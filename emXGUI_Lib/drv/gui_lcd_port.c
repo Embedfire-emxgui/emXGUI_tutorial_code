@@ -99,6 +99,21 @@ SURFACE* GUI_DisplayInit(void)
 
   //LCD硬件初始化
  	LCD_HardInit((u32)pSurf->Bits); 
+  
+#if  DMA2D_EN 
+  DMA2D_DrvInit();
+#endif
+  
+#if FRAME_BUFFER_EN
+  {
+    const SURFACE *pSurf_FB;
+    pSurf_FB = GUI_CreateSurface((SURF_FORMAT)pSurf->Format,pSurf->Width,pSurf->Height,0,NULL);
+    GUI_SetFrameBufferSurface(pSurf_FB);  
+    //清屏
+	  pSurf_FB->GL->FillArea(pSurf_FB,0,0,LCD_XSIZE,LCD_YSIZE,pSurf_FB->CC->MapRGB(0,0,0)); 
+
+  }
+#endif  
 
   //清屏
 	pSurf->GL->FillArea(pSurf,0,0,LCD_XSIZE,LCD_YSIZE,pSurf->CC->MapRGB(0,0,0)); 
@@ -124,140 +139,6 @@ SURFACE* GUI_DisplayInit(void)
 	return pSurf;
 }
 
-
-/**
-  * @brief  创建SURFACE表面
-  * @param  Format 绘图表面格式
-  * @param  Width Height 绘图表面宽高
-  * @param  LineBytes 绘图表面每行像素占多少字节
-  * @param  bits 显存地址，若为NULL，则会使用GUI_GMEM_Alloc申请动态显存
-  * @retval 显示设备Surface对象指针，创建得到的绘图表面
-  */
-SURFACE*	GUI_CreateSurface(SURF_FORMAT Format,int Width,int Height,int LineBytes,void *bits)
-{
-
-	SURFACE *pSurf;
-   		
-	switch(Format)
-	{
-		
-		case	SURF_RGB332:
-				pSurf = (SURFACE*)GUI_MEM_Alloc(sizeof(SURFACE));
-
-				pSurf->Flags =0;
-
-				if(LineBytes <= 0)
-				{
-					LineBytes = Width;
-				}
-
-				if(bits==NULL)
-				{
-					bits = (void*)GUI_GRAM_Alloc(Height*LineBytes);
-					pSurf->Flags |= SURF_FLAG_GRAM;
-
-				}
-				SurfaceInit_RGB332(pSurf,&GL_MEM_8PP,Width,Height,LineBytes,bits);
-				break;
-					////
-		
-		case	SURF_RGB565:
-				pSurf = (SURFACE*)GUI_MEM_Alloc(sizeof(SURFACE));
-				pSurf->Flags =0;
-				if(LineBytes <= 0)
-				{
-					LineBytes = Width*2;
-				}
-				if(bits==NULL)
-				{
-					bits = (void*)GUI_GRAM_Alloc(Height*LineBytes);
-					pSurf->Flags |= SURF_FLAG_GRAM;
-
-				}
-				SurfaceInit_RGB565(pSurf,&GL_MEM_16PP,Width,Height,LineBytes,bits);
-				break;
-				////
-		
-		case	SURF_ARGB4444:
-				pSurf = (SURFACE*)GUI_MEM_Alloc(sizeof(SURFACE));
-				pSurf->Flags =0;
-				if(LineBytes <= 0)
-				{
-					LineBytes = Width*2;
-				}
-				if(bits==NULL)
-				{
-					bits = (void*)GUI_GRAM_Alloc(Height*LineBytes);
-					pSurf->Flags |= SURF_FLAG_GRAM;
-
-				}
-				SurfaceInit_ARGB4444(pSurf,&GL_MEM_16PP,Width,Height,LineBytes,bits);
-				break;
-				////
-						
-		case	SURF_XRGB8888:
-				pSurf = (SURFACE*)GUI_MEM_Alloc(sizeof(SURFACE));
-				pSurf->Flags =0;
-				if(LineBytes <= 0)
-				{
-					LineBytes = Width*4;
-				}
-				if(bits==NULL)
-				{
-					bits = (void*)GUI_GRAM_Alloc(Height*LineBytes);
-					pSurf->Flags |= SURF_FLAG_GRAM;
-
-				}
-				SurfaceInit_XRGB8888(pSurf,&GL_MEM_32PP,Width,Height,LineBytes,bits);
-				break;
-				////	
-									
-		case	SURF_ARGB8888:
-				pSurf = (SURFACE*)GUI_MEM_Alloc(sizeof(SURFACE));
-				pSurf->Flags =0;
-				if(LineBytes <= 0)
-				{
-					LineBytes = Width*4;
-				}
-				if(bits==NULL)
-				{
-					bits = (void*)GUI_GRAM_Alloc(Height*LineBytes);
-					pSurf->Flags |= SURF_FLAG_GRAM;
-
-				}
-				SurfaceInit_ARGB8888(pSurf,&GL_MEM_32PP,Width,Height,LineBytes,bits);
-				break;
-				////	
-									
-		default:
-				pSurf = NULL;
-				break;
-				////
-	
-	}
-		
-	return	pSurf;
-}
-
-
-/**
-  * @brief  释放绘图表面
-  * @param  pSurf 要释放的绘图表面
-  * @note  它会释放pSurf使用的内存，
-  *         若该表面申请了动态内存作为显存空间，还会释放相应的显存空间 
-  * @retval 无
-  */
-void	GUI_DeleteSurface(const SURFACE *pSurf)
-{
-	if(pSurf!=NULL)
-	{
-		if(pSurf->Flags&SURF_FLAG_GRAM)
-		{
-			GUI_GRAM_Free(pSurf->Bits);
-		}
-		GUI_MEM_Free((void*)pSurf);
-	}
-}
 
 /********************************END OF FILE****************************/
 
