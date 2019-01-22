@@ -1,0 +1,20 @@
+#ifndef __GUI_TOUCH_PORT_H
+#define	__GUI_TOUCH_PORT_H
+
+#include	"emXGUI.h"
+#include "stm32f4xx.h"
+
+////Touch State
+#define	TS_ACT_NONE	 	0
+#define	TS_ACT_DOWN	 	1
+#define   TS_ACT_UP		2
+
+
+BOOL TouchDev_Init(void);
+int TouchDev_GetAction(void);
+BOOL TouchDev_GetPoint(POINT *pt);
+
+void 	GUI_TouchHandler(void);
+
+
+#endif /* __GUI_TOUCH_PORT_H */
