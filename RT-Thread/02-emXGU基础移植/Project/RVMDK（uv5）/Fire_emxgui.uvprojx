@@ -334,7 +334,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>USE_STDPERIPH_DRIVER,STM32F429_439xx,</Define>
+              <Define>USE_STDPERIPH_DRIVER,STM32F429_439xx,X_GUI_USE_RTTHREAD,</Define>
               <Undefine></Undefine>
               <IncludePath>..\..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\..\User;..\..\Libraries\CMSIS\Include;..\..\User\bsp\led;..\..\User\bsp\lcd;..\..\User\bsp\sdram;..\..\User\bsp\touch;..\..\User\bsp\usart;..\..\User\bsp\flash;..\..\User\bsp\font;..\..\rtthread\3.0.3\include;..\..\rtthread\3.0.3\include\libc;..\..\rtthread\3.0.3\components\cm_backtrace;..\..\User\bsp;..\..\..\..\emXGUI_Lib\inc;..\..\..\..\emXGUI_Lib\drv;..\..\..\..\emXGUI_Lib\arch\Inc</IncludePath>
             </VariousControls>
@@ -869,6 +869,11 @@
               <FileName>gui_drv.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\..\..\emXGUI_Lib\arch\Inc\gui_drv.h</FilePath>
+            </File>
+            <File>
+              <FileName>gui_os_port.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\arch\Inc\gui_os_port.h</FilePath>
             </File>
           </Files>
         </Group>

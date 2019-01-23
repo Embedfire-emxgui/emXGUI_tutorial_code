@@ -2358,6 +2358,7 @@ void PostKeyMessage(U8 key,BOOL IsKeyDown);
 int	gdevRotateBitmap_ARGB8888(const SURFACE *pSurf,int cx,int cy,const BITMAP *bm,int angle);
 
 /*===================================================================================*/
+#include "gui_os_port.h"
 #include "emXGUI_Arch.h"
 #include "gui_drv.h"
 #include "web_color.h"

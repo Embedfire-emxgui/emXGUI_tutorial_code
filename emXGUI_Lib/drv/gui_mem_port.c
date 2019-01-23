@@ -17,24 +17,6 @@
 #include	"emXGUI_Arch.h"
 #include "gui_mem_port.h"
 
-#ifdef	X_GUI_USE_RTTHREAD
-  /* RT-Thread 系统头文件 */ 
-  #include	"rtthread.h"
-  #define OS_MALLOC   rt_malloc
-  #define OS_FREE     rt_free
-  
-#elif X_GUI_USE_FREERTOS
-  /* FreeRTOS 系统头文件 */ 
-  #include "FreeRTOS.h"
-  #include "task.h"
-  
-  #define OS_MALLOC   pvPortMalloc
-  #define OS_FREE     vPortFree
-  
-#else
-  #error No OS type select,please define MACRO 'X_GUI_USE_RTTHREAD'/'X_GUI_USE_FREERTOS' or else.
-#endif
-
 
 /**
 * @note  vmem/vmalloc/vfree 提供给应用程序自由使用，
@@ -137,6 +119,7 @@ void	GUI_MEM_Init(void)
 	return ;
 }
 
+/* OS_MALLOC和 OS_FREE在gui_os_port.h中定义*/
 /**
 * @brief  动态内存申请(用于GUI内核对象)
 * @param  size 要申请的内存大小

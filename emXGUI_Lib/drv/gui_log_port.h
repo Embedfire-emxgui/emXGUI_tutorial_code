@@ -5,16 +5,17 @@
 #include "stm32f4xx.h"
 #include	"gui_drv_cfg.h"
 
+/* GUI_Log 在gui_os_port.h中定义 */
 
 /* INFO和ERROR在任何情况下都会输出 */
 /* 信息输出 */
-#define GUI_INFO(fmt,arg...)           GUI_Printf("<<-GUI-INFO->> "fmt"\n",##arg)
+#define GUI_INFO(fmt,arg...)           GUI_Log("<<-GUI-INFO->> "fmt"\n",##arg)
 /* 错误输出 */
-#define GUI_ERROR(fmt,arg...)          GUI_Printf("<<-GUI-ERROR->> "fmt"\n",##arg)
+#define GUI_ERROR(fmt,arg...)          GUI_Log("<<-GUI-ERROR->> "fmt"\n",##arg)
 /* 调试输出，受GUI_DEBUG_EN控制 */
 #define GUI_DEBUG(fmt,arg...)          do{\
                                          if(GUI_DEBUG_EN)\
-                                         GUI_Printf("<<-GUI-DEBUG->> [%s] [%d]"fmt"\n",__FILE__,__LINE__, ##arg);\
+                                         GUI_Log("<<-GUI-DEBUG->> [%s] [%d]"fmt"\n",__FILE__,__LINE__, ##arg);\
 																					}while(0)
 /* 数组输出，受GUI_DEBUG_ARRAY_EN控制 */
 #define GUI_DEBUG_ARRAY(array, num)    do{\
@@ -22,16 +23,16 @@
                                          uint8_t* a = array;\
                                          if(GUI_DEBUG_ARRAY_EN)\
                                          {\
-                                            GUI_Printf("<<-GUI-DEBUG-ARRAY->>\n");\
+                                            GUI_Log("<<-GUI-DEBUG-ARRAY->>\n");\
                                             for (i = 0; i < (num); i++)\
                                             {\
-                                                GUI_Printf("%02x   ", (a)[i]);\
+                                                GUI_Log("%02x   ", (a)[i]);\
                                                 if ((i + 1 ) %10 == 0)\
                                                 {\
-                                                    GUI_Printf("\n");\
+                                                    GUI_Log("\n");\
                                                 }\
                                             }\
-                                            GUI_Printf("\n");\
+                                            GUI_Log("\n");\
                                         }\
                                        }while(0)
 
@@ -41,7 +42,7 @@
 */
 #define GUI_DEBUG_FUNC()               do{\
                                          if(GUI_DEBUG_FUNC_EN)\
-                                         GUI_Printf("<<-GUI-FUNC->> Func:%s@Line:%d\n",__func__,__LINE__);\
+                                         GUI_Log("<<-GUI-FUNC->> Func:%s@Line:%d\n",__func__,__LINE__);\
                                        }while(0)
 
                                        

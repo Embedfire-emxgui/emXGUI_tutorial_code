@@ -28,7 +28,7 @@
 */
 GUI_MUTEX*	GUI_MutexCreate(void)
 {
-	return (GUI_MUTEX*)xSemaphoreCreateMutex();	
+	return (GUI_MUTEX*)xSemaphoreCreateRecursiveMutex();	
 }
 
 /*===================================================================================*/
@@ -41,7 +41,7 @@ GUI_MUTEX*	GUI_MutexCreate(void)
 */
 BOOL	GUI_MutexLock(GUI_MUTEX *hMutex,U32 time)
 {
-	if(xSemaphoreTake((SemaphoreHandle_t)hMutex,pdMS_TO_TICKS(time))==pdTRUE)
+	if(xSemaphoreTakeRecursive((SemaphoreHandle_t)hMutex,pdMS_TO_TICKS(time))==pdTRUE)
 	{
 		return TRUE;
 	}
@@ -57,7 +57,7 @@ BOOL	GUI_MutexLock(GUI_MUTEX *hMutex,U32 time)
 */
 void	GUI_MutexUnlock(GUI_MUTEX *hMutex)
 {
-	xSemaphoreGive((SemaphoreHandle_t)hMutex);
+	 xSemaphoreGiveRecursive((SemaphoreHandle_t)hMutex);
 }
 
 /*===================================================================================*/

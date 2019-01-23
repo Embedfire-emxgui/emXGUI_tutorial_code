@@ -116,7 +116,7 @@ int main(void)
                         (const char*    )"gui",/* 任务名字 */
                         (uint16_t       )4*1024,  /* 任务栈大小 */
                         (void*          )NULL,/* 任务入口函数参数 */
-                        (UBaseType_t    )1, /* 任务的优先级 */
+                        (UBaseType_t    )3, /* 任务的优先级 */
                         (TaskHandle_t*  )&TaskGUIThreadEntry_Handle);/* 任务控制块指针 */ 
   /* 启动任务调度 */           
   if(pdPASS == xReturn)

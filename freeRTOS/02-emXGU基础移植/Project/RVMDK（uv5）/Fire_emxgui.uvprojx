@@ -784,6 +784,11 @@
               <FileType>5</FileType>
               <FilePath>..\..\..\..\emXGUI_Lib\arch\Inc\gui_drv.h</FilePath>
             </File>
+            <File>
+              <FileName>gui_os_port.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\arch\Inc\gui_os_port.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
