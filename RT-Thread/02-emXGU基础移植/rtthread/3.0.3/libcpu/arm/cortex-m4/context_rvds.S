@@ -221,18 +221,18 @@ rt_hw_interrupt_thread_switch PROC
     ENDP
 
     IMPORT rt_hw_hard_fault_exception
-    EXPORT HardFault_Handler
-HardFault_Handler    PROC
+    ;EXPORT HardFault_Handler
+;HardFault_Handler    PROC
 
-    ; get current context
-    MRS     r0, psp                 ; get fault thread stack pointer
-    PUSH    {lr}
-    BL      rt_hw_hard_fault_exception
-    POP     {lr}
+    ;; get current context
+    ;MRS     r0, psp                 ; get fault thread stack pointer
+    ;PUSH    {lr}
+    ;BL      rt_hw_hard_fault_exception
+    ;POP     {lr}
 
-    ORR     lr, lr, #0x04
-    BX      lr
-    ENDP
+    ;ORR     lr, lr, #0x04
+    ;BX      lr
+    ;ENDP
 
     ALIGN   4
 

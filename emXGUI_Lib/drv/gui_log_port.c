@@ -16,7 +16,7 @@
 #include "gui_drv_cfg.h"
 #include "gui_log_port.h"
 
-#include	"rtthread.h"
+
 
 /*============================================================================*/
 /**
@@ -68,11 +68,21 @@ void	GUI_Printf(const char *fmt,...)
   }
 #else
 
-  rt_kprintf(fmt);  
+//  rt_kprintf(fmt);  
 #endif   
   
 }
 
 
+///**
+//  * @brief  格式化字符串输出
+//  * @param  可变参数
+//  * @note   如果不用输出GUI调试信息,这个函数可以为空
+//  * @retval 无
+//  */
+//void	GUI_Log(const char *fmt,...)
+//{
+//  rt_kprintf(fmt);
+//}
 /********************************END OF FILE****************************/
 

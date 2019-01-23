@@ -336,7 +336,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F429_439xx,</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\..\User;..\..\Libraries\CMSIS\Include;..\..\User\bsp\led;..\..\User\bsp\lcd;..\..\User\bsp\sdram;..\..\User\bsp\touch;..\..\User\bsp\usart;..\..\User\bsp\flash;..\..\User\bsp\font;..\..\rtthread\3.0.3\include;..\..\rtthread\3.0.3\include\libc;..\..\User\bsp;..\..\..\..\emXGUI_Lib\inc;..\..\..\..\emXGUI_Lib\drv;..\..\..\..\emXGUI_Lib\arch\Inc</IncludePath>
+              <IncludePath>..\..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\..\User;..\..\Libraries\CMSIS\Include;..\..\User\bsp\led;..\..\User\bsp\lcd;..\..\User\bsp\sdram;..\..\User\bsp\touch;..\..\User\bsp\usart;..\..\User\bsp\flash;..\..\User\bsp\font;..\..\rtthread\3.0.3\include;..\..\rtthread\3.0.3\include\libc;..\..\rtthread\3.0.3\components\cm_backtrace;..\..\User\bsp;..\..\..\..\emXGUI_Lib\inc;..\..\..\..\emXGUI_Lib\drv;..\..\..\..\emXGUI_Lib\arch\Inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -798,6 +798,36 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>rtt/cm_backtrace</GroupName>
+          <Files>
+            <File>
+              <FileName>cm_backtrace.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\rtthread\3.0.3\components\cm_backtrace\cm_backtrace.c</FilePath>
+            </File>
+            <File>
+              <FileName>cm_backtrace.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\rtthread\3.0.3\components\cm_backtrace\cm_backtrace.h</FilePath>
+            </File>
+            <File>
+              <FileName>cmb_cfg.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\rtthread\3.0.3\components\cm_backtrace\cmb_cfg.h</FilePath>
+            </File>
+            <File>
+              <FileName>cmb_def.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\rtthread\3.0.3\components\cm_backtrace\cmb_def.h</FilePath>
+            </File>
+            <File>
+              <FileName>cmb_fault.S</FileName>
+              <FileType>2</FileType>
+              <FilePath>..\..\rtthread\3.0.3\components\cm_backtrace\fault_handler\keil\cmb_fault.S</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>rtt/ports</GroupName>
           <Files>
             <File>
@@ -815,6 +845,11 @@
         <Group>
           <GroupName>emxgui/arch</GroupName>
           <Files>
+            <File>
+              <FileName>GL_Cursor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\arch\GL_Cursor.c</FilePath>
+            </File>
             <File>
               <FileName>GUI_Arch.c</FileName>
               <FileType>1</FileType>
@@ -919,6 +954,11 @@
               <FileName>x_obj.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\..\..\emXGUI_Lib\inc\x_obj.h</FilePath>
+            </File>
+            <File>
+              <FileName>Web_Color.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\inc\Web_Color.h</FilePath>
             </File>
           </Files>
         </Group>

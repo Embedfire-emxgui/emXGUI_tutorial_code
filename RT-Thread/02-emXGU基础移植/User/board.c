@@ -6,6 +6,11 @@
 #include <rthw.h>
 #include <rtthread.h>
 
+#include <cm_backtrace.h>
+
+#define HARDWARE_VERSION               "V1.0.0"
+#define SOFTWARE_VERSION               "V0.1.0"
+
 
 #if defined(RT_USING_USER_MAIN) && defined(RT_USING_HEAP)
 #define RT_HEAP_SIZE (GUI_CORE_MEM_SIZE)
@@ -60,6 +65,10 @@ void rt_hw_board_init()
 #if defined(RT_USING_USER_MAIN) && defined(RT_USING_HEAP)
     rt_system_heap_init(rt_heap_begin_get(), rt_heap_end_get());
 #endif
+
+  /*hardfault ¸ú×ÙÆ÷³õÊ¼»¯*/  
+  cm_backtrace_init("CmBacktrace", HARDWARE_VERSION, SOFTWARE_VERSION);
+
 }
 
 /**

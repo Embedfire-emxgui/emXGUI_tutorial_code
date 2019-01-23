@@ -79,6 +79,11 @@ void* GUI_VMEM_Alloc(u32 size)
 	GUI_MutexLock(mutex_vmem,5000);
 	p =x_heap_alloc(&heap_vmem,size);
 	GUI_MutexUnlock(mutex_vmem);
+  if(p==NULL)
+	{
+	    GUI_ERROR("GUI_VMEM_Alloc,no enough space(for %d byte)",size);
+	}
+  
 	return p;
 #endif
 }
@@ -132,6 +137,7 @@ void*	GUI_MEM_Alloc(U32 size)
 	void *p=NULL;
 
 	p =rt_malloc(size);
+
 	if(p==NULL)
 	{
 	    GUI_ERROR("GUI_MEM_Alloc.");
@@ -152,7 +158,7 @@ void	GUI_MEM_Free(void *p)
 //  GUI_MutexLock(mutex_core_mem,5000);
 //	x_heap_free(&heap_core_mem,p);
 //	GUI_MutexUnlock(mutex_core_mem);
-  
+
 	rt_free(p);
 }
 
@@ -176,6 +182,17 @@ void*	GUI_GRAM_Alloc(U32 size)
 * @retval нч
 */
 void	GUI_GRAM_Free(void *p)
+{
+	GUI_VMEM_Free(p);
+}
+
+
+void* vmalloc(int size)
+{
+	return GUI_VMEM_Alloc(size);
+}
+
+void vfree(void *p)
 {
 	GUI_VMEM_Free(p);
 }

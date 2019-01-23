@@ -2,14 +2,12 @@
 #include <string.h>
 #include "gui_drv.h"
 
-
 /*============================================================================*/
+extern BOOL	GL_CursorInit(const SURFACE *pSurf,int x,int y);
 extern BOOL	GUI_Arch_Init(void);
 extern void GUI_DesktopStartup(void);
 
 static BOOL GUI_LowLevelInit(void);
-
-
 
 /**
   * @brief  GUI低级别的初始化,这是GUI的第一个初始化函数
@@ -73,6 +71,7 @@ void	GUI_Startup(void)
 	}
 	GUI_SetScreenSurface(pSurf); //设置屏幕Surface对象
   
+
 #if(GUI_RES_DEV_EN)  
    //资源设备初始化（FLASH）
   if(RES_DevInit() != TRUE)
@@ -90,7 +89,7 @@ void	GUI_Startup(void)
 
 	GL_CursorInit(pSurf,pSurf->Width>>1,pSurf->Height>>1); //初始化光标
 #endif
-  
+
 	hFont =GUI_Default_FontInit(); //初始化默认的字体
 	if(hFont==NULL)
 	{
@@ -98,9 +97,8 @@ void	GUI_Startup(void)
 		return;
 	}
 	GUI_SetDefFont(hFont);  //设置默认的字体
-
-	GUI_DesktopStartup();	//启动桌面窗口(该函数不会返回).
-
+	//启动桌面窗口(该函数不会返回).
+   GUI_DesktopStartup();   
 }
 
 /********************************END OF FILE****************************/
