@@ -29,13 +29,10 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_it.h"
-#include "bsp_debug_usart.h"
-#include "./touch/bsp_i2c_touch.h"
-#include "./led/bsp_led.h"
+#include "board.h"
 #include "FreeRTOS.h"					//FreeRTOS使用		  
 #include "task.h" 
 
-extern void GTP_TouchProcess(void);
 
 /** @addtogroup STM32F429I_DISCOVERY_Examples
   * @{
@@ -142,23 +139,6 @@ void SysTick_Handler(void)
 }
 
 
-
-void GTP_IRQHandler(void)
-{
-  uint32_t ulReturn;
-  /* 进入临界段，临界段可以嵌套 */
-  ulReturn = taskENTER_CRITICAL_FROM_ISR();
-	
-	if(EXTI_GetITStatus(GTP_INT_EXTI_LINE) != RESET) //确保是否产生了EXTI Line中断
-	{
-		LED2_TOGGLE;
-    GTP_TouchProcess();    
-		EXTI_ClearITPendingBit(GTP_INT_EXTI_LINE);     //清除中断标志位
-	}  
-	
-  /* 退出临界段 */
-  taskEXIT_CRITICAL_FROM_ISR( ulReturn );
-}
 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
