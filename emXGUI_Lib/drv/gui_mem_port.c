@@ -16,7 +16,24 @@
 #include "gui_drv.h"
 #include	"emXGUI_Arch.h"
 #include "gui_mem_port.h"
-#include	"rtthread.h"
+
+#ifdef	X_GUI_USE_RTTHREAD
+  /* RT-Thread 系统头文件 */ 
+  #include	"rtthread.h"
+  #define OS_MALLOC   rt_malloc
+  #define OS_FREE     rt_free
+  
+#elif X_GUI_USE_FREERTOS
+  /* FreeRTOS 系统头文件 */ 
+  #include "FreeRTOS.h"
+  #include "task.h"
+  
+  #define OS_MALLOC   pvPortMalloc
+  #define OS_FREE     vPortFree
+  
+#else
+  #error No OS type select,please define MACRO 'X_GUI_USE_RTTHREAD'/'X_GUI_USE_FREERTOS' or else.
+#endif
 
 
 /**
@@ -136,7 +153,7 @@ void*	GUI_MEM_Alloc(U32 size)
   
 	void *p=NULL;
 
-	p =rt_malloc(size);
+	p =OS_MALLOC(size);
 
 	if(p==NULL)
 	{
@@ -159,7 +176,7 @@ void	GUI_MEM_Free(void *p)
 //	x_heap_free(&heap_core_mem,p);
 //	GUI_MutexUnlock(mutex_core_mem);
 
-	rt_free(p);
+	OS_FREE(p);
 }
 
 /*===================================================================================*/

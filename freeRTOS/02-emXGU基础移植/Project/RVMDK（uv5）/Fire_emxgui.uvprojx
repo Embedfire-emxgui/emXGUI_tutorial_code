@@ -310,7 +310,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>2</Optim>
+            <Optim>1</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -322,7 +322,7 @@
             <wLevel>0</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
-            <uC99>1</uC99>
+            <uC99>0</uC99>
             <useXO>0</useXO>
             <v6Lang>0</v6Lang>
             <v6LangP>0</v6LangP>
@@ -333,9 +333,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>USE_STDPERIPH_DRIVER,STM32F429_439xx,</Define>
+              <Define>USE_STDPERIPH_DRIVER,STM32F429_439xx,X_GUI_USE_FREERTOS,</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\..\Libraries\CMSIS\Include;..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\..\User;..\..\FreeRTOS\include;..\..\FreeRTOS\port\RVDS\ARM_CM4F;..\..\User\key;..\..\User\led;..\..\User\uart</IncludePath>
+              <IncludePath>..\..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\..\Libraries\CMSIS\Include;..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\..\User;..\..\User\bsp;..\..\FreeRTOS\include;..\..\FreeRTOS\port\RVDS\ARM_CM4F;..\..\User\key;..\..\User\led;..\..\User\uart;..\..\..\..\emXGUI_Lib\inc;..\..\..\..\emXGUI_Lib\drv;..\..\..\..\emXGUI_Lib\arch\Inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -665,59 +665,44 @@
               <FilePath>..\..\User\stm32f4xx_it.c</FilePath>
             </File>
             <File>
-              <FileName>bsp_led.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\led\bsp_led.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_key.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\key\bsp_key.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_debug_usart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\uart\bsp_debug_usart.c</FilePath>
-            </File>
-            <File>
               <FileName>FreeRTOSConfig.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\User\FreeRTOSConfig.h</FilePath>
             </File>
             <File>
-              <FileName>bsp_spi_flash.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\flash\bsp_spi_flash.c</FilePath>
+              <FileName>board.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\User\board.h</FilePath>
             </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>BSP</GroupName>
+          <Files>
             <File>
-              <FileName>fonts.c</FileName>
+              <FileName>bsp_led.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\User\font\fonts.c</FilePath>
+              <FilePath>..\..\User\bsp\led\bsp_led.c</FilePath>
             </File>
             <File>
               <FileName>bsp_lcd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\User\lcd\bsp_lcd.c</FilePath>
+              <FilePath>..\..\User\bsp\lcd\bsp_lcd.c</FilePath>
             </File>
             <File>
               <FileName>bsp_sdram.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\User\sdram\bsp_sdram.c</FilePath>
+              <FilePath>..\..\User\bsp\sdram\bsp_sdram.c</FilePath>
             </File>
             <File>
-              <FileName>bsp_i2c_touch.c</FileName>
+              <FileName>bsp_key.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\User\touch\bsp_i2c_touch.c</FilePath>
+              <FilePath>..\..\User\bsp\key\bsp_key.c</FilePath>
             </File>
             <File>
-              <FileName>gt9xx.c</FileName>
+              <FileName>bsp_debug_usart.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\User\touch\gt9xx.c</FilePath>
-            </File>
-            <File>
-              <FileName>palette.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\touch\palette.c</FilePath>
+              <FilePath>..\..\User\bsp\usart\bsp_debug_usart.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -768,6 +753,151 @@
               <FileName>port.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\FreeRTOS\port\RVDS\ARM_CM4F\port.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/arch</GroupName>
+          <Files>
+            <File>
+              <FileName>GL_Cursor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\arch\GL_Cursor.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUI_Arch.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\arch\GUI_Arch.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUI_GPU.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\arch\GUI_GPU.c</FilePath>
+            </File>
+            <File>
+              <FileName>X_GUI_FreeRTOS.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\arch\OS_Options\X_GUI_FreeRTOS.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_drv.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\arch\Inc\gui_drv.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/resource</GroupName>
+          <Files>
+            <File>
+              <FileName>ASCII_20_4BPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_20_4BPP.c</FilePath>
+            </File>
+            <File>
+              <FileName>ASCII_24_4BPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_24_4BPP.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/drv</GroupName>
+          <Files>
+            <File>
+              <FileName>gui_drv_cfg.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\drv\gui_drv_cfg.h</FilePath>
+            </File>
+            <File>
+              <FileName>gui_font_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\drv\gui_font_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_lcd_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\drv\gui_lcd_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_log_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\drv\gui_log_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_mem_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\drv\gui_mem_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_startup.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\drv\gui_startup.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/inc</GroupName>
+          <Files>
+            <File>
+              <FileName>def.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\inc\def.h</FilePath>
+            </File>
+            <File>
+              <FileName>emXGUI.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\inc\emXGUI.h</FilePath>
+            </File>
+            <File>
+              <FileName>emXGUI_Arch.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\inc\emXGUI_Arch.h</FilePath>
+            </File>
+            <File>
+              <FileName>GUI_Font_XFT.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\inc\GUI_Font_XFT.h</FilePath>
+            </File>
+            <File>
+              <FileName>x_libc.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\inc\x_libc.h</FilePath>
+            </File>
+            <File>
+              <FileName>x_obj.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\inc\x_obj.h</FilePath>
+            </File>
+            <File>
+              <FileName>Web_Color.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\inc\Web_Color.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/libs</GroupName>
+          <Files>
+            <File>
+              <FileName>emXGUI100_MDK_M4.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\libs\emXGUI100_MDK_M4.lib</FilePath>
+            </File>
+            <File>
+              <FileName>x_libc_MDK_M4.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\libs\x_libc_MDK_M4.lib</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>tutorial_app</GroupName>
+          <Files>
+            <File>
+              <FileName>gui_desktop.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\tutorial_app\gui_desktop.c</FilePath>
             </File>
           </Files>
         </Group>

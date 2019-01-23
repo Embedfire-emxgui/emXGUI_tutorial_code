@@ -5,11 +5,9 @@
 #include <stdio.h>
 
 
-//引脚定义
-/*******************************************************/
 #define DEBUG_USART                             USART1
 #define DEBUG_USART_CLK                         RCC_APB2Periph_USART1
-#define DEBUG_USART_BAUDRATE                    115200  //串口波特率
+#define DEBUG_USART_BAUDRATE                    115200
 
 #define DEBUG_USART_RX_GPIO_PORT                GPIOA
 #define DEBUG_USART_RX_GPIO_CLK                 RCC_AHB1Periph_GPIOA
@@ -23,14 +21,22 @@
 #define DEBUG_USART_TX_AF                       GPIO_AF_USART1
 #define DEBUG_USART_TX_SOURCE                   GPIO_PinSource9
 
-#define DEBUG_USART_IRQHandler                  USART1_IRQHandler
-#define DEBUG_USART_IRQ                 				USART1_IRQn
-/************************************************************/
+
+#define __DEBUG 	//开启串口调试
+
+#ifdef  __DEBUG
+#define DEBUG(format,...)	printf("File:"__FILE__",Line:%03d:"format"\n",__LINE__,##__VA_ARGS__) 
+#else
+
+#define DEBUG(format,...)
+
+#endif
+
 
 void Debug_USART_Config(void);
-void Usart_SendByte( USART_TypeDef * pUSARTx, uint8_t ch);
-void Usart_SendString( USART_TypeDef * pUSARTx, char *str);
 
-void Usart_SendHalfWord( USART_TypeDef * pUSARTx, uint16_t ch);
+
+
+
 
 #endif /* __USART1_H */

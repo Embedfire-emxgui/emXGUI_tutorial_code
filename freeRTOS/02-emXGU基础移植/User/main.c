@@ -81,6 +81,9 @@ static void BSP_Init(void)
 	
 	/* LED 初始化 */
 	LED_GPIO_Config();
+  
+  /* SDRAM初始化 */
+  SDRAM_Init();  
 
 	/* 串口初始化	*/
 	Debug_USART_Config();
@@ -111,7 +114,7 @@ int main(void)
    /* 创建AppTaskCreate任务 */
   xReturn = xTaskCreate((TaskFunction_t )GUI_Thread_Entry,  /* 任务入口函数 */
                         (const char*    )"gui",/* 任务名字 */
-                        (uint16_t       )2*1024,  /* 任务栈大小 */
+                        (uint16_t       )4*1024,  /* 任务栈大小 */
                         (void*          )NULL,/* 任务入口函数参数 */
                         (UBaseType_t    )1, /* 任务的优先级 */
                         (TaskHandle_t*  )&TaskGUIThreadEntry_Handle);/* 任务控制块指针 */ 
@@ -125,7 +128,7 @@ int main(void)
 }
 
 
-//extern void GUI_Startup(void);
+extern void GUI_Startup(void);
 
 /**********************************************************************
   * @ 函数名  ： gui_thread_entry
@@ -136,7 +139,7 @@ int main(void)
 static void GUI_Thread_Entry(void* parameter)
 {	
   /* 执行本函数不会返回 */
-//	GUI_Startup();
+	GUI_Startup();
   
   while (1)
   {

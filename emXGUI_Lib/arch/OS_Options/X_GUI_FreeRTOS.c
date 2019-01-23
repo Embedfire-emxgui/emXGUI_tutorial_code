@@ -1,24 +1,24 @@
 /**
   *********************************************************************
-  * @file    X_GUI_RTT.c
+  * @file    X_GUI_FreeRTOS.c
   * @version V1.0
   * @date    2018-xx-xx
-  * @brief   emXGUI的RT-Thread操作系统接口
+  * @brief   emXGUI的FreeRTOS操作系统接口
   *********************************************************************
   * @attention
   * 官网    :www.emXGUI.com
   *
   **********************************************************************
   */ 
-  
-/* 在工程选项中定义这个宏，以设置使用的操作系统 */ 
-#ifdef	X_GUI_USE_RTTHREAD
+/* 在工程选项中定义这个宏，以设置使用的操作系统 */  
+#ifdef	X_GUI_USE_FREERTOS
 
 #include	<stddef.h>
 #include	"emXGUI_Arch.h"
 
-#include  	"rtthread.h"
-
+#include "FreeRTOS.h"
+#include "semphr.h"
+#include "task.h"
 
 /*===================================================================================*/
 /*
@@ -28,7 +28,7 @@
 */
 GUI_MUTEX*	GUI_MutexCreate(void)
 {
-	return (GUI_MUTEX*)rt_mutex_create(NULL,RT_IPC_FLAG_FIFO);
+	return (GUI_MUTEX*)xSemaphoreCreateMutex();	
 }
 
 /*===================================================================================*/
@@ -41,8 +41,7 @@ GUI_MUTEX*	GUI_MutexCreate(void)
 */
 BOOL	GUI_MutexLock(GUI_MUTEX *hMutex,U32 time)
 {
-	
-	if(rt_mutex_take((rt_mutex_t)hMutex,rt_tick_from_millisecond(time))==RT_EOK)
+	if(xSemaphoreTake((SemaphoreHandle_t)hMutex,pdMS_TO_TICKS(time))==pdTRUE)
 	{
 		return TRUE;
 	}
@@ -58,7 +57,7 @@ BOOL	GUI_MutexLock(GUI_MUTEX *hMutex,U32 time)
 */
 void	GUI_MutexUnlock(GUI_MUTEX *hMutex)
 {
-	rt_mutex_release((rt_mutex_t)hMutex);
+	xSemaphoreGive((SemaphoreHandle_t)hMutex);
 }
 
 /*===================================================================================*/
@@ -70,7 +69,7 @@ void	GUI_MutexUnlock(GUI_MUTEX *hMutex)
 */
 void	GUI_MutexDelete(GUI_MUTEX *hMutex)
 {
-	rt_mutex_delete((rt_mutex_t)hMutex);
+	vSemaphoreDelete((SemaphoreHandle_t)hMutex);
 }
 
 /*===================================================================================*/
@@ -82,7 +81,7 @@ void	GUI_MutexDelete(GUI_MUTEX *hMutex)
 */
 GUI_SEM*	GUI_SemCreate(int init,int max)
 {
-	return (GUI_SEM*)rt_sem_create(NULL,init,RT_IPC_FLAG_FIFO);
+	return (GUI_SEM*)xSemaphoreCreateCounting(max,init);
 }
 
 /*===================================================================================*/
@@ -96,7 +95,7 @@ GUI_SEM*	GUI_SemCreate(int init,int max)
 BOOL	GUI_SemWait(GUI_SEM *hsem,U32 time)
 {
 
-	if(rt_sem_take((rt_sem_t)hsem,rt_tick_from_millisecond(time))== RT_EOK)
+	if(xSemaphoreTake((SemaphoreHandle_t)hsem,pdMS_TO_TICKS(time))== pdTRUE)
 	{
 		return TRUE;
 	}
@@ -112,7 +111,7 @@ BOOL	GUI_SemWait(GUI_SEM *hsem,U32 time)
 */
 void	GUI_SemPost(GUI_SEM *hsem)
 {
-	rt_sem_release((rt_sem_t)hsem);
+	xSemaphoreGive((SemaphoreHandle_t)hsem);
 }
 
 /*===================================================================================*/
@@ -124,7 +123,7 @@ void	GUI_SemPost(GUI_SEM *hsem)
 */
 void	GUI_SemDelete(GUI_SEM *hsem)
 {
-	rt_sem_delete((rt_sem_t)hsem);
+	vSemaphoreDelete((SemaphoreHandle_t)hsem);
 }
 
 /*===================================================================================*/
@@ -136,7 +135,7 @@ void	GUI_SemDelete(GUI_SEM *hsem)
 */
 HANDLE	GUI_GetCurThreadHandle(void)
 {
-	return	(HANDLE)rt_thread_self();
+	return	(HANDLE)xTaskGetCurrentTaskHandle();
 }
 
 
@@ -151,9 +150,9 @@ U32	GUI_GetTickCount(void)
 {
 	U32 i;
 	
-	i=rt_tick_get();
+	i=xTaskGetTickCount();
 	
-	return (i*1000)/RT_TICK_PER_SECOND;
+	return (i*1000)/configTICK_RATE_HZ;
 
 }
 
@@ -166,8 +165,7 @@ U32	GUI_GetTickCount(void)
 */
 void	GUI_Yield(void)
 {
-	//rt_thread_yield();
-	rt_thread_delay(2);
+	vTaskDelay(2);
 }
 
 /*===================================================================================*/
@@ -179,9 +177,10 @@ void	GUI_Yield(void)
 */
 void	GUI_msleep(u32 ms)
 {
-	ms=rt_tick_from_millisecond(ms);
-	rt_thread_delay(ms);
+	vTaskDelay(pdMS_TO_TICKS(ms));
 }
+
+
 
 #endif
 
