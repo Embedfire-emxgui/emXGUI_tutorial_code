@@ -26,6 +26,12 @@
 /* 开发板硬件bsp头文件 */
 #include "board.h"
 
+#include <cm_backtrace.h>
+
+/* hardfault跟踪器需要的定义 */
+#define HARDWARE_VERSION               "V1.0.0"
+#define SOFTWARE_VERSION               "V0.1.0"
+
 /**************************** 任务句柄 ********************************/
 /* 
  * 任务句柄是一个指针，用于指向一个任务，当任务创建好之后，它就具有了一个任务句柄
@@ -90,6 +96,10 @@ static void BSP_Init(void)
   
   /* 按键初始化	*/
   Key_GPIO_Config();	
+  
+    /*hardfault 跟踪器初始化*/  
+  cm_backtrace_init("CmBacktrace", HARDWARE_VERSION, SOFTWARE_VERSION);
+
 
 }
 

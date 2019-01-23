@@ -335,7 +335,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F429_439xx,X_GUI_USE_FREERTOS,</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\..\Libraries\CMSIS\Include;..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\..\User;..\..\User\bsp;..\..\FreeRTOS\include;..\..\FreeRTOS\port\RVDS\ARM_CM4F;..\..\User\key;..\..\User\led;..\..\User\uart;..\..\..\..\emXGUI_Lib\inc;..\..\..\..\emXGUI_Lib\drv;..\..\..\..\emXGUI_Lib\arch\Inc</IncludePath>
+              <IncludePath>..\..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\..\Libraries\CMSIS\Include;..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\..\User;..\..\User\bsp;..\..\FreeRTOS\include;..\..\FreeRTOS\port\RVDS\ARM_CM4F;..\..\User\bsp\cm_backtrace;..\..\User\key;..\..\User\led;..\..\User\uart;..\..\..\..\emXGUI_Lib\inc;..\..\..\..\emXGUI_Lib\drv;..\..\..\..\emXGUI_Lib\arch\Inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -757,6 +757,36 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>cm_backtrace</GroupName>
+          <Files>
+            <File>
+              <FileName>cm_backtrace.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\bsp\cm_backtrace\cm_backtrace.c</FilePath>
+            </File>
+            <File>
+              <FileName>cmb_fault.S</FileName>
+              <FileType>2</FileType>
+              <FilePath>..\..\User\bsp\cm_backtrace\fault_handler\keil\cmb_fault.S</FilePath>
+            </File>
+            <File>
+              <FileName>cm_backtrace.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\User\bsp\cm_backtrace\cm_backtrace.h</FilePath>
+            </File>
+            <File>
+              <FileName>cmb_cfg.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\User\bsp\cm_backtrace\cmb_cfg.h</FilePath>
+            </File>
+            <File>
+              <FileName>cmb_def.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\User\bsp\cm_backtrace\cmb_def.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>emxgui/arch</GroupName>
           <Files>
             <File>
@@ -815,14 +845,19 @@
               <FilePath>..\..\..\..\emXGUI_Lib\drv\gui_drv_cfg.h</FilePath>
             </File>
             <File>
-              <FileName>gui_font_port.c</FileName>
+              <FileName>gui_startup.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\emXGUI_Lib\drv\gui_font_port.c</FilePath>
+              <FilePath>..\..\..\..\emXGUI_Lib\drv\gui_startup.c</FilePath>
             </File>
             <File>
               <FileName>gui_lcd_port.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\emXGUI_Lib\drv\gui_lcd_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_font_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\drv\gui_font_port.c</FilePath>
             </File>
             <File>
               <FileName>gui_log_port.c</FileName>
@@ -833,11 +868,6 @@
               <FileName>gui_mem_port.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\emXGUI_Lib\drv\gui_mem_port.c</FilePath>
-            </File>
-            <File>
-              <FileName>gui_startup.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\..\emXGUI_Lib\drv\gui_startup.c</FilePath>
             </File>
           </Files>
         </Group>
