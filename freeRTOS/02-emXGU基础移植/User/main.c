@@ -38,7 +38,6 @@
  * 以后我们要想操作这个任务都需要通过这个任务句柄，如果是自身的任务操作自己，那么
  * 这个句柄可以为NULL。
  */
-static TaskHandle_t TaskGUIThreadEntry_Handle = NULL;/* 创建任务句柄 */
 
 /********************************** 内核对象句柄 *********************************/
 /*
@@ -67,8 +66,6 @@ static TaskHandle_t TaskGUIThreadEntry_Handle = NULL;/* 创建任务句柄 */
 static void GUI_Thread_Entry(void* pvParameters);/* Test_Task任务实现 */
 
 static void BSP_Init(void);/* 用于初始化板载相关资源 */
-
-extern uint8_t SDRAM_Test(void);
 
 
 /***********************************************************************
@@ -117,17 +114,15 @@ int main(void)
   BaseType_t xReturn = pdPASS;/* 定义一个创建信息返回值，默认为pdPASS */
   
   /* 开发板硬件初始化 */
-  BSP_Init();
-  
-  printf("野火emXGUI演示例程\n\n");
+  BSP_Init();  
   
    /* 创建AppTaskCreate任务 */
   xReturn = xTaskCreate((TaskFunction_t )GUI_Thread_Entry,  /* 任务入口函数 */
                         (const char*    )"gui",/* 任务名字 */
-                        (uint16_t       )4*1024,  /* 任务栈大小 */
+                        (uint16_t       )2*1024,  /* 任务栈大小 */
                         (void*          )NULL,/* 任务入口函数参数 */
                         (UBaseType_t    )3, /* 任务的优先级 */
-                        (TaskHandle_t*  )&TaskGUIThreadEntry_Handle);/* 任务控制块指针 */ 
+                        (TaskHandle_t*  )NULL);/* 任务控制块指针 */ 
   /* 启动任务调度 */           
   if(pdPASS == xReturn)
     vTaskStartScheduler();   /* 启动任务，开启调度 */
@@ -148,6 +143,9 @@ extern void GUI_Startup(void);
   ********************************************************************/
 static void GUI_Thread_Entry(void* parameter)
 {	
+  
+  printf("野火emXGUI演示例程\n\n");
+
   /* 执行本函数不会返回 */
 	GUI_Startup();
   

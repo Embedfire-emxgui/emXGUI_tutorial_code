@@ -83,6 +83,9 @@ extern void GUI_Startup(void);
 
 static void gui_thread_entry(void* parameter)
 {	 
+ 
+  rt_kprintf("野火emXGUI演示例程\n\n");
+
   /* 执行本函数不会返回 */
 	GUI_Startup();
 	

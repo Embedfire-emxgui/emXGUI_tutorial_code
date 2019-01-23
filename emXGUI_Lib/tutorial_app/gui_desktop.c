@@ -51,7 +51,6 @@ static	void	gui_app_thread(void *p)
 //      GUI_DEBUG("gui_app_thread");
       GUI_msleep(500);
     }
-  //  return 0;
 }
 
 /*===================================================================================*/
@@ -133,15 +132,13 @@ static 	 LRESULT  	desktop_proc(HWND hwnd,UINT msg,WPARAM wParam,LPARAM lParam)
           }
           #elif X_GUI_USE_FREERTOS
           {
-             TaskHandle_t h = NULL;/* 创建任务句柄 */
-
              /* FreeRTOS系统 */
              xTaskCreate((TaskFunction_t )gui_app_thread,  /* 任务入口函数 */
                           (const char*    )"GUI_APP",/* 任务名字 */
                           (uint16_t       )2*1024,  /* 任务栈大小 */
                           (void*          )NULL,/* 任务入口函数参数 */
                           (UBaseType_t    )5, /* 任务的优先级 */
-                          (TaskHandle_t*  )&h);/* 任务控制块指针 */
+                          (TaskHandle_t*  )NULL);/* 任务控制块指针 */
           
           }
           #endif							
@@ -193,7 +190,6 @@ void GUI_DesktopStartup(void)
 	MSG msg;
 
 	wcex.Tag 		    = WNDCLASS_TAG;
-
 	wcex.Style			= CS_HREDRAW | CS_VREDRAW;
 	wcex.lpfnWndProc	= desktop_proc;
 	wcex.cbClsExtra		= 0;
@@ -202,7 +198,7 @@ void GUI_DesktopStartup(void)
 	wcex.hIcon			= NULL;
 	wcex.hCursor		= NULL;//LoadCursor(NULL, IDC_ARROW);
 
-  GUI_DEBUG("Create desktop");
+//  GUI_DEBUG("Create desktop");
 	//创建桌面窗口.
 	hwnd = GUI_CreateDesktop(	WS_EX_LOCKPOS,
                               &wcex,
@@ -211,7 +207,7 @@ void GUI_DesktopStartup(void)
                               0,0,GUI_XSIZE,GUI_YSIZE,
                               NULL,0,NULL,NULL);
 
-	GUI_DEBUG("HWND_Desktop=%08XH\r\n",	hwnd);
+//	GUI_DEBUG("HWND_Desktop=%08XH\r\n",	hwnd);
 
 	//显示桌面窗口.
 	ShowWindow(hwnd,SW_SHOW);

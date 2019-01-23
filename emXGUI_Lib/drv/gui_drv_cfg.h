@@ -58,7 +58,7 @@
 //#define	GUI_CORE_MEM_BASE	  0xD0100000  //本例子使用RTT管理，使用内部sram，不指定地址
 
 /* GUI内核使用的存储区大小，推荐最小值为8KB */
-#define  GUI_CORE_MEM_SIZE  (120*1024) //本例子使用系统管理，在rtt系统在board.c实现，freertos在heap_4.c实现
+#define  GUI_CORE_MEM_SIZE  (32*1024) //本例子使用系统管理，在rtt系统在board.c实现，freertos在heap_4.c实现
 /* 最小分配粒度，单位为字节*/  
 #define	GUI_CORE_MEM_ALLOC_UNIT   (64)         
 
@@ -78,9 +78,9 @@
 
 #endif
 /*
-SDRAM 基地址：0xD0000000
-前 LCD_FRAME_SIZE 大小的空间作为液晶驱动显存
-剩余的空间作为VMEM动态分配使用
+ * SDRAM 基地址：0xD0000000
+ * 前 LCD_FRAME_SIZE 大小的空间作为液晶驱动显存
+ * 剩余的空间作为VMEM动态分配使用
 */
 /* 内存堆的基地址，可以为内部SRAM、外扩的SDRAM等 */  
 #define	VMEM_BASE	        (0xD0000000 + LCD_FRAME_SIZE)
@@ -88,21 +88,6 @@ SDRAM 基地址：0xD0000000
 #define	VMEM_SIZE	        ((8*1024*1024) - LCD_FRAME_SIZE)     
 /* 最小分配粒度，单位为字节*/  
 #define	VMEM_ALLOC_UNIT   (64)         //64字节   
-
-/*===========存储器配置===GUI_Arch.c===============================================*/
-/** 
- 在静态内存中最大的RECT_LL 链表数，
- 使用静态内存链表可以极快速的分配，以提升系统性能
- 如果这个静态 RECT_LL 链表用完，就会调用 GUI_MEM_Alloc，
- 以动态内存方式分配 RECT_LL 
- 这部分在GUI_RectLL_Alloc函数实现
-
- 如果用户窗口不多，并且系统静态 RAM又比较少时，
- 就可以把这个表定义小一点
- 
- 一个RECT_LL元素20字节，总的静态空间占用为 20*RECT_LL_SLOT_NUM 个字节
-*/
-#define	RECT_LL_SLOT_NUM	        512
 
 /*===========字体配置===gui_font_port.c===============================================*/
 /* 默认字体使用XFT，保留，这个宏不起作用 */
