@@ -48,7 +48,7 @@ static	void	gui_app_thread(void *p)
 //   	ShellWindowStartup();
     while(1)
     {
-      GUI_DEBUG("gui_app_thread");
+//      GUI_DEBUG("gui_app_thread");
       GUI_msleep(500);
     }
   //  return 0;
@@ -118,32 +118,30 @@ static 	 LRESULT  	desktop_proc(HWND hwnd,UINT msg,WPARAM wParam,LPARAM lParam)
 	{
     /* 桌面创建时,会产生该消息,可以在这里做一些初始化工作. */
 		case	WM_CREATE:	
-          GUI_DEBUG("WM_CREATE");
-
-			   ////创建1个20ms定时器，处理循环事件.
-//				 SetTimer(hwnd,1,20,TMR_START,NULL);
+			   //创建1个20ms定时器，处理循环事件.
+				 SetTimer(hwnd,1,20,TMR_START,NULL);
 
 				//创建App线程						
 				{
           #ifdef	X_GUI_USE_RTTHREAD
           {
-//            /* RT-Thread系统 */
-//            rt_thread_t h;
-//					
-//						h=rt_thread_create("GUI_APP",gui_app_thread,NULL,2048,5,5);
-//						rt_thread_startup(h);		
+            /* RT-Thread系统 */
+            rt_thread_t h;
+					
+						h=rt_thread_create("GUI_APP",gui_app_thread,NULL,2048,5,5);
+						rt_thread_startup(h);		
           }
           #elif X_GUI_USE_FREERTOS
           {
-//             TaskHandle_t h = NULL;/* 创建任务句柄 */
+             TaskHandle_t h = NULL;/* 创建任务句柄 */
 
-//             /* FreeRTOS系统 */
-//             xTaskCreate((TaskFunction_t )gui_app_thread,  /* 任务入口函数 */
-//                          (const char*    )"GUI_APP",/* 任务名字 */
-//                          (uint16_t       )2*1024,  /* 任务栈大小 */
-//                          (void*          )NULL,/* 任务入口函数参数 */
-//                          (UBaseType_t    )5, /* 任务的优先级 */
-//                          (TaskHandle_t*  )&h);/* 任务控制块指针 */
+             /* FreeRTOS系统 */
+             xTaskCreate((TaskFunction_t )gui_app_thread,  /* 任务入口函数 */
+                          (const char*    )"GUI_APP",/* 任务名字 */
+                          (uint16_t       )2*1024,  /* 任务栈大小 */
+                          (void*          )NULL,/* 任务入口函数参数 */
+                          (UBaseType_t    )5, /* 任务的优先级 */
+                          (TaskHandle_t*  )&h);/* 任务控制块指针 */
           
           }
           #endif							
@@ -153,8 +151,6 @@ static 	 LRESULT  	desktop_proc(HWND hwnd,UINT msg,WPARAM wParam,LPARAM lParam)
 
 		/* 定时处理输入设备的信息 */
 		case	WM_TIMER:
-                GUI_DEBUG("WM_TIMER");
-
       #if(GUI_INPUT_DEV_EN)
         {
           u16 id;
@@ -170,38 +166,14 @@ static 	 LRESULT  	desktop_proc(HWND hwnd,UINT msg,WPARAM wParam,LPARAM lParam)
 
     /* 客户区背景需要被擦除 */
 		case	WM_ERASEBKGND:
-		{                
-      GUI_DEBUG("WM_ERASEBKGND");
-
-      
+		{         
 			HDC hdc =(HDC)wParam;
 			_EraseBackgnd(hdc,NULL,hwnd);
 		}
-		return TRUE;
-    
-//	case WM_PAINT:
-//	{
-//		HDC hdc;
-//		PAINTSTRUCT ps;
-//		RECT rc;
-//    GUI_DEBUG("WM_PAINT");
-
-//		//			WCHAR wbuf[128];
-//    GetClientRect(hwnd, &rc);
-
-//    hdc = BeginPaint(hwnd, &ps);
-//			_EraseBackgnd(hdc,NULL,hwnd);
-
-
-//		EndPaint(hwnd, &ps);
-//	}
-//	break;
-
+		return TRUE;  
 
     /* 用户不关心的信息，由系统处理 */
 		default:
-            GUI_DEBUG("default");
-
 				return	DefDesktopProc(hwnd,msg,wParam,lParam);
 	}
 

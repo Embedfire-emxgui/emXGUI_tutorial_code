@@ -68,6 +68,7 @@ static void GUI_Thread_Entry(void* pvParameters);/* Test_Task任务实现 */
 
 static void BSP_Init(void);/* 用于初始化板载相关资源 */
 
+extern uint8_t SDRAM_Test(void);
 
 
 /***********************************************************************
@@ -88,14 +89,13 @@ static void BSP_Init(void)
 	/* LED 初始化 */
 	LED_GPIO_Config();
   
-  /* SDRAM初始化 */
-  SDRAM_Init();  
-
-	/* 串口初始化	*/
-	Debug_USART_Config();
-  
   /* 按键初始化	*/
   Key_GPIO_Config();	
+
+  /* SDRAM初始化 */
+  SDRAM_Init();  
+	/* 串口初始化	*/
+	Debug_USART_Config();
   
     /*hardfault 跟踪器初始化*/  
   cm_backtrace_init("CmBacktrace", HARDWARE_VERSION, SOFTWARE_VERSION);

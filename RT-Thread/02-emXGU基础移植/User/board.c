@@ -8,6 +8,7 @@
 
 #include <cm_backtrace.h>
 
+/* hardfault跟踪器需要的定义 */
 #define HARDWARE_VERSION               "V1.0.0"
 #define SOFTWARE_VERSION               "V0.1.0"
 

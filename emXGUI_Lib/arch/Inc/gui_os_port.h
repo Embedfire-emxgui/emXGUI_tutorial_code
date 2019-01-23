@@ -24,8 +24,8 @@
   #include	"rtthread.h"
   
   /* 系统管理的内存堆，gui_mem_port.c */
-  #define OS_MALLOC   rt_malloc
-  #define OS_FREE     rt_free
+  #define OS_MALLOC   GUI_VMEM_Alloc
+  #define OS_FREE     GUI_VMEM_Free
     
   /* 调试或错误、信息输出接口 gui_log_port.h */
   #define   GUI_Log     rt_kprintf

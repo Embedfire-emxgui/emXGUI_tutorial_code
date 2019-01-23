@@ -80,8 +80,7 @@
 /*
 SDRAM 基地址：0xD0000000
 前 LCD_FRAME_SIZE 大小的空间作为液晶驱动显存
-后1MB空间作为EXRAM节区用于全局变量的空间，详见sct分散加载文件
-中间剩余的空间作为VMEM动态分配使用
+剩余的空间作为VMEM动态分配使用
 */
 /* 内存堆的基地址，可以为内部SRAM、外扩的SDRAM等 */  
 #define	VMEM_BASE	        (0xD0000000 + LCD_FRAME_SIZE)
