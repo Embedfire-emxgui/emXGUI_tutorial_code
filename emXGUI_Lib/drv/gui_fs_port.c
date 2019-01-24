@@ -1,10 +1,9 @@
 /**
   *********************************************************************
-  * @file    gui_resource_port.c
+  * @file    gui_fs_port.c
   * @version V1.0
   * @date    2018-xx-xx
-  * @brief   管理外部资源的接口
-  *          例如用来管理外部FLASH中的资源
+  * @brief   文件系统接口，需要实现FileSystem_Init函数
   *********************************************************************
   * @attention
   * 官网    :www.emXGUI.com
