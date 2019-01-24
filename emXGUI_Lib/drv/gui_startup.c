@@ -5,8 +5,8 @@
 /*============================================================================*/
 extern BOOL	GL_CursorInit(const SURFACE *pSurf,int x,int y);
 extern BOOL	GUI_Arch_Init(void);
-extern void GUI_DesktopStartup(void);
 
+extern void GUI_DesktopStartup(void);
 static BOOL GUI_LowLevelInit(void);
 
 /**
@@ -85,10 +85,12 @@ void	GUI_Startup(void)
   if(GUI_InputInit() != TRUE)
   {
     GUI_ERROR("GUI_InputInit Failed.");
-  } 
-
-	GL_CursorInit(pSurf,pSurf->Width>>1,pSurf->Height>>1); //初始化光标
+  }  
 #endif
+  
+#if (GUI_SHOW_CURSOR)
+	GL_CursorInit(pSurf,pSurf->Width>>1,pSurf->Height>>1); //初始化光标
+#endif  
 
 	hFont =GUI_Default_FontInit(); //初始化默认的字体
 	if(hFont==NULL)

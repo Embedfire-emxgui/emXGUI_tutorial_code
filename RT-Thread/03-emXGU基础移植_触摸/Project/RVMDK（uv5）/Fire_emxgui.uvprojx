@@ -715,6 +715,16 @@
               <FileType>1</FileType>
               <FilePath>..\..\User\bsp\usart\bsp_debug_usart.c</FilePath>
             </File>
+            <File>
+              <FileName>bsp_i2c_touch.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\bsp\touch\bsp_i2c_touch.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_touch_gt9xx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\bsp\touch\bsp_touch_gt9xx.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -846,11 +856,6 @@
           <GroupName>emxgui/arch</GroupName>
           <Files>
             <File>
-              <FileName>GL_Cursor.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\..\emXGUI_Lib\arch\GL_Cursor.c</FilePath>
-            </File>
-            <File>
               <FileName>GUI_Arch.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\emXGUI_Lib\arch\GUI_Arch.c</FilePath>
@@ -929,6 +934,16 @@
               <FileName>gui_log_port.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\emXGUI_Lib\drv\gui_log_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_input_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\drv\gui_input_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_touch_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\drv\gui_touch_port.c</FilePath>
             </File>
           </Files>
         </Group>

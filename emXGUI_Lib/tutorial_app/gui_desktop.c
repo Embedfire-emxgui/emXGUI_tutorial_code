@@ -212,8 +212,10 @@ void GUI_DesktopStartup(void)
 	//显示桌面窗口.
 	ShowWindow(hwnd,SW_SHOW);
 
-//	//设置系统打开光标显示(可以按实际情况看是否需要).
-//	ShowCursor(TRUE);
+#if (GUI_SHOW_CURSOR)
+	//设置系统打开光标显示(可以按实际情况看是否需要).
+	ShowCursor(TRUE);
+#endif
 
 	while(GetMessage(&msg,hwnd))
 	{

@@ -1,6 +1,10 @@
 #ifndef __GUI_TOUCH_PORT_H
 #define	__GUI_TOUCH_PORT_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif  
+  
 #include	"emXGUI.h"
 #include "stm32f4xx.h"
 
@@ -16,5 +20,7 @@ BOOL TouchDev_GetPoint(POINT *pt);
 
 void 	GUI_TouchHandler(void);
 
-
+#ifdef	__cplusplus
+}
+#endif
 #endif /* __GUI_TOUCH_PORT_H */

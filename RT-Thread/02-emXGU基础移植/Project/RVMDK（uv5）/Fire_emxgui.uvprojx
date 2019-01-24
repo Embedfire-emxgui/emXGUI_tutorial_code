@@ -846,11 +846,6 @@
           <GroupName>emxgui/arch</GroupName>
           <Files>
             <File>
-              <FileName>GL_Cursor.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\..\emXGUI_Lib\arch\GL_Cursor.c</FilePath>
-            </File>
-            <File>
               <FileName>GUI_Arch.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\emXGUI_Lib\arch\GUI_Arch.c</FilePath>
