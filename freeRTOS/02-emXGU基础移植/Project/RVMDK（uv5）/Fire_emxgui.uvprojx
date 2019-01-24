@@ -7,7 +7,7 @@
 
   <Targets>
     <Target>
-      <TargetName>Fire_FreeRTOS</TargetName>
+      <TargetName>Fire_emxgui</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
