@@ -42,9 +42,21 @@ extern const char ASCII_24_4BPP[];
 extern const char ASCII_32_4BPP[];
 
 
+/* 默认字体 */
+HFONT defaultFont =NULL;
+
+/* 默认英文字体 */
+HFONT defaultFontEn = NULL;
+
+/* 用于标记是否有资源文件无法找到 */
+BOOL res_not_found_flag = FALSE;
+
+#if (GUI_FONT_LOAD_TO_RAM)
+  u8 *default_font_buf;
+#endif
 
 /*===================================================================================*/
-#if (GUI_USE_EXTERN_FONT && (!GUI_FONT_LOAD_TO_RAM))
+#if (GUI_USE_EXTERN_FONT)
 
 /**
   * @brief  从流媒体加载内容的回调函数
@@ -65,7 +77,108 @@ static int font_read_data_exFlash(void *buf,int offset,int size,LONG lParam)
 	RES_DevRead(buf,offset,size);
 	return size;
 }
+
+
+/**
+  * @brief  初始化外部FLASH字体(流设备方式)
+  * @param  res_name 字体资源名字
+  * @retval 返回默认字体的句柄
+  */
+HFONT GUI_Init_Extern_Font_Stream(const char* res_name)
+{
+  /* 使用流设备加载字体，按需要读取 */
+  int font_base;
+  HFONT hFont = NULL;
+  CatalogTypeDef dir;
+ 
+  font_base =RES_GetInfo_AbsAddr(res_name, &dir);
+  if(font_base > 0)
+  {
+    hFont =XFT_CreateFontEx(font_read_data_exFlash,font_base);
+  }
+  else
+  {
+    res_not_found_flag = TRUE;
+    GUI_ERROR("Can not find RES:%s",res_name);
+  }
+  
+  if(hFont==NULL)
+  {
+    res_not_found_flag = TRUE;    
+    GUI_ERROR("%s font create failed",res_name);
+  }
+  return hFont;
+}
+
+
+
+/**
+  * @brief  初始化外部FLASH字体（整体加载到SDRAM）
+  * @param  res_name[in] 字体资源名字
+  * @param  buf[out]：字体资源复制到的缓冲区，
+  *         可以通过它free掉占用的空间，但注意释放后使用字体的话会出错
+  * @retval 返回默认字体的句柄
+  */
+HFONT GUI_Init_Extern_Font_2RAM(const char* res_name,u8** buf)
+{
+    /* 整个字体文件加载至RAM */
+    int font_base; 
+    HFONT hFont = NULL;  
+    CatalogTypeDef dir;
+   
+    /* RES_GetInfo读取到的dir.offset是资源的绝对地址 */
+    font_base =RES_GetInfo_AbsAddr(res_name, &dir);
+
+    if(font_base > 0)
+    {
+    	*buf =(u8*)GUI_VMEM_Alloc(dir.size);
+      if(*buf!=NULL)
+      {
+        RES_DevRead((u8 *)*buf, font_base, dir.size);
+
+        hFont = XFT_CreateFont(*buf);
+      }
+    }
+    else
+    {
+      res_not_found_flag = TRUE;
+      GUI_ERROR("Can not find RES:%s",res_name);
+    }
+    
+    if(hFont==NULL)
+    {
+      res_not_found_flag = TRUE;    
+      GUI_ERROR("%s font create failed",res_name);
+    }
+    
+   return hFont;
+}
+
+
+/**
+  * @brief  加载外部字体
+  * @retval 返回重新创建的defaultFont
+  */
+HFONT GUI_Init_Extern_Font(void)
+{
+   /* 整个字体文件加载至RAM */
+#if (GUI_FONT_LOAD_TO_RAM  )
+  {  
+    defaultFont = GUI_Init_Extern_Font_2RAM(GUI_DEFAULT_EXTERN_FONT,&default_font_buf);
+  }
+  
+#else
+   /* 使用流设备加载字体，按需要读取 */
+  {
+    defaultFont =GUI_Init_Extern_Font_Stream(GUI_DEFAULT_EXTERN_FONT);  
+  }
+#endif 
+ 
+  return defaultFont;
+}
+
 #endif
+
 
 /**
   * @brief  GUI默认字体初始化
@@ -74,64 +187,31 @@ static int font_read_data_exFlash(void *buf,int offset,int size,LONG lParam)
   */
 HFONT GUI_Default_FontInit(void)
 {
-
-	HFONT hFont=NULL;
-
-#if (GUI_FONT_LOAD_TO_RAM  )
-  {  
-    /* 整个字体文件加载至RAM */
-    
-    int font_base;
-    
-    /* 指向缓冲区的指针 */
-    static u8 *pFontData_XFT=NULL;
-    CatalogTypeDef dir;
-    
-    /* RES_GetInfo读取到的dir.offset是资源的绝对地址 */
-    font_base =RES_GetInfo_AbsAddr(GUI_DEFAULT_EXTERN_FONT, &dir);
-
-    if(font_base > 0)
-    {
-    	pFontData_XFT =(u8*)GUI_VMEM_Alloc(dir.size);
-      if(pFontData_XFT!=NULL)
-      {
-        RES_DevRead(pFontData_XFT, font_base, dir.size);
-
-        hFont = XFT_CreateFont(pFontData_XFT);
-      }
-    }
-  }
-#elif (GUI_USE_EXTERN_FONT)   
-  {
-    /* 使用流设备加载字体，按需要读取 */
-    if(hFont==NULL)
-    { 
-    	int font_base;
-      CatalogTypeDef dir;
-
-    	font_base =RES_GetInfo_AbsAddr(GUI_DEFAULT_EXTERN_FONT, &dir);
-    	if(font_base > 0)
-    	{
-    		hFont =XFT_CreateFontEx(font_read_data_exFlash,font_base);
-    	}
-    }
-  }
-#endif
-
     /* 若前面的字体加载失败，使用内部FLASH中的数据（工程中的C语言数组）
     *  添加字体数据时，把数组文件添加到工程，在本文件头添加相应字体数组的声明，
     *  然后调用XFT_CreateFont函数创建字体即可
     */
-    if(hFont==NULL)
+  
+    /* 从本地加载(本地数组数据) */ 
+    /*ASCii字库,24x24,4BPP抗锯齿*/
+    defaultFontEn = XFT_CreateFont(GUI_DEFAULT_FONT);        
+
+    /* 中文字库存储占用空间非常大，不推荐放在内部FLASH */
+    //defaultFont =XFT_CreateFont(GB2312_16_2BPP); /*GB2312字库,16x16,2BPP抗锯齿*/
+    //defaultFont =XFT_CreateFont(GB2312_20_4BPP); /*GB2312字库,20x20,4BPP抗锯齿*/
+#if (GUI_USE_EXTERN_FONT)
+ 
+    defaultFont = GUI_Init_Extern_Font();
+  
+#endif
+  
+    /* 中文字体创建失败时使用英文字体作为默认字体 */
+    if(defaultFont==NULL)
     { 
-      /* 从本地加载(本地数组数据) */    	
-      hFont =XFT_CreateFont(GUI_DEFAULT_FONT);  /*ASCii字库,20x20,4BPP抗锯齿*/
-      
-      /* 中文字库存储占用空间非常大，不推荐放在内部FLASH */
-    	//hFont =XFT_CreateFont(GB2312_16_2BPP); /*GB2312字库,16x16,2BPP抗锯齿*/
-    	//hFont =XFT_CreateFont(GB2312_20_4BPP); /*GB2312字库,20x20,4BPP抗锯齿*/
+      defaultFont = defaultFontEn;  
     }
-	return hFont;
+    
+	return defaultFont;
 }
 
 /********************************END OF FILE****************************/
