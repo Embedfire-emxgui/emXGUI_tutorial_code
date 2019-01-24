@@ -236,5 +236,6 @@ void GTP_IRQ_Disable(void);
 void GTP_IRQ_Enable(void);
 int32_t GTP_Init_Panel(void);
 int8_t GTP_Send_Command(uint8_t command);
+int	GTP_Execu( int *x,int *y);                                       
 
 #endif /* _GOODIX_GT9XX_H_ */

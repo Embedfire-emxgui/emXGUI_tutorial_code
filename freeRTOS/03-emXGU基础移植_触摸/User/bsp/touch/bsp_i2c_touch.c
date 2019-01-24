@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    bsp_i2c_ee.c
+  * @file    bsp_i2c_touch.c
   * @author  STMicroelectronics
   * @version V1.0
   * @date    2015-xx-xx
@@ -8,16 +8,16 @@
   ******************************************************************************
   * @attention
   *
-  * 实验平台:秉火  STM32 F429 开发板 
+  * 实验平台:野火  STM32 F429 开发板 
   * 论坛    :http://www.firebbs.cn
-  * 淘宝    :http://firestm32.taobao.com
+  * 淘宝    :https://fire-stm32.taobao.com
   *
   ******************************************************************************
   */ 
 
 #include "./touch/bsp_i2c_touch.h"
-#include "./touch/gt9xx.h"
-#include "bsp_debug_usart.h"
+#include "./touch/bsp_touch_gt9xx.h"
+#include "./usart/bsp_debug_usart.h"
 
 
 /* STM32 I2C 快速模式 */
@@ -62,12 +62,12 @@ void I2C_GTP_IRQEnable(void)
   EXTI_Init(&EXTI_InitStructure);  
   
   /* 配置中断优先级 */
-  NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
+  NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
   
 	/*使能中断*/
   NVIC_InitStructure.NVIC_IRQChannel = GTP_INT_EXTI_IRQ;
-  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 6;
-  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
+  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
   NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
   NVIC_Init(&NVIC_InitStructure);
 
@@ -220,13 +220,12 @@ void I2C_ResetChip(void)
 	  GPIO_Init(GTP_INT_GPIO_PORT, &GPIO_InitStructure);
 }
 
-#if !(SOFT_IIC) //硬件IIC模式 
 /**
   * @brief  I2C 工作模式配置
   * @param  无
   * @retval 无
   */
-static void I2C_Mode_Config(void)
+ void I2C_Mode_Config(void)
 {
   I2C_InitTypeDef  I2C_InitStructure; 
 
@@ -243,7 +242,7 @@ static void I2C_Mode_Config(void)
   I2C_AcknowledgeConfig(GTP_I2C, ENABLE);
 
 }
-#endif
+
 
 /**
   * @brief  I2C 外设(GT91xx)初始化
@@ -260,7 +259,7 @@ void I2C_Touch_Init(void)
   
   I2C_ResetChip();
 
-  I2C_GTP_IRQEnable();
+  I2C_GTP_IRQDisable();
 }
 
 
@@ -649,23 +648,18 @@ uint32_t I2C_ReadBytes(uint8_t ClientAddr,uint8_t* pBuffer, uint16_t NumByteToRe
 
 	while(NumByteToRead) 
   {
-   if(NumByteToRead == 1)
-    {
-			i2c_NAck();	/* 最后1个字节读完后，CPU产生NACK信号(驱动SDA = 1) */
-      
-      /* 发送I2C总线停止信号 */
-      i2c_Stop();
-    }
-    
-   *pBuffer = i2c_ReadByte();
+    *pBuffer = i2c_ReadByte();
     
     /* 读指针自增 */
     pBuffer++; 
       
     /*计数器自减 */
     NumByteToRead--;
-    
-    i2c_Ack();	/* 中间字节读完后，CPU产生ACK信号(驱动SDA = 0) */  
+       
+    if(NumByteToRead == 0)
+			i2c_NAck();	/* 最后1个字节读完后，CPU产生NACK信号(驱动SDA = 1) */      
+    else
+      i2c_Ack();	/* 中间字节读完后，CPU产生ACK信号(驱动SDA = 0) */  
   }
 
 	/* 发送I2C总线停止信号 */
