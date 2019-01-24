@@ -78,7 +78,6 @@ static int font_read_data_exFlash(void *buf,int offset,int size,LONG lParam)
 	return size;
 }
 
-
 /**
   * @brief  初始化外部FLASH字体(流设备方式)
   * @param  res_name 字体资源名字
@@ -192,17 +191,19 @@ HFONT GUI_Default_FontInit(void)
     *  然后调用XFT_CreateFont函数创建字体即可
     */
   
-    /* 从本地加载(本地数组数据) */ 
-    /*ASCii字库,24x24,4BPP抗锯齿*/
-    defaultFontEn = XFT_CreateFont(GUI_DEFAULT_FONT);        
+    /* 默认英文字体 */ 
+    defaultFontEn = XFT_CreateFont(GUI_DEFAULT_FONT_EN);        
 
     /* 中文字库存储占用空间非常大，不推荐放在内部FLASH */
-    //defaultFont =XFT_CreateFont(GB2312_16_2BPP); /*GB2312字库,16x16,2BPP抗锯齿*/
-    //defaultFont =XFT_CreateFont(GB2312_20_4BPP); /*GB2312字库,20x20,4BPP抗锯齿*/
 #if (GUI_USE_EXTERN_FONT)
  
+    /* 从外部资源设备加载字体 */
     defaultFont = GUI_Init_Extern_Font();
   
+#elif (GUI_USE_INER_CN_FONT)
+    
+    /* 从内部flash加载默认中文字体，不推荐*/
+    defaultFont = XFT_CreateFont(GUI_DEFAULT_FONT_CN);    
 #endif
   
     /* 中文字体创建失败时使用英文字体作为默认字体 */

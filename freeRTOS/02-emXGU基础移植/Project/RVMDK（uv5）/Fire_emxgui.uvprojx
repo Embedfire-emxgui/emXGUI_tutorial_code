@@ -834,6 +834,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_24_4BPP.c</FilePath>
             </File>
+            <File>
+              <FileName>GB2312_16_2BPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\resource\xft_font\GB2312_16_2BPP.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -842,7 +847,7 @@
             <File>
               <FileName>gui_drv_cfg.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\..\..\..\emXGUI_Lib\drv\gui_drv_cfg.h</FilePath>
+              <FilePath>..\..\User\gui_drv_cfg.h</FilePath>
             </File>
             <File>
               <FileName>gui_startup.c</FileName>

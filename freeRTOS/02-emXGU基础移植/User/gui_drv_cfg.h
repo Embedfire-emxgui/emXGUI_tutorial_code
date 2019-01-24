@@ -95,6 +95,16 @@
 /* 是否支持TTF字体，保留，这个宏不起作用 */
 #define	GUI_FONT_TTF_EN		      0
 
+
+/* 默认内部英文字体数组名，USE_EXTERN_FONT为0或 外部字体加载失败时会采用的字体 */
+#define GUI_DEFAULT_FONT_EN          ASCII_24_4BPP
+
+/* 是否使用内部中文字体，中文字体太大，不建议放在内部 */
+#define GUI_USE_INER_CN_FONT      0
+/* 默认内部中文字体数组名 */
+#define GUI_DEFAULT_FONT_CN          GB2312_16_2BPP
+
+
 /* 是否使用外部FLASH中的字体
 *  流设备和整体加载方式都要把这个宏设置为1
 */
@@ -109,10 +119,6 @@
 
 /* 要使用的外部默认字体文件，USE_EXTERN_FONT为1时生效 */
 #define GUI_DEFAULT_EXTERN_FONT   "GB2312_24_4BPP.xft"
-
-/* 默认内部字体数组名，USE_EXTERN_FONT为0或 外部字体加载失败时会采用的字体 */
-#define GUI_DEFAULT_FONT          ASCII_24_4BPP
-
 
 
 /*===========日志输出设备配置===gui_log_port.c===============================================*/

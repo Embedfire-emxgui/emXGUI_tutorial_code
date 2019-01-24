@@ -12,7 +12,9 @@ extern "C" {
 extern HFONT defaultFont;
 /* 默认英文字体 */
 extern HFONT defaultFontEn;
-
+  
+/* 用于标记是否有资源文件无法找到 */
+extern BOOL res_not_found_flag;
 
 HFONT GUI_Default_FontInit(void);
 HFONT GUI_Init_Extern_Font_Stream(const char* res_name);
