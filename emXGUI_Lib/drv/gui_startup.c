@@ -78,7 +78,15 @@ void	GUI_Startup(void)
   {
     GUI_ERROR("RES_DevInit Failed.");
   }
-#endif   
+#endif  
+
+#if(GUI_FS_EN)  
+   //文件系统初始化
+  if(FileSystem_Init() != TRUE)
+  {
+    GUI_ERROR("File_System Failed.");
+  }
+#endif  
 
 #if(GUI_INPUT_DEV_EN)    
   //初始化输入设备

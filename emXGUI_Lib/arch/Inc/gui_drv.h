@@ -21,14 +21,22 @@
 #include	<math.h>
 
 #include "gui_drv_cfg.h"
-
 #include "gui_mem_port.h"
-#include "gui_input_port.h"
 #include "gui_lcd_port.h"
-#include "gui_resource_port.h"
 #include "gui_font_port.h"
 #include "gui_log_port.h"
 
+#if(GUI_INPUT_DEV_EN)
+  #include "gui_input_port.h"
+#endif
+
+#if(GUI_RES_DEV_EN)
+  #include "gui_resource_port.h"
+#endif
+
+#if(GUI_FS_EN)
+  #include "gui_fs_port.h"
+#endif
 
 #ifndef	MIN
 #define	MIN(a,b)	(((a)<(b))?(a):(b))
