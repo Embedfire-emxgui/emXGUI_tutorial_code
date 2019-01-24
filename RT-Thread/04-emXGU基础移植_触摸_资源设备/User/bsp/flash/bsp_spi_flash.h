@@ -104,6 +104,8 @@ u8 SPI_FLASH_SendByte(u8 byte);
 u16 SPI_FLASH_SendHalfWord(u16 HalfWord);
 void SPI_FLASH_WriteEnable(void);
 void SPI_FLASH_WaitForWriteEnd(void);
+uint8_t SPI_FLASH_Get_Busy_Status(void);
+
 
 #endif /* __SPI_FLASH_H */
 

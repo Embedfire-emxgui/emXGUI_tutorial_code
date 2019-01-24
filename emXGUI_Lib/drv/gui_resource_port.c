@@ -68,7 +68,6 @@ U32 RES_DevGetID(void)
 BOOL RES_DevWrite(u8 *buf,u32 addr,u32 size)
 {
 	GUI_MutexLock(mutex_lock,5000);
-	SPI_FLASH_SectorErase(addr&0xFFFFF000);
 	SPI_FLASH_BufferWrite(buf,addr,size);
 	GUI_MutexUnlock(mutex_lock);
 	return TRUE;
@@ -84,7 +83,6 @@ BOOL RES_DevWrite(u8 *buf,u32 addr,u32 size)
 BOOL RES_DevRead(u8 *buf,u32 addr,u32 size)
 {
 	GUI_MutexLock(mutex_lock,5000);
-
 	SPI_FLASH_BufferRead(buf,addr,size);
 	GUI_MutexUnlock(mutex_lock);
 	return TRUE;
@@ -103,6 +101,20 @@ int RES_DevEraseSector(u32 addr)
 	return SPI_FLASH_SectorSize;
 }
 
+
+/**
+  * @brief  等待设备的写入或擦除结束
+  * @param  timeout 最大等待时间（ms）
+  * @retval 是否超时
+  */
+BOOL RES_WaitForWriteEnd(u32 timeout)
+{
+	GUI_MutexLock(mutex_lock,5000);
+  SPI_FLASH_WaitForWriteEnd();
+//	SPI_FLASH_BufferRead(buf,addr,size);
+	GUI_MutexUnlock(mutex_lock);
+	return TRUE;
+}
 /*=========================================================================================*/
 #if 0
 /**
@@ -157,9 +169,9 @@ s32 RES_GetOffset(const char *res_name)
 	CatalogTypeDef dir;
 
 	len =x_strlen(res_name);
-	for(i=0;i<GUI_CATALOG_SIZE;i+=32)
+	for(i=0;i<GUI_CATALOG_SIZE;i+=sizeof(CatalogTypeDef))
 	{
-		RES_DevRead((u8*)&dir,GUI_RES_BASE+i,32);
+		RES_DevRead((u8*)&dir,GUI_RES_BASE+i,sizeof(CatalogTypeDef));
 
 		if(x_strncasecmp(dir.name,res_name,len)==0)
 		{
@@ -185,9 +197,9 @@ s32 RES_GetInfo_AbsAddr(const char *res_name, CatalogTypeDef *dir)
   
 	len =x_strlen(res_name);
   /* 根据名字遍历目录 */
-	for(i=0;i<GUI_CATALOG_SIZE;i+=32)
+	for(i=0;i<GUI_CATALOG_SIZE;i+=sizeof(CatalogTypeDef))
 	{
-		RES_DevRead((u8*)dir,GUI_RES_BASE+i,32);
+		RES_DevRead((u8*)dir,GUI_RES_BASE+i,sizeof(CatalogTypeDef));
 
 		if(x_strncasecmp(dir->name,res_name,len)==0)
 		{
@@ -198,6 +210,96 @@ s32 RES_GetInfo_AbsAddr(const char *res_name, CatalogTypeDef *dir)
 	}
 	return -1;
 }
+
+
+/**
+  * @brief  从资源设备加载内容
+  * @param  file_name[in]: 文件名
+  * @param  buf[out]：加载后得到的缓冲区
+  * @param  size[out]：内容的大小
+  * @note   buf是根据内容的大小动态从VMEM中申请的，
+  *         使用完毕buf后，需要调用h文件中的Release_Content函数释放buf的空间
+  * @retval FALSE:失败; TRUE:成功
+*/
+BOOL RES_Load_Content(char *file_name, char** buf, u32* size) 
+{	 
+    int content_offset;
+    CatalogTypeDef dir;
+    BOOL result = TRUE;
+  
+    content_offset = RES_GetInfo_AbsAddr(file_name, &dir);
+    if(content_offset > 0)
+    {    
+      /* 文件内容空间 */
+      *buf = (char *)GUI_VMEM_Alloc(dir.size);
+      if(*buf != NULL)
+      {
+        /* 加载数据*/
+        RES_DevRead((u8 *)*buf,content_offset,dir.size); 
+          
+        *size = dir.size;
+      }
+      else
+        result = FALSE;
+    }
+    else 
+      result = FALSE;
+   
+    return result;
+}
+
+#if(GUI_RES_FS_EN)
+/**
+  * @brief  从文件系统加载内容
+  * @param  file_name[in]: 文件路径
+  * @param  buf[out]：加载后得到的缓冲区
+  * @param  size[out]：内容的大小
+  * @note   buf是根据内容的大小动态从VMEM中申请的，
+  *         使用完毕buf后，需要调用h文件中的Release_Content函数释放buf的空间
+  * @retval FALSE:失败; TRUE:成功
+*/
+BOOL FS_Load_Content(char *file_name, char** buf, u32* size) 
+{	 	
+    /* file objects */
+    FIL     *file;												
+    FRESULT fresult;  
+    BOOL result = TRUE;
+    UINT br;
+  
+    /* 文件句柄空间 */
+    file =(FIL*)GUI_VMEM_Alloc(sizeof(FIL));
+      
+    /* 打开文件 */		
+    fresult = f_open(file, file_name, FA_OPEN_EXISTING | FA_READ );
+    if (fresult != FR_OK)
+    {      
+      GUI_ERROR("Open file failed!");
+      GUI_VMEM_Free(file);
+      return FALSE;
+    }    
+
+    *size = f_size(file);    
+    /* 文件内容空间 */
+    *buf = (char *)GUI_VMEM_Alloc(*size);
+    if(*buf != NULL)
+    {    
+      /* 加载整个图片文件 */
+      fresult = f_read(file, *buf, *size, &br);
+      /* 关闭文件 */
+      f_close(file);
+    }
+    else
+      result = FALSE;    
+    
+    /* 释放空间 */
+    GUI_VMEM_Free(file);    
+    
+    return result;
+}
+#endif
+
+
+
 
 /********************************END OF FILE****************************/
 

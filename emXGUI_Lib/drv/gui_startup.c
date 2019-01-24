@@ -88,7 +88,7 @@ void	GUI_Startup(void)
   }  
 #endif
   
-#if (GUI_SHOW_CURSOR)
+#if (GUI_SHOW_CURSOR_EN)
 	GL_CursorInit(pSurf,pSurf->Width>>1,pSurf->Height>>1); //初始化光标
 #endif  
 

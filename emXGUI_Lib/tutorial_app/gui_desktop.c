@@ -81,9 +81,14 @@ static	void	_EraseBackgnd(HDC hdc,const RECT *lprc,HWND hwnd)
   	
   SetTextColor(hdc,MapRGB(hdc,250,250,250));
 
+
+#if (GUI_EXTERN_FONT_EN || GUI_INER_CN_FONT_EN)
+  /* 居中显示结果 */
+	DrawText(hdc,L"您好，野火emXGUI!",-1,&rc,DT_SINGLELINE|DT_VCENTER|DT_CENTER);  
+#else
   /* 居中显示结果 */
 	DrawText(hdc,L"Hello emXGUI@Embedfire!",-1,&rc,DT_SINGLELINE|DT_VCENTER|DT_CENTER);
-
+#endif
   
 	SetTextColor(hdc,MapRGB(hdc,250,250,250));
 	TextOut(hdc,20,20,L"emXGUI@Embedfire STM32F429 ",-1);
@@ -212,7 +217,7 @@ void GUI_DesktopStartup(void)
 	//显示桌面窗口.
 	ShowWindow(hwnd,SW_SHOW);
 
-#if (GUI_SHOW_CURSOR)
+#if (GUI_SHOW_CURSOR_EN)
 	//设置系统打开光标显示(可以按实际情况看是否需要).
 	ShowCursor(TRUE);
 #endif

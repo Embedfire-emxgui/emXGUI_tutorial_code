@@ -51,12 +51,12 @@ HFONT defaultFontEn = NULL;
 /* 用于标记是否有资源文件无法找到 */
 BOOL res_not_found_flag = FALSE;
 
-#if (GUI_FONT_LOAD_TO_RAM)
+#if (GUI_FONT_LOAD_TO_RAM_EN)
   u8 *default_font_buf;
 #endif
 
 /*===================================================================================*/
-#if (GUI_USE_EXTERN_FONT)
+#if (GUI_EXTERN_FONT_EN)
 
 /**
   * @brief  从流媒体加载内容的回调函数
@@ -161,7 +161,7 @@ HFONT GUI_Init_Extern_Font_2RAM(const char* res_name,u8** buf)
 HFONT GUI_Init_Extern_Font(void)
 {
    /* 整个字体文件加载至RAM */
-#if (GUI_FONT_LOAD_TO_RAM  )
+#if (GUI_FONT_LOAD_TO_RAM_EN  )
   {  
     defaultFont = GUI_Init_Extern_Font_2RAM(GUI_DEFAULT_EXTERN_FONT,&default_font_buf);
   }
@@ -195,7 +195,7 @@ HFONT GUI_Default_FontInit(void)
     defaultFontEn = XFT_CreateFont(GUI_DEFAULT_FONT_EN);        
 
     /* 中文字库存储占用空间非常大，不推荐放在内部FLASH */
-#if (GUI_USE_EXTERN_FONT)
+#if (GUI_EXTERN_FONT_EN)
  
     /* 从外部资源设备加载字体 */
     defaultFont = GUI_Init_Extern_Font();

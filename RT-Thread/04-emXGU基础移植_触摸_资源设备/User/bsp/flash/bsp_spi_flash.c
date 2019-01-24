@@ -8,7 +8,7 @@
   ******************************************************************************
   * @attention
   *
-  * 实验平台:秉火STM32 F429 开发板
+  * 实验平台:野火STM32 F429 开发板
   * 论坛    :http://www.firebbs.cn
   * 淘宝    :https://fire-stm32.taobao.com
   *
@@ -16,7 +16,7 @@
   */
   
 #include "./flash/bsp_spi_flash.h"
-
+#include <emXGUI.h>
 
 static __IO uint32_t  SPITimeout = SPIT_LONG_TIMEOUT;   
 
@@ -142,6 +142,8 @@ void SPI_FLASH_BulkErase(void)
   /* 等待擦除完毕*/
   SPI_FLASH_WaitForWriteEnd();
 }
+
+
 
 
 
@@ -509,6 +511,7 @@ void SPI_FLASH_WriteEnable(void)
   */
 void SPI_FLASH_WaitForWriteEnd(void)
 {
+#if 1
   u8 FLASH_Status = 0;
 
   /* 选择 FLASH: CS 低 */
@@ -523,8 +526,7 @@ void SPI_FLASH_WaitForWriteEnd(void)
   {
     /* 读取FLASH芯片的状态寄存器 */
     FLASH_Status = SPI_FLASH_SendByte(Dummy_Byte);	 
-
-    {
+    {   
       if((SPITimeout--) == 0) 
       {
         SPI_TIMEOUT_UserCallback(4);
@@ -536,8 +538,50 @@ void SPI_FLASH_WaitForWriteEnd(void)
 
   /* 停止信号  FLASH: CS 高 */
   SPI_FLASH_CS_HIGH();
+#else
+
+  /* 带GUI延时 */
+  SPITimeout = SPIT_FLAG_TIMEOUT;
+
+  while(SPI_FLASH_Get_Busy_Status() == SET)
+  {
+    GUI_msleep(1);
+    
+    if((SPITimeout--) == 0) 
+    {
+      SPI_TIMEOUT_UserCallback(4);
+      return;
+    }
+  }
+    
+#endif  
 }
 
+
+
+ /**
+  * @brief  获取状态寄存器的内容
+  * @param  none
+  * @retval SET 忙碌，RESET 空闲
+  */
+uint8_t SPI_FLASH_Get_Busy_Status(void)
+{
+  u8 FLASH_Status = 0;
+
+  /* 选择 FLASH: CS 低 */
+  SPI_FLASH_CS_LOW();
+
+  /* 发送 读状态寄存器 命令 */
+  SPI_FLASH_SendByte(W25X_ReadStatusReg);
+
+  /* 读取FLASH芯片的状态寄存器 */
+  FLASH_Status = SPI_FLASH_SendByte(Dummy_Byte);	 
+
+  /* 停止信号  FLASH: CS 高 */
+  SPI_FLASH_CS_HIGH();
+  
+  return (FLASH_Status & WIP_Flag);
+}
 
 //进入掉电模式
 void SPI_Flash_PowerDown(void)   
@@ -577,5 +621,86 @@ static  uint16_t SPI_TIMEOUT_UserCallback(uint8_t errorCode)
   FLASH_ERROR("SPI 等待超时!errorCode = %d",errorCode);
   return 0;
 }
-   
+  
+#if 0
+
+extern HWND wnd_progbar;
+#define ESTIMATE_ERASING_TIME (40*1000)
+
+ /**
+  * @brief  擦除FLASH扇区，整片擦除，带GUI
+  * @param  无
+  * @retval 无
+  */
+void SPI_FLASH_BulkErase_GUI(void)
+{
+  
+  /* 重置进度条 */
+  u32 progbar_val = 0;
+  SendMessage(wnd_progbar,PBM_SET_VALUE,TRUE,0);
+  SetWindowText(wnd_progbar,L"Erasing Flash");
+
+  /* 设置最大值，擦除大概需要30s */
+  SendMessage(wnd_progbar,PBM_SET_RANGLE,TRUE,ESTIMATE_ERASING_TIME);
+  GUI_msleep(10);
+  
+  /* 发送FLASH写使能命令 */
+  SPI_FLASH_WriteEnable();
+
+  /* 整块 Erase */
+  /* 选择FLASH: CS低电平 */
+  SPI_FLASH_CS_LOW();
+  /* 发送整块擦除指令*/
+  SPI_FLASH_SendByte(W25X_ChipErase);
+  /* 停止信号 FLASH: CS 高电平 */
+  SPI_FLASH_CS_HIGH();
+
+  GUI_msleep(10);
+  /* 等待擦除完毕*/
+  {
+    u8 FLASH_Status = 0;
+
+    /* 选择 FLASH: CS 低 */
+    SPI_FLASH_CS_LOW();
+
+    /* 发送 读状态寄存器 命令 */
+    SPI_FLASH_SendByte(W25X_ReadStatusReg);
+
+    progbar_val = 0;
+    /* 若FLASH忙碌，则等待 */
+    do
+    {
+      /* 读取FLASH芯片的状态寄存器 */
+      FLASH_Status = SPI_FLASH_SendByte(Dummy_Byte);	 
+      
+      progbar_val += 100;
+      /* 超过40*1000ms没完成，继续等*/
+      if(progbar_val >= ESTIMATE_ERASING_TIME - 10*1000)
+          progbar_val =ESTIMATE_ERASING_TIME - 10*1000;
+
+      SendMessage(wnd_progbar,PBM_SET_VALUE,TRUE,progbar_val);
+      /* 让出cpu */
+      GUI_msleep(100);
+
+      {
+        /* 大于2倍预估时间，跳出 */
+        if(progbar_val > 2*ESTIMATE_ERASING_TIME) 
+        {
+          SPI_TIMEOUT_UserCallback(4);
+          return;
+        }
+      } 
+    }
+    while ((FLASH_Status & WIP_Flag) == SET); /* 正在写入标志 */
+
+    /* 停止信号  FLASH: CS 高 */
+    SPI_FLASH_CS_HIGH();
+  }
+  
+  /* 完成 */
+  SendMessage(wnd_progbar,PBM_SET_VALUE,TRUE,ESTIMATE_ERASING_TIME);
+  GUI_msleep(10);
+}
+
+#endif
 /*********************************************END OF FILE**********************/

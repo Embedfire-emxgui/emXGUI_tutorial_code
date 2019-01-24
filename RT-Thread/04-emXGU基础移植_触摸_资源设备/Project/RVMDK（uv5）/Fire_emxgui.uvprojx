@@ -725,6 +725,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\User\bsp\touch\bsp_touch_gt9xx.c</FilePath>
             </File>
+            <File>
+              <FileName>bsp_spi_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\bsp\flash\bsp_spi_flash.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -944,6 +949,11 @@
               <FileName>gui_touch_port.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\emXGUI_Lib\drv\gui_touch_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_resource_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\drv\gui_resource_port.c</FilePath>
             </File>
           </Files>
         </Group>
