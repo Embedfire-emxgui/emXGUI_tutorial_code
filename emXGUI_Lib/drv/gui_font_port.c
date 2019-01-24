@@ -58,6 +58,9 @@ BOOL res_not_found_flag = FALSE;
 /*===================================================================================*/
 #if (GUI_EXTERN_FONT_EN)
 
+#if (!GUI_RES_DEV_EN)
+  #error Use extern must enable macro 'GUI_RES_DEV_EN' first!
+#endif
 /**
   * @brief  从流媒体加载内容的回调函数
   * @param  buf[out] 存储读取到的数据缓冲区
@@ -200,7 +203,7 @@ HFONT GUI_Default_FontInit(void)
     /* 从外部资源设备加载字体 */
     defaultFont = GUI_Init_Extern_Font();
   
-#elif (GUI_USE_INER_CN_FONT)
+#elif (GUI_INER_CN_FONT_EN)
     
     /* 从内部flash加载默认中文字体，不推荐*/
     defaultFont = XFT_CreateFont(GUI_DEFAULT_FONT_CN);    

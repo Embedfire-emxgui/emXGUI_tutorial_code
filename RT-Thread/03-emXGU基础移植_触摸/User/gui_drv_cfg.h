@@ -51,7 +51,7 @@
 #define	GUI_TOUCHSCREEN_CALIBRATE       0
 
 /* 是否显示光标 */
-#define  GUI_SHOW_CURSOR        1
+#define  GUI_SHOW_CURSOR_EN        1
 
 /*===========存储器配置===gui_mem_port.c===============================================*/
 /* 通常GUI内核使用MEM内存堆，VMEM内存堆给用户使用 */
@@ -102,22 +102,23 @@
 #define GUI_DEFAULT_FONT_EN          ASCII_24_4BPP
 
 /* 是否使用内部中文字体，中文字体太大，不建议放在内部 */
-#define GUI_USE_INER_CN_FONT      0
+#define GUI_INER_CN_FONT_EN      0
 /* 默认内部中文字体数组名 */
 #define GUI_DEFAULT_FONT_CN          GB2312_16_2BPP
 
 
 /* 是否使用外部FLASH中的字体
 *  流设备和整体加载方式都要把这个宏设置为1
+*  使用本功能时需要把GUI_RES_DEV_EN设置为1
 */
-#define GUI_USE_EXTERN_FONT       0
+#define GUI_EXTERN_FONT_EN       0
 
 /*
 * 是否把整个外部字体数据加载至VMEM区域，初始化加载时需要较长时间，
 * 加载后可大幅提高字符显示的速度
 * 若设置为真，则使用整体加载方式，否则使用流设备方式
 */
-#define GUI_FONT_LOAD_TO_RAM    (0 && GUI_USE_EXTERN_FONT)
+#define GUI_FONT_LOAD_TO_RAM_EN    (0 && GUI_EXTERN_FONT_EN)
 
 /* 要使用的外部默认字体文件，USE_EXTERN_FONT为1时生效 */
 #define GUI_DEFAULT_EXTERN_FONT   "GB2312_24_4BPP.xft"
@@ -137,7 +138,7 @@
 #define GUI_RES_DEV_EN         0
 
 /* 是否支持文件系统接口,需要移植fatfs文件系统 */
-#define GUI_RES_FS_EN         0
+#define GUI_FS_EN         0
 
 /* 资源所在的基地址 */
 #define GUI_RES_BASE             4096

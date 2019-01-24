@@ -24,8 +24,8 @@
   #include	"rtthread.h"
   
   /* 系统管理的内存堆，gui_mem_port.c */
-  #define OS_MALLOC   GUI_VMEM_Alloc
-  #define OS_FREE     GUI_VMEM_Free
+  #define OS_MALLOC   rt_malloc
+  #define OS_FREE     rt_free
     
   /* 调试或错误、信息输出接口 gui_log_port.h */
   #define   GUI_Log     rt_kprintf
@@ -45,7 +45,7 @@
   
 #else
   /* 没定义的错误提示 */
-  #error No OS type select,please define MACRO 'X_GUI_USE_RTTHREAD'/'X_GUI_USE_FREERTOS' or else.
+  #error No OS type select,please define macro 'X_GUI_USE_RTTHREAD'/'X_GUI_USE_FREERTOS' or else.
 #endif
 
 
