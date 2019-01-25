@@ -178,7 +178,7 @@ HANDLE		GUI_GetCurThreadHandle(void);
 U32			GUI_GetTickCount(void);
 void		GUI_Yield(void);
 
-HANDLE GUI_Thread_Create(void (*entry)(void *parameter),
+BOOL GUI_Thread_Create(void (*entry)(void *parameter),
                            const char *name,
                            u32  stack_size,
                            void *parameter,

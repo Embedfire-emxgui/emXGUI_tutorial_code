@@ -191,9 +191,9 @@ void	GUI_msleep(u32 ms)
  * @param stack_size 线程栈大小
  * @param priority 线程优先级
  * @param tick 时间片（同优先级任务的时间片轮转）
- * @return 返回任务句柄
+ * @return 是否创建成功
 */
-HANDLE GUI_Thread_Create(void (*entry)(void *parameter),
+BOOL GUI_Thread_Create(void (*entry)(void *parameter),
                          const char *name,
                          u32  stack_size,
                          void *parameter,
@@ -211,12 +211,14 @@ HANDLE GUI_Thread_Create(void (*entry)(void *parameter),
   
   rt_thread_startup(h);		
   
-  return h;
-
+  if(h == RT_NULL)
+    return FALSE;
+  else
+    return TRUE;
 }
 
 /**
- * @breif: 删除线程
+ * @breif: 删除线程，可通过GUI_GetCurThreadHandle获取当前任务句柄作为输入参数
  * @return 无
 */
 void GUI_Thread_Delete(HANDLE thread)

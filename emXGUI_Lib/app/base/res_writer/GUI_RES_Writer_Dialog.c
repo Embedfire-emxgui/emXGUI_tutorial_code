@@ -36,7 +36,6 @@ extern BOOL res_not_found_flag;
 static void App_FLASH_Writer(void )
 {
   static int thread=0;
-	static rt_thread_t h_flash;
   
    //HDC hdc;
   u32 result;
@@ -44,12 +43,12 @@ static void App_FLASH_Writer(void )
 	if(thread==0)
 	{ 
       /* 创建线程运行自己 */
-      h_flash = GUI_Thread_Create((void(*)(void*))App_FLASH_Writer,  /* 任务入口函数 */
-                                    "Flash writer",/* 任务名字 */
-                                    5*1024,  /* 任务栈大小 */
-                                    NULL, /* 任务入口函数参数 */
-                                    1,    /* 任务的优先级 */
-                                    10); /* 任务时间片，部分任务不支持 */
+      GUI_Thread_Create((void(*)(void*))App_FLASH_Writer,  /* 任务入口函数 */
+                            "Flash writer",/* 任务名字 */
+                            5*1024,  /* 任务栈大小 */
+                            NULL, /* 任务入口函数参数 */
+                            1,    /* 任务的优先级 */
+                            10); /* 任务时间片，部分任务不支持 */
     thread =1;
 
       return;
@@ -63,7 +62,8 @@ static void App_FLASH_Writer(void )
 
     thread = 0;       
 
-    GUI_Thread_Delete(h_flash);
+    /* 删除线程自己 */
+    GUI_Thread_Delete(GUI_GetCurThreadHandle());
 
 	}
   return;

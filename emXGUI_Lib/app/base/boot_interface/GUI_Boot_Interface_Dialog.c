@@ -30,17 +30,16 @@ HWND Boot_progbar = NULL;
 static void App_Load_Res(void )
 {
   static int thread=0;
-  static HANDLE h_load;
 
   if(thread==0)
   { 
     /* 创建线程运行自己 */
-    h_load = GUI_Thread_Create((void(*)(void*))App_Load_Res,  /* 任务入口函数 */
-                                    "Load Res",/* 任务名字 */
-                                    5*1024,  /* 任务栈大小 */
-                                    NULL, /* 任务入口函数参数 */
-                                    1,    /* 任务的优先级 */
-                                    10); /* 任务时间片，部分任务不支持 */
+    GUI_Thread_Create((void(*)(void*))App_Load_Res,  /* 任务入口函数 */
+                        "Load Res",/* 任务名字 */
+                        5*1024,  /* 任务栈大小 */
+                        NULL, /* 任务入口函数参数 */
+                        1,    /* 任务的优先级 */
+                        10); /* 任务时间片，部分任务不支持 */
     thread =1;
 
     return;
@@ -68,7 +67,8 @@ static void App_Load_Res(void )
     SendMessage(GUI_Boot_hwnd,WM_CLOSE,0,0);
     thread = 0;       
 
-    GUI_Thread_Delete(h_load);
+    /* 删除线程自己 */
+    GUI_Thread_Delete(GUI_GetCurThreadHandle());
 
   }
   return;
