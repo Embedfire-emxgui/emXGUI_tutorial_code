@@ -22,9 +22,9 @@
 //定义控件的私有消息(所有控件的私有消息要从 WM_WIDGET 开始定义)
 #define MSG_MYWRITE_RESULT WM_WIDGET+1 //烧录结果
 
-HWND wnd_info_textbox ;
+HWND wnd_res_writer_info_textbox ;
 HWND wnd_res_writer_dialog;
-HWND wnd_progbar;
+HWND wnd_res_writer_progbar;
 
 /* 用于标记是否有资源文件无法找到 */
 extern BOOL res_not_found_flag;
@@ -156,13 +156,13 @@ If you really want to reload resources:\r\n\r\n\
           //文字格式水平，垂直居中
 					cfg.TextFlag = DT_VCENTER|DT_CENTER;  
 
-					wnd_progbar = CreateWindow(PROGRESSBAR,L"",
+					wnd_res_writer_progbar = CreateWindow(PROGRESSBAR,L"",
                                   PBS_TEXT|PBS_ALIGN_LEFT,
                                   rc0.x, rc0.y, rc0.w, rc0.h,hwnd,ID_PROGBAR,NULL,NULL);
 
-          SendMessage(wnd_progbar,PBM_GET_CFG,TRUE,(LPARAM)&cfg);
-			 SendMessage(wnd_progbar,PBM_SET_CFG,TRUE,(LPARAM)&cfg);
-          SendMessage(wnd_progbar,PBM_SET_VALUE,TRUE,0);
+          SendMessage(wnd_res_writer_progbar,PBM_GET_CFG,TRUE,(LPARAM)&cfg);
+          SendMessage(wnd_res_writer_progbar,PBM_SET_CFG,TRUE,(LPARAM)&cfg);
+          SendMessage(wnd_res_writer_progbar,PBM_SET_VALUE,TRUE,0);
 
           /* 烧录按钮 */
           OffsetRect(&rc0,0,rc0.h+10);  
@@ -195,7 +195,7 @@ If you really want to reload resources:\r\n\r\n\
         ShowWindow(GetDlgItem(hwnd,ID_BURN),SW_HIDE);
         ShowWindow(GetDlgItem(hwnd,ID_PROGBAR),SW_HIDE);
 
-        SetWindowText(wnd_info_textbox,L"Load resources success!\r\n\r\nClick the button below to reset system!");
+        SetWindowText(wnd_res_writer_info_textbox,L"Load resources success!\r\n\r\nClick the button below to reset system!");
 
       }  
       
@@ -215,18 +215,13 @@ If you really want to reload resources:\r\n\r\n\
       
       if(id == ID_BURN && code == BN_CLICKED)
       {
-//         rt_enter_critical();
-         
-         wnd_info_textbox = GetDlgItem(hwnd,ID_INFO);
+         wnd_res_writer_info_textbox = GetDlgItem(hwnd,ID_INFO);
          App_FLASH_Writer();
         
          EnableWindow(GetDlgItem(hwnd,ID_BURN),DISABLE);
          ShowWindow(GetDlgItem(hwnd,ID_EXIT),SW_HIDE);
          ShowWindow(GetDlgItem(hwnd,ID_EXIT_INFO),SW_HIDE);
          ShowWindow(GetDlgItem(hwnd,ID_PROGBAR),SW_SHOW);
-
-//         rt_exit_critical();
-
       }
       
       if(id == ID_RESET && code == BN_CLICKED)
@@ -324,7 +319,7 @@ If you really want to reload resources:\r\n\r\n\
 }
 
 
-void	GUI_RES_WRITER_DIALOG(void)
+void	GUI_RES_Writer_Dialog(void *param)
 {
 	HWND	hwnd;
 	WNDCLASS	wcex;

@@ -18,6 +18,8 @@
 #include "gui_font_port.h"
 #include "gui_resource_port.h"
 
+#include "GUI_AppDef.h"
+
 /*===================================================================================*/
 /*===================================================================================*/
 
@@ -92,7 +94,22 @@ HFONT GUI_Init_Extern_Font_Stream(const char* res_name)
   int font_base;
   HFONT hFont = NULL;
   CatalogTypeDef dir;
- 
+
+#if (GUI_APP_BOOT_INTERFACE_EN)
+  {
+    /* 启动界面的进度条 */
+    if(Boot_progbar != NULL)
+    {  
+      int count = 0;
+
+      /* 更新启动界面的进度条 */
+      count = SendMessage(Boot_progbar,PBM_GET_VALUE,TRUE,NULL); 
+      count++;
+      SendMessage(Boot_progbar,PBM_SET_VALUE,TRUE,count); 
+    }
+  }    
+#endif
+
   font_base =RES_GetInfo_AbsAddr(res_name, &dir);
   if(font_base > 0)
   {
@@ -127,7 +144,22 @@ HFONT GUI_Init_Extern_Font_2RAM(const char* res_name,u8** buf)
     int font_base; 
     HFONT hFont = NULL;  
     CatalogTypeDef dir;
-   
+  
+#if (GUI_APP_BOOT_INTERFACE_EN)
+  {
+    /* 启动界面的进度条 */
+    if(Boot_progbar != NULL)
+    {  
+      int count = 0;
+
+      /* 更新启动界面的进度条 */
+      count = SendMessage(Boot_progbar,PBM_GET_VALUE,TRUE,NULL); 
+      count++;
+      SendMessage(Boot_progbar,PBM_SET_VALUE,TRUE,count); 
+    }  
+  }
+#endif
+  
     /* RES_GetInfo读取到的dir.offset是资源的绝对地址 */
     font_base =RES_GetInfo_AbsAddr(res_name, &dir);
 
@@ -197,16 +229,18 @@ HFONT GUI_Default_FontInit(void)
     /* 默认英文字体 */ 
     defaultFontEn = XFT_CreateFont(GUI_DEFAULT_FONT_EN);        
 
-    /* 中文字库存储占用空间非常大，不推荐放在内部FLASH */
-#if (GUI_EXTERN_FONT_EN)
+    /* 如果使用了启动界面，在启动界面再加载外部字体 */
+#if (GUI_EXTERN_FONT_EN && (!GUI_APP_BOOT_INTERFACE_EN))
  
     /* 从外部资源设备加载字体 */
-    defaultFont = GUI_Init_Extern_Font();
+    defaultFont = GUI_Init_Extern_Font();  
+    Load_state = TRUE;
   
-#elif (GUI_INER_CN_FONT_EN)
-    
+#elif (GUI_INER_CN_FONT_EN && (!GUI_APP_BOOT_INTERFACE_EN))
+    /* 中文字库存储占用空间非常大，不推荐放在内部FLASH */
     /* 从内部flash加载默认中文字体，不推荐*/
     defaultFont = XFT_CreateFont(GUI_DEFAULT_FONT_CN);    
+    Load_state = TRUE;
 #endif
   
     /* 中文字体创建失败时使用英文字体作为默认字体 */

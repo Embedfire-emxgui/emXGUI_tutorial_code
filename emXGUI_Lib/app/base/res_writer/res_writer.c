@@ -9,22 +9,22 @@
 #include <emXGUI.h>
 #include <x_libc.h>
 #include "res_mgr.h"
-
+#include "gui_resource_port.h"
 
 /*============================================================================*/
 
 
 //SD卡源数据路径！！
-char src_dir[512] __EXRAM;
+char src_dir[512] ;
 const char src_dir_const[] = RESOURCE_DIR;
 
-static FIL file_temp __EXRAM;													/* file objects */
-static char full_file_name[512] __EXRAM;
-static char line_temp[512] __EXRAM;
+static FIL file_temp ;													/* file objects */
+static char full_file_name[512] ;
+static char line_temp[512] ;
 static u32 file_num = 0;
 
-extern HWND wnd_info_textbox ;
-extern HWND wnd_progbar;
+extern HWND wnd_res_writer_info_textbox ;
+extern HWND wnd_res_writer_progbar;
 
 extern void SPI_FLASH_BulkErase_GUI(void);
 
@@ -141,12 +141,12 @@ FRESULT Make_Catalog (char* path,uint8_t clear)
     BURN_INFO("正在生成烧录信息文件catalog.txt...\r\n"); 
 
     /* 重置进度条 */
-    SendMessage(wnd_progbar,PBM_SET_VALUE,TRUE,0);
-    SetWindowText(wnd_progbar,L"Creating catalog...");
+    SendMessage(wnd_res_writer_progbar,PBM_SET_VALUE,TRUE,0);
+    SetWindowText(wnd_res_writer_progbar,L"Creating catalog...");
     /* 设置进度条最大值为100 */
-    SendMessage(wnd_progbar,PBM_SET_RANGLE,TRUE,100);
+    SendMessage(wnd_res_writer_progbar,PBM_SET_RANGLE,TRUE,100);
 
-    SetWindowText(wnd_info_textbox,L"Creating catalog file...");
+    SetWindowText(wnd_res_writer_info_textbox,L"Creating catalog file...");
     GUI_msleep(20);
     
     /* 第一次执行Make_Catalog函数时删除旧的烧录信息文件 */
@@ -240,12 +240,12 @@ FRESULT Make_Catalog (char* path,uint8_t clear)
         file_num++;
         if(file_num < 100)
         {
-          SendMessage(wnd_progbar,PBM_SET_VALUE,TRUE,file_num);
+          SendMessage(wnd_res_writer_progbar,PBM_SET_VALUE,TRUE,file_num);
         }
         else
         {
           /* 超过进度条最大值时显示99 */
-          SendMessage(wnd_progbar,PBM_SET_VALUE,TRUE,99);
+          SendMessage(wnd_res_writer_progbar,PBM_SET_VALUE,TRUE,99);
         }
         GUI_msleep(20);
         
@@ -271,7 +271,7 @@ FRESULT Make_Catalog (char* path,uint8_t clear)
                                       resource_addr + RESOURCE_BASE_ADDR );	 
     
     /* 显示完成 */
-    SendMessage(wnd_progbar,PBM_SET_VALUE,TRUE,100);
+    SendMessage(wnd_res_writer_progbar,PBM_SET_VALUE,TRUE,100);
     GUI_msleep(20);
 
     }
@@ -350,11 +350,11 @@ void Burn_Catalog(void)
   uint8_t is_end;
   
   /* 重置进度条 */
-  SendMessage(wnd_progbar,PBM_SET_VALUE,TRUE,0);
-  SetWindowText(wnd_progbar,L"Writing catalog...");
+  SendMessage(wnd_res_writer_progbar,PBM_SET_VALUE,TRUE,0);
+  SetWindowText(wnd_res_writer_progbar,L"Writing catalog...");
   /* 设置最大值 */
-  SendMessage(wnd_progbar,PBM_SET_RANGLE,TRUE,file_num);
-  SetWindowText(wnd_info_textbox,L"Writing catalog...");
+  SendMessage(wnd_res_writer_progbar,PBM_SET_RANGLE,TRUE,file_num);
+  SetWindowText(wnd_res_writer_info_textbox,L"Writing catalog...");
 
   GUI_msleep(20);
 
@@ -369,15 +369,15 @@ void Burn_Catalog(void)
       break;
     
     /* 更新进度条 */
-    SendMessage(wnd_progbar,PBM_SET_VALUE,TRUE,i);
+    SendMessage(wnd_res_writer_progbar,PBM_SET_VALUE,TRUE,i);
     GUI_msleep(20);
 
     /* 把dir信息烧录到FLASH中 */  
     SPI_FLASH_BufferWrite((u8*)&dir,RESOURCE_BASE_ADDR + sizeof(dir)*i,sizeof(dir));
   }
   
-  SendMessage(wnd_progbar,PBM_SET_VALUE,TRUE,file_num);
-  SetWindowText(wnd_info_textbox,L"Writing catalog complete.");
+  SendMessage(wnd_res_writer_progbar,PBM_SET_VALUE,TRUE,file_num);
+  SetWindowText(wnd_res_writer_info_textbox,L"Writing catalog complete.");
   GUI_msleep(20);
 
 }
@@ -400,10 +400,10 @@ FRESULT Burn_Content(void)
   uint8_t tempbuf[256];
   
   /* 重置进度条 */
-  SendMessage(wnd_progbar,PBM_SET_VALUE,TRUE,0);
-  SetWindowText(wnd_progbar,L"Writing file");
+  SendMessage(wnd_res_writer_progbar,PBM_SET_VALUE,TRUE,0);
+  SetWindowText(wnd_res_writer_progbar,L"Writing file");
   /* 设置最大值*/
-  SendMessage(wnd_progbar,PBM_SET_RANGLE,TRUE,file_num);
+  SendMessage(wnd_res_writer_progbar,PBM_SET_RANGLE,TRUE,file_num);
   GUI_msleep(20);
 
  
@@ -421,8 +421,8 @@ FRESULT Burn_Content(void)
     BURN_INFO("准备烧录内容：%s",full_file_name);
     
     x_wsprintf((WCHAR*)tempbuf,L"Writing file %d/%d,writing big files will take a long time.\r\nPlease wait...",i,file_num);
-    SetWindowText(wnd_info_textbox,(WCHAR*)tempbuf);
-    SendMessage(wnd_progbar,PBM_SET_VALUE,TRUE,i);
+    SetWindowText(wnd_res_writer_info_textbox,(WCHAR*)tempbuf);
+    SendMessage(wnd_res_writer_progbar,PBM_SET_VALUE,TRUE,i);
 
     GUI_msleep(20);
 
@@ -460,8 +460,8 @@ FRESULT Burn_Content(void)
   BURN_INFO("************************************");
   BURN_INFO("所有文件均已烧录完毕！（非文件系统部分）");
   
-  SendMessage(wnd_progbar,PBM_SET_VALUE,TRUE,file_num);
-  SetWindowText(wnd_info_textbox,L"All file have been complete.");
+  SendMessage(wnd_res_writer_progbar,PBM_SET_VALUE,TRUE,file_num);
+  SetWindowText(wnd_res_writer_info_textbox,L"All file have been complete.");
   GUI_msleep(20);
 
   return FR_OK;
@@ -486,11 +486,11 @@ FRESULT Check_Resource(void)
   uint8_t tempbuf[256],flash_buf[256];
   
   /* 重置进度条 */
-  SendMessage(wnd_progbar,PBM_SET_VALUE,TRUE,0);
-  SetWindowText(wnd_progbar,L"Checking file");
+  SendMessage(wnd_res_writer_progbar,PBM_SET_VALUE,TRUE,0);
+  SetWindowText(wnd_res_writer_progbar,L"Checking file");
 
   /* 设置最大值 */
-  SendMessage(wnd_progbar,PBM_SET_RANGLE,TRUE,file_num);
+  SendMessage(wnd_res_writer_progbar,PBM_SET_RANGLE,TRUE,file_num);
   GUI_msleep(20);
  
   /* 遍历目录文件 */
@@ -504,13 +504,13 @@ FRESULT Check_Resource(void)
       break;    
     
     x_wsprintf((WCHAR *)tempbuf,L"Checking file %d/%d,checking big files will take a long time.\r\nPlease wait...",i,file_num);
-    SetWindowText(wnd_info_textbox,(WCHAR *)tempbuf);
-    SendMessage(wnd_progbar,PBM_SET_VALUE,TRUE,i);
+    SetWindowText(wnd_res_writer_info_textbox,(WCHAR *)tempbuf);
+    SendMessage(wnd_res_writer_progbar,PBM_SET_VALUE,TRUE,i);
 
     GUI_msleep(20);
     
     /* 在FLASH的目录里查找对应的offset */
-    offset = GetResOffset(dir.name);
+    offset = RES_GetOffset(dir.name);
     if(offset == -1)
     {
       LED_RED;
@@ -518,7 +518,7 @@ FRESULT Check_Resource(void)
       return FR_NO_FILE;
     }
     else
-      dir.offset = offset + RESOURCE_BASE_ADDR;
+      dir.offset = offset;
        
     BURN_INFO("-------------------------------------"); 
     BURN_INFO("准备校验内容：%s",full_file_name);
@@ -574,8 +574,8 @@ FRESULT Check_Resource(void)
   BURN_INFO("************************************");
   BURN_INFO("所有文件校验正常！（非文件系统部分）");
   
-  SendMessage(wnd_progbar,PBM_SET_VALUE,TRUE,file_num);
-  SetWindowText(wnd_info_textbox,L"All files check normal!");
+  SendMessage(wnd_res_writer_progbar,PBM_SET_VALUE,TRUE,file_num);
+  SetWindowText(wnd_res_writer_info_textbox,L"All files check normal!");
   GUI_msleep(20);
 
   return FR_OK;
@@ -604,14 +604,14 @@ FRESULT BurnFile(void)
   if(result != FR_OK)
   {
     GUI_ERROR("请插入带‘srcdata’烧录数据的SD卡,并重新复位开发板！ result = %d",result);
-    SetWindowText(wnd_info_textbox,L"1.Please insert an SD card with [srcdata] resources.\r\n2.Powerup again the board.");
+    SetWindowText(wnd_res_writer_info_textbox,L"1.Please insert an SD card with [srcdata] resources.\r\n2.Powerup again the board.");
     GUI_msleep(20);
     
     return result;
   }
   f_closedir(&dir);
   
-  SetWindowText(wnd_info_textbox,L"Erasing FLASH,it will take a long time,\r\nplease wait...");
+  SetWindowText(wnd_res_writer_info_textbox,L"Erasing FLASH,it will take a long time,\r\nplease wait...");
   GUI_msleep(20);
   
   BURN_INFO("正在进行整片擦除，时间很长，请耐心等候...");

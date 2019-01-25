@@ -9,7 +9,6 @@
 
 /**********************分界线*********************/
 
-BOOL Load_state = FALSE;
 HWND GUI_Boot_hwnd;
 /* 各类控件ID */
 enum eID
@@ -31,13 +30,19 @@ HWND Boot_progbar = NULL;
 static void App_Load_Res(void )
 {
   static int thread=0;
-  static rt_thread_t h_load;
+  static HANDLE h_load;
 
   if(thread==0)
-  {  
-    h_load=rt_thread_create("Load Res",(void(*)(void*))App_Load_Res,NULL,5*1024,1,5);
+  { 
+    /* 创建线程运行自己 */
+    h_load = GUI_Thread_Create((void(*)(void*))App_Load_Res,  /* 任务入口函数 */
+                                    "Load Res",/* 任务名字 */
+                                    5*1024,  /* 任务栈大小 */
+                                    NULL, /* 任务入口函数参数 */
+                                    1,    /* 任务的优先级 */
+                                    10); /* 任务时间片，部分任务不支持 */
     thread =1;
-    rt_thread_startup(h_load);//启动线程
+
     return;
   }
   while(thread) //线程已创建了
@@ -63,7 +68,7 @@ static void App_Load_Res(void )
     SendMessage(GUI_Boot_hwnd,WM_CLOSE,0,0);
     thread = 0;       
 
-    rt_thread_delete(h_load);
+    GUI_Thread_Delete(h_load);
 
   }
   return;
@@ -173,10 +178,10 @@ static	LRESULT	win_proc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 }
 
 extern void 	GUI_Board_App_Desktop(void);
-extern void	GUI_RES_WRITER_DIALOG(void);
+extern void	GUI_RES_Writer_Dialog(void *param);
 extern void	GUI_DEMO_SlideWindow(void);
 
-void	GUI_Boot_Interface_DIALOG(void)
+void	GUI_Boot_Interface_Dialog(void *param)
 {
 
   WNDCLASS	wcex;
@@ -214,28 +219,32 @@ void	GUI_Boot_Interface_DIALOG(void)
   }
   
   /* 启动界面在加载完资源后会关闭，执行以下代码，创建应用线程 */
-  {
-     rt_thread_t h;             
-     
+//  {   
+    res_not_found_flag = TRUE;  
      if(res_not_found_flag)
      {
         GUI_INFO("外部SPI FLASH缺少资源，即将开始烧录资源内容...");
 
-        /* 若找不到资源，进入资源烧录应用 */
-        h=rt_thread_create("GUI_FLASH_WRITER",GUI_RES_WRITER_DIALOG,NULL,8*1024,5,5);
-        rt_thread_startup(h);			
+        /* 若找不到资源，进入资源烧录应用 */      
+        GUI_Thread_Create(GUI_RES_Writer_Dialog,  /* 任务入口函数 */
+                              "GUI_FLASH_WRITER",/* 任务名字 */
+                              8*1024,  /* 任务栈大小 */
+                              NULL, /* 任务入口函数参数 */
+                              5,    /* 任务的优先级 */
+                              10); /* 任务时间片，部分任务不支持 */
+
 
      }
-     else
-     {	
-        /* 找到资源，正常跑应用*/ 
-     
-        h=rt_thread_create("GUI_APP",GUI_Board_App_Desktop,NULL,8*1024,5,5);
-        rt_thread_startup(h);			
-        h=rt_thread_create("GUI_SLIDE_WIN",GUI_DEMO_SlideWindow,NULL,4096,5,5);
-        rt_thread_startup(h);
-     }   
-  } 
+//     else
+//     {	
+//        /* 找到资源，正常跑应用*/ 
+//     
+//        h=rt_thread_create("GUI_APP",GUI_Board_App_Desktop,NULL,8*1024,5,5);
+//        rt_thread_startup(h);			
+//        h=rt_thread_create("GUI_SLIDE_WIN",GUI_DEMO_SlideWindow,NULL,4096,5,5);
+//        rt_thread_startup(h);
+//     }   
+//  } 
 
 
 }

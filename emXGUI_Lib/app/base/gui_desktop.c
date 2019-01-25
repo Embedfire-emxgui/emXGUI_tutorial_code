@@ -19,11 +19,15 @@
 #include "emXGUI.h"
 
 
+/* 外部资源加载完成标志 */
+BOOL Load_state = FALSE;
+
 /*===================================================================================*/
+extern void	GUI_Boot_Interface_Dialog(void *param);
 extern void GUI_AppMain(void);
 
 
-static	void	gui_app_thread(void *p)
+void	gui_app_thread(void *p)
 {
     #if(GUI_TOUCHSCREEN_EN & GUI_TOUCHSCREEN_CALIBRATE)
     {
@@ -76,6 +80,9 @@ static	void	_EraseBackgnd(HDC hdc,const RECT *lprc,HWND hwnd)
 		CopyRect(&rc,lprc);
 	}
 
+  /* 恢复默认字体 */
+  SetFont(hdc, defaultFont);
+
 	SetBrushColor(hdc,MapRGB(hdc,32,72,144));
 	FillRect(hdc,&rc);
   	
@@ -95,10 +102,10 @@ static	void	_EraseBackgnd(HDC hdc,const RECT *lprc,HWND hwnd)
 
 }
 
+/* 使用专用的线程来处理输入 */
 #if 0
 static	int	gui_input_thread(void *p)
 {
-	SYS_thread_set_priority(NULL,+4);
 	while(1)
 	{
 		GUI_InputHandler(); //处理输入设备
@@ -127,13 +134,23 @@ static 	 LRESULT  	desktop_proc(HWND hwnd,UINT msg,WPARAM wParam,LPARAM lParam)
 
 				//创建App线程						
 				{
-         GUI_Thread_Create(gui_app_thread,  /* 任务入口函数 */
-                              "GUI_APP",/* 任务名字 */
-                              2*1024,  /* 任务栈大小 */
+#if (GUI_APP_BOOT_INTERFACE_EN)  
+          
+         GUI_Thread_Create(GUI_Boot_Interface_Dialog,  /* 任务入口函数 */
+                              "Boot_Interface",/* 任务名字 */
+                              8*1024,  /* 任务栈大小 */
                               NULL, /* 任务入口函数参数 */
                               5,    /* 任务的优先级 */
                               10); /* 任务时间片，部分任务不支持 */
-      
+#else
+          
+        GUI_Thread_Create(gui_app_thread,  /* 任务入口函数 */
+                            "GUI_APP",/* 任务名字 */
+                            2*1024,  /* 任务栈大小 */
+                            NULL, /* 任务入口函数参数 */
+                            5,    /* 任务的优先级 */
+                            10); /* 任务时间片，部分任务不支持 */    
+#endif
 				}
 
 				break;
@@ -155,9 +172,20 @@ static 	 LRESULT  	desktop_proc(HWND hwnd,UINT msg,WPARAM wParam,LPARAM lParam)
 
     /* 客户区背景需要被擦除 */
 		case	WM_ERASEBKGND:
-		{         
-			HDC hdc =(HDC)wParam;
-			_EraseBackgnd(hdc,NULL,hwnd);
+		{   
+      RECT rc = *(RECT*)lParam;
+			HDC hdc =(HDC)wParam; 
+      
+        /* 字体资源加载完成后才显示正常界面，刚开始时只显示纯色 */
+       if(Load_state == TRUE)
+       {
+          _EraseBackgnd(hdc,NULL,hwnd);
+       }
+       else
+       {
+          SetBrushColor(hdc, MapRGB(hdc, 0, 0, 0));
+          FillRect(hdc, &rc);
+       }
 		}
 		return TRUE;  
 

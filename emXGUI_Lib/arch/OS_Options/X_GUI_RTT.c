@@ -183,17 +183,17 @@ void	GUI_msleep(u32 ms)
 	rt_thread_delay(ms);
 }
 
-/*
- * 函数功能: 创建线程
+/**
+ * @breif: 创建线程
  * @param name 线程名
  * @param entry 线程入口函数
  * @param parameter 线程参数
  * @param stack_size 线程栈大小
  * @param priority 线程优先级
  * @param tick 时间片（同优先级任务的时间片轮转）
- * @return 是否创建成功
+ * @return 返回任务句柄
 */
-BOOL GUI_Thread_Create(void (*entry)(void *parameter),
+HANDLE GUI_Thread_Create(void (*entry)(void *parameter),
                          const char *name,
                          u32  stack_size,
                          void *parameter,
@@ -211,10 +211,17 @@ BOOL GUI_Thread_Create(void (*entry)(void *parameter),
   
   rt_thread_startup(h);		
   
-  if(h == RT_NULL)
-    return FALSE;
-  else
-    return TRUE;
+  return h;
+
+}
+
+/**
+ * @breif: 删除线程
+ * @return 无
+*/
+void GUI_Thread_Delete(HANDLE thread)
+{
+  rt_thread_delete((rt_thread_t) thread);
 }
 
 #endif

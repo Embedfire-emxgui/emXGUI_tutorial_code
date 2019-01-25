@@ -9,7 +9,16 @@
 #ifndef	__GUI_APPDEF_H__
 #define	__GUI_APPDEF_H__
 
-#define FONT_NUM  1//加载外部字体的文件数
+/* 启动界面 */
+/* 要加载外部字体的文件数目 */
+#define FONT_NUM          1
+
+/* 外部资源加载完成标志 */
+extern BOOL Load_state;
+
+/* 启动界面的进度条句柄 */
+extern HWND Boot_progbar;
+
 
 //#define ID_SLIDE_WINDOW   1200
 

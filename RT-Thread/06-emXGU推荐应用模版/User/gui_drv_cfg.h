@@ -36,7 +36,7 @@
 #define	DMA2D_EN                   0
 
 /* 是否使用缓冲型控件，使用的话会增加一层液晶像素数据的消耗，显示效果减少闪烁*/
-#define  FRAME_BUFFER_EN            0
+#define  FRAME_BUFFER_EN            1
 
 /*==========输入设备配置===gui_input_port.c==================================================*/
 /* 是否使用输入设备 */
@@ -51,7 +51,7 @@
 #define	GUI_TOUCHSCREEN_CALIBRATE       0
 
 /* 是否显示光标 */
-#define  GUI_SHOW_CURSOR_EN        1
+#define  GUI_SHOW_CURSOR_EN        0
 
 /*===========存储器配置===gui_mem_port.c===============================================*/
 /* 通常GUI内核使用MEM内存堆，VMEM内存堆给用户使用 */
@@ -118,7 +118,7 @@
 * 加载后可大幅提高字符显示的速度
 * 若设置为真，则使用整体加载方式，否则使用流设备方式
 */
-#define GUI_FONT_LOAD_TO_RAM_EN    (0 && GUI_EXTERN_FONT_EN)
+#define GUI_FONT_LOAD_TO_RAM_EN    (1 && GUI_EXTERN_FONT_EN)
 
 /* 要使用的外部默认字体文件，USE_EXTERN_FONT为1时生效 */
 #define GUI_DEFAULT_EXTERN_FONT   "GB2312_24_4BPP.xft"
@@ -158,6 +158,11 @@
 
 /* 截图 */
 #define GUI_PIC_CAPTURE_SCREEN_EN  ( 1 && GUI_PIC_FS_EN)
+
+/*===========是否启用各种APP===============================================*/
+
+/* 启动界面 */
+#define GUI_APP_BOOT_INTERFACE_EN     1
 
 /*============================================================================*/
 
