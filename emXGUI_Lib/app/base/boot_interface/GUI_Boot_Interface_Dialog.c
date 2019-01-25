@@ -219,8 +219,9 @@ void	GUI_Boot_Interface_Dialog(void *param)
   }
   
   /* 启动界面在加载完资源后会关闭，执行以下代码，创建应用线程 */
-//  {   
-    res_not_found_flag = TRUE;  
+//  {  
+#if (GUI_APP_RES_WRITER_EN )  
+//    res_not_found_flag = TRUE;  
      if(res_not_found_flag)
      {
         GUI_INFO("外部SPI FLASH缺少资源，即将开始烧录资源内容...");
@@ -235,6 +236,7 @@ void	GUI_Boot_Interface_Dialog(void *param)
 
 
      }
+#endif     
 //     else
 //     {	
 //        /* 找到资源，正常跑应用*/ 
