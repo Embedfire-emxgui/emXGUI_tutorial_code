@@ -1141,9 +1141,9 @@
               <FilePath>..\..\..\..\emXGUI_Lib\app\base\res_writer\GUI_RES_Writer_Dialog.c</FilePath>
             </File>
             <File>
-              <FileName>res_writer.c</FileName>
+              <FileName>backend_res_writer.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\emXGUI_Lib\app\base\res_writer\res_writer.c</FilePath>
+              <FilePath>..\..\..\..\emXGUI_Lib\app\base\res_writer\backend_res_writer.c</FilePath>
             </File>
           </Files>
         </Group>

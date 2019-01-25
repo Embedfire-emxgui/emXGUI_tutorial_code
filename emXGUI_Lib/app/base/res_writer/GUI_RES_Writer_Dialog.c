@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "emXGUI.h"
 #include "x_libc.h"
-#include "res_mgr.h"
+#include "backend_res_mgr.h"
 #include "GUI_AppDef.h"
 
 

@@ -8,7 +8,7 @@
 
 #include <emXGUI.h>
 #include <x_libc.h>
-#include "res_mgr.h"
+#include "backend_res_mgr.h"
 #include "gui_resource_port.h"
 
 /*============================================================================*/
