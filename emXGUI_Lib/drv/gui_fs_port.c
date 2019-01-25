@@ -98,9 +98,14 @@ BOOL FileSystem_Init(void)
   {
     printf("》文件系统挂载成功\r\n");
     
-#if 1
+#if 0
+    /* 文件系统测试 */
     FileSystem_Test();
 #endif 
+    
+    /* 尝试进行unicode编码转换，
+      当使用extern_cc936时，可测试是否存在cc936资源*/
+    ff_convert('a',1);
     
     return TRUE;
   }

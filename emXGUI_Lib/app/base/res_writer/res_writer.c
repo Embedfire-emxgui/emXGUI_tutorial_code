@@ -295,9 +295,9 @@ uint8_t Read_CatalogInfo(uint32_t file_index,
                             char *full_name)
 {
   uint32_t i;
-  FRESULT res;
-  res = f_open(fp, BURN_INFO_NAME_FULL, FA_OPEN_EXISTING | FA_READ);
-  GUI_DEBUG("res = %d",res);
+
+  f_open(fp, BURN_INFO_NAME_FULL, FA_OPEN_EXISTING | FA_READ);
+
   /* 跳过前N行,每个文件记录5行 */
   for(i=0;i<file_index*5;i++)
   {

@@ -42,8 +42,12 @@ WCHAR ff_convert (	/* Converted code, 0 means conversion error */
     /* RES_GetInfo读取到的dir.offset是资源的绝对地址 */
     ugbk_addr =RES_GetInfo_AbsAddr(UGBKNAME, &res_dir);
     if(ugbk_addr < 0)
-    {
+    {      
       /* res error */
+      res_not_found_flag = TRUE;
+      GUI_ERROR("Can not find RES:%s",UGBKNAME);
+      /* 设置标志，不让它再次调用RES_GetInfo_AbsAddr */
+      ugbk_addr = 0;
     }
   }
 						  
