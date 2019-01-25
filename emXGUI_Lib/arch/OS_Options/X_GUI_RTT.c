@@ -183,6 +183,40 @@ void	GUI_msleep(u32 ms)
 	rt_thread_delay(ms);
 }
 
+/*
+ * 函数功能: 创建线程
+ * @param name 线程名
+ * @param entry 线程入口函数
+ * @param parameter 线程参数
+ * @param stack_size 线程栈大小
+ * @param priority 线程优先级
+ * @param tick 时间片（同优先级任务的时间片轮转）
+ * @return 是否创建成功
+*/
+BOOL GUI_Thread_Create(void (*entry)(void *parameter),
+                         const char *name,
+                         u32  stack_size,
+                         void *parameter,
+                         u32  priority,
+                         u32  tick)
+{
+  rt_thread_t h;
+
+  h=rt_thread_create((const char *)name,           /* 任务名字 */
+                        (void (*)(void *))entry,    /* 任务入口函数 */
+                        (void*          )parameter,  /* 任务入口函数参数 */
+                        (rt_uint32_t)stack_size,    /* 任务栈大小 */
+                        (rt_uint8_t)priority,       /* 任务的优先级 */
+                        (rt_uint32_t)tick);         /* 时间片，此处默认分配 */
+  
+  rt_thread_startup(h);		
+  
+  if(h == RT_NULL)
+    return FALSE;
+  else
+    return TRUE;
+}
+
 #endif
 
 /********************************END OF FILE****************************/

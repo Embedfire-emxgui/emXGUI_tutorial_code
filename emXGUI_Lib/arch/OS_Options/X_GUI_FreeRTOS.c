@@ -180,6 +180,37 @@ void	GUI_msleep(u32 ms)
 	vTaskDelay(pdMS_TO_TICKS(ms));
 }
 
+/*
+ * 函数功能: 创建线程
+ * @param name 线程名
+ * @param entry 线程入口函数
+ * @param parameter 线程参数
+ * @param stack_size 线程栈大小
+ * @param priority 线程优先级
+ * @param tick FreeRTOS没这个功能，时间片（同优先级任务的时间片轮转）
+ * @return 是否创建成功
+*/
+BOOL GUI_Thread_Create(void (*entry)(void *parameter),
+                         const char *name,
+                         u32  stack_size,
+                         void *parameter,
+                         u32  priority,
+                         u32  tick)
+{
+   BaseType_t xReturn = pdPASS;/* 定义一个创建信息返回值，默认为pdPASS */
+
+   xReturn = xTaskCreate((TaskFunction_t )entry,  /* 任务入口函数 */
+                            (const char*    )name,/* 任务名字 */
+                            (uint16_t       )stack_size,  /* 任务栈大小 */
+                            (void*          )NULL,/* 任务入口函数参数 */
+                            (UBaseType_t    )priority, /* 任务的优先级 */
+                            (TaskHandle_t*  )NULL);/* 任务控制块指针 */
+                            
+  if(xReturn == pdPASS )
+    return TRUE;
+  else
+    return FALSE;  
+}
 
 
 #endif

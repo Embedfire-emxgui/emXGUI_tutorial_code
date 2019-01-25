@@ -127,26 +127,13 @@ static 	 LRESULT  	desktop_proc(HWND hwnd,UINT msg,WPARAM wParam,LPARAM lParam)
 
 				//创建App线程						
 				{
-          #ifdef	X_GUI_USE_RTTHREAD
-          {
-            /* RT-Thread系统 */
-            rt_thread_t h;
-					
-						h=rt_thread_create("GUI_APP",gui_app_thread,NULL,2048,5,5);
-						rt_thread_startup(h);		
-          }
-          #elif X_GUI_USE_FREERTOS
-          {
-             /* FreeRTOS系统 */
-             xTaskCreate((TaskFunction_t )gui_app_thread,  /* 任务入口函数 */
-                          (const char*    )"GUI_APP",/* 任务名字 */
-                          (uint16_t       )2*1024,  /* 任务栈大小 */
-                          (void*          )NULL,/* 任务入口函数参数 */
-                          (UBaseType_t    )5, /* 任务的优先级 */
-                          (TaskHandle_t*  )NULL);/* 任务控制块指针 */
-          
-          }
-          #endif							
+         GUI_Thread_Create(gui_app_thread,  /* 任务入口函数 */
+                              "GUI_APP",/* 任务名字 */
+                              2*1024,  /* 任务栈大小 */
+                              NULL, /* 任务入口函数参数 */
+                              5,    /* 任务的优先级 */
+                              10); /* 任务时间片，部分任务不支持 */
+      
 				}
 
 				break;

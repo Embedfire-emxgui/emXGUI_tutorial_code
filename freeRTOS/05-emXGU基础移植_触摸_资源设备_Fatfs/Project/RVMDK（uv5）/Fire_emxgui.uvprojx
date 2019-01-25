@@ -1052,12 +1052,12 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>tutorial_app</GroupName>
+          <GroupName>base_app</GroupName>
           <Files>
             <File>
               <FileName>gui_desktop.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\emXGUI_Lib\tutorial_app\gui_desktop.c</FilePath>
+              <FilePath>..\..\..\..\emXGUI_Lib\app\base\gui_desktop.c</FilePath>
             </File>
           </Files>
         </Group>
