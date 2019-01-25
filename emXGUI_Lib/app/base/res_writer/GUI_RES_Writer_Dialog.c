@@ -42,10 +42,16 @@ static void App_FLASH_Writer(void )
   u32 result;
    
 	if(thread==0)
-	{  
-      h_flash=rt_thread_create("Flash writer",(void(*)(void*))App_FLASH_Writer,NULL,5*1024,1,5);
-      thread =1;
-      rt_thread_startup(h_flash);//启动线程
+	{ 
+      /* 创建线程运行自己 */
+      h_flash = GUI_Thread_Create((void(*)(void*))App_FLASH_Writer,  /* 任务入口函数 */
+                                    "Flash writer",/* 任务名字 */
+                                    5*1024,  /* 任务栈大小 */
+                                    NULL, /* 任务入口函数参数 */
+                                    1,    /* 任务的优先级 */
+                                    10); /* 任务时间片，部分任务不支持 */
+    thread =1;
+
       return;
 	}
 	while(thread) //线程已创建了
@@ -57,7 +63,7 @@ static void App_FLASH_Writer(void )
 
     thread = 0;       
 
-    rt_thread_delete(h_flash);
+    GUI_Thread_Delete(h_flash);
 
 	}
   return;
