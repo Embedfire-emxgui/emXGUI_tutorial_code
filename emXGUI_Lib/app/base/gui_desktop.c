@@ -134,7 +134,7 @@ static 	 LRESULT  	desktop_proc(HWND hwnd,UINT msg,WPARAM wParam,LPARAM lParam)
 
 				//创建App线程						
 				{
-#if (GUI_APP_BOOT_INTERFACE_EN && 0)  
+#if (GUI_APP_BOOT_INTERFACE_EN )  
           
          GUI_Thread_Create(GUI_Boot_Interface_Dialog,  /* 任务入口函数 */
                               "Boot_Interface",/* 任务名字 */

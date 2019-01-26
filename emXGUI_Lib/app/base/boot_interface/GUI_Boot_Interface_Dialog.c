@@ -41,13 +41,12 @@ static void App_Load_Res(void )
                         1,    /* 任务的优先级 */
                         10); /* 任务时间片，部分任务不支持 */
     thread =1;
-
     return;
   }
   while(thread) //线程已创建了
-  {     
+  { 
     HFONT hFont;
- 
+
     /* 加载字体到外部SDRAM，返回defaultFont */    
     hFont = GUI_Init_Extern_Font();
     if(hFont==NULL)
@@ -65,11 +64,10 @@ static void App_Load_Res(void )
     
     //发消息给启动窗口，关闭
     SendMessage(GUI_Boot_hwnd,WM_CLOSE,0,0);
-    thread = 0;       
+    thread = 0;  
 
     /* 删除线程自己 */
     GUI_Thread_Delete(GUI_GetCurThreadHandle());
-
   }
   return;
 }
@@ -217,12 +215,12 @@ void	GUI_Boot_Interface_Dialog(void *param)
     TranslateMessage(&msg);
     DispatchMessage(&msg);
   }
-  
+
   /* 启动界面在加载完资源后会关闭，执行以下代码，创建应用线程 */
 //  {  
-#if (GUI_APP_RES_WRITER_EN && 0)  
+#if (GUI_APP_RES_WRITER_EN )  
     /* 人为设置为TRUE，测试用 */
-    res_not_found_flag = TRUE; 
+//    res_not_found_flag = TRUE; 
   
      if(res_not_found_flag)
      {
@@ -250,5 +248,7 @@ void	GUI_Boot_Interface_Dialog(void *param)
 //     }   
 //  } 
 
+    /* 部分操作系统在退出任务函数时，必须删除线程自己 */
+    GUI_Thread_Delete(GUI_GetCurThreadHandle());
 
 }

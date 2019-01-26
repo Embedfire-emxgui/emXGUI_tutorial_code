@@ -362,4 +362,13 @@ void	GUI_RES_Writer_Dialog(void *param)
   /* 恢复中文默认字体 */
   GUI_SetDefFont(defaultFont);  
 
+  /* res_not_found_flag为真时，res writer应用是独立创建线程的，所以退出时要删除自己
+     res_not_found_flag为假时，res writer应用是可能是用户点开的app，不删除app主线程
+     请根据自己的需要进行调整
+  */
+  if(res_not_found_flag)
+  {
+    /* 部分操作系统在退出任务函数时，必须删除线程自己 */
+    GUI_Thread_Delete(GUI_GetCurThreadHandle());
+  }
 }
