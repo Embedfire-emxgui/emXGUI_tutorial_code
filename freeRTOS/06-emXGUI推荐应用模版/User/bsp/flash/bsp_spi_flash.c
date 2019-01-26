@@ -621,10 +621,12 @@ static  uint16_t SPI_TIMEOUT_UserCallback(uint8_t errorCode)
   FLASH_ERROR("SPI 等待超时!errorCode = %d",errorCode);
   return 0;
 }
-  
-#if 0
+ 
+#include "gui_drv_cfg.h"
 
-extern HWND wnd_progbar;
+#if (GUI_APP_RES_WRITER_EN)
+
+extern HWND wnd_res_writer_progbar;
 #define ESTIMATE_ERASING_TIME (40*1000)
 
  /**
@@ -637,11 +639,11 @@ void SPI_FLASH_BulkErase_GUI(void)
   
   /* 重置进度条 */
   u32 progbar_val = 0;
-  SendMessage(wnd_progbar,PBM_SET_VALUE,TRUE,0);
-  SetWindowText(wnd_progbar,L"Erasing Flash");
+  SendMessage(wnd_res_writer_progbar,PBM_SET_VALUE,TRUE,0);
+  SetWindowText(wnd_res_writer_progbar,L"Erasing Flash");
 
   /* 设置最大值，擦除大概需要30s */
-  SendMessage(wnd_progbar,PBM_SET_RANGLE,TRUE,ESTIMATE_ERASING_TIME);
+  SendMessage(wnd_res_writer_progbar,PBM_SET_RANGLE,TRUE,ESTIMATE_ERASING_TIME);
   GUI_msleep(10);
   
   /* 发送FLASH写使能命令 */
@@ -678,7 +680,7 @@ void SPI_FLASH_BulkErase_GUI(void)
       if(progbar_val >= ESTIMATE_ERASING_TIME - 10*1000)
           progbar_val =ESTIMATE_ERASING_TIME - 10*1000;
 
-      SendMessage(wnd_progbar,PBM_SET_VALUE,TRUE,progbar_val);
+      SendMessage(wnd_res_writer_progbar,PBM_SET_VALUE,TRUE,progbar_val);
       /* 让出cpu */
       GUI_msleep(100);
 
@@ -698,7 +700,7 @@ void SPI_FLASH_BulkErase_GUI(void)
   }
   
   /* 完成 */
-  SendMessage(wnd_progbar,PBM_SET_VALUE,TRUE,ESTIMATE_ERASING_TIME);
+  SendMessage(wnd_res_writer_progbar,PBM_SET_VALUE,TRUE,ESTIMATE_ERASING_TIME);
   GUI_msleep(10);
 }
 

@@ -188,7 +188,7 @@ void	GUI_msleep(u32 ms)
  * @param name 线程名
  * @param entry 线程入口函数
  * @param parameter 线程参数
- * @param stack_size 线程栈大小
+ * @param stack_size 线程栈大小（单位字节，注意部分系统需要进行单位转换）
  * @param priority 线程优先级
  * @param tick 时间片（同优先级任务的时间片轮转）
  * @return 是否创建成功
@@ -212,7 +212,10 @@ BOOL GUI_Thread_Create(void (*entry)(void *parameter),
   rt_thread_startup(h);		
   
   if(h == RT_NULL)
+  {
+    GUI_ERROR("GUI Thread Create failed:%s",name);
     return FALSE;
+  }
   else
     return TRUE;
 }

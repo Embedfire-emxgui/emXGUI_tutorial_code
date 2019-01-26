@@ -622,7 +622,8 @@ static  uint16_t SPI_TIMEOUT_UserCallback(uint8_t errorCode)
   return 0;
 }
   
-#if 1
+#include "gui_drv_cfg.h"
+#if (GUI_APP_RES_WRITER_EN)
 
 extern HWND wnd_res_writer_progbar;
 #define ESTIMATE_ERASING_TIME (40*1000)

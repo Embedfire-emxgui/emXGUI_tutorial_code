@@ -185,7 +185,7 @@ void	GUI_msleep(u32 ms)
  * @param name 线程名
  * @param entry 线程入口函数
  * @param parameter 线程参数
- * @param stack_size 线程栈大小
+ * @param stack_size 线程栈大小（单位字节，注意部分系统需要进行单位转换）
  * @param priority 线程优先级
  * @param tick FreeRTOS没这个功能，时间片（同优先级任务的时间片轮转）
  * @return 是否创建成功
@@ -201,7 +201,7 @@ BOOL GUI_Thread_Create(void (*entry)(void *parameter),
 
    xReturn = xTaskCreate((TaskFunction_t )entry,  /* 任务入口函数 */
                             (const char*    )name,/* 任务名字 */
-                            (uint16_t       )stack_size,  /* 任务栈大小 */
+                            (uint16_t       )stack_size/4,  /* 任务栈大小FreeRTOS的任务栈以字为单位 */
                             (void*          )NULL,/* 任务入口函数参数 */
                             (UBaseType_t    )priority, /* 任务的优先级 */
                             (TaskHandle_t*  )NULL);/* 任务控制块指针 */
@@ -209,7 +209,10 @@ BOOL GUI_Thread_Create(void (*entry)(void *parameter),
   if(xReturn == pdPASS )
     return TRUE;
   else
-    return FALSE;  
+  {
+    GUI_ERROR("GUI Thread Create failed:%s",name);
+    return FALSE; 
+  }    
 }
 
 /**

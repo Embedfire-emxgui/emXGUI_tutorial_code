@@ -793,11 +793,6 @@
               <FileName>cc936.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\FATFS\option\cc936.c</FilePath>
-            </File>
-            <File>
-              <FileName>extern_cc936.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\FATFS\option\extern_cc936.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -848,6 +843,11 @@
                   </Cads>
                 </FileArmAds>
               </FileOption>
+            </File>
+            <File>
+              <FileName>extern_cc936.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\FATFS\option\extern_cc936.c</FilePath>
             </File>
             <File>
               <FileName>syscall.c</FileName>
@@ -994,6 +994,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\emXGUI_Lib\drv\gui_fs_port.c</FilePath>
             </File>
+            <File>
+              <FileName>gui_picture_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\drv\gui_picture_port.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1049,15 +1054,55 @@
               <FileType>4</FileType>
               <FilePath>..\..\..\..\emXGUI_Lib\libs\x_libc_MDK_M4.lib</FilePath>
             </File>
+            <File>
+              <FileName>libjpeg_MDK_M4.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\libs\libjpeg_MDK_M4.lib</FilePath>
+            </File>
+            <File>
+              <FileName>libpng_MDK_M4.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\libs\libpng_MDK_M4.lib</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>base_app</GroupName>
           <Files>
             <File>
+              <FileName>GUI_AppDef.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\app\base\GUI_AppDef.h</FilePath>
+            </File>
+            <File>
               <FileName>gui_desktop.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\emXGUI_Lib\app\base\gui_desktop.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUI_Boot_Interface_Dialog.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\app\base\boot_interface\GUI_Boot_Interface_Dialog.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUI_RES_Writer_Dialog.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\app\base\res_writer\GUI_RES_Writer_Dialog.c</FilePath>
+            </File>
+            <File>
+              <FileName>backend_res_writer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\app\base\res_writer\backend_res_writer.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>app_res</GroupName>
+          <Files>
+            <File>
+              <FileName>boot_logo.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\app\base\boot_interface\boot_logo.c</FilePath>
             </File>
           </Files>
         </Group>

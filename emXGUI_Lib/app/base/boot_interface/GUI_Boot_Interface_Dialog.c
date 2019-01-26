@@ -220,9 +220,9 @@ void	GUI_Boot_Interface_Dialog(void *param)
   
   /* 启动界面在加载完资源后会关闭，执行以下代码，创建应用线程 */
 //  {  
-#if (GUI_APP_RES_WRITER_EN )  
+#if (GUI_APP_RES_WRITER_EN && 0)  
     /* 人为设置为TRUE，测试用 */
-//    res_not_found_flag = TRUE; 
+    res_not_found_flag = TRUE; 
   
      if(res_not_found_flag)
      {

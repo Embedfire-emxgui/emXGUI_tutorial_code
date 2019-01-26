@@ -52,7 +52,7 @@ void	gui_app_thread(void *p)
 //   	ShellWindowStartup();
     while(1)
     {
-//      GUI_DEBUG("gui_app_thread");
+      GUI_DEBUG("gui_app_thread");
       GUI_msleep(500);
     }
 }
@@ -134,7 +134,7 @@ static 	 LRESULT  	desktop_proc(HWND hwnd,UINT msg,WPARAM wParam,LPARAM lParam)
 
 				//创建App线程						
 				{
-#if (GUI_APP_BOOT_INTERFACE_EN)  
+#if (GUI_APP_BOOT_INTERFACE_EN && 0)  
           
          GUI_Thread_Create(GUI_Boot_Interface_Dialog,  /* 任务入口函数 */
                               "Boot_Interface",/* 任务名字 */

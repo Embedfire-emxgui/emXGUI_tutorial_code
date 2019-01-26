@@ -64,7 +64,7 @@ WCHAR ff_convert (	/* Converted code, 0 means conversion error */
 		for (n = 16; n; n--)
 		{
 			i = li + (hi - li) / 2;	
-			SPI_FLASH_BufferRead((uint8_t *)&t,gbk2uni_offset+i*4+ugbk_addr,4);//读出4个字节
+			RES_DevRead((uint8_t *)&t,gbk2uni_offset+i*4+ugbk_addr,4);//读出4个字节
 			if (src == t[0]) break;
 			if (src > t[0])li = i;  
 			else hi = i;    
