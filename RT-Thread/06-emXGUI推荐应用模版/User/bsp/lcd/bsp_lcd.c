@@ -62,7 +62,9 @@ const LCD_PARAM_TypeDef lcd_param[2]={
   }
 };
 
-/* 当前使用的LCD，默认为5/7寸屏 */
+/* 当前使用的LCD，默认为5/7寸屏
+  * 在触摸驱动初始化时可根据触摸芯片的型号驱分不同的LCD
+*/
 LCD_TypeDef cur_lcd = INCH_5_7;
 
 /* 每个像素点占多少个字节

@@ -753,22 +753,48 @@ int32_t GTP_Read_Version(void)
         return ret;
     }
 
-    if (buf[5] == 0x00)
-    {
-        GTP_INFO("IC1 Version: %c%c%c_%02x%02x", buf[2], buf[3], buf[4], buf[7], buf[6]);
-				
+    if (buf[2] == '9')
+    {				
 				//GT911芯片
 				if(buf[2] == '9' && buf[3] == '1' && buf[4] == '1')
+        {
+          GTP_INFO("IC1 Version: %c%c%c_%02x%02x", buf[2], buf[3], buf[4], buf[7], buf[6]);
+
 					touchIC = GT911;
+          /* 设置当前的液晶屏类型 */
+          cur_lcd = INCH_5_7;
+        }
+        //GT9157芯片
+        else if( buf[2] == '9' && buf[3] == '1' && buf[4] == '5' && buf[5] == '7')
+        {
+          GTP_INFO("IC2 Version: %c%c%c%c_%02x%02x", buf[2], buf[3], buf[4], buf[5], buf[7], buf[6]);
+
+					touchIC = GT9157;
+          /* 设置当前的液晶屏类型 */
+          cur_lcd = INCH_5_7;
+        }
+        else
+           GTP_INFO("Unknown IC Version: %c%c%c%c_%02x%02x", buf[2], buf[3], buf[4], buf[5], buf[7], buf[6]);
+
+    }    
+    else if (buf[2] == '5')
+    {	
+				//GT5688芯片
+				if(buf[2] == '5' && buf[3] == '6' && buf[4] == '8' && buf[5] == '8')
+        {
+          GTP_INFO("IC3 Version: %c%c%c%c_%02x%02x", buf[2], buf[3], buf[4], buf[5], buf[7], buf[6]);
+
+					touchIC = GT5688;
+          /* 设置当前的液晶屏类型 */
+          cur_lcd = INCH_4_3;
+        }
+        else
+           GTP_INFO("Unknown IC Version: %c%c%c%c_%02x%02x", buf[2], buf[3], buf[4], buf[5], buf[7], buf[6]);
+
     }
     else
-    {
-        GTP_INFO("IC2 Version: %c%c%c%c_%02x%02x", buf[2], buf[3], buf[4], buf[5], buf[7], buf[6]);
-				
-				//GT9157芯片
-				if(buf[2] == '9' && buf[3] == '1' && buf[4] == '5' && buf[5] == '7')
-					touchIC = GT9157;
-		}
+       GTP_INFO("Unknown IC Version: %c%c%c%c_%02x%02x", buf[2], buf[3], buf[4], buf[5], buf[7], buf[6]);
+
     return ret;
 }
 

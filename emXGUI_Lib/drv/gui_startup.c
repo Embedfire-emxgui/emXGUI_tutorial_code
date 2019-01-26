@@ -63,7 +63,17 @@ void	GUI_Startup(void)
 		return;
 	}
   
-	pSurf =GUI_DisplayInit(); //显示设备初始化
+  /* 先初始化触摸，以确认液晶屏的类型 */ 
+#if(GUI_INPUT_DEV_EN)    
+  //初始化输入设备
+  if(GUI_InputInit() != TRUE)
+  {
+    GUI_ERROR("GUI_InputInit Failed.");
+  }  
+#endif
+  
+  /* 初始化液晶屏 */
+	pSurf =GUI_DisplayInit(); 
 	if(pSurf==NULL)
 	{
     GUI_ERROR("GUI_DisplayInit Failed.");
@@ -86,15 +96,7 @@ void	GUI_Startup(void)
   {
     GUI_ERROR("File_System Failed.");
   }
-#endif  
-
-#if(GUI_INPUT_DEV_EN)    
-  //初始化输入设备
-  if(GUI_InputInit() != TRUE)
-  {
-    GUI_ERROR("GUI_InputInit Failed.");
-  }  
-#endif
+#endif 
   
 #if (GUI_SHOW_CURSOR_EN)
 	GL_CursorInit(pSurf,pSurf->Width>>1,pSurf->Height>>1); //初始化光标

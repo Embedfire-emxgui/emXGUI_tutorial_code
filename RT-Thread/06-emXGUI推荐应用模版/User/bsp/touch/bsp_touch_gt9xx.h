@@ -54,6 +54,7 @@ typedef enum
 {
 	GT9157=0,
 	GT911=1,
+  GT5688=2,
 }TOUCH_IC;
 
 
