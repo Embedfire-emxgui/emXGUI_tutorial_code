@@ -230,10 +230,10 @@ struct	_X_HEAP
 	struct heap_mem *end;	/* the last entry, always unused! */
 	struct heap_mem *lfree; /* pointer to the lowest free block */
 	
-	u32	total_size;
-	u32	align_size;
-	u32	used_mem;
-	u32	used_size;			
+	u32 align_size;
+	UINT total_size;  //内存总数量(字节)
+	UINT used_cur;    //当前使用量(字节)
+	UINT used_max;    //最大使用量(字节)
 };
 
 typedef	struct _X_HEAP heap_t;

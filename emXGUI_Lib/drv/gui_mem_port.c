@@ -36,7 +36,7 @@
 static GUI_MUTEX *mutex_vmem = NULL;
 
 /* 内存堆管理句柄 */
-static	heap_t heap_vmem;
+heap_t heap_vmem;
 
 /* VMEM缓冲区 */
 static uint8_t buff_vmem[VMEM_SIZE] __attribute__((at(VMEM_BASE)));
