@@ -148,13 +148,13 @@
 
 /*===========图片接口配置===gui_picture_port.c===============================================*/
 /* 是否支持文件系统图片接口,需要移植fatfs文件系统 */
-#define GUI_PIC_FS_EN         0
+#define GUI_PIC_FS_EN         1
 
 /* 是否支持显示JPEG图片,需要添加jpeg解码库 */
-#define GUI_PIC_JPEG_EN       0
+#define GUI_PIC_JPEG_EN       1
 
 /* 是否支持显示JPEG图片,需要添加png解码库 */
-#define GUI_PIC_PNG_EN       0
+#define GUI_PIC_PNG_EN       1
 
 /* 截图 */
 #define GUI_PIC_CAPTURE_SCREEN_EN  ( 1 && GUI_PIC_FS_EN)
