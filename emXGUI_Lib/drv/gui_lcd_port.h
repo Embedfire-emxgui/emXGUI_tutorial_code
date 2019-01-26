@@ -13,21 +13,6 @@
 #define	ROTATE_270	3
 
 /*============================================================================*/
-#if	(LCD_FORMAT==COLOR_FORMAT_RGB565)
-
-#define	LCD_COLOR	    U16
-#define	LCD_BUF_SIZE	(LCD_XSIZE*LCD_YSIZE*2)
-
-#endif
-
-////////
-
-#if	(LCD_FORMAT==COLOR_FORMAT_XRGB8888)
-
-#define	LCD_COLOR       U32
-#define	LCD_BUF_SIZE	(LCD_XSIZE*LCD_YSIZE*4)
-
-#endif
 
 
 SURFACE* GUI_DisplayInit(void);

@@ -25,9 +25,13 @@
 #define	LCD_FORMAT	  COLOR_FORMAT_RGB565
 //#define	LCD_FORMAT	  COLOR_FORMAT_XRGB8888
 
-/* 液晶宽高 */
+/* 当前使用液晶的宽高 */
 #define	LCD_XSIZE	    LCD_PIXEL_WIDTH
 #define	LCD_YSIZE	    LCD_PIXEL_HEIGHT
+
+/* 使用最大液晶屏的宽高，用于计算显存空间 */
+#define	LCD_MAX_XSIZE	    LCD_MAX_PIXEL_WIDTH
+#define	LCD_MAX_YSIZE	    LCD_MAX_PIXEL_HEIGHT
 
 //屏幕旋转，默认
 #define	LCD_ROTATE      ROTATE_0
@@ -72,11 +76,11 @@
 /* 液晶驱动显存使用的空间 */
 #if (LCD_FORMAT == COLOR_FORMAT_RGB565)
 
-  #define LCD_FRAME_SIZE  (LCD_XSIZE*LCD_YSIZE*2)
+  #define LCD_FRAME_SIZE  (LCD_MAX_XSIZE*LCD_MAX_YSIZE*2)
 
 #elif (LCD_FORMAT == COLOR_FORMAT_XRGB8888)
 
-  #define LCD_FRAME_SIZE (LCD_XSIZE*LCD_YSIZE*4)
+  #define LCD_FRAME_SIZE (LCD_MAX_XSIZE*LCD_MAX_YSIZE*4)
 
 #endif
 /*

@@ -8,25 +8,66 @@
   * @{
   */
 
+/** 
+  * @brief  LCD液晶参数
+  */   
+typedef struct
+{
+  /*根据液晶数据手册的参数配置*/
+  uint8_t hbp;  //HSYNC后的无效像素
+  uint8_t vbp;  //VSYNC后的无效行数
+
+  uint8_t hsw;  	//HSYNC宽度
+  uint8_t vsw;   //VSYNC宽度
+
+  uint8_t hfp;  	//HSYNC前的无效像素
+  uint8_t vfp;  	//VSYNC前的无效行数
+  
+  uint8_t comment_clock_2byte; //rgb565/argb4444等双字节像素时推荐使用的液晶时钟频率
+  uint8_t comment_clock_4byte; //Argb8888等四字节像素时推荐使用的液晶时钟频率
+
+  uint16_t lcd_pixel_width; //液晶分辨率，宽
+  uint16_t lcd_pixel_height;//液晶分辨率，高
+
+}LCD_PARAM_TypeDef;
+
+
+/** 
+  * @brief  LCD液晶类型
+  */   
+typedef enum
+{ 
+  INCH_5_7  = 0x00, /* 野火5/7寸屏 */
+  INCH_4_3  = 0x01,  /* 野火4.3寸屏 */
+}LCD_TypeDef;
+
+/* 当前使用的LCD，默认为5/7寸屏 */
+extern LCD_TypeDef cur_lcd;
+/* 不同液晶屏的参数 */
+extern const LCD_PARAM_TypeDef lcd_param[];
 /**
   * @brief  Initializes the LCD.
   * @param  None
   * @retval None
   */
 /*根据液晶数据手册的参数配置*/
-#define HBP  46		//HSYNC后的无效像素
-#define VBP  23		//VSYNC后的无效行数
+#define HBP  lcd_param[cur_lcd].hbp		//HSYNC后的无效像素
+#define VBP  lcd_param[cur_lcd].vbp		//VSYNC后的无效行数
 
-#define HSW   1		//HSYNC宽度
-#define VSW   1		//VSYNC宽度
+#define HSW  lcd_param[cur_lcd].hsw		//HSYNC宽度
+#define VSW  lcd_param[cur_lcd].vsw		//VSYNC宽度
 
-#define HFP  22		//HSYNC前的无效像素
-#define VFP   22		//VSYNC前的无效行数
+#define HFP  lcd_param[cur_lcd].hfp		//HSYNC前的无效像素
+#define VFP  lcd_param[cur_lcd].vfp		//VSYNC前的无效行数
 
 
 /* LCD Size (Width and Height) */
-#define  LCD_PIXEL_WIDTH          ((uint16_t)800)
-#define  LCD_PIXEL_HEIGHT         ((uint16_t)480)
+#define  LCD_PIXEL_WIDTH          lcd_param[cur_lcd].lcd_pixel_width
+#define  LCD_PIXEL_HEIGHT         lcd_param[cur_lcd].lcd_pixel_height
+
+/* 使用的各个屏幕中最大的分辨率 */
+#define  LCD_MAX_PIXEL_WIDTH    ((uint16_t)800)  
+#define  LCD_MAX_PIXEL_HEIGHT   ((uint16_t)480)  
 
 #define  LCD_BUFFER         ((uint32_t)0xD0000000)
 

@@ -28,11 +28,11 @@ void LCD_HardInit(u32 fb_addr)
 {	
   /* ≥ı ºªØ“∫æß∆¡ */  
 #if	(LCD_FORMAT == COLOR_FORMAT_RGB565)
-  LCD_Init(fb_addr, 33, LTDC_Pixelformat_RGB565);
+  LCD_Init(fb_addr, 0, LTDC_Pixelformat_RGB565);
 #endif
   
 #if	(LCD_FORMAT == COLOR_FORMAT_XRGB8888)
-  LCD_Init(fb_addr, 21, LTDC_Pixelformat_ARGB8888);
+  LCD_Init(fb_addr, 0, LTDC_Pixelformat_ARGB8888);
 #endif
 
 }

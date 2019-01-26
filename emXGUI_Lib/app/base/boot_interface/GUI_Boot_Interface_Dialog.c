@@ -93,13 +93,13 @@ static	LRESULT	win_proc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
       /* °ÑÍ¼Æ¬×ª»»³Ébitmap */
       PNG_GetBitmap(png_dec, &png_bm);
       CreateWindow(TEXTBOX, L"emXGUI booting", WS_VISIBLE, 
-                    0,260,800,40,
+                    0,260,rc.w,40,
                     hwnd, ID_TEXT1, NULL, NULL);
       SendMessage(GetDlgItem(hwnd, ID_TEXT1),TBM_SET_TEXTFLAG,0,
                     DT_SINGLELINE|DT_CENTER|DT_VCENTER|DT_BKGND); 
 
       CreateWindow(TEXTBOX, L"Copying FontLIB form SPIFALSH to SDRAM", WS_VISIBLE, 
-                    0,300,800,40,
+                    0,300,rc.w,40,
                     hwnd, ID_TEXT2, NULL, NULL);
       SendMessage(GetDlgItem(hwnd, ID_TEXT2),TBM_SET_TEXTFLAG,0,
                     DT_SINGLELINE|DT_CENTER|DT_VCENTER|DT_BKGND); 
@@ -114,7 +114,7 @@ static	LRESULT	win_proc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
       Boot_progbar = CreateWindow(PROGRESSBAR,L"Loading",
                                      PBS_TEXT|PBS_ALIGN_LEFT|WS_VISIBLE,
-                                    50, 380, 700, 40 ,hwnd,ID_PROGBAR,NULL,NULL);
+                                    50, 380, rc.w -100, 40 ,hwnd,ID_PROGBAR,NULL,NULL);
 
       SendMessage(Boot_progbar,PBM_GET_CFG,TRUE,(LPARAM)&cfg);
       SendMessage(Boot_progbar,PBM_SET_CFG,TRUE,(LPARAM)&cfg);
