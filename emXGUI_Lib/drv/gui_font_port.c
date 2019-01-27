@@ -267,7 +267,7 @@ HFONT GUI_Default_FontInit(void)
 #endif
  
 /* 不使用外部字体时，默认把Load_state至1 */  
-#if (!GUI_EXTERN_FONT_EN) 
+#if ((!GUI_EXTERN_FONT_EN) || (!GUI_APP_BOOT_INTERFACE_EN)) 
     Load_state = TRUE;
 #endif  
   
