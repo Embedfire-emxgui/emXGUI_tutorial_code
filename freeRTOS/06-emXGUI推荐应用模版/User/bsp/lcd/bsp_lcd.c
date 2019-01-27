@@ -19,7 +19,73 @@
 /* Includes ------------------------------------------------------------------*/
 #include "bsp_lcd.h"
 
+/* 不同液晶屏的参数 */
+const LCD_PARAM_TypeDef lcd_param[LCD_TYPE_NUM]={
 
+  /* 5寸屏参数 */
+  {
+    /*根据液晶数据手册的参数配置*/
+    .hbp = 46,  //HSYNC后的无效像素
+    .vbp = 23,  //VSYNC后的无效行数
+
+    .hsw = 1,  	//HSYNC宽度
+    .vsw = 1,   //VSYNC宽度
+
+    .hfp = 22,  	//HSYNC前的无效像素
+    .vfp = 22,  	//VSYNC前的无效行数
+    
+    .comment_clock_2byte = 33, //rgb565/argb4444等双字节像素时推荐使用的液晶时钟频率
+    .comment_clock_4byte = 21, //Argb8888等四字节像素时推荐使用的液晶时钟频率
+
+    
+    .lcd_pixel_width = LCD_MAX_PIXEL_WIDTH,//液晶分辨率，宽
+    .lcd_pixel_height = LCD_MAX_PIXEL_HEIGHT,//液晶分辨率，高
+  },
+  
+   /* 7寸屏参数（与5寸一样） */
+  {
+    /*根据液晶数据手册的参数配置*/
+    .hbp = 46,  //HSYNC后的无效像素
+    .vbp = 23,  //VSYNC后的无效行数
+
+    .hsw = 1,  	//HSYNC宽度
+    .vsw = 1,   //VSYNC宽度
+
+    .hfp = 22,  	//HSYNC前的无效像素
+    .vfp = 22,  	//VSYNC前的无效行数
+    
+    .comment_clock_2byte = 33, //rgb565/argb4444等双字节像素时推荐使用的液晶时钟频率
+    .comment_clock_4byte = 21, //Argb8888等四字节像素时推荐使用的液晶时钟频率
+
+    
+    .lcd_pixel_width = LCD_MAX_PIXEL_WIDTH,//液晶分辨率，宽
+    .lcd_pixel_height = LCD_MAX_PIXEL_HEIGHT,//液晶分辨率，高
+  },
+
+  /* 4.3寸屏参数 */
+  {
+      /*根据液晶数据手册的参数配置*/
+    .hbp = 8,  //HSYNC后的无效像素
+    .vbp = 2,  //VSYNC后的无效行数
+
+    .hsw = 41,  	//HSYNC宽度
+    .vsw = 10,   //VSYNC宽度
+
+    .hfp = 4,  	//HSYNC前的无效像素
+    .vfp = 4,  	//VSYNC前的无效行数
+    
+    .comment_clock_2byte = 15, //rgb565/argb4444等双字节像素时推荐使用的液晶时钟频率
+    .comment_clock_4byte = 15, //Argb8888等四字节像素时推荐使用的液晶时钟频率
+    
+    .lcd_pixel_width = 480,//液晶分辨率，宽
+    .lcd_pixel_height = 272,//液晶分辨率，高
+  }
+};
+
+/* 当前使用的LCD，默认为5/7寸屏
+  * 在触摸驱动初始化时可根据触摸芯片的型号驱分不同的LCD
+*/
+LCD_TypeDef cur_lcd = INCH_5;
 
 /* 每个像素点占多少个字节
 ARGB8888/RGB888/RGB565/ARGB1555/ARGB4444/L8/AL44/AL88 
@@ -276,7 +342,7 @@ void LCD_LayerInit(uint32_t fb_addr, uint32_t pixel_format )
 /**
   * @brief LCD初始化
   * @param fb_addr 显存首地址
-  * @param  lcd_clk_mhz 像素时钟频率，
+  * @param  lcd_clk_mhz 像素时钟频率，为 0 时直接使用推荐时钟频率
             RGB565格式推荐为30~33，
             XRGB8888格式推荐为20~22
             极限范围为15~52，其余值会超出LTDC时钟分频配置范围
@@ -287,6 +353,24 @@ void LCD_Init(uint32_t fb_addr, int lcd_clk_mhz, uint32_t pixel_format )
 { 
   uint32_t div;
   LTDC_InitTypeDef       LTDC_InitStruct;
+  
+  /* lcd_clk_mhz为0时使用推荐时钟频率 */
+  if(lcd_clk_mhz == 0)
+  {
+    if(pixel_format == LTDC_Pixelformat_RGB565||
+        pixel_format == LTDC_Pixelformat_ARGB1555||
+        pixel_format == LTDC_Pixelformat_ARGB4444||
+        pixel_format == LTDC_Pixelformat_L8||
+        pixel_format == LTDC_Pixelformat_AL88)
+    {
+      lcd_clk_mhz = lcd_param[cur_lcd].comment_clock_2byte;
+    }
+    else if(pixel_format == LTDC_Pixelformat_ARGB8888||
+              pixel_format == LTDC_Pixelformat_RGB888)
+    {
+      lcd_clk_mhz = lcd_param[cur_lcd].comment_clock_4byte;
+    }
+  }
   
   /* 使能LTDC外设时钟 */
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_LTDC, ENABLE);

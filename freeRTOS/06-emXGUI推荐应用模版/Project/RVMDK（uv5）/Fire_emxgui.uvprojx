@@ -710,9 +710,9 @@
               <FilePath>..\..\User\bsp\touch\bsp_i2c_touch.c</FilePath>
             </File>
             <File>
-              <FileName>bsp_touch_gt9xx.c</FileName>
+              <FileName>bsp_touch_gtxx.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\User\bsp\touch\bsp_touch_gt9xx.c</FilePath>
+              <FilePath>..\..\User\bsp\touch\bsp_touch_gtxx.c</FilePath>
             </File>
             <File>
               <FileName>bsp_spi_flash.c</FileName>
@@ -924,6 +924,11 @@
         <Group>
           <GroupName>emxgui/resource</GroupName>
           <Files>
+            <File>
+              <FileName>ASCII_16_4BPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_16_4BPP.c</FilePath>
+            </File>
             <File>
               <FileName>ASCII_20_4BPP.c</FileName>
               <FileType>1</FileType>

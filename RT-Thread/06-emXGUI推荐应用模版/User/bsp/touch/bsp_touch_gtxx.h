@@ -15,8 +15,8 @@
  * 
  */
 
-#ifndef _GOODIX_GT9XX_H
-#define _GOODIX_GT9XX_H
+#ifndef _GOODIX_GTXX_H
+#define _GOODIX_GTXX_H
 
 #include "stm32f4xx.h"
 
