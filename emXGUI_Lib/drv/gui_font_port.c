@@ -63,6 +63,31 @@ BOOL res_not_found_flag = FALSE;
 #if (!GUI_RES_DEV_EN)
   #error Use extern must enable macro 'GUI_RES_DEV_EN' first!
 #endif
+  
+ /** 
+  * @brief  字体参数
+  *  为适应不同分辨率的屏幕，使用不同的默认字体 
+  *  不需要使用不同字体参数时，直接设置gui_drv_cfg.h文件即可
+  *  这些参数用在gui_drv_cfg.h文件的宏GUI_DEFAULT_FONT_EN和GUI_DEFAULT_EXTERN_FONT
+*/  
+const FONT_PARAM_TypeDef gui_font_param[GUI_LCD_TYPE_NUM] = {
+  /* 5寸屏 */
+  {   
+    .default_en = ASCII_24_4BPP,                /* 默认英文字体，内部flash */
+    .default_extern_cn = "GB2312_24_4BPP.xft", /* 默认中文字体，外部 */
+  },
+  /* 7寸屏 */
+  {   
+    .default_en = ASCII_24_4BPP,                /* 默认英文字体，内部flash */
+    .default_extern_cn = "GB2312_24_4BPP.xft", /* 默认中文字体，外部 */
+  },
+  /* 4.3寸屏 */
+  {   
+    .default_en = ASCII_20_4BPP,                /* 默认英文字体，内部flash */
+    .default_extern_cn = "GB2312_20_4BPP.xft", /* 默认中文字体，外部 */
+  },
+};
+
 /**
   * @brief  从流媒体加载内容的回调函数
   * @param  buf[out] 存储读取到的数据缓冲区

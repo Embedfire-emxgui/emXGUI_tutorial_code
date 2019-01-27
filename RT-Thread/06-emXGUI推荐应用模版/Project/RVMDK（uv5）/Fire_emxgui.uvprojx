@@ -981,6 +981,11 @@
           <GroupName>emxgui/resource</GroupName>
           <Files>
             <File>
+              <FileName>ASCII_16_4BPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_16_4BPP.c</FilePath>
+            </File>
+            <File>
               <FileName>ASCII_20_4BPP.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_20_4BPP.c</FilePath>

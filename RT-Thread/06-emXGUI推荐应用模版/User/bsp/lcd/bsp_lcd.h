@@ -37,11 +37,14 @@ typedef struct
   */   
 typedef enum
 { 
-  INCH_5_7  = 0x00, /* 野火5/7寸屏 */
-  INCH_4_3  = 0x01,  /* 野火4.3寸屏 */
+  INCH_5  = 0x00, /* 野火5寸屏 */
+  INCH_7,     /* 野火7寸屏 */
+  INCH_4_3,  /* 野火4.3寸屏 */
+  
+  LCD_TYPE_NUM /* LCD类型总数*/
 }LCD_TypeDef;
 
-/* 当前使用的LCD，默认为5/7寸屏 */
+/* 当前使用的LCD，默认为5寸屏 */
 extern LCD_TypeDef cur_lcd;
 /* 不同液晶屏的参数 */
 extern const LCD_PARAM_TypeDef lcd_param[];

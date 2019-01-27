@@ -84,26 +84,44 @@ static	LRESULT	win_proc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
   {  
     case WM_CREATE:
     {
-      RECT rc;
+      RECT rc,rc0;
 
       GetClientRect(hwnd,&rc); //获得窗口的客户区矩形
+      CopyRect(&rc0,&rc);
 
       /* 根据图片数据创建PNG_DEC句柄 */
       png_dec = PNG_Open((u8 *)bootlogo, bootlogo_size());
       /* 把图片转换成bitmap */
       PNG_GetBitmap(png_dec, &png_bm);
+      
+      rc0.x = (rc.w - png_bm.Width)/2;
+      rc0.y = 0;
+      rc0.w = rc.w;
+//      DrawBitmap(hdc, 250, 80, &png_bm, NULL); 
+      
+      OffsetRect(&rc0,0,png_bm.Height);
+      rc0.x = 0;
+      rc0.h = 30;      
+      rc0.w = rc.w;
+
       CreateWindow(TEXTBOX, L"emXGUI booting", WS_VISIBLE, 
-                    0,260,rc.w,40,
+                    rc0.x,rc0.y,rc0.w,rc0.h,
                     hwnd, ID_TEXT1, NULL, NULL);
       SendMessage(GetDlgItem(hwnd, ID_TEXT1),TBM_SET_TEXTFLAG,0,
                     DT_SINGLELINE|DT_CENTER|DT_VCENTER|DT_BKGND); 
 
-      CreateWindow(TEXTBOX, L"Copying FontLIB form SPIFALSH to SDRAM", WS_VISIBLE, 
-                    0,300,rc.w,40,
+      OffsetRect(&rc0,0,rc0.h);
+
+      CreateWindow(TEXTBOX, L"Copying FontLIB from SPIFLASH to SDRAM", WS_VISIBLE, 
+                    rc0.x,rc0.y,rc0.w,rc0.h,
                     hwnd, ID_TEXT2, NULL, NULL);
       SendMessage(GetDlgItem(hwnd, ID_TEXT2),TBM_SET_TEXTFLAG,0,
                     DT_SINGLELINE|DT_CENTER|DT_VCENTER|DT_BKGND); 
 
+      rc0.x = 50;
+      rc0.h = 30;    
+      rc0.y = rc.h-rc0.h-10;   
+      rc0.w = rc.w - 2*rc0.x;
 
       //PROGRESSBAR_CFG结构体的大小
       cfg.cbSize	 = sizeof(PROGRESSBAR_CFG);
@@ -114,7 +132,7 @@ static	LRESULT	win_proc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
       Boot_progbar = CreateWindow(PROGRESSBAR,L"Loading",
                                      PBS_TEXT|PBS_ALIGN_LEFT|WS_VISIBLE,
-                                    50, 380, rc.w -100, 40 ,hwnd,ID_PROGBAR,NULL,NULL);
+                                    rc0.x,rc0.y,rc0.w,rc0.h,hwnd,ID_PROGBAR,NULL,NULL);
 
       SendMessage(Boot_progbar,PBM_GET_CFG,TRUE,(LPARAM)&cfg);
       SendMessage(Boot_progbar,PBM_SET_CFG,TRUE,(LPARAM)&cfg);
@@ -136,10 +154,15 @@ static	LRESULT	win_proc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
       HDC hdc =(HDC)wParam;
       RECT rc =*(RECT*)lParam;
 
+      GetClientRect(hwnd,&rc); //获得窗口的客户区矩形
+
       SetBrushColor(hdc, MapRGB(hdc, 0, 0, 0));
-      FillRect(hdc, &rc);           
+      FillRect(hdc, &rc);    
+      
+      rc.x = (rc.w - png_bm.Width)/2;
+      rc.y = 0;
       /* 显示图片 */
-      DrawBitmap(hdc, 250, 80, &png_bm, NULL);  
+      DrawBitmap(hdc, rc.x, rc.y, &png_bm, NULL);  
       return TRUE;
 
     }

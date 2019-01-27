@@ -16,7 +16,7 @@
 
 
 /*===========显示器配置===gui_lcd_port.c===============================================*/
-//野火5.0 / 7.0TFT,800x480
+//野火5.0 / 7.0TFT,800x480 ,4.3寸480*272
 
 /* 显存基地址 */
 #define  LCD_FRAME_BUFFER   LCD_BUFFER
@@ -32,6 +32,9 @@
 /* 使用最大液晶屏的宽高，用于计算显存空间 */
 #define	LCD_MAX_XSIZE	    LCD_MAX_PIXEL_WIDTH
 #define	LCD_MAX_YSIZE	    LCD_MAX_PIXEL_HEIGHT
+
+/* 使用的LCD种类数，方便支持不同的分辨率，使用不同的字体 */
+#define  GUI_LCD_TYPE_NUM     LCD_TYPE_NUM
 
 //屏幕旋转，默认
 #define	LCD_ROTATE      ROTATE_0
@@ -55,7 +58,7 @@
 #define	GUI_TOUCHSCREEN_CALIBRATE       0
 
 /* 是否显示光标 */
-#define  GUI_SHOW_CURSOR_EN        1
+#define  GUI_SHOW_CURSOR_EN        0
 
 /*===========存储器配置===gui_mem_port.c===============================================*/
 /* 通常GUI内核使用MEM内存堆，VMEM内存堆给用户使用 */
@@ -103,7 +106,7 @@
 
 
 /* 默认内部英文字体数组名，USE_EXTERN_FONT为0或 外部字体加载失败时会采用的字体 */
-#define GUI_DEFAULT_FONT_EN          ASCII_24_4BPP
+#define GUI_DEFAULT_FONT_EN          gui_font_param[cur_lcd].default_en
 
 /* 是否使用内部中文字体，中文字体太大，不建议放在内部 */
 #define GUI_INER_CN_FONT_EN      0
@@ -125,7 +128,7 @@
 #define GUI_FONT_LOAD_TO_RAM_EN    (1 && GUI_EXTERN_FONT_EN)
 
 /* 要使用的外部默认字体文件，USE_EXTERN_FONT为1时生效 */
-#define GUI_DEFAULT_EXTERN_FONT   "GB2312_24_4BPP.xft"
+#define GUI_DEFAULT_EXTERN_FONT   gui_font_param[cur_lcd].default_extern_cn
 
 
 /*===========日志输出设备配置===gui_log_port.c===============================================*/

@@ -7,6 +7,20 @@ extern "C" {
   
 #include	"emXGUI.h"
 #include	"gui_drv_cfg.h"
+  
+  /** 
+  * @brief  字体参数
+  *  为适应不同分辨率的屏幕，使用不同的默认字体 
+  */   
+typedef struct
+{
+  const char *default_en;  //默认英文字体
+  const char *default_extern_cn;  //默认中文字体
+
+}FONT_PARAM_TypeDef;
+
+/* 字体参数配置 */
+extern const FONT_PARAM_TypeDef gui_font_param[];
 
 /* 默认字体 */
 extern HFONT defaultFont;
