@@ -81,15 +81,15 @@ static	LRESULT	win_proc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
 	//static RECT rc_R, rc_G, rc_B;//RGB分量指示框
   
-  const WCHAR no_res_info[] = L"It's seems that the FLASH is missing some resources.\r\n\
+  const WCHAR no_res_info[] = L"Some resources not found in the FLASH.\r\n\
 Follow the instructions below:\r\n\r\n\
 1.Insert an SD card with [srcdata] resource.\r\n\
 3.Power up again the board.\r\n\
 2.Click the button below to load the resources.";
   
-  const WCHAR normal_res_info[] = L"This app is use to reload resources!\r\n\
-Doing that all contents on the SPI FLASH will be erased!\r\n\
-If you really want to reload resources:\r\n\r\n\
+  const WCHAR normal_res_info[] = L"Please [Exit] if you don't know what to do!!!\r\n\
+This app is use to reload resources\r\n\
+If you really want to reload resources:\r\n\
 1.Insert an SD card with [srcdata] resource.\r\n\
 3.Power up again the board.\r\n\
 2.Click the button below to load the resources.";
@@ -109,52 +109,48 @@ If you really want to reload resources:\r\n\r\n\
             pStr = no_res_info;
           
           GetClientRect(hwnd,&rc); //获得窗口的客户区矩形.
+          CopyRect(&rc0,&rc);
+          
+          /* 本窗口垂直分为5份 */
       
           /* 标题 */
-          rc0.x = 5;
-          rc0.y = 10;
-          rc0.w = rc.w-10;
-          rc0.h = 40;
+          rc0.x = 0;
+          rc0.y = 0;
+          rc0.w = rc.w;
+          rc0.h = rc.h/5;
           
           wnd = CreateWindow(TEXTBOX,L"GUI FLASH Writer" ,WS_VISIBLE,
                                 rc0.x, rc0.y, rc0.w, rc0.h, hwnd, ID_TITLE, NULL, NULL); 
 
-          SendMessage(wnd,TBM_SET_TEXTFLAG,0,DT_SINGLELINE|DT_CENTER|DT_VCENTER|DT_BKGND);
+          SendMessage(wnd,TBM_SET_TEXTFLAG,0,DT_SINGLELINE|DT_CENTER|DT_VCENTER|DT_BKGND);          
 
-          /* 退出提示 */
-          OffsetRect(&rc0,0,rc0.h+10);  
-          rc0.w = 700;
-          
+          /* 有退出提示 */
           if(!res_not_found_flag)
-          {
-            /* 若本身能找到资源文件，显示这个提示 */
-            CreateWindow(TEXTBOX,L"Please [Exit] if you don't know what you are doing! --->" ,WS_VISIBLE,
-                        rc0.x, rc0.y, rc0.w, rc0.h, hwnd, ID_EXIT_INFO, NULL, NULL); 
-          
-          
-            OffsetRect(&rc0,rc0.w+10,0);  
-            
+          {  
             /* 退出按钮 */
-            rc0.w = 70;
+            rc0.w = 60;
+            rc0.x = rc.w - rc0.w - 5*2;
+            rc0.h = 30;
+
             CreateWindow(BUTTON, L"Exit",BS_FLAT | WS_VISIBLE,
                           rc0.x, rc0.y, rc0.w, rc0.h, hwnd, ID_EXIT, NULL, NULL); 
           }
           
           /* 提示信息 */
-          OffsetRect(&rc0,0,rc0.h+10);  
           rc0.x = 5;
-          rc0.w = rc.w-10;
-          rc0.h = 200;
+          rc0.y = 1*rc.h/5;
+          rc0.w = rc.w - rc0.x*2;
+          rc0.h = 2*rc.h/5;
       
           CreateWindow(TEXTBOX,pStr ,WS_VISIBLE,
                         rc0.x, rc0.y, rc0.w, rc0.h, hwnd, ID_INFO, NULL, NULL); 
 
           /* 进度条 */
-          OffsetRect(&rc0,0,rc0.h+10);  
           rc0.x = 5;
-          rc0.w = 790;
+          rc0.w = rc.w - rc0.x*2;
           rc0.h = 30;
-          
+          rc0.y = 4*rc.h/5 - rc0.h-10;
+ 
           //PROGRESSBAR_CFG结构体的大小
 					cfg.cbSize	 = sizeof(PROGRESSBAR_CFG);
           //开启所有的功能
@@ -171,14 +167,20 @@ If you really want to reload resources:\r\n\r\n\
           SendMessage(wnd_res_writer_progbar,PBM_SET_VALUE,TRUE,0);
 
           /* 烧录按钮 */
-          OffsetRect(&rc0,0,rc0.h+10);  
-          rc0.w = 350;
-          rc0.h = 70;         
+          rc0.x = 5;
+          rc0.w = rc.w/2- rc0.x*2;
+          rc0.h = 45;
+          rc0.y = rc.h - rc0.h - 10;
+
           CreateWindow(BUTTON, L"Click me to load resources",BS_FLAT | WS_VISIBLE,
                         rc0.x, rc0.y, rc0.w, rc0.h, hwnd, ID_BURN, NULL, NULL); 
 
           /* 复位按钮 */
-          OffsetRect(&rc0,rc0.w+50,0);  
+          rc0.x = rc.w/2 +5;
+          rc0.w = rc.w/2 - 5*2;
+          rc0.h = 45;
+          rc0.y = rc.h - rc0.h - 10;
+          
           CreateWindow(BUTTON, L"Click me to reset system",BS_FLAT ,
                         rc0.x, rc0.y, rc0.w, rc0.h, hwnd, ID_RESET, NULL, NULL); 
           break;

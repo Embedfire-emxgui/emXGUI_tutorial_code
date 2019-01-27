@@ -83,7 +83,7 @@ const FONT_PARAM_TypeDef gui_font_param[GUI_LCD_TYPE_NUM] = {
   },
   /* 4.3寸屏 */
   {   
-    .default_en = ASCII_20_4BPP,                /* 默认英文字体，内部flash */
+    .default_en = ASCII_16_4BPP,                /* 默认英文字体，内部flash */
     .default_extern_cn = "GB2312_20_4BPP.xft", /* 默认中文字体，外部 */
   },
 };

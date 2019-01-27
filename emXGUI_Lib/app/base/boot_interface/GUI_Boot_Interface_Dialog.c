@@ -88,6 +88,8 @@ static	LRESULT	win_proc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
       GetClientRect(hwnd,&rc); //获得窗口的客户区矩形
       CopyRect(&rc0,&rc);
+      
+      /* 本窗口垂直分为2份 */
 
       /* 根据图片数据创建PNG_DEC句柄 */
       png_dec = PNG_Open((u8 *)bootlogo, bootlogo_size());
@@ -95,12 +97,13 @@ static	LRESULT	win_proc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
       PNG_GetBitmap(png_dec, &png_bm);
       
       rc0.x = (rc.w - png_bm.Width)/2;
-      rc0.y = 0;
+      rc0.y = rc.h/2 - png_bm.Height - 10;
       rc0.w = rc.w;
 //      DrawBitmap(hdc, 250, 80, &png_bm, NULL); 
       
       OffsetRect(&rc0,0,png_bm.Height);
       rc0.x = 0;
+      rc0.y = rc.h/2;
       rc0.h = 30;      
       rc0.w = rc.w;
 
@@ -118,9 +121,10 @@ static	LRESULT	win_proc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
       SendMessage(GetDlgItem(hwnd, ID_TEXT2),TBM_SET_TEXTFLAG,0,
                     DT_SINGLELINE|DT_CENTER|DT_VCENTER|DT_BKGND); 
 
-      rc0.x = 50;
-      rc0.h = 30;    
-      rc0.y = rc.h-rc0.h-10;   
+      OffsetRect(&rc0,0,rc0.h+10);
+
+      rc0.x = 10;
+      rc0.h = 30;
       rc0.w = rc.w - 2*rc0.x;
 
       //PROGRESSBAR_CFG结构体的大小
@@ -160,7 +164,7 @@ static	LRESULT	win_proc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
       FillRect(hdc, &rc);    
       
       rc.x = (rc.w - png_bm.Width)/2;
-      rc.y = 0;
+      rc.y = rc.h/2 - png_bm.Height - 10;;
       /* 显示图片 */
       DrawBitmap(hdc, rc.x, rc.y, &png_bm, NULL);  
       return TRUE;

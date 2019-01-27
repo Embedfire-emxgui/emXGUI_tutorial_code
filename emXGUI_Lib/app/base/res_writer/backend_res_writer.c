@@ -422,7 +422,7 @@ FRESULT Burn_Content(void)
     BURN_INFO("-------------------------------------"); 
     BURN_INFO("×¼±¸ÉÕÂ¼ÄÚÈÝ£º%s",full_file_name);
     
-    x_wsprintf((WCHAR*)tempbuf,L"Writing file %d/%d,writing big files will take a long time.\r\nPlease wait...",i,file_num);
+    x_wsprintf((WCHAR*)tempbuf,L"Writing file %d/%d.\r\nWriting big files will take a long time.\r\nPlease wait...",i,file_num);
     SetWindowText(wnd_res_writer_info_textbox,(WCHAR*)tempbuf);
     SendMessage(wnd_res_writer_progbar,PBM_SET_VALUE,TRUE,i);
 
@@ -505,7 +505,7 @@ FRESULT Check_Resource(void)
     if(is_end !=0)   
       break;    
     
-    x_wsprintf((WCHAR *)tempbuf,L"Checking file %d/%d,checking big files will take a long time.\r\nPlease wait...",i,file_num);
+    x_wsprintf((WCHAR *)tempbuf,L"Checking file %d/%d.\r\nChecking big files will take a long time.\r\nPlease wait...",i,file_num);
     SetWindowText(wnd_res_writer_info_textbox,(WCHAR *)tempbuf);
     SendMessage(wnd_res_writer_progbar,PBM_SET_VALUE,TRUE,i);
 
