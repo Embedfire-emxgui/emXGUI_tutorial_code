@@ -53,18 +53,7 @@ HFONT defaultFontEn = NULL;
 /* 用于标记是否有资源文件无法找到 */
 BOOL res_not_found_flag = FALSE;
 
-#if (GUI_FONT_LOAD_TO_RAM_EN)
-  u8 *default_font_buf;
-#endif
-
-/*===================================================================================*/
-#if (GUI_EXTERN_FONT_EN)
-
-#if (!GUI_RES_DEV_EN)
-  #error Use extern must enable macro 'GUI_RES_DEV_EN' first!
-#endif
-  
- /** 
+/** 
   * @brief  字体参数
   *  为适应不同分辨率的屏幕，使用不同的默认字体 
   *  不需要使用不同字体参数时，直接设置gui_drv_cfg.h文件即可
@@ -87,6 +76,17 @@ const FONT_PARAM_TypeDef gui_font_param[GUI_LCD_TYPE_NUM] = {
     .default_extern_cn = "GB2312_20_4BPP.xft", /* 默认中文字体，外部 */
   },
 };
+
+#if (GUI_FONT_LOAD_TO_RAM_EN)
+  u8 *default_font_buf;
+#endif
+
+/*===================================================================================*/
+#if (GUI_EXTERN_FONT_EN)
+
+#if (!GUI_RES_DEV_EN)
+  #error Use extern must enable macro 'GUI_RES_DEV_EN' first!
+#endif
 
 /**
   * @brief  从流媒体加载内容的回调函数
@@ -259,14 +259,17 @@ HFONT GUI_Default_FontInit(void)
  
     /* 从外部资源设备加载字体 */
     defaultFont = GUI_Init_Extern_Font();  
-    Load_state = TRUE;
   
 #elif (GUI_INER_CN_FONT_EN && (!GUI_APP_BOOT_INTERFACE_EN))
     /* 中文字库存储占用空间非常大，不推荐放在内部FLASH */
     /* 从内部flash加载默认中文字体，不推荐*/
     defaultFont = XFT_CreateFont(GUI_DEFAULT_FONT_CN);    
-    Load_state = TRUE;
 #endif
+ 
+/* 不使用外部字体时，默认把Load_state至1 */  
+#if (!GUI_EXTERN_FONT_EN) 
+    Load_state = TRUE;
+#endif  
   
     /* 中文字体创建失败时使用英文字体作为默认字体 */
     if(defaultFont==NULL)

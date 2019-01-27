@@ -14,9 +14,10 @@
 #ifndef	__GUI_DRV_CFG_H__
 #define	__GUI_DRV_CFG_H__
 
+#include "board.h"
 
 /*===========显示器配置===gui_lcd_port.c===============================================*/
-//野火5.0 / 7.0TFT,800x480
+//野火5.0 / 7.0TFT,800x480 ,4.3寸480*272
 
 /* 显存基地址 */
 #define  LCD_FRAME_BUFFER   LCD_BUFFER
@@ -25,9 +26,16 @@
 #define	LCD_FORMAT	  COLOR_FORMAT_RGB565
 //#define	LCD_FORMAT	  COLOR_FORMAT_XRGB8888
 
-/* 液晶宽高 */
+/* 当前使用液晶的宽高 */
 #define	LCD_XSIZE	    LCD_PIXEL_WIDTH
 #define	LCD_YSIZE	    LCD_PIXEL_HEIGHT
+
+/* 使用最大液晶屏的宽高，用于计算显存空间 */
+#define	LCD_MAX_XSIZE	    LCD_MAX_PIXEL_WIDTH
+#define	LCD_MAX_YSIZE	    LCD_MAX_PIXEL_HEIGHT
+
+/* 使用的LCD种类数，方便支持不同的分辨率，使用不同的字体 */
+#define  GUI_LCD_TYPE_NUM     LCD_TYPE_NUM
 
 //屏幕旋转，默认
 #define	LCD_ROTATE      ROTATE_0
@@ -72,11 +80,11 @@
 /* 液晶驱动显存使用的空间 */
 #if (LCD_FORMAT == COLOR_FORMAT_RGB565)
 
-  #define LCD_FRAME_SIZE  (LCD_XSIZE*LCD_YSIZE*2)
+  #define LCD_FRAME_SIZE  (LCD_MAX_XSIZE*LCD_MAX_YSIZE*2)
 
 #elif (LCD_FORMAT == COLOR_FORMAT_XRGB8888)
 
-  #define LCD_FRAME_SIZE (LCD_XSIZE*LCD_YSIZE*4)
+  #define LCD_FRAME_SIZE (LCD_MAX_XSIZE*LCD_MAX_YSIZE*4)
 
 #endif
 /*
@@ -99,7 +107,7 @@
 
 
 /* 默认内部英文字体数组名，USE_EXTERN_FONT为0或 外部字体加载失败时会采用的字体 */
-#define GUI_DEFAULT_FONT_EN          ASCII_24_4BPP
+#define GUI_DEFAULT_FONT_EN          gui_font_param[cur_lcd].default_en
 
 /* 是否使用内部中文字体，中文字体太大，不建议放在内部 */
 #define GUI_INER_CN_FONT_EN      0
@@ -118,10 +126,10 @@
 * 加载后可大幅提高字符显示的速度
 * 若设置为真，则使用整体加载方式，否则使用流设备方式
 */
-#define GUI_FONT_LOAD_TO_RAM_EN    (0 && GUI_EXTERN_FONT_EN)
+#define GUI_FONT_LOAD_TO_RAM_EN    (1 && GUI_EXTERN_FONT_EN)
 
 /* 要使用的外部默认字体文件，USE_EXTERN_FONT为1时生效 */
-#define GUI_DEFAULT_EXTERN_FONT   "GB2312_24_4BPP.xft"
+#define GUI_DEFAULT_EXTERN_FONT   gui_font_param[cur_lcd].default_extern_cn
 
 
 /*===========日志输出设备配置===gui_log_port.c===============================================*/
@@ -159,6 +167,14 @@
 /* 截图 */
 #define GUI_PIC_CAPTURE_SCREEN_EN  ( 1 && GUI_PIC_FS_EN)
 
+/*===========是否启用各种APP===============================================*/
+
+/* 启动界面 */
+#define GUI_APP_BOOT_INTERFACE_EN     0
+
+/* 资源烧录器，使能后缺少资源会自动进入资源烧录界面 */
+/* 需要sd文件系统/flash资源设备支持 */
+#define GUI_APP_RES_WRITER_EN          0
 /*============================================================================*/
 
 #endif	/*__GUI_DRV_CFG_H__*/

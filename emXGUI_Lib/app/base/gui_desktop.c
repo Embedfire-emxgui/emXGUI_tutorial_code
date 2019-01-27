@@ -52,7 +52,7 @@ void	gui_app_thread(void *p)
 //   	ShellWindowStartup();
     while(1)
     {
-      GUI_DEBUG("gui_app_thread");
+//      GUI_DEBUG("gui_app_thread");
       GUI_msleep(500);
     }
 }

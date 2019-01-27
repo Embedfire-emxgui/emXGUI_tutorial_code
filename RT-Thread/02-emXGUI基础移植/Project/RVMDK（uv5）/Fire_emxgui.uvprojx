@@ -336,7 +336,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F429_439xx,X_GUI_USE_RTTHREAD,</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\..\User;..\..\Libraries\CMSIS\Include;..\..\User\bsp\led;..\..\User\bsp\lcd;..\..\User\bsp\sdram;..\..\User\bsp\touch;..\..\User\bsp\usart;..\..\User\bsp\flash;..\..\User\bsp\font;..\..\rtthread\3.0.3\include;..\..\rtthread\3.0.3\include\libc;..\..\rtthread\3.0.3\components\cm_backtrace;..\..\User\bsp;..\..\..\..\emXGUI_Lib\inc;..\..\..\..\emXGUI_Lib\drv;..\..\..\..\emXGUI_Lib\arch\Inc</IncludePath>
+              <IncludePath>..\..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\..\User;..\..\Libraries\CMSIS\Include;..\..\User\bsp\led;..\..\User\bsp\lcd;..\..\User\bsp\sdram;..\..\User\bsp\touch;..\..\User\bsp\usart;..\..\User\bsp\flash;..\..\User\bsp\font;..\..\rtthread\3.0.3\include;..\..\rtthread\3.0.3\include\libc;..\..\rtthread\3.0.3\components\cm_backtrace;..\..\User\bsp;..\..\..\..\emXGUI_Lib\inc;..\..\..\..\emXGUI_Lib\drv;..\..\..\..\emXGUI_Lib\arch\Inc;..\..\..\..\emXGUI_Lib\app\base</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -876,6 +876,11 @@
           <GroupName>emxgui/resource</GroupName>
           <Files>
             <File>
+              <FileName>ASCII_16_4BPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_16_4BPP.c</FilePath>
+            </File>
+            <File>
               <FileName>ASCII_20_4BPP.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_20_4BPP.c</FilePath>
@@ -983,12 +988,12 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>tutorial_app</GroupName>
+          <GroupName>app</GroupName>
           <Files>
             <File>
               <FileName>gui_desktop.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\emXGUI_Lib\tutorial_app\gui_desktop.c</FilePath>
+              <FilePath>..\..\..\..\emXGUI_Lib\app\base\gui_desktop.c</FilePath>
             </File>
           </Files>
         </Group>

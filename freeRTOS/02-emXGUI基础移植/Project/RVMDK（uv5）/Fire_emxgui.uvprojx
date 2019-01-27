@@ -322,7 +322,7 @@
             <wLevel>0</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
-            <uC99>0</uC99>
+            <uC99>1</uC99>
             <useXO>0</useXO>
             <v6Lang>0</v6Lang>
             <v6LangP>0</v6LangP>
@@ -335,7 +335,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F429_439xx,X_GUI_USE_FREERTOS,</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\..\Libraries\CMSIS\Include;..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\..\User;..\..\User\bsp;..\..\FreeRTOS\include;..\..\FreeRTOS\port\RVDS\ARM_CM4F;..\..\User\bsp\cm_backtrace;..\..\User\key;..\..\User\led;..\..\User\uart;..\..\..\..\emXGUI_Lib\inc;..\..\..\..\emXGUI_Lib\drv;..\..\..\..\emXGUI_Lib\arch\Inc</IncludePath>
+              <IncludePath>..\..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\..\Libraries\CMSIS\Include;..\..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\..\User;..\..\User\bsp;..\..\FreeRTOS\include;..\..\FreeRTOS\port\RVDS\ARM_CM4F;..\..\User\bsp\cm_backtrace;..\..\User\key;..\..\User\led;..\..\User\uart;..\..\..\..\emXGUI_Lib\inc;..\..\..\..\emXGUI_Lib\drv;..\..\..\..\emXGUI_Lib\arch\Inc;..\..\..\..\emXGUI_Lib\app\base</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -820,6 +820,11 @@
           <GroupName>emxgui/resource</GroupName>
           <Files>
             <File>
+              <FileName>ASCII_16_4BPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_16_4BPP.c</FilePath>
+            </File>
+            <File>
               <FileName>ASCII_20_4BPP.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_20_4BPP.c</FilePath>
@@ -927,12 +932,12 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>tutorial_app</GroupName>
+          <GroupName>base_app</GroupName>
           <Files>
             <File>
               <FileName>gui_desktop.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\emXGUI_Lib\tutorial_app\gui_desktop.c</FilePath>
+              <FilePath>..\..\..\..\emXGUI_Lib\app\base\gui_desktop.c</FilePath>
             </File>
           </Files>
         </Group>
