@@ -115,7 +115,7 @@ BOOL FileSystem_Init(void)
 //		rt_hw_interrupt_disable();
 }
 
-#if 1
+#if 0
 FIL fnew;													/* 文件对象 */
 UINT fnum;            					  /* 文件成功读写数量 */
 BYTE ReadBuffer[1024]={0};        /* 读缓冲区 */

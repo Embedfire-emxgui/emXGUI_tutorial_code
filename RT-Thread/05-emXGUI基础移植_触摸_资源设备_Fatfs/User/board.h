@@ -14,7 +14,7 @@
 #include "./lcd/bsp_lcd.h"
 #include "./sdram/bsp_sdram.h" 
 #include "./touch/bsp_i2c_touch.h"
-#include "./touch/bsp_touch_gt9xx.h"
+#include "./touch/bsp_touch_gtxx.h"
 #include "./usart/bsp_debug_usart.h"
 #include "./flash/bsp_spi_flash.h"
 #include "./font/fonts.h"
