@@ -706,6 +706,11 @@
               <FilePath>..\..\User\bsp\lcd\bsp_lcd.c</FilePath>
             </File>
             <File>
+              <FileName>bsp_dma2d_emxgui.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\bsp\lcd\bsp_dma2d_emxgui.c</FilePath>
+            </File>
+            <File>
               <FileName>bsp_sdram.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\bsp\sdram\bsp_sdram.c</FilePath>

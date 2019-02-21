@@ -62,7 +62,7 @@ void I2C_GTP_IRQEnable(void)
   EXTI_Init(&EXTI_InitStructure);  
   
   /* 配置中断优先级 */
-  NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+//  NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
   
 	/*使能中断*/
   NVIC_InitStructure.NVIC_IRQChannel = GTP_INT_EXTI_IRQ;
@@ -101,7 +101,7 @@ void I2C_GTP_IRQDisable(void)
   EXTI_Init(&EXTI_InitStructure);
 
   /* 配置中断优先级 */
-  NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+//  NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
 
   /* 关闭中断 */
   NVIC_InitStructure.NVIC_IRQChannel = GTP_INT_EXTI_IRQ;
