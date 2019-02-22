@@ -95,7 +95,7 @@ static void BSP_Init(void)
 	Debug_USART_Config();
   
     /*hardfault ¸ú×ÙÆ÷³õÊ¼»¯*/  
-  cm_backtrace_init("CmBacktrace", HARDWARE_VERSION, SOFTWARE_VERSION);
+  cm_backtrace_init("Fire_FreeRTOS", HARDWARE_VERSION, SOFTWARE_VERSION);
 
 
 }
