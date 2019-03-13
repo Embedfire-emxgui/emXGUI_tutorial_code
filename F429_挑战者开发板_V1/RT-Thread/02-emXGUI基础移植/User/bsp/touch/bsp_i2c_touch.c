@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    bsp_i2c_ee.c
+  * @file    bsp_i2c_touch.c
   * @author  STMicroelectronics
   * @version V1.0
   * @date    2015-xx-xx
@@ -8,7 +8,7 @@
   ******************************************************************************
   * @attention
   *
-  * 实验平台:秉火  STM32 F429 开发板 
+  * 实验平台:野火  STM32 F429 开发板 
   * 论坛    :http://www.firebbs.cn
   * 淘宝    :https://fire-stm32.taobao.com
   *
@@ -16,7 +16,7 @@
   */ 
 
 #include "./touch/bsp_i2c_touch.h"
-#include "./touch/bsp_touch_gt9xx.h"
+#include "./touch/bsp_touch_gtxx.h"
 #include "./usart/bsp_debug_usart.h"
 
 
