@@ -1257,7 +1257,7 @@
 
   <Group>
     <GroupName>emxgui/arch</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1268,7 +1268,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\emXGUI_Lib\arch\GUI_Arch.c</PathWithFileName>
+      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\arch\GUI_Arch.c</PathWithFileName>
       <FilenameWithoutPath>GUI_Arch.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1280,7 +1280,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\emXGUI_Lib\arch\GUI_GPU.c</PathWithFileName>
+      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\arch\GUI_GPU.c</PathWithFileName>
       <FilenameWithoutPath>GUI_GPU.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1292,7 +1292,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\emXGUI_Lib\arch\OS_Options\X_GUI_RTT.c</PathWithFileName>
+      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\arch\OS_Options\X_GUI_RTT.c</PathWithFileName>
       <FilenameWithoutPath>X_GUI_RTT.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1304,8 +1304,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\emXGUI_Lib\arch\Inc\gui_drv.h</PathWithFileName>
-      <FilenameWithoutPath>gui_drv.h</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\arch\Inc\gui_os_port.h</PathWithFileName>
+      <FilenameWithoutPath>gui_os_port.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1316,8 +1316,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\emXGUI_Lib\arch\Inc\gui_os_port.h</PathWithFileName>
-      <FilenameWithoutPath>gui_os_port.h</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\arch\Inc\gui_drv.h</PathWithFileName>
+      <FilenameWithoutPath>gui_drv.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1325,7 +1325,7 @@
 
   <Group>
     <GroupName>emxgui/resource</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1336,7 +1336,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_16_4BPP.c</PathWithFileName>
+      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_16_4BPP.c</PathWithFileName>
       <FilenameWithoutPath>ASCII_16_4BPP.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1348,7 +1348,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_20_4BPP.c</PathWithFileName>
+      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_20_4BPP.c</PathWithFileName>
       <FilenameWithoutPath>ASCII_20_4BPP.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1360,7 +1360,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_24_4BPP.c</PathWithFileName>
+      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_24_4BPP.c</PathWithFileName>
       <FilenameWithoutPath>ASCII_24_4BPP.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1372,7 +1372,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\emXGUI_Lib\resource\xft_font\GB2312_16_2BPP.c</PathWithFileName>
+      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\resource\xft_font\GB2312_16_2BPP.c</PathWithFileName>
       <FilenameWithoutPath>GB2312_16_2BPP.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1404,8 +1404,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\emXGUI_Lib\drv\gui_startup.c</PathWithFileName>
-      <FilenameWithoutPath>gui_startup.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\drv\gui_font_port.c</PathWithFileName>
+      <FilenameWithoutPath>gui_font_port.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1416,8 +1416,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\emXGUI_Lib\drv\gui_lcd_port.c</PathWithFileName>
-      <FilenameWithoutPath>gui_lcd_port.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\drv\gui_input_port.c</PathWithFileName>
+      <FilenameWithoutPath>gui_input_port.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1428,8 +1428,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\emXGUI_Lib\drv\gui_mem_port.c</PathWithFileName>
-      <FilenameWithoutPath>gui_mem_port.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\drv\gui_lcd_port.c</PathWithFileName>
+      <FilenameWithoutPath>gui_lcd_port.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1440,8 +1440,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\emXGUI_Lib\drv\gui_font_port.c</PathWithFileName>
-      <FilenameWithoutPath>gui_font_port.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\drv\gui_log_port.c</PathWithFileName>
+      <FilenameWithoutPath>gui_log_port.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1452,8 +1452,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\emXGUI_Lib\drv\gui_log_port.c</PathWithFileName>
-      <FilenameWithoutPath>gui_log_port.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\drv\gui_mem_port.c</PathWithFileName>
+      <FilenameWithoutPath>gui_mem_port.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1464,8 +1464,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\emXGUI_Lib\drv\gui_input_port.c</PathWithFileName>
-      <FilenameWithoutPath>gui_input_port.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\drv\gui_resource_port.c</PathWithFileName>
+      <FilenameWithoutPath>gui_resource_port.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1476,8 +1476,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\emXGUI_Lib\drv\gui_touch_port.c</PathWithFileName>
-      <FilenameWithoutPath>gui_touch_port.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\drv\gui_startup.c</PathWithFileName>
+      <FilenameWithoutPath>gui_startup.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1488,8 +1488,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\emXGUI_Lib\drv\gui_resource_port.c</PathWithFileName>
-      <FilenameWithoutPath>gui_resource_port.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\drv\gui_touch_port.c</PathWithFileName>
+      <FilenameWithoutPath>gui_touch_port.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1508,7 +1508,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\emXGUI_Lib\inc\def.h</PathWithFileName>
+      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\inc\def.h</PathWithFileName>
       <FilenameWithoutPath>def.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1520,7 +1520,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\emXGUI_Lib\inc\emXGUI.h</PathWithFileName>
+      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\inc\emXGUI.h</PathWithFileName>
       <FilenameWithoutPath>emXGUI.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1532,7 +1532,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\emXGUI_Lib\inc\emXGUI_Arch.h</PathWithFileName>
+      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\inc\emXGUI_Arch.h</PathWithFileName>
       <FilenameWithoutPath>emXGUI_Arch.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1544,7 +1544,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\emXGUI_Lib\inc\GUI_Font_XFT.h</PathWithFileName>
+      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\inc\GUI_Font_XFT.h</PathWithFileName>
       <FilenameWithoutPath>GUI_Font_XFT.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1556,8 +1556,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\emXGUI_Lib\inc\x_libc.h</PathWithFileName>
-      <FilenameWithoutPath>x_libc.h</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\inc\Web_Color.h</PathWithFileName>
+      <FilenameWithoutPath>Web_Color.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1568,8 +1568,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\emXGUI_Lib\inc\x_obj.h</PathWithFileName>
-      <FilenameWithoutPath>x_obj.h</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\inc\x_libc.h</PathWithFileName>
+      <FilenameWithoutPath>x_libc.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1580,8 +1580,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\emXGUI_Lib\inc\Web_Color.h</PathWithFileName>
-      <FilenameWithoutPath>Web_Color.h</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\inc\x_obj.h</PathWithFileName>
+      <FilenameWithoutPath>x_obj.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1600,7 +1600,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\emXGUI_Lib\libs\emXGUI100_MDK_M4.lib</PathWithFileName>
+      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\libs\emXGUI100_MDK_M4.lib</PathWithFileName>
       <FilenameWithoutPath>emXGUI100_MDK_M4.lib</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1612,7 +1612,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\emXGUI_Lib\libs\x_libc_MDK_M4.lib</PathWithFileName>
+      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\libs\x_libc_MDK_M4.lib</PathWithFileName>
       <FilenameWithoutPath>x_libc_MDK_M4.lib</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -1621,7 +1621,7 @@
 
   <Group>
     <GroupName>app</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1632,7 +1632,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\emXGUI_Lib\app\base\gui_desktop.c</PathWithFileName>
+      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\app\base\gui_desktop.c</PathWithFileName>
       <FilenameWithoutPath>gui_desktop.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
