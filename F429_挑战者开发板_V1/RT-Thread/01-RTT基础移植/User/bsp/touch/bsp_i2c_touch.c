@@ -259,7 +259,7 @@ void I2C_Touch_Init(void)
   
   I2C_ResetChip();
 
-  I2C_GTP_IRQEnable();
+  I2C_GTP_IRQDisable();
 }
 
 

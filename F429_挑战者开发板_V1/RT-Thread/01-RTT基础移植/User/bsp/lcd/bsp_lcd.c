@@ -1984,7 +1984,7 @@ const LCD_PARAM_TypeDef lcd_param[LCD_TYPE_NUM]={
     .lcd_pixel_width = 480,//液晶分辨率，宽
     .lcd_pixel_height = 272,//液晶分辨率，高
     
-    .m_palette_btn_width = 40,//触摸画板按键的宽度
+    .m_palette_btn_width = 50,//触摸画板按键的宽度
     .m_palette_btn_height = 20,//触摸画板按键的高度    
   }
 };
