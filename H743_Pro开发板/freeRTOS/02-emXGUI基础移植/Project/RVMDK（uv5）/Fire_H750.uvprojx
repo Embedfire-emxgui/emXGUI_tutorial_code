@@ -13,16 +13,16 @@
       <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
       <TargetOption>
         <TargetCommonOption>
-          <Device>STM32H743IITx</Device>
+          <Device>STM32H743XIHx</Device>
           <Vendor>STMicroelectronics</Vendor>
           <PackID>Keil.STM32H7xx_DFP.2.2.0</PackID>
           <PackURL>http://www.keil.com/pack</PackURL>
           <Cpu>IRAM(0x20000000,0x00020000) IRAM2(0x24000000,0x00080000) IROM(0x08000000,0x00200000) CPUTYPE("Cortex-M7") FPU3(DFPU) CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
-          <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC1000 -FN1 -FF0STM32H7x_2048 -FS08000000 -FL0200000 -FP0($$Device:STM32H743IITx$CMSIS\Flash\STM32H7x_2048.FLM))</FlashDriverDll>
+          <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC1000 -FN1 -FF0STM32H7x_2048 -FS08000000 -FL0200000 -FP0($$Device:STM32H743XIHx$CMSIS\Flash\STM32H7x_2048.FLM))</FlashDriverDll>
           <DeviceId>0</DeviceId>
-          <RegisterFile>$$Device:STM32H743IITx$Drivers\CMSIS\Device\ST\STM32H7xx\Include\stm32h7xx.h</RegisterFile>
+          <RegisterFile>$$Device:STM32H743XIHx$Drivers\CMSIS\Device\ST\STM32H7xx\Include\stm32h7xx.h</RegisterFile>
           <MemoryEnv></MemoryEnv>
           <Cmp></Cmp>
           <Asm></Asm>
@@ -32,7 +32,7 @@
           <SLE66CMisc></SLE66CMisc>
           <SLE66AMisc></SLE66AMisc>
           <SLE66LinkerMisc></SLE66LinkerMisc>
-          <SFDFile>$$Device:STM32H743IITx$CMSIS\SVD\STM32H7x3.svd</SFDFile>
+          <SFDFile>$$Device:STM32H743XIHx$CMSIS\SVD\STM32H7x3.svd</SFDFile>
           <bCustSvd>0</bCustSvd>
           <UseEnv>0</UseEnv>
           <BinPath></BinPath>
@@ -137,7 +137,7 @@
           </Flash1>
           <bUseTDR>1</bUseTDR>
           <Flash2>BIN\UL2CM3.DLL</Flash2>
-          <Flash3>"" ()</Flash3>
+          <Flash3></Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
           <pFcarmGrp></pFcarmGrp>
@@ -208,7 +208,7 @@
             <Ra2Chk>0</Ra2Chk>
             <Ra3Chk>0</Ra3Chk>
             <Im1Chk>1</Im1Chk>
-            <Im2Chk>0</Im2Chk>
+            <Im2Chk>1</Im2Chk>
             <OnChipMemories>
               <Ocm1>
                 <Type>0</Type>
@@ -257,8 +257,8 @@
               </XRAM>
               <OCR_RVCT1>
                 <Type>1</Type>
-                <StartAddress>0x8000000</StartAddress>
-                <Size>0x8000000</Size>
+                <StartAddress>0x0</StartAddress>
+                <Size>0x0</Size>
               </OCR_RVCT1>
               <OCR_RVCT2>
                 <Type>1</Type>
@@ -272,7 +272,7 @@
               </OCR_RVCT3>
               <OCR_RVCT4>
                 <Type>1</Type>
-                <StartAddress>0x90000000</StartAddress>
+                <StartAddress>0x8000000</StartAddress>
                 <Size>0x200000</Size>
               </OCR_RVCT4>
               <OCR_RVCT5>
@@ -333,9 +333,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>APPLICATION_ADDRESS=0x90000000,USE_HAL_DRIVER,STM32H743xx,X_GUI_USE_FREERTOS,</Define>
+              <Define>USE_HAL_DRIVER,STM32H743xx,X_GUI_USE_FREERTOS,</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\Libraries\CMSIS\Include;..\..\Libraries\CMSIS\Device\ST\STM32H7xx\Include;..\..\Libraries\STM32H7xx_HAL_Driver\Inc;..\..\User;..\..\User\bsp;..\..\FreeRTOS\include;..\..\FreeRTOS\port\RVDS\ARM_CM7\r0p1;..\..\User\bsp\cm_backtrace;..\..\..\..\emXGUI_Lib\inc;..\..\..\..\emXGUI_Lib\drv;..\..\..\..\emXGUI_Lib\arch\Inc;..\..\..\..\emXGUI_Lib\app\base</IncludePath>
+              <IncludePath>..\..\Libraries\CMSIS\Include;..\..\Libraries\CMSIS\Device\ST\STM32H7xx\Include;..\..\Libraries\STM32H7xx_HAL_Driver\Inc;..\..\User;..\..\User\bsp;..\..\FreeRTOS\include;..\..\FreeRTOS\port\RVDS\ARM_CM7\r0p1;..\..\User\bsp\cm_backtrace;..\..\..\..\..\emXGUI_Lib\inc;..\..\..\..\..\emXGUI_Lib\drv;..\..\..\..\..\emXGUI_Lib\arch\Inc;..\..\..\..\..\emXGUI_Lib\app\base</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -829,6 +829,16 @@
               <FileType>1</FileType>
               <FilePath>..\..\User\bsp\delay\core_delay.c</FilePath>
             </File>
+            <File>
+              <FileName>bsp_i2c_touch.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\bsp\touch\bsp_i2c_touch.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_touch_gtxx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\bsp\touch\bsp_touch_gtxx.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -917,27 +927,27 @@
             <File>
               <FileName>GUI_Arch.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\emXGUI_Lib\arch\GUI_Arch.c</FilePath>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\GUI_Arch.c</FilePath>
             </File>
             <File>
               <FileName>GUI_GPU.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\emXGUI_Lib\arch\GUI_GPU.c</FilePath>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\GUI_GPU.c</FilePath>
             </File>
             <File>
               <FileName>X_GUI_FreeRTOS.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\emXGUI_Lib\arch\OS_Options\X_GUI_FreeRTOS.c</FilePath>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\OS_Options\X_GUI_FreeRTOS.c</FilePath>
             </File>
             <File>
               <FileName>gui_drv.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\..\..\..\emXGUI_Lib\arch\Inc\gui_drv.h</FilePath>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\Inc\gui_drv.h</FilePath>
             </File>
             <File>
               <FileName>gui_os_port.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\..\..\..\emXGUI_Lib\arch\Inc\gui_os_port.h</FilePath>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\Inc\gui_os_port.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -947,22 +957,22 @@
             <File>
               <FileName>ASCII_16_4BPP.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_16_4BPP.c</FilePath>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_16_4BPP.c</FilePath>
             </File>
             <File>
               <FileName>ASCII_20_4BPP.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_20_4BPP.c</FilePath>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_20_4BPP.c</FilePath>
             </File>
             <File>
               <FileName>ASCII_24_4BPP.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_24_4BPP.c</FilePath>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_24_4BPP.c</FilePath>
             </File>
             <File>
               <FileName>GB2312_16_2BPP.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\emXGUI_Lib\resource\xft_font\GB2312_16_2BPP.c</FilePath>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\resource\xft_font\GB2312_16_2BPP.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -977,27 +987,37 @@
             <File>
               <FileName>gui_font_port.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\emXGUI_Lib\drv\gui_font_port.c</FilePath>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_font_port.c</FilePath>
             </File>
             <File>
               <FileName>gui_lcd_port.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\emXGUI_Lib\drv\gui_lcd_port.c</FilePath>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_lcd_port.c</FilePath>
             </File>
             <File>
               <FileName>gui_log_port.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\emXGUI_Lib\drv\gui_log_port.c</FilePath>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_log_port.c</FilePath>
             </File>
             <File>
               <FileName>gui_mem_port.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\emXGUI_Lib\drv\gui_mem_port.c</FilePath>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_mem_port.c</FilePath>
             </File>
             <File>
               <FileName>gui_startup.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\emXGUI_Lib\drv\gui_startup.c</FilePath>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_startup.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_input_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_input_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_touch_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_touch_port.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1007,37 +1027,37 @@
             <File>
               <FileName>def.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\..\..\..\emXGUI_Lib\inc\def.h</FilePath>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\def.h</FilePath>
             </File>
             <File>
               <FileName>emXGUI.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\..\..\..\emXGUI_Lib\inc\emXGUI.h</FilePath>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\emXGUI.h</FilePath>
             </File>
             <File>
               <FileName>emXGUI_Arch.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\..\..\..\emXGUI_Lib\inc\emXGUI_Arch.h</FilePath>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\emXGUI_Arch.h</FilePath>
             </File>
             <File>
               <FileName>GUI_Font_XFT.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\..\..\..\emXGUI_Lib\inc\GUI_Font_XFT.h</FilePath>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\GUI_Font_XFT.h</FilePath>
             </File>
             <File>
               <FileName>Web_Color.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\..\..\..\emXGUI_Lib\inc\Web_Color.h</FilePath>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\Web_Color.h</FilePath>
             </File>
             <File>
               <FileName>x_libc.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\..\..\..\emXGUI_Lib\inc\x_libc.h</FilePath>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\x_libc.h</FilePath>
             </File>
             <File>
               <FileName>x_obj.h</FileName>
               <FileType>5</FileType>
-              <FilePath>..\..\..\..\emXGUI_Lib\inc\x_obj.h</FilePath>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\x_obj.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1047,12 +1067,12 @@
             <File>
               <FileName>emXGUI100_MDK_M7.lib</FileName>
               <FileType>4</FileType>
-              <FilePath>..\..\..\..\emXGUI_Lib\libs\emXGUI100_MDK_M7.lib</FilePath>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\emXGUI100_MDK_M7.lib</FilePath>
             </File>
             <File>
-              <FileName>x_libc_MDK_M4.lib</FileName>
+              <FileName>x_libc_MDK_M7.lib</FileName>
               <FileType>4</FileType>
-              <FilePath>..\..\..\..\emXGUI_Lib\libs\x_libc_MDK_M4.lib</FilePath>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\x_libc_MDK_M7.lib</FilePath>
             </File>
           </Files>
         </Group>
@@ -1062,7 +1082,7 @@
             <File>
               <FileName>gui_desktop.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\emXGUI_Lib\app\base\gui_desktop.c</FilePath>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\app\base\gui_desktop.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -48,7 +48,7 @@
 
 /*==========输入设备配置===gui_input_port.c==================================================*/
 /* 是否使用输入设备 */
-#define  GUI_INPUT_DEV_EN        0
+#define  GUI_INPUT_DEV_EN        1
 
 /* 是否使能键盘、鼠标、触摸屏 */
 #define	GUI_TOUCHSCREEN_EN      1
