@@ -10,13 +10,13 @@
   *
   * 实验平台:秉火  STM32  F429 开发板
   * 论坛    :http://www.firebbs.cn
-  * 淘宝    :http://firestm32.taobao.com
+  * 淘宝    :https://fire-stm32.taobao.com
   *
   ******************************************************************************
   */
 
 #include "./touch/palette.h"
-#include "./touch/gt9xx.h"
+#include "./touch/bsp_touch_gtxx.h"
 #include "./lcd/bsp_lcd.h"
  
 /*按钮结构体数组*/
@@ -828,8 +828,8 @@ static void LCD_DrawUniLineCircle(uint16_t x1, uint16_t y1, uint16_t x2, uint16_
   {
 		
 		//判断边界
-		if(x+thick>LCD_PIXEL_WIDTH || x-thick<0 || //液晶左右边界
-			y+thick>LCD_PIXEL_HEIGHT || y-thick<0  ) //液晶上下边界
+		if(x+thick>=LCD_PIXEL_WIDTH || x-thick<=0 || //液晶左右边界
+			y+thick>=LCD_PIXEL_HEIGHT || y-thick<=0  ) //液晶上下边界
 			continue;
 
     LCD_DrawFullCircle(x,y,thick);             /* Draw the current pixel */

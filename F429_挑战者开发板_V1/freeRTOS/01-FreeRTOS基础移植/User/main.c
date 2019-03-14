@@ -29,7 +29,7 @@
 #include "bsp_key.h"
 #include "./sdram/bsp_sdram.h"
 #include "./lcd/bsp_lcd.h"
-#include "./touch/gt9xx.h"
+#include "./touch/bsp_touch_gtxx.h"
 #include "./touch/palette.h"
 /**************************** ÈÎÎñ¾ä±ú ********************************/
 /* 
