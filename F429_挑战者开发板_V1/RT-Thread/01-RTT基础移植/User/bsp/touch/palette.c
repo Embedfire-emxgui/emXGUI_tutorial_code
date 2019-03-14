@@ -828,8 +828,8 @@ static void LCD_DrawUniLineCircle(uint16_t x1, uint16_t y1, uint16_t x2, uint16_
   {
 		
 		//ÅÐ¶Ï±ß½ç
-		if(x+thick>LCD_PIXEL_WIDTH || x-thick<0 || //Òº¾§×óÓÒ±ß½ç
-			y+thick>LCD_PIXEL_HEIGHT || y-thick<0  ) //Òº¾§ÉÏÏÂ±ß½ç
+		if(x+thick>=LCD_PIXEL_WIDTH || x-thick<=0 || //Òº¾§×óÓÒ±ß½ç
+			y+thick>=LCD_PIXEL_HEIGHT || y-thick<=0  ) //Òº¾§ÉÏÏÂ±ß½ç
 			continue;
 
     LCD_DrawFullCircle(x,y,thick);             /* Draw the current pixel */

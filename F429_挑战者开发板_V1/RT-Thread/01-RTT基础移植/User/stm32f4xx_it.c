@@ -148,15 +148,15 @@ void SVC_Handler(void)
 
   
   
-void GTP_IRQHandler(void)
-{
-	if(EXTI_GetITStatus(GTP_INT_EXTI_LINE) != RESET) //确保是否产生了EXTI Line中断
-	{
-		//LED2_TOGGLE;
-        GTP_TouchProcess();    
-		EXTI_ClearITPendingBit(GTP_INT_EXTI_LINE);     //清除中断标志位
-	}  
-}
+//void GTP_IRQHandler(void)
+//{
+//	if(EXTI_GetITStatus(GTP_INT_EXTI_LINE) != RESET) //确保是否产生了EXTI Line中断
+//	{
+//		//LED2_TOGGLE;
+//        GTP_TouchProcess();    
+//		EXTI_ClearITPendingBit(GTP_INT_EXTI_LINE);     //清除中断标志位
+//	}  
+//}
 
 /******************************************************************************/
 /*                 STM32F4xx Peripherals Interrupt Handlers                   */

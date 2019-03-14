@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    bsp_i2c_ee.c
+  * @file    bsp_i2c_touch.c
   * @author  STMicroelectronics
   * @version V1.0
   * @date    2015-xx-xx
@@ -8,7 +8,7 @@
   ******************************************************************************
   * @attention
   *
-  * 实验平台:秉火  STM32 F429 开发板 
+  * 实验平台:野火  STM32 F429 开发板 
   * 论坛    :http://www.firebbs.cn
   * 淘宝    :https://fire-stm32.taobao.com
   *
@@ -225,7 +225,7 @@ void I2C_ResetChip(void)
   * @param  无
   * @retval 无
   */
-static void I2C_Mode_Config(void)
+ void I2C_Mode_Config(void)
 {
   I2C_InitTypeDef  I2C_InitStructure; 
 
@@ -648,23 +648,18 @@ uint32_t I2C_ReadBytes(uint8_t ClientAddr,uint8_t* pBuffer, uint16_t NumByteToRe
 
 	while(NumByteToRead) 
   {
-   if(NumByteToRead == 1)
-    {
-			i2c_NAck();	/* 最后1个字节读完后，CPU产生NACK信号(驱动SDA = 1) */
-      
-      /* 发送I2C总线停止信号 */
-      i2c_Stop();
-    }
-    
-   *pBuffer = i2c_ReadByte();
+    *pBuffer = i2c_ReadByte();
     
     /* 读指针自增 */
     pBuffer++; 
       
     /*计数器自减 */
     NumByteToRead--;
-    
-    i2c_Ack();	/* 中间字节读完后，CPU产生ACK信号(驱动SDA = 0) */  
+       
+    if(NumByteToRead == 0)
+			i2c_NAck();	/* 最后1个字节读完后，CPU产生NACK信号(驱动SDA = 1) */      
+    else
+      i2c_Ack();	/* 中间字节读完后，CPU产生ACK信号(驱动SDA = 0) */  
   }
 
 	/* 发送I2C总线停止信号 */
