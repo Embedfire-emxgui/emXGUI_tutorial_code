@@ -2,7 +2,11 @@
 #define	__GUI_LOG_PORT_H
 
 #include	"emXGUI.h"
+#if defined(STM32F429_439xx)
 #include "stm32f4xx.h"
+#elif defined(STM32H743xx)
+#include "stm32h7xx.h"
+#endif
 #include	"gui_drv_cfg.h"
 
 /* GUI_Log 在gui_os_port.h中定义 */

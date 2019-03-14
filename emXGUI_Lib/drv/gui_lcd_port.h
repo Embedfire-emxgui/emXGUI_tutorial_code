@@ -1,7 +1,13 @@
 #ifndef __GUI_LCD_PORT_H
 #define	__GUI_LCD_PORT_H
 
+
+#if defined(STM32F429_439xx)
 #include "stm32f4xx.h"
+#elif defined(STM32H743xx)
+#include "stm32h7xx.h"
+#endif
+
 #include	"emXGUI.h"
 #include	"gui_drv_cfg.h"
 

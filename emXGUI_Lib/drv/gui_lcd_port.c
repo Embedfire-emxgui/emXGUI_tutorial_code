@@ -27,13 +27,25 @@ extern void DMA2D_DrvInit(void);
   */
 void LCD_HardInit(u32 fb_addr)
 {	
+#if defined(STM32F429_439xx)  
   /* ≥ı ºªØ“∫æß∆¡ */  
-#if	(LCD_FORMAT == COLOR_FORMAT_RGB565)
-  LCD_Init(fb_addr, 0, LTDC_Pixelformat_RGB565);
-#endif
+  #if	(LCD_FORMAT == COLOR_FORMAT_RGB565)
+    LCD_Init(fb_addr, 0, LTDC_Pixelformat_RGB565);
+  #endif
+    
+  #if	(LCD_FORMAT == COLOR_FORMAT_XRGB8888)
+    LCD_Init(fb_addr, 0, LTDC_Pixelformat_ARGB8888);
+  #endif
   
-#if	(LCD_FORMAT == COLOR_FORMAT_XRGB8888)
-  LCD_Init(fb_addr, 0, LTDC_Pixelformat_ARGB8888);
+#elif defined(STM32H743xx)
+  /* ≥ı ºªØ“∫æß∆¡ */  
+  #if	(LCD_FORMAT == COLOR_FORMAT_RGB565)
+    LCD_Init(fb_addr, 0, LTDC_PIXEL_FORMAT_RGB565);
+  #endif
+    
+  #if	(LCD_FORMAT == COLOR_FORMAT_XRGB8888)
+    LCD_Init(fb_addr, 0, LTDC_PIXEL_FORMAT_ARGB8888);
+  #endif 
 #endif
 
 }
