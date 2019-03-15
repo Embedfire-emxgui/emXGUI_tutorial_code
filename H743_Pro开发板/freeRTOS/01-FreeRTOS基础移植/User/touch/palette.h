@@ -5,8 +5,8 @@
 #include "./lcd/bsp_lcd.h"
  
 
-#define COLOR_BLOCK_WIDTH   90
-#define COLOR_BLOCK_HEIGHT  50
+#define COLOR_BLOCK_WIDTH   lcd_param[cur_lcd].m_palette_btn_width
+#define COLOR_BLOCK_HEIGHT  lcd_param[cur_lcd].m_palette_btn_height
 
 #define BUTTON_NUM 18
 #define PALETTE_START_Y   0

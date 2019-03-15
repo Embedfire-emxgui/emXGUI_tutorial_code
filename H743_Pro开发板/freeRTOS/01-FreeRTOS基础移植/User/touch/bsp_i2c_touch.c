@@ -16,7 +16,7 @@
   */ 
 
 #include "./touch/bsp_i2c_touch.h"
-#include "./touch/gt9xx.h"
+#include "./touch/bsp_touch_gtxx.h"
 #include "./usart/bsp_usart.h"
 
 
@@ -243,7 +243,7 @@ void I2C_Touch_Init(void)
 #endif
   
   I2C_ResetChip();
-  I2C_GTP_IRQEnable();
+  I2C_GTP_IRQDisable();
 }
 
 

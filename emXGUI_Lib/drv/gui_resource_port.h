@@ -5,6 +5,7 @@
 #include "stm32f4xx.h"
 #elif defined(STM32H743xx)
 #include "stm32h7xx.h"
+#include "./flash/bsp_qspi_flash.h"
 #endif
 
 #include	"emXGUI.h"

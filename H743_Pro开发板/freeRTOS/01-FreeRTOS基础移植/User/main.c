@@ -25,7 +25,7 @@
 #include "./led/bsp_led.h" 
 #include "./usart/bsp_usart.h"
 #include "./lcd/bsp_lcd.h"
-#include "./touch/gt9xx.h"
+#include "./touch/bsp_touch_gtxx.h"
 #include "./touch/palette.h"
 /* FreeRTOSÍ·ÎÄ¼þ */
 #include "FreeRTOS.h"

@@ -8,9 +8,9 @@
   ******************************************************************************
   * @attention
   *
-  * 实验平台:野火  STM32 F429 开发板 
+  * 实验平台:野火  STM32 H750/H743 开发板  
   * 论坛    :http://www.firebbs.cn
-  * 淘宝    :https://fire-stm32.taobao.com
+  * 淘宝    :http://firestm32.taobao.com
   *
   ******************************************************************************
   */ 
@@ -315,9 +315,8 @@ void GTP_IRQ_Disable(void)
   */
 void GTP_IRQ_Enable(void)
 {
-    GTP_DEBUG_FUNC();
-     
-	  I2C_GTP_IRQEnable();    
+	GTP_DEBUG_FUNC();
+	I2C_GTP_IRQEnable();    
 }
 
 
@@ -341,7 +340,6 @@ static void GTP_Touch_Down(int32_t id,int32_t x,int32_t y,int32_t w)
 
 	/*取x、y初始值大于屏幕像素值*/
     GTP_DEBUG("ID:%d, X:%d, Y:%d, W:%d", id, x, y, w);
-
 	
     /* 处理触摸按钮，用于触摸画板 */
     Touch_Button_Down(x,y); 
@@ -385,7 +383,6 @@ static void GTP_Touch_Up( int32_t id)
 	  pre_y[id] = -1;		
   
     GTP_DEBUG("Touch id[%2d] release!", id);
-
 }
 
 
@@ -654,7 +651,7 @@ static int32_t GTP_Get_Info(void)
 
     opr_buf[0] = (uint8_t)((GTP_REG_CONFIG_DATA+6) >> 8);
     opr_buf[1] = (uint8_t)((GTP_REG_CONFIG_DATA+6) & 0xFF);
-
+    
     ret = GTP_I2C_Read(GTP_ADDRESS, opr_buf, 3);
     if (ret < 0)
     {
@@ -692,7 +689,8 @@ Output:
     uint8_t cfg_num =0 ;		//需要配置的寄存器个数
 
     GTP_DEBUG_FUNC();
-	
+
+
     I2C_Touch_Init();
 
     ret = GTP_I2C_Test();
@@ -791,7 +789,7 @@ Output:
 		
 
 		
-#if 0	//读出写入的数据，检查是否正常写入
+#if 1	//读出写入的数据，检查是否正常写入
     //检验读出的数据与写入的是否相同
 	{
     	    uint16_t i;
@@ -829,7 +827,7 @@ Output:
 	
 		
 	 /* emXGUI示例中不使能中断 */
-		GTP_IRQ_Enable();
+		I2C_GTP_IRQEnable();
 	
     GTP_Get_Info();
 		
@@ -1043,7 +1041,7 @@ static int32_t GT91xx_Config_Write_Proc(void)
 }
 
 #endif
-#if 0
+
 /**
   * @brief  触屏中断服务函数，emXGUI示例中没有使用中断
   * @param 无
@@ -1051,14 +1049,14 @@ static int32_t GT91xx_Config_Write_Proc(void)
   */
 void GTP_IRQHandler(void)
 {
-	if(EXTI_GetITStatus(GTP_INT_EXTI_LINE) != RESET) //确保是否产生了EXTI Line中断
+	if(__HAL_GPIO_EXTI_GET_IT(GTP_INT_GPIO_PIN) != RESET) //确保是否产生了EXTI Line中断
 	{
 		//LED2_TOGGLE;
         GTP_TouchProcess();    
-		EXTI_ClearITPendingBit(GTP_INT_EXTI_LINE);     //清除中断标志位
+        __HAL_GPIO_EXTI_CLEAR_IT(GTP_INT_GPIO_PIN);     //清除中断标志位
 	}  
 }
-#endif
+
 /**
   * @brief  触屏检测函数，本函数作为emXGUI的定制检测函数，
    *        参考Goodix_TS_Work_Func修改而来， 只读取单个触摸点坐标

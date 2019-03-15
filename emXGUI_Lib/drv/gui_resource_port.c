@@ -34,8 +34,11 @@ static GUI_MUTEX *mutex_lock=NULL;
 BOOL RES_DevInit(void)
 {  
 	mutex_lock=GUI_MutexCreate();
-
+#if defined(STM32F429_439xx)
 	if(SPI_FLASH_Init() == 0)
+#elif defined(STM32H743xx)
+  if(QSPI_FLASH_Init() == 0)
+#endif
     return TRUE;
   else
     return FALSE;
@@ -52,8 +55,12 @@ U32 RES_DevGetID(void)
 {
 	U32 id;
 	GUI_MutexLock(mutex_lock,5000);
-
+#if defined(STM32F429_439xx)
 	id =SPI_FLASH_ReadID();
+#elif defined(STM32H743xx)
+  id = QSPI_FLASH_ReadID();
+#endif  
+  
 	GUI_MutexUnlock(mutex_lock);
 	return id;
 }
@@ -68,7 +75,12 @@ U32 RES_DevGetID(void)
 BOOL RES_DevWrite(u8 *buf,u32 addr,u32 size)
 {
 	GUI_MutexLock(mutex_lock,5000);
+	
+#if defined(STM32F429_439xx)
 	SPI_FLASH_BufferWrite(buf,addr,size);
+#elif defined(STM32H743xx)
+  BSP_QSPI_Write(buf,addr,size);
+#endif    
 	GUI_MutexUnlock(mutex_lock);
 	return TRUE;
 }
@@ -83,7 +95,12 @@ BOOL RES_DevWrite(u8 *buf,u32 addr,u32 size)
 BOOL RES_DevRead(u8 *buf,u32 addr,u32 size)
 {
 	GUI_MutexLock(mutex_lock,5000);
+	
+#if defined(STM32F429_439xx)
 	SPI_FLASH_BufferRead(buf,addr,size);
+#elif defined(STM32H743xx)
+  BSP_QSPI_Read(buf,addr,size);
+#endif      
 	GUI_MutexUnlock(mutex_lock);
 	return TRUE;
 }
@@ -96,7 +113,11 @@ BOOL RES_DevRead(u8 *buf,u32 addr,u32 size)
 int RES_DevEraseSector(u32 addr)
 {
 	GUI_MutexLock(mutex_lock,5000);
+#if defined(STM32F429_439xx)  
 	SPI_FLASH_SectorErase(addr&0xFFFFF000);
+#elif defined(STM32H743xx)
+  BSP_QSPI_Erase_Block(addr&0xFFFFF000);
+#endif     
 	GUI_MutexUnlock(mutex_lock);
 	return SPI_FLASH_SectorSize;
 }
