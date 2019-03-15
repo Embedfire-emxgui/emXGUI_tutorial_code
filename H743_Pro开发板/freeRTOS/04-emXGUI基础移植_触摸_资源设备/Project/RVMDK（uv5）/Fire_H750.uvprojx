@@ -839,6 +839,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\User\bsp\touch\bsp_touch_gtxx.c</FilePath>
             </File>
+            <File>
+              <FileName>bsp_qspi_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\bsp\flash\bsp_qspi_flash.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -985,14 +990,19 @@
               <FilePath>..\..\User\gui_drv_cfg.h</FilePath>
             </File>
             <File>
-              <FileName>gui_font_port.c</FileName>
+              <FileName>gui_startup.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_font_port.c</FilePath>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_startup.c</FilePath>
             </File>
             <File>
               <FileName>gui_lcd_port.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_lcd_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_font_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_font_port.c</FilePath>
             </File>
             <File>
               <FileName>gui_log_port.c</FileName>
@@ -1005,11 +1015,6 @@
               <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_mem_port.c</FilePath>
             </File>
             <File>
-              <FileName>gui_startup.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_startup.c</FilePath>
-            </File>
-            <File>
               <FileName>gui_input_port.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_input_port.c</FilePath>
@@ -1018,6 +1023,11 @@
               <FileName>gui_touch_port.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_touch_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_resource_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_resource_port.c</FilePath>
             </File>
           </Files>
         </Group>
