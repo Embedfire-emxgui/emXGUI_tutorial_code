@@ -13,33 +13,19 @@
 #include "gui_fs_port.h"
 #include "ff.h"
 
+#if defined(STM32F429_439xx)
+#include "sdio/bsp_sdio_sd.h"
+#elif defined(STM32H743xx)
+#include "./sd_card/bsp_sdio_sd.h"
+#endif  
+
+
 	/* FatFs文件系统对象 */
 static FATFS fs;									
 
 void FileSystem_Test(void);
 
-/**
-	*********************************************************************************************************
-	* Description : 初始化BL8782 WiFi模块使能引脚，并禁用WiFi模块
-	* Argument(s) : none.
-	* Return(s)   : none.
-	*********************************************************************************************************
-	*/
-static void BL8782_PDN_INIT(void)
-{
-  /*定义一个GPIO_InitTypeDef类型的结构体*/
-  GPIO_InitTypeDef GPIO_InitStructure;
 
-  RCC_AHB1PeriphClockCmd ( RCC_AHB1Periph_GPIOG, ENABLE); 							   
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;	
-  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;   
-  GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-  GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_DOWN;
-  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz; 
-  GPIO_Init(GPIOG, &GPIO_InitStructure);	
-  
-  GPIO_ResetBits(GPIOG,GPIO_Pin_9);  //禁用WiFi模块
-}
 
 /**
   * @brief  文件系统初始化
@@ -60,7 +46,13 @@ BOOL FileSystem_Init(void)
 //	rt_hw_interrupt_enable(level);	
 
   /* 禁用WiFi模块 */
-	BL8782_PDN_INIT();
+#if defined(STM32F429_439xx)
+  BL8782_PDN_INIT();
+#elif defined(STM32H743xx)
+  WIFI_PDN_INIT();
+#endif  
+	
+
 
 	//在外部SPI Flash挂载文件系统，文件系统挂载时会对SPI设备初始化
 	res_sd = f_mount(&fs,"0:",1);
