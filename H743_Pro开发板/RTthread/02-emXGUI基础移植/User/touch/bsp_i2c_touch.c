@@ -20,6 +20,7 @@
 #include "./usart/bsp_usart.h"
 
 
+
 /* STM32 I2C 快速模式 */
 #define I2C_Speed              400000
 
@@ -245,7 +246,7 @@ void I2C_Touch_Init(void)
 #endif
   
   I2C_ResetChip();
-  GTP_IRQ_Disable();
+  I2C_GTP_IRQEnable();
 }
 
 
