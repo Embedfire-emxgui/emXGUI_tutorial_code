@@ -26,11 +26,11 @@
 /* 开发板硬件bsp头文件 */
 #include "board.h"
 
-#include <cm_backtrace.h>
+//#include <cm_backtrace.h>
 
-/* hardfault跟踪器需要的定义 */
-#define HARDWARE_VERSION               "V1.0.0"
-#define SOFTWARE_VERSION               "V0.1.0"
+///* hardfault跟踪器需要的定义 */
+//#define HARDWARE_VERSION               "V1.0.0"
+//#define SOFTWARE_VERSION               "V0.1.0"
 
 /**************************** 任务句柄 ********************************/
 /* 
@@ -100,9 +100,9 @@ static void BSP_Init(void)
 	
 	/* usart 端口初始化 */
   UARTx_Config();
-  
+ 
   /*hardfault 跟踪器初始化*/  
-  cm_backtrace_init("Fire_emxgui", HARDWARE_VERSION, SOFTWARE_VERSION);
+  //cm_backtrace_init("Fire_emxgui", HARDWARE_VERSION, SOFTWARE_VERSION);
  
 }
 

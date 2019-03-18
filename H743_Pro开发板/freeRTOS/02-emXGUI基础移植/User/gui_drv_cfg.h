@@ -59,7 +59,7 @@
 #define	GUI_TOUCHSCREEN_CALIBRATE       0
 
 /* 是否显示光标 */
-#define  GUI_SHOW_CURSOR_EN        0
+#define  GUI_SHOW_CURSOR_EN        1
 
 /*===========存储器配置===gui_mem_port.c===============================================*/
 /* 通常GUI内核使用MEM内存堆，VMEM内存堆给用户使用 */
@@ -75,7 +75,7 @@
 
 /* 配置vmem的基地址，大小以及分配粒度 */
 /* 是否使能VMEM内存堆 */
-#define  GUI_VMEM_EN      1
+#define  GUI_VMEM_EN      0
 
 /* 液晶驱动显存使用的空间 */
 #if (LCD_FORMAT == COLOR_FORMAT_RGB565)
