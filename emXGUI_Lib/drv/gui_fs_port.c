@@ -60,23 +60,23 @@ BOOL FileSystem_Init(void)
 	if(res_sd == FR_NO_FILESYSTEM)
 	{
 		printf("》SD卡还没有文件系统...\r\n");
-//    /* 格式化 */
-//		res_sd=f_mkfs("0:",0,0);							
-//		
-//		if(res_sd == FR_OK)
-//		{
-//			printf("》SD卡已成功格式化文件系统。\r\n");
-//      /* 格式化后，先取消挂载 */
-//			res_sd = f_mount(NULL,"0:",1);			
-//      /* 重新挂载	*/			
-//			res_sd = f_mount(&fs,"0:",1);
-//		}
-//		else
-//		{
-////			LED_RED;
-//			printf("《《格式化失败。》》\r\n");
-////			while(1);
-//		}
+    /* 格式化 */
+		res_sd=f_mkfs("0:",0,0);							
+		
+		if(res_sd == FR_OK)
+		{
+			printf("》SD卡已成功格式化文件系统。\r\n");
+      /* 格式化后，先取消挂载 */
+			res_sd = f_mount(NULL,"0:",1);			
+      /* 重新挂载	*/			
+			res_sd = f_mount(&fs,"0:",1);
+		}
+		else
+		{
+//			LED_RED;
+			printf("《《格式化失败。》》\r\n");
+//			while(1);
+		}
     return FALSE;
 	}
   else if(res_sd!=FR_OK)
