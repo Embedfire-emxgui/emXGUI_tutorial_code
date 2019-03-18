@@ -34,10 +34,9 @@
 #include "stm32h7xx_hal.h"
 #include "stm32h7xx.h"
 #include "stm32h7xx_it.h"
-
 #include <rthw.h>
 #include <rtthread.h>
-
+extern void GTP_TouchProcess(void);
 /* USER CODE BEGIN 0 */
 extern SD_HandleTypeDef uSdHandle;
 /* USER CODE END 0 */
@@ -92,6 +91,15 @@ void NMI_Handler(void)
 
 //  /* USER CODE END MemoryManagement_IRQn 1 */
 //}
+void SDMMC1_IRQHandler(void)
+{
+  /* 进入临界段，临界段可以嵌套 */
+  rt_interrupt_enter(); 
+  HAL_SD_IRQHandler(&uSdHandle);
+		
+  /* 退出临界段 */
+  rt_interrupt_leave();
+}
 
 /**
 * @brief This function handles Pre-fetch fault, memory access fault.
@@ -178,15 +186,6 @@ void DebugMon_Handler(void)
 
 //  /* USER CODE END SysTick_IRQn 1 */
 //}
-void SDMMC1_IRQHandler(void)
-{
-  /* 进入临界段，临界段可以嵌套 */
-  rt_interrupt_enter();
-  HAL_SD_IRQHandler(&uSdHandle);
-		
-  /* 退出临界段 */
-  rt_interrupt_leave();  
-}
 
 /******************************************************************************/
 /* STM32H7xx Peripheral Interrupt Handlers                                    */
