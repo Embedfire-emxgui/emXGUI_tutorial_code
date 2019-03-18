@@ -99,9 +99,11 @@ static void I2C_GPIO_Config(void)
   
   /*使能触摸屏使用的引脚的时钟*/
   GTP_I2C_SCL_GPIO_CLK_ENABLE();
-  GTP_I2C_SDA_GPIO_CLK_ENABLE();
+  GTP_I2C_SDA_GPIO_CLK_ENABLE(); 
+  
   GTP_INT_GPIO_CLK_ENABLE();
   GTP_RST_GPIO_CLK_ENABLE();
+
 #if !(SOFT_IIC)   //使用硬件IIC 
     
   /*配置SDA引脚 */  

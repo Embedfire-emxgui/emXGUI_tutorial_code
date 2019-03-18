@@ -990,19 +990,14 @@
               <FilePath>..\..\User\gui_drv_cfg.h</FilePath>
             </File>
             <File>
-              <FileName>gui_startup.c</FileName>
+              <FileName>gui_font_port.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_startup.c</FilePath>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_font_port.c</FilePath>
             </File>
             <File>
               <FileName>gui_lcd_port.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_lcd_port.c</FilePath>
-            </File>
-            <File>
-              <FileName>gui_font_port.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_font_port.c</FilePath>
             </File>
             <File>
               <FileName>gui_log_port.c</FileName>
@@ -1013,6 +1008,11 @@
               <FileName>gui_mem_port.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_mem_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_startup.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_startup.c</FilePath>
             </File>
             <File>
               <FileName>gui_input_port.c</FileName>

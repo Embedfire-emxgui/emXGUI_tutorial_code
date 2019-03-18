@@ -146,7 +146,56 @@
           <Name></Name>
         </SetRegEntry>
       </TargetDriverDllRegistry>
-      <Breakpoint/>
+      <Breakpoint>
+        <Bp>
+          <Number>0</Number>
+          <Type>0</Type>
+          <LineNumber>33</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134266750</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>H:\emXGUI\tutorial_code_stm32f429\H743_Pro寮€鍙戞澘\freeRTOS\03-emXGUI鍩虹绉绘_瑙︽懜\Project\User\bsp\flash\bsp_qspi_flash.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\Fire_emxgui\../../User/bsp/flash/bsp_qspi_flash.c\33</Expression>
+        </Bp>
+        <Bp>
+          <Number>1</Number>
+          <Type>0</Type>
+          <LineNumber>105</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134221812</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>H:\emXGUI\tutorial_code_stm32f429\H743_Pro寮€鍙戞澘\freeRTOS\03-emXGUI鍩虹绉绘_瑙︽懜\Project\User\bsp\flash\bsp_qspi_flash.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\Fire_emxgui\../../User/bsp/flash/bsp_qspi_flash.c\105</Expression>
+        </Bp>
+        <Bp>
+          <Number>2</Number>
+          <Type>0</Type>
+          <LineNumber>108</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134221816</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>H:\emXGUI\tutorial_code_stm32f429\H743_Pro寮€鍙戞澘\freeRTOS\03-emXGUI鍩虹绉绘_瑙︽懜\Project\User\bsp\flash\bsp_qspi_flash.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\Fire_emxgui\../../User/bsp/flash/bsp_qspi_flash.c\108</Expression>
+        </Bp>
+      </Breakpoint>
       <Tracepoint>
         <THDelay>0</THDelay>
       </Tracepoint>
@@ -1144,7 +1193,7 @@
 
   <Group>
     <GroupName>USER</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1631,8 +1680,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\drv\gui_startup.c</PathWithFileName>
-      <FilenameWithoutPath>gui_startup.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\drv\gui_font_port.c</PathWithFileName>
+      <FilenameWithoutPath>gui_font_port.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1655,8 +1704,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\drv\gui_font_port.c</PathWithFileName>
-      <FilenameWithoutPath>gui_font_port.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\drv\gui_log_port.c</PathWithFileName>
+      <FilenameWithoutPath>gui_log_port.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1667,8 +1716,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\drv\gui_log_port.c</PathWithFileName>
-      <FilenameWithoutPath>gui_log_port.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\drv\gui_mem_port.c</PathWithFileName>
+      <FilenameWithoutPath>gui_mem_port.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1679,8 +1728,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\drv\gui_mem_port.c</PathWithFileName>
-      <FilenameWithoutPath>gui_mem_port.c</FilenameWithoutPath>
+      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\drv\gui_startup.c</PathWithFileName>
+      <FilenameWithoutPath>gui_startup.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
