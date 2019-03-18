@@ -97,7 +97,7 @@ static void BSP_Init(void)
   SDRAM_Init();
 	/* LED 端口初始化 */
 	LED_GPIO_Config();	
-	
+	 QSPI_FLASH_Init();
 	/* usart 端口初始化 */
   UARTx_Config();
  
