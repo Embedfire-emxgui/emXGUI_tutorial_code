@@ -32,51 +32,8 @@ RT_WEAK void *rt_heap_end_get(void)
   */
 void rt_hw_board_init()
 {
-    /* 初始化SysTick */
-    SysTick_Config( SystemCoreClock / RT_TICK_PER_SECOND );	
-    
-	/* 硬件BSP初始化统统放在这里，比如LED，串口，LCD等 */
-    /* 初始化LED */
-    LED_GPIO_Config();
-    
-    /* 初始化串口 */
-    Debug_USART_Config();
-    
-/* 触摸画板相关初始化 ==============================================================*/    
-    /* 初始化触摸屏 */
-    GTP_Init_Panel();    
-	
-    /*初始化液晶屏*/
-    LCD_Init();
-    LCD_LayerInit();
-    LTDC_Cmd(ENABLE);
-
-    /*把背景层刷黑色*/
-    LCD_SetLayer(LCD_BACKGROUND_LAYER);  
-    LCD_Clear(LCD_COLOR_BLACK);
-
-    /*初始化后默认使用前景层*/
-    LCD_SetLayer(LCD_FOREGROUND_LAYER); 
-    /*默认设置不透明	，该函数参数为不透明度，范围 0-0xff ，0为全透明，0xff为不透明*/
-    LCD_SetTransparency(0xFF);
-    LCD_Clear(LCD_COLOR_BLACK);
-
-    /*调用画板函数*/
-    Palette_Init();
-/*================================================================================*/    
-	
-/* 调用组件初始化函数 (use INIT_BOARD_EXPORT()) */
-#ifdef RT_USING_COMPONENTS_INIT
-    rt_components_board_init();
-#endif
-    
-#if defined(RT_USING_CONSOLE) && defined(RT_USING_DEVICE)
-	rt_console_set_device(RT_CONSOLE_DEVICE_NAME);
-#endif
-    
-#if defined(RT_USING_USER_MAIN) && defined(RT_USING_HEAP)
-    rt_system_heap_init(rt_heap_begin_get(), rt_heap_end_get());
-#endif
+  /* Enable I-Cache */
+  SCB_EnableICache();
 }
 
 /**

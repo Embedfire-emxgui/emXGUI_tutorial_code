@@ -34,12 +34,16 @@ static GUI_MUTEX *mutex_lock=NULL;
 BOOL RES_DevInit(void)
 {  
 	mutex_lock=GUI_MutexCreate();
+  
 #if defined(STM32F429_439xx)
 	if(SPI_FLASH_Init() == 0)
+  {
 #elif defined(STM32H743xx)
   if(QSPI_FLASH_Init() == 0)
+  {
 #endif
     return TRUE;
+  }
   else
     return FALSE;
 
@@ -79,7 +83,7 @@ BOOL RES_DevWrite(u8 *buf,u32 addr,u32 size)
 #if defined(STM32F429_439xx)
 	SPI_FLASH_BufferWrite(buf,addr,size);
 #elif defined(STM32H743xx)
-  BSP_QSPI_Write(buf,addr,size);
+  //BSP_QSPI_Write(buf,addr,size);
 #endif    
 	GUI_MutexUnlock(mutex_lock);
 	return TRUE;
@@ -99,7 +103,7 @@ BOOL RES_DevRead(u8 *buf,u32 addr,u32 size)
 #if defined(STM32F429_439xx)
 	SPI_FLASH_BufferRead(buf,addr,size);
 #elif defined(STM32H743xx)
-  BSP_QSPI_Read(buf,addr,size);
+  //BSP_QSPI_Read(buf,addr,size);
 #endif      
 	GUI_MutexUnlock(mutex_lock);
 	return TRUE;
@@ -116,10 +120,10 @@ int RES_DevEraseSector(u32 addr)
 #if defined(STM32F429_439xx)  
 	SPI_FLASH_SectorErase(addr&0xFFFFF000);
 #elif defined(STM32H743xx)
-  BSP_QSPI_Erase_Block(addr&0xFFFFF000);
+  //BSP_QSPI_Erase_Block(addr&0xFFFFF000);
 #endif     
 	GUI_MutexUnlock(mutex_lock);
-	return SPI_FLASH_SectorSize;
+	return 0;
 }
 
 
@@ -131,7 +135,7 @@ int RES_DevEraseSector(u32 addr)
 BOOL RES_WaitForWriteEnd(u32 timeout)
 {
 	GUI_MutexLock(mutex_lock,5000);
-  SPI_FLASH_WaitForWriteEnd();
+//  SPI_FLASH_WaitForWriteEnd();
 //	SPI_FLASH_BufferRead(buf,addr,size);
 	GUI_MutexUnlock(mutex_lock);
 	return TRUE;
@@ -176,7 +180,52 @@ void RES_DevTest(void)
 }
 #endif
 
+#if 0
+#define countof(a)      (sizeof(a) / sizeof(*(a)))
+#define  BufferSize     (countof(Tx_Buffer)-1)
+typedef enum { FAILED = 0, PASSED = !FAILED} TestStatus;
+uint8_t Tx_Buffer[] = "好stm32开发板\r\nhttp://firestm32.taobao.c感谢您选用野火stm32开发板\r\nhttp://firestm32.taobao.com感谢您选用野火stm32开发板\r\nhttp://firestm32.taobao.com感谢您选用野火stm32开发板\r\nhttp://firestm32.taobao.com感谢您选用野火stm32开发板\r\nhttp://firestm32.taobao.com";
+uint8_t Rx_Buffer[BufferSize];
+#define  FLASH_WriteAddress     0x00000
+#define  FLASH_ReadAddress      FLASH_WriteAddress
+#define  FLASH_SectorToErase    FLASH_WriteAddress
+__IO TestStatus TransferStatus1 = FAILED;
 
+TestStatus Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint32_t BufferLength)
+{
+  while(BufferLength--)
+  {
+    if(*pBuffer1 != *pBuffer2)
+    {
+      return FAILED;
+    }
+
+    pBuffer1++;
+    pBuffer2++;
+  }
+  return PASSED;
+}
+
+void RES_DevTest(void)
+{
+  BSP_QSPI_Erase_Block(FLASH_SectorToErase);
+  HAL_InitTick(5);
+  BSP_QSPI_Write(Tx_Buffer, FLASH_WriteAddress, BufferSize);
+  HAL_InitTick(5);
+  BSP_QSPI_FastRead(Rx_Buffer, FLASH_ReadAddress, BufferSize);
+  TransferStatus1 = Buffercmp(Tx_Buffer, Rx_Buffer, BufferSize);
+  if( PASSED == TransferStatus1 )
+  {    
+    LED_GREEN;
+    GUI_DEBUG("\r\n16M串行flash(W25Q256)测试成功!\n\r");
+  }
+  else
+  {        
+    LED_RED;
+    GUI_DEBUG("\r\n16M串行flash(W25Q256)测试失败!\n\r");
+  }
+}
+#endif
 
 /**
   * @brief  从FLASH中的目录查找相应的资源位置

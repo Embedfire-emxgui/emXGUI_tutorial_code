@@ -23,6 +23,7 @@
 /* STM32 I2C 快速模式 */
 #define I2C_Speed              400000
 
+
 /* 这个地址只要与STM32外挂的I2C器件地址不一样即可 */
 #define I2C_OWN_ADDRESS7      0x0A
 

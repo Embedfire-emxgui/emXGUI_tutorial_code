@@ -429,7 +429,32 @@ uint8_t convert_from_bytes_to_power_of_two(uint16_t NumberOfBytes);
 	
 	
 	
-/******************* start：从stm324x9i_eval.c文件移植代码 ***************************/	
+/******************* start：从stm324x9i_eval.c文件移植代码 ***************************/
+
+
+/**
+	*********************************************************************************************************
+	* Description : 初始化BL8782 WiFi模块使能引脚，并禁用WiFi模块
+	* Argument(s) : none.
+	* Return(s)   : none.
+	*********************************************************************************************************
+	*/
+void BL8782_PDN_INIT(void)
+{
+  /*定义一个GPIO_InitTypeDef类型的结构体*/
+  GPIO_InitTypeDef GPIO_InitStructure;
+
+  RCC_AHB1PeriphClockCmd ( RCC_AHB1Periph_GPIOG, ENABLE); 							   
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;	
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;   
+  GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+  GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_DOWN;
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz; 
+  GPIO_Init(GPIOG, &GPIO_InitStructure);	
+  
+  GPIO_ResetBits(GPIOG,GPIO_Pin_9);  //禁用WiFi模块
+}
+
 /**
   * @brief  DeInitializes the SDIO interface.
   * @param  None

@@ -354,6 +354,7 @@ typedef struct
   * @{
   */ 
 void SD_DeInit(void);
+void BL8782_PDN_INIT(void);
 SD_Error SD_Init(void);
 SDTransferState SD_GetStatus(void);
 SDCardState SD_GetState(void);
