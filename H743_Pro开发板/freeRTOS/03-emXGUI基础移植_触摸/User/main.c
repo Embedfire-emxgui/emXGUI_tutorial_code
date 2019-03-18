@@ -100,7 +100,7 @@ static void BSP_Init(void)
 	
 	/* usart 端口初始化 */
   UARTx_Config();
-  
+  QSPI_FLASH_Init();
   /*hardfault 跟踪器初始化*/  
   cm_backtrace_init("Fire_emxgui", HARDWARE_VERSION, SOFTWARE_VERSION);
  
