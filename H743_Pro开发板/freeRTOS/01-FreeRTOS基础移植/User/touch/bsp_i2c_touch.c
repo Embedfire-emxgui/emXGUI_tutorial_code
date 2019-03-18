@@ -100,6 +100,8 @@ static void I2C_GPIO_Config(void)
   /*使能触摸屏使用的引脚的时钟*/
   GTP_I2C_SCL_GPIO_CLK_ENABLE();
   GTP_I2C_SDA_GPIO_CLK_ENABLE(); 
+  GTP_INT_GPIO_CLK_ENABLE();
+  GTP_RST_GPIO_CLK_ENABLE();
 
 #if !(SOFT_IIC)   //使用硬件IIC 
     
@@ -243,7 +245,7 @@ void I2C_Touch_Init(void)
 #endif
   
   I2C_ResetChip();
-  I2C_GTP_IRQDisable();
+  GTP_IRQ_Disable();
 }
 
 

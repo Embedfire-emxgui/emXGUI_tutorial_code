@@ -8,7 +8,6 @@
 #include "./fonts/fonts.h"
 
 
-
 /* LCD 层像素格式*/
 #define ARGB8888 	LTDC_PIXEL_FORMAT_ARGB8888  /*!< ARGB8888 LTDC像素格式 */
 #define RGB888 		LTDC_PIXEL_FORMAT_RGB888    /*!< RGB888 LTDC像素格式   */
@@ -28,6 +27,8 @@ typedef struct
   int16_t X;
   int16_t Y;
 }Point, * pPoint; 
+
+
 /** 
   * @brief  LCD液晶参数
   */   
@@ -48,9 +49,10 @@ typedef struct
 
   uint16_t lcd_pixel_width; //液晶分辨率，宽
   uint16_t lcd_pixel_height;//液晶分辨率，高
-
+  
   uint16_t m_palette_btn_width; //液晶分辨率，宽
   uint16_t m_palette_btn_height;//液晶分辨率，高  
+
 }LCD_PARAM_TypeDef;
 
 
@@ -70,11 +72,20 @@ typedef enum
 extern LCD_TypeDef cur_lcd;
 /* 不同液晶屏的参数 */
 extern const LCD_PARAM_TypeDef lcd_param[];
-/**
-  * @brief  Initializes the LCD.
-  * @param  None
-  * @retval None
-  */
+
+
+
+
+/* LCD Size (Width and Height) */
+#define  LCD_PIXEL_WIDTH          lcd_param[cur_lcd].lcd_pixel_width
+#define  LCD_PIXEL_HEIGHT         lcd_param[cur_lcd].lcd_pixel_height
+
+/* 使用的各个屏幕中最大的分辨率 */
+#define  LCD_MAX_PIXEL_WIDTH    ((uint16_t)800)  
+#define  LCD_MAX_PIXEL_HEIGHT   ((uint16_t)480)  
+
+#define LCD_FRAME_BUFFER       ((uint32_t)0xD0000000)
+#define BUFFER_OFFSET          ((uint32_t)LCD_PIXEL_WIDTH*LCD_PIXEL_HEIGHT*2)
 /*根据液晶数据手册的参数配置*/
 #define HBP  lcd_param[cur_lcd].hbp		//HSYNC后的无效像素
 #define VBP  lcd_param[cur_lcd].vbp		//VSYNC后的无效行数
@@ -85,14 +96,6 @@ extern const LCD_PARAM_TypeDef lcd_param[];
 #define HFP  lcd_param[cur_lcd].hfp		//HSYNC前的无效像素
 #define VFP  lcd_param[cur_lcd].vfp		//VSYNC前的无效行数
 
-
-/* LCD Size (Width and Height) */
-#define  LCD_PIXEL_WIDTH          lcd_param[cur_lcd].lcd_pixel_width
-#define  LCD_PIXEL_HEIGHT         lcd_param[cur_lcd].lcd_pixel_height
-
-/* 使用的各个屏幕中最大的分辨率 */
-#define  LCD_MAX_PIXEL_WIDTH    ((uint16_t)800)  
-#define  LCD_MAX_PIXEL_HEIGHT   ((uint16_t)480)  
 /** 
   * @brief  字体对齐模式  
   */ 
@@ -116,7 +119,7 @@ typedef enum
 /** 
   * @brief  LCD FB_StartAddress  
   */
-#define LCD_FB_START_ADDRESS       ((uint32_t)0xD2000000)
+#define LCD_FB_START_ADDRESS       ((uint32_t)0xD0000000)
 /** 
   * @brief  LCD color  
   */ 
@@ -363,5 +366,5 @@ void     LCD_MspDeInit(LTDC_HandleTypeDef *hltdc, void *Params);
 void     LCD_ClockConfig(void);
 
 void LCD_LayerInit(uint16_t LayerIndex, uint32_t FB_Address,uint32_t PixelFormat);
-
+void LCD_DispString_EN_CH( uint16_t Line, uint16_t Column, const uint8_t * pStr );
 #endif /* __BSP_LCD_H */
