@@ -787,7 +787,7 @@ Output:
             break;
         }
     }
-    CPU_TS_Tmr_Delay_MS(20);				//延迟等待芯片更新
+    CPU_TS_Tmr_Delay_MS(40);				//延迟等待芯片更新
 		
 
 	
