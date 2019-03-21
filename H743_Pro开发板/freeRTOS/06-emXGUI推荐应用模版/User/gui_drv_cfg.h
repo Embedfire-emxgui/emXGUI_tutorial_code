@@ -119,7 +119,7 @@
 *  流设备和整体加载方式都要把这个宏设置为1
 *  使用本功能时需要把GUI_RES_DEV_EN设置为1
 */
-#define GUI_EXTERN_FONT_EN       0
+#define GUI_EXTERN_FONT_EN       1
 
 /*
 * 是否把整个外部字体数据加载至VMEM区域，初始化加载时需要较长时间，
@@ -170,11 +170,11 @@
 /*===========是否启用各种APP===============================================*/
 
 /* 启动界面 */
-#define GUI_APP_BOOT_INTERFACE_EN     0
+#define GUI_APP_BOOT_INTERFACE_EN     1
 
 /* 资源烧录器，使能后缺少资源会自动进入资源烧录界面 */
 /* 需要sd文件系统/flash资源设备支持 */
-#define GUI_APP_RES_WRITER_EN          0
+#define GUI_APP_RES_WRITER_EN          1
 /*============================================================================*/
 
 #endif	/*__GUI_DRV_CFG_H__*/

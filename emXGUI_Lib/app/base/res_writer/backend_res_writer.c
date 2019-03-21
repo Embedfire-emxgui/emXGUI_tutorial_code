@@ -28,10 +28,27 @@ static u32 file_num = 0;
 extern HWND wnd_res_writer_info_textbox ;
 extern HWND wnd_res_writer_progbar;
 
-extern void SPI_FLASH_BulkErase_GUI(void);
+//extern void SPI_FLASH_BulkErase_GUI(void);
+#if defined(STM32H743xx)
+#define SPI_FLASH_BufferWrite BSP_QSPI_Write
+#define SPI_FLASH_BufferRead  BSP_QSPI_Read 
+#endif
 
- 
 
+int Buffercmp(uint8_t* pBuffer1, uint8_t* pBuffer2, uint32_t BufferLength)
+{
+  while(BufferLength--)
+  {
+    if(*pBuffer1 != *pBuffer2)
+    {
+      return 0;
+    }
+
+    pBuffer1++;
+    pBuffer2++;
+  }
+  return 1;
+}
 /**
   * @brief  检查是否要忽略文件夹或文件
   * @param  check_name[in] 要检查的文件名,全路径
@@ -350,7 +367,7 @@ void Burn_Catalog(void)
   CatalogTypeDef dir;
   uint8_t i;
   uint8_t is_end;
-  
+//  uint8_t* rx_buff;
   /* 重置进度条 */
   SendMessage(wnd_res_writer_progbar,PBM_SET_VALUE,TRUE,0);
   SetWindowText(wnd_res_writer_progbar,L"Writing catalog...");
@@ -363,6 +380,7 @@ void Burn_Catalog(void)
   /* 遍历目录文件 */
   for(i=0;1;i++)
   {
+    uint8_t state = QSPI_ERROR;
     is_end = Read_CatalogInfo(i, 
                                 &dir,
                                 full_file_name);  
@@ -375,12 +393,21 @@ void Burn_Catalog(void)
     GUI_msleep(20);
 
     /* 把dir信息烧录到FLASH中 */  
-    SPI_FLASH_BufferWrite((u8*)&dir,RESOURCE_BASE_ADDR + sizeof(dir)*i,sizeof(dir));
+    state = SPI_FLASH_BufferWrite((u8*)&dir,RESOURCE_BASE_ADDR + sizeof(dir)*i,sizeof(dir));
+//    rx_buff = (uint8_t *)GUI_VMEM_Alloc(sizeof(dir));
+//    SPI_FLASH_BufferRead(rx_buff,RESOURCE_BASE_ADDR + sizeof(dir)*i,sizeof(dir));
+//    
+//    printf("%d:%d\n",i,Buffercmp((u8*)&dir, rx_buff, sizeof(dir)));
+//    
+//    
+//    GUI_VMEM_Free(rx_buff);
+    if(state != QSPI_OK)
+      printf("Error Write\n");
   }
   
   SendMessage(wnd_res_writer_progbar,PBM_SET_VALUE,TRUE,file_num);
   SetWindowText(wnd_res_writer_info_textbox,L"Writing catalog complete.");
-  GUI_msleep(20);
+  GUI_msleep(200);
 
 }
 
@@ -395,7 +422,7 @@ FRESULT Burn_Content(void)
   CatalogTypeDef dir;
   uint8_t i;
   uint8_t is_end;   
-  
+//  uint8_t* rx_buff;
   FRESULT result;   
   UINT  bw;            					    /* File R/W count */
   uint32_t write_addr=0;
@@ -451,6 +478,16 @@ FRESULT Burn_Content(void)
           return result;
         }      
         SPI_FLASH_BufferWrite(tempbuf,write_addr,bw);  //拷贝数据到外部flash上    
+        
+//        rx_buff = (uint8_t *)GUI_VMEM_Alloc(bw);
+//        SPI_FLASH_BufferRead(rx_buff,write_addr,bw);
+//    
+//        printf("%d:%d --%d\n",i,Buffercmp(tempbuf, rx_buff, bw),bw);
+//    
+//    
+//        GUI_VMEM_Free(rx_buff);
+
+        
         write_addr+=bw;				
         if(bw !=256)break;
       }
@@ -606,7 +643,7 @@ FRESULT BurnFile(void)
   file_num = 0;
   
   /* 复制初始路径 */
-  strcpy(src_dir,src_dir_const);
+  strcpy(src_dir,src_dir_const);//字库资源文件存放位置
   
   /* 打开路径测试 */
   result = f_opendir(&dir, src_dir); 
@@ -627,8 +664,13 @@ FRESULT BurnFile(void)
   BURN_INFO("正在进行整片擦除，时间很长，请耐心等候...");  
 
   /* 整片FLASH擦除 */
-  SPI_FLASH_BulkErase_GUI();
-
+  //SPI_FLASH_BulkErase_GUI();
+  if(BSP_QSPI_Erase_Chip() != QSPI_OK)
+  {
+    printf("Erase Error\n");
+    while(1);
+  }
+  
   /* 生成烧录目录信息文件 */
   Make_Catalog(src_dir,0);
   
@@ -637,7 +679,7 @@ FRESULT BurnFile(void)
   /* 根据 目录 烧录内容至FLASH*/
   Burn_Content();
   /* 校验烧录的内容 */
-  result =  Check_Resource();
+  //result =  Check_Resource();
 
 exit:
   /* 释放申请的空间 */
