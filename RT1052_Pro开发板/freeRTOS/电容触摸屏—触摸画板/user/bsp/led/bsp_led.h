@@ -78,6 +78,24 @@
 #define RGB_BLUE_LED_OFF            digitalHi(RGB_BLUE_LED_GPIO,RGB_BLUE_LED_GPIO_PIN)
 #define RGB_BLUE_LED_ON             digitalLo(RGB_BLUE_LED_GPIO,RGB_BLUE_LED_GPIO_PIN)
 
+/* 兼容控制LED灯的宏*/
+#define LED1_TOGGLE		RGB_RED_LED_TOGGLE
+#define LED1_OFF			  RGB_RED_LED_OFF
+#define LED1_ON				RGB_RED_LED_ON
+
+#define LED2_TOGGLE		RGB_GREEN_LED_TOGGLE
+#define LED2_OFF			  RGB_GREEN_LED_OFF
+#define LED2_ON				RGB_GREEN_LED_ON
+
+#define LED3_TOGGLE		RGB_BLUE_LED_TOGGLE
+#define LED3_OFF			  RGB_BLUE_LED_OFF
+#define LED3_ON				RGB_BLUE_LED_ON
+
+#define LED4_TOGGLE		CORE_BOARD_LED_ON
+#define LED4_OFF			  CORE_BOARD_LED_OFF
+#define LED4_ON				CORE_BOARD_LED_TOGGLE
+
+
 /* 基本混色，后面高级用法使用PWM可混出全彩颜色,且效果更好 */
 
 //红

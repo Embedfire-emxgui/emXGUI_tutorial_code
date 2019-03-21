@@ -244,6 +244,7 @@ void GTP_I2C_ModeInit(void)
   * 	@arg ClientAddr:从设备地址
   *		@arg pBuffer:存放由从机读取的数据的缓冲区指针
   *		@arg NumByteToRead:读取的数据长度
+  * @note NumByteToRead <= 256
   * @retval  无
   */
 uint32_t I2C_ReadBytes(uint8_t ClientAddr,uint8_t* pBuffer, uint16_t NumByteToRead)
