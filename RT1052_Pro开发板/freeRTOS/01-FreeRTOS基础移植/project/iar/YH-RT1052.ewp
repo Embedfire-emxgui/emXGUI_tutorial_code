@@ -355,6 +355,8 @@
                     <state>$PROJ_DIR$\..\..\libraries\xip</state>
                     <state>$PROJ_DIR$\..\..\user</state>
                     <state>$PROJ_DIR$\..\..\user\bsp</state>
+                    <state>$PROJ_DIR$\..\..\FreeRTOS\include</state>
+                    <state>$PROJ_DIR$\..\..\FreeRTOS\port\IAR\ARM_CM7\r0p1</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -621,7 +623,8 @@
                 </option>
                 <option>
                     <name>AUserIncludes</name>
-                    <state></state>
+                    <state>$PROJ_DIR$\..\..\user
+</state>
                 </option>
                 <option>
                     <name>AExtraOptionsCheckV2</name>
@@ -1388,6 +1391,8 @@
                     <state>$PROJ_DIR$\..\..\libraries\xip</state>
                     <state>$PROJ_DIR$\..\..\user</state>
                     <state>$PROJ_DIR$\..\..\user\bsp</state>
+                    <state>$PROJ_DIR$\..\..\FreeRTOS\include</state>
+                    <state>$PROJ_DIR$\..\..\FreeRTOS\port\IAR\ARM_CM7\r0p1</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -1654,7 +1659,7 @@
                 </option>
                 <option>
                     <name>AUserIncludes</name>
-                    <state></state>
+                    <state>$PROJ_DIR$\..\..\user</state>
                 </option>
                 <option>
                     <name>AExtraOptionsCheckV2</name>
@@ -2421,6 +2426,8 @@
                     <state>$PROJ_DIR$\..\..\libraries\xip</state>
                     <state>$PROJ_DIR$\..\..\user</state>
                     <state>$PROJ_DIR$\..\..\user\bsp</state>
+                    <state>$PROJ_DIR$\..\..\FreeRTOS\include</state>
+                    <state>$PROJ_DIR$\..\..\FreeRTOS\port\IAR\ARM_CM7\r0p1</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -2687,7 +2694,7 @@
                 </option>
                 <option>
                     <name>AUserIncludes</name>
-                    <state></state>
+                    <state>$PROJ_DIR$\..\..\user</state>
                 </option>
                 <option>
                     <name>AExtraOptionsCheckV2</name>
@@ -3456,6 +3463,8 @@
                     <state>$PROJ_DIR$\..\..\libraries\xip</state>
                     <state>$PROJ_DIR$\..\..\user</state>
                     <state>$PROJ_DIR$\..\..\user\bsp</state>
+                    <state>$PROJ_DIR$\..\..\FreeRTOS\include</state>
+                    <state>$PROJ_DIR$\..\..\FreeRTOS\port\IAR\ARM_CM7\r0p1</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -3722,7 +3731,7 @@
                 </option>
                 <option>
                     <name>AUserIncludes</name>
-                    <state></state>
+                    <state>$PROJ_DIR$\..\..\user</state>
                 </option>
                 <option>
                     <name>AExtraOptionsCheckV2</name>
@@ -4491,6 +4500,8 @@
                     <state>$PROJ_DIR$\..\..\libraries\xip</state>
                     <state>$PROJ_DIR$\..\..\user</state>
                     <state>$PROJ_DIR$\..\..\user\bsp</state>
+                    <state>$PROJ_DIR$\..\..\FreeRTOS\include</state>
+                    <state>$PROJ_DIR$\..\..\FreeRTOS\port\IAR\ARM_CM7\r0p1</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -4757,7 +4768,7 @@
                 </option>
                 <option>
                     <name>AUserIncludes</name>
-                    <state></state>
+                    <state>$PROJ_DIR$\..\..\user</state>
                 </option>
                 <option>
                     <name>AExtraOptionsCheckV2</name>
@@ -5527,6 +5538,8 @@
                     <state>$PROJ_DIR$\..\..\libraries\xip</state>
                     <state>$PROJ_DIR$\..\..\user</state>
                     <state>$PROJ_DIR$\..\..\user\bsp</state>
+                    <state>$PROJ_DIR$\..\..\FreeRTOS\include</state>
+                    <state>$PROJ_DIR$\..\..\FreeRTOS\port\IAR\ARM_CM7\r0p1</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -5793,7 +5806,7 @@
                 </option>
                 <option>
                     <name>AUserIncludes</name>
-                    <state></state>
+                    <state>$PROJ_DIR$\..\..\user</state>
                 </option>
                 <option>
                     <name>AExtraOptionsCheckV2</name>
@@ -6563,6 +6576,8 @@
                     <state>$PROJ_DIR$\..\..\libraries\xip</state>
                     <state>$PROJ_DIR$\..\..\user</state>
                     <state>$PROJ_DIR$\..\..\user\bsp</state>
+                    <state>$PROJ_DIR$\..\..\FreeRTOS\include</state>
+                    <state>$PROJ_DIR$\..\..\FreeRTOS\port\IAR\ARM_CM7\r0p1</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -6829,7 +6844,7 @@
                 </option>
                 <option>
                     <name>AUserIncludes</name>
-                    <state></state>
+                    <state>$PROJ_DIR$\..\..\user</state>
                 </option>
                 <option>
                     <name>AExtraOptionsCheckV2</name>
@@ -7294,6 +7309,42 @@
         </file>
     </group>
     <group>
+        <name>FreeRTOS</name>
+        <group>
+            <name>port</name>
+            <file>
+                <name>$PROJ_DIR$\..\..\FreeRTOS\port\MemMang\heap_4.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\FreeRTOS\port\IAR\ARM_CM7\r0p1\port.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\FreeRTOS\port\IAR\ARM_CM7\r0p1\portasm.s</name>
+            </file>
+        </group>
+        <group>
+            <name>src</name>
+            <file>
+                <name>$PROJ_DIR$\..\..\FreeRTOS\src\croutine.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\FreeRTOS\src\event_groups.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\FreeRTOS\src\list.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\FreeRTOS\src\queue.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\FreeRTOS\src\tasks.c</name>
+            </file>
+            <file>
+                <name>$PROJ_DIR$\..\..\FreeRTOS\src\timers.c</name>
+            </file>
+        </group>
+    </group>
+    <group>
         <name>startup</name>
         <file>
             <name>$PROJ_DIR$\startup_MIMXRT1052.s</name>
@@ -7317,6 +7368,9 @@
         <name>user</name>
         <file>
             <name>$PROJ_DIR$\..\..\user\bsp\touch\bsp_i2c_touch.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\user\bsp\key\bsp_key.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\..\user\bsp\lcd\bsp_lcd.c</name>
