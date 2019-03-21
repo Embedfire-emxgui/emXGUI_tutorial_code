@@ -538,15 +538,15 @@
               <FileType>1</FileType>
               <FilePath>..\..\user\main.c</FilePath>
             </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>bsp</GroupName>
+          <Files>
             <File>
-              <FileName>bsp_led.c</FileName>
+              <FileName>core_delay.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\led\bsp_led.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_lcd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\lcd\bsp_lcd.c</FilePath>
+              <FilePath>..\..\user\bsp\delay\core_delay.c</FilePath>
             </File>
             <File>
               <FileName>fonts.c</FileName>
@@ -554,14 +554,24 @@
               <FilePath>..\..\user\bsp\font\fonts.c</FilePath>
             </File>
             <File>
+              <FileName>bsp_key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\key\bsp_key.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_lcd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\lcd\bsp_lcd.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_led.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\led\bsp_led.c</FilePath>
+            </File>
+            <File>
               <FileName>bsp_systick.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\systick\bsp_systick.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_touch_gtxx.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\touch\bsp_touch_gtxx.c</FilePath>
             </File>
             <File>
               <FileName>bsp_i2c_touch.c</FileName>
@@ -569,19 +579,14 @@
               <FilePath>..\..\user\bsp\touch\bsp_i2c_touch.c</FilePath>
             </File>
             <File>
+              <FileName>bsp_touch_gtxx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\touch\bsp_touch_gtxx.c</FilePath>
+            </File>
+            <File>
               <FileName>palette.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\touch\palette.c</FilePath>
-            </File>
-            <File>
-              <FileName>core_delay.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\delay\core_delay.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_key.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\key\bsp_key.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -652,6 +657,161 @@
               <FileName>heap_4.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\FreeRTOS\port\MemMang\heap_4.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/arch</GroupName>
+          <Files>
+            <File>
+              <FileName>GUI_Arch.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\GUI_Arch.c</FilePath>
+            </File>
+            <File>
+              <FileName>X_GUI_FreeRTOS.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\OS_Options\X_GUI_FreeRTOS.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_drv.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\Inc\gui_drv.h</FilePath>
+            </File>
+            <File>
+              <FileName>gui_os_port.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\Inc\gui_os_port.h</FilePath>
+            </File>
+            <File>
+              <FileName>GUI_GPU.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\GUI_GPU.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/resource</GroupName>
+          <Files>
+            <File>
+              <FileName>ASCII_16_4BPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_16_4BPP.c</FilePath>
+            </File>
+            <File>
+              <FileName>ASCII_20_4BPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_20_4BPP.c</FilePath>
+            </File>
+            <File>
+              <FileName>ASCII_24_4BPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_24_4BPP.c</FilePath>
+            </File>
+            <File>
+              <FileName>GB2312_16_2BPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\resource\xft_font\GB2312_16_2BPP.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/drv</GroupName>
+          <Files>
+            <File>
+              <FileName>gui_drv_cfg.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\user\gui_drv_cfg.h</FilePath>
+            </File>
+            <File>
+              <FileName>gui_font_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_font_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_lcd_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_lcd_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_log_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_log_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_mem_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_mem_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_startup.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_startup.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/inc</GroupName>
+          <Files>
+            <File>
+              <FileName>def.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\def.h</FilePath>
+            </File>
+            <File>
+              <FileName>emXGUI.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\emXGUI.h</FilePath>
+            </File>
+            <File>
+              <FileName>emXGUI_Arch.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\emXGUI_Arch.h</FilePath>
+            </File>
+            <File>
+              <FileName>GUI_Font_XFT.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\GUI_Font_XFT.h</FilePath>
+            </File>
+            <File>
+              <FileName>Web_Color.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\Web_Color.h</FilePath>
+            </File>
+            <File>
+              <FileName>x_libc.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\x_libc.h</FilePath>
+            </File>
+            <File>
+              <FileName>x_obj.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\x_obj.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/libs</GroupName>
+          <Files>
+            <File>
+              <FileName>emXGUI100_MDK_M7.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\emXGUI100_MDK_M7.lib</FilePath>
+            </File>
+            <File>
+              <FileName>x_libc_MDK_M7.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\x_libc_MDK_M7.lib</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>base_app</GroupName>
+          <Files>
+            <File>
+              <FileName>gui_desktop.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\app\base\gui_desktop.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1199,15 +1359,15 @@
               <FileType>1</FileType>
               <FilePath>..\..\user\main.c</FilePath>
             </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>bsp</GroupName>
+          <Files>
             <File>
-              <FileName>bsp_led.c</FileName>
+              <FileName>core_delay.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\led\bsp_led.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_lcd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\lcd\bsp_lcd.c</FilePath>
+              <FilePath>..\..\user\bsp\delay\core_delay.c</FilePath>
             </File>
             <File>
               <FileName>fonts.c</FileName>
@@ -1215,14 +1375,24 @@
               <FilePath>..\..\user\bsp\font\fonts.c</FilePath>
             </File>
             <File>
+              <FileName>bsp_key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\key\bsp_key.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_lcd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\lcd\bsp_lcd.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_led.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\led\bsp_led.c</FilePath>
+            </File>
+            <File>
               <FileName>bsp_systick.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\systick\bsp_systick.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_touch_gtxx.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\touch\bsp_touch_gtxx.c</FilePath>
             </File>
             <File>
               <FileName>bsp_i2c_touch.c</FileName>
@@ -1230,19 +1400,14 @@
               <FilePath>..\..\user\bsp\touch\bsp_i2c_touch.c</FilePath>
             </File>
             <File>
+              <FileName>bsp_touch_gtxx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\touch\bsp_touch_gtxx.c</FilePath>
+            </File>
+            <File>
               <FileName>palette.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\touch\palette.c</FilePath>
-            </File>
-            <File>
-              <FileName>core_delay.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\delay\core_delay.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_key.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\key\bsp_key.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1313,6 +1478,161 @@
               <FileName>heap_4.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\FreeRTOS\port\MemMang\heap_4.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/arch</GroupName>
+          <Files>
+            <File>
+              <FileName>GUI_Arch.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\GUI_Arch.c</FilePath>
+            </File>
+            <File>
+              <FileName>X_GUI_FreeRTOS.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\OS_Options\X_GUI_FreeRTOS.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_drv.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\Inc\gui_drv.h</FilePath>
+            </File>
+            <File>
+              <FileName>gui_os_port.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\Inc\gui_os_port.h</FilePath>
+            </File>
+            <File>
+              <FileName>GUI_GPU.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\GUI_GPU.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/resource</GroupName>
+          <Files>
+            <File>
+              <FileName>ASCII_16_4BPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_16_4BPP.c</FilePath>
+            </File>
+            <File>
+              <FileName>ASCII_20_4BPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_20_4BPP.c</FilePath>
+            </File>
+            <File>
+              <FileName>ASCII_24_4BPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_24_4BPP.c</FilePath>
+            </File>
+            <File>
+              <FileName>GB2312_16_2BPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\resource\xft_font\GB2312_16_2BPP.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/drv</GroupName>
+          <Files>
+            <File>
+              <FileName>gui_drv_cfg.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\user\gui_drv_cfg.h</FilePath>
+            </File>
+            <File>
+              <FileName>gui_font_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_font_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_lcd_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_lcd_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_log_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_log_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_mem_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_mem_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_startup.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_startup.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/inc</GroupName>
+          <Files>
+            <File>
+              <FileName>def.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\def.h</FilePath>
+            </File>
+            <File>
+              <FileName>emXGUI.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\emXGUI.h</FilePath>
+            </File>
+            <File>
+              <FileName>emXGUI_Arch.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\emXGUI_Arch.h</FilePath>
+            </File>
+            <File>
+              <FileName>GUI_Font_XFT.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\GUI_Font_XFT.h</FilePath>
+            </File>
+            <File>
+              <FileName>Web_Color.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\Web_Color.h</FilePath>
+            </File>
+            <File>
+              <FileName>x_libc.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\x_libc.h</FilePath>
+            </File>
+            <File>
+              <FileName>x_obj.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\x_obj.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/libs</GroupName>
+          <Files>
+            <File>
+              <FileName>emXGUI100_MDK_M7.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\emXGUI100_MDK_M7.lib</FilePath>
+            </File>
+            <File>
+              <FileName>x_libc_MDK_M7.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\x_libc_MDK_M7.lib</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>base_app</GroupName>
+          <Files>
+            <File>
+              <FileName>gui_desktop.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\app\base\gui_desktop.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1659,9 +1979,9 @@
 --diag_suppress=66,1296,186 
  
 </MiscControls>
-              <Define>CPU_MIMXRT1052DVL6B,SKIP_SYSCLK_INIT,PRINTF_FLOAT_ENABLE=1, SCANF_FLOAT_ENABLE=1, PRINTF_ADVANCED_ENABLE=1, SCANF_ADVANCED_ENABLE=1</Define>
+              <Define>CPU_MIMXRT1052DVL6B,SKIP_SYSCLK_INIT,PRINTF_FLOAT_ENABLE=1, SCANF_FLOAT_ENABLE=1, PRINTF_ADVANCED_ENABLE=1, SCANF_ADVANCED_ENABLE=1,X_GUI_USE_FREERTOS,</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\libraries\CMSIS\Include;..\..\libraries\drivers;..\..\libraries\utilities;..\..\libraries\utilities\str;..\..\libraries\utilities\log;..\..\libraries\utilities\io;..\..\libraries\xip;..\..\user;..\..\user\bsp;..\..\FreeRTOS\include;..\..\FreeRTOS\port\RVDS\ARM_CM7\r0p1</IncludePath>
+              <IncludePath>..\..\libraries\CMSIS\Include;..\..\libraries\drivers;..\..\libraries\utilities;..\..\libraries\utilities\str;..\..\libraries\utilities\log;..\..\libraries\utilities\io;..\..\libraries\xip;..\..\user;..\..\user\bsp;..\..\FreeRTOS\include;..\..\FreeRTOS\port\RVDS\ARM_CM7\r0p1;..\..\..\..\..\emXGUI_Lib\inc;..\..\..\..\..\emXGUI_Lib\drv;..\..\..\..\..\emXGUI_Lib\arch\Inc;..\..\..\..\..\emXGUI_Lib\app\base</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1860,15 +2180,15 @@
               <FileType>1</FileType>
               <FilePath>..\..\user\main.c</FilePath>
             </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>bsp</GroupName>
+          <Files>
             <File>
-              <FileName>bsp_led.c</FileName>
+              <FileName>core_delay.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\led\bsp_led.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_lcd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\lcd\bsp_lcd.c</FilePath>
+              <FilePath>..\..\user\bsp\delay\core_delay.c</FilePath>
             </File>
             <File>
               <FileName>fonts.c</FileName>
@@ -1876,14 +2196,24 @@
               <FilePath>..\..\user\bsp\font\fonts.c</FilePath>
             </File>
             <File>
+              <FileName>bsp_key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\key\bsp_key.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_lcd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\lcd\bsp_lcd.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_led.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\led\bsp_led.c</FilePath>
+            </File>
+            <File>
               <FileName>bsp_systick.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\systick\bsp_systick.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_touch_gtxx.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\touch\bsp_touch_gtxx.c</FilePath>
             </File>
             <File>
               <FileName>bsp_i2c_touch.c</FileName>
@@ -1891,19 +2221,14 @@
               <FilePath>..\..\user\bsp\touch\bsp_i2c_touch.c</FilePath>
             </File>
             <File>
+              <FileName>bsp_touch_gtxx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\touch\bsp_touch_gtxx.c</FilePath>
+            </File>
+            <File>
               <FileName>palette.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\touch\palette.c</FilePath>
-            </File>
-            <File>
-              <FileName>core_delay.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\delay\core_delay.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_key.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\key\bsp_key.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1978,6 +2303,161 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>emxgui/arch</GroupName>
+          <Files>
+            <File>
+              <FileName>GUI_Arch.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\GUI_Arch.c</FilePath>
+            </File>
+            <File>
+              <FileName>X_GUI_FreeRTOS.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\OS_Options\X_GUI_FreeRTOS.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_drv.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\Inc\gui_drv.h</FilePath>
+            </File>
+            <File>
+              <FileName>gui_os_port.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\Inc\gui_os_port.h</FilePath>
+            </File>
+            <File>
+              <FileName>GUI_GPU.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\GUI_GPU.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/resource</GroupName>
+          <Files>
+            <File>
+              <FileName>ASCII_16_4BPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_16_4BPP.c</FilePath>
+            </File>
+            <File>
+              <FileName>ASCII_20_4BPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_20_4BPP.c</FilePath>
+            </File>
+            <File>
+              <FileName>ASCII_24_4BPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_24_4BPP.c</FilePath>
+            </File>
+            <File>
+              <FileName>GB2312_16_2BPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\resource\xft_font\GB2312_16_2BPP.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/drv</GroupName>
+          <Files>
+            <File>
+              <FileName>gui_drv_cfg.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\user\gui_drv_cfg.h</FilePath>
+            </File>
+            <File>
+              <FileName>gui_font_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_font_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_lcd_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_lcd_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_log_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_log_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_mem_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_mem_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_startup.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_startup.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/inc</GroupName>
+          <Files>
+            <File>
+              <FileName>def.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\def.h</FilePath>
+            </File>
+            <File>
+              <FileName>emXGUI.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\emXGUI.h</FilePath>
+            </File>
+            <File>
+              <FileName>emXGUI_Arch.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\emXGUI_Arch.h</FilePath>
+            </File>
+            <File>
+              <FileName>GUI_Font_XFT.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\GUI_Font_XFT.h</FilePath>
+            </File>
+            <File>
+              <FileName>Web_Color.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\Web_Color.h</FilePath>
+            </File>
+            <File>
+              <FileName>x_libc.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\x_libc.h</FilePath>
+            </File>
+            <File>
+              <FileName>x_obj.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\x_obj.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/libs</GroupName>
+          <Files>
+            <File>
+              <FileName>emXGUI100_MDK_M7.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\emXGUI100_MDK_M7.lib</FilePath>
+            </File>
+            <File>
+              <FileName>x_libc_MDK_M7.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\x_libc_MDK_M7.lib</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>base_app</GroupName>
+          <Files>
+            <File>
+              <FileName>gui_desktop.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\app\base\gui_desktop.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>doc</GroupName>
           <Files>
             <File>
@@ -2036,7 +2516,7 @@
           <CreateLib>0</CreateLib>
           <CreateHexFile>0</CreateHexFile>
           <DebugInformation>1</DebugInformation>
-          <BrowseInformation>1</BrowseInformation>
+          <BrowseInformation>0</BrowseInformation>
           <ListingPath>.\nor_txt_ram\Listings\</ListingPath>
           <HexFormatSelection>1</HexFormatSelection>
           <Merge32K>0</Merge32K>
@@ -2320,9 +2800,9 @@
 --diag_suppress=66,1296,186 
  
 </MiscControls>
-              <Define>CPU_MIMXRT1052DVL6B,XIP_EXTERNAL_FLASH=1, XIP_BOOT_HEADER_ENABLE =1,XIP_BOOT_HEADER_DCD_ENABLE =1,PRINTF_FLOAT_ENABLE=1, SCANF_FLOAT_ENABLE=1, PRINTF_ADVANCED_ENABLE=1, SCANF_ADVANCED_ENABLE=1</Define>
+              <Define>CPU_MIMXRT1052DVL6B,XIP_EXTERNAL_FLASH=1, XIP_BOOT_HEADER_ENABLE =1,XIP_BOOT_HEADER_DCD_ENABLE =1,PRINTF_FLOAT_ENABLE=1, SCANF_FLOAT_ENABLE=1, PRINTF_ADVANCED_ENABLE=1, SCANF_ADVANCED_ENABLE=1,X_GUI_USE_FREERTOS</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\libraries\CMSIS\Include;..\..\libraries\drivers;..\..\libraries\utilities;..\..\libraries\utilities\str;..\..\libraries\utilities\log;..\..\libraries\utilities\io;..\..\libraries\xip;..\..\user;..\..\user\bsp;..\..\FreeRTOS\include;..\..\FreeRTOS\port\RVDS\ARM_CM7\r0p1</IncludePath>
+              <IncludePath>..\..\libraries\CMSIS\Include;..\..\libraries\drivers;..\..\libraries\utilities;..\..\libraries\utilities\str;..\..\libraries\utilities\log;..\..\libraries\utilities\io;..\..\libraries\xip;..\..\user;..\..\user\bsp;..\..\FreeRTOS\include;..\..\FreeRTOS\port\RVDS\ARM_CM7\r0p1;..\..\..\..\..\emXGUI_Lib\inc;..\..\..\..\..\emXGUI_Lib\drv;..\..\..\..\..\emXGUI_Lib\arch\Inc;..\..\..\..\..\emXGUI_Lib\app\base</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -2522,15 +3002,15 @@
               <FileType>1</FileType>
               <FilePath>..\..\user\main.c</FilePath>
             </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>bsp</GroupName>
+          <Files>
             <File>
-              <FileName>bsp_led.c</FileName>
+              <FileName>core_delay.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\led\bsp_led.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_lcd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\lcd\bsp_lcd.c</FilePath>
+              <FilePath>..\..\user\bsp\delay\core_delay.c</FilePath>
             </File>
             <File>
               <FileName>fonts.c</FileName>
@@ -2538,14 +3018,24 @@
               <FilePath>..\..\user\bsp\font\fonts.c</FilePath>
             </File>
             <File>
+              <FileName>bsp_key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\key\bsp_key.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_lcd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\lcd\bsp_lcd.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_led.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\led\bsp_led.c</FilePath>
+            </File>
+            <File>
               <FileName>bsp_systick.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\systick\bsp_systick.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_touch_gtxx.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\touch\bsp_touch_gtxx.c</FilePath>
             </File>
             <File>
               <FileName>bsp_i2c_touch.c</FileName>
@@ -2553,19 +3043,14 @@
               <FilePath>..\..\user\bsp\touch\bsp_i2c_touch.c</FilePath>
             </File>
             <File>
+              <FileName>bsp_touch_gtxx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\touch\bsp_touch_gtxx.c</FilePath>
+            </File>
+            <File>
               <FileName>palette.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\touch\palette.c</FilePath>
-            </File>
-            <File>
-              <FileName>core_delay.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\delay\core_delay.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_key.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\key\bsp_key.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2636,6 +3121,161 @@
               <FileName>heap_4.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\FreeRTOS\port\MemMang\heap_4.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/arch</GroupName>
+          <Files>
+            <File>
+              <FileName>GUI_Arch.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\GUI_Arch.c</FilePath>
+            </File>
+            <File>
+              <FileName>X_GUI_FreeRTOS.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\OS_Options\X_GUI_FreeRTOS.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_drv.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\Inc\gui_drv.h</FilePath>
+            </File>
+            <File>
+              <FileName>gui_os_port.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\Inc\gui_os_port.h</FilePath>
+            </File>
+            <File>
+              <FileName>GUI_GPU.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\GUI_GPU.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/resource</GroupName>
+          <Files>
+            <File>
+              <FileName>ASCII_16_4BPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_16_4BPP.c</FilePath>
+            </File>
+            <File>
+              <FileName>ASCII_20_4BPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_20_4BPP.c</FilePath>
+            </File>
+            <File>
+              <FileName>ASCII_24_4BPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_24_4BPP.c</FilePath>
+            </File>
+            <File>
+              <FileName>GB2312_16_2BPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\resource\xft_font\GB2312_16_2BPP.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/drv</GroupName>
+          <Files>
+            <File>
+              <FileName>gui_drv_cfg.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\user\gui_drv_cfg.h</FilePath>
+            </File>
+            <File>
+              <FileName>gui_font_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_font_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_lcd_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_lcd_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_log_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_log_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_mem_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_mem_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_startup.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_startup.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/inc</GroupName>
+          <Files>
+            <File>
+              <FileName>def.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\def.h</FilePath>
+            </File>
+            <File>
+              <FileName>emXGUI.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\emXGUI.h</FilePath>
+            </File>
+            <File>
+              <FileName>emXGUI_Arch.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\emXGUI_Arch.h</FilePath>
+            </File>
+            <File>
+              <FileName>GUI_Font_XFT.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\GUI_Font_XFT.h</FilePath>
+            </File>
+            <File>
+              <FileName>Web_Color.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\Web_Color.h</FilePath>
+            </File>
+            <File>
+              <FileName>x_libc.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\x_libc.h</FilePath>
+            </File>
+            <File>
+              <FileName>x_obj.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\x_obj.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/libs</GroupName>
+          <Files>
+            <File>
+              <FileName>emXGUI100_MDK_M7.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\emXGUI100_MDK_M7.lib</FilePath>
+            </File>
+            <File>
+              <FileName>x_libc_MDK_M7.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\x_libc_MDK_M7.lib</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>base_app</GroupName>
+          <Files>
+            <File>
+              <FileName>gui_desktop.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\app\base\gui_desktop.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -3184,15 +3824,15 @@
               <FileType>1</FileType>
               <FilePath>..\..\user\main.c</FilePath>
             </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>bsp</GroupName>
+          <Files>
             <File>
-              <FileName>bsp_led.c</FileName>
+              <FileName>core_delay.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\led\bsp_led.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_lcd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\lcd\bsp_lcd.c</FilePath>
+              <FilePath>..\..\user\bsp\delay\core_delay.c</FilePath>
             </File>
             <File>
               <FileName>fonts.c</FileName>
@@ -3200,14 +3840,24 @@
               <FilePath>..\..\user\bsp\font\fonts.c</FilePath>
             </File>
             <File>
+              <FileName>bsp_key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\key\bsp_key.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_lcd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\lcd\bsp_lcd.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_led.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\led\bsp_led.c</FilePath>
+            </File>
+            <File>
               <FileName>bsp_systick.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\systick\bsp_systick.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_touch_gtxx.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\touch\bsp_touch_gtxx.c</FilePath>
             </File>
             <File>
               <FileName>bsp_i2c_touch.c</FileName>
@@ -3215,19 +3865,14 @@
               <FilePath>..\..\user\bsp\touch\bsp_i2c_touch.c</FilePath>
             </File>
             <File>
+              <FileName>bsp_touch_gtxx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\touch\bsp_touch_gtxx.c</FilePath>
+            </File>
+            <File>
               <FileName>palette.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\touch\palette.c</FilePath>
-            </File>
-            <File>
-              <FileName>core_delay.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\delay\core_delay.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_key.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\key\bsp_key.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -3298,6 +3943,161 @@
               <FileName>heap_4.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\FreeRTOS\port\MemMang\heap_4.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/arch</GroupName>
+          <Files>
+            <File>
+              <FileName>GUI_Arch.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\GUI_Arch.c</FilePath>
+            </File>
+            <File>
+              <FileName>X_GUI_FreeRTOS.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\OS_Options\X_GUI_FreeRTOS.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_drv.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\Inc\gui_drv.h</FilePath>
+            </File>
+            <File>
+              <FileName>gui_os_port.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\Inc\gui_os_port.h</FilePath>
+            </File>
+            <File>
+              <FileName>GUI_GPU.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\GUI_GPU.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/resource</GroupName>
+          <Files>
+            <File>
+              <FileName>ASCII_16_4BPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_16_4BPP.c</FilePath>
+            </File>
+            <File>
+              <FileName>ASCII_20_4BPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_20_4BPP.c</FilePath>
+            </File>
+            <File>
+              <FileName>ASCII_24_4BPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_24_4BPP.c</FilePath>
+            </File>
+            <File>
+              <FileName>GB2312_16_2BPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\resource\xft_font\GB2312_16_2BPP.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/drv</GroupName>
+          <Files>
+            <File>
+              <FileName>gui_drv_cfg.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\user\gui_drv_cfg.h</FilePath>
+            </File>
+            <File>
+              <FileName>gui_font_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_font_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_lcd_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_lcd_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_log_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_log_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_mem_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_mem_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_startup.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_startup.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/inc</GroupName>
+          <Files>
+            <File>
+              <FileName>def.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\def.h</FilePath>
+            </File>
+            <File>
+              <FileName>emXGUI.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\emXGUI.h</FilePath>
+            </File>
+            <File>
+              <FileName>emXGUI_Arch.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\emXGUI_Arch.h</FilePath>
+            </File>
+            <File>
+              <FileName>GUI_Font_XFT.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\GUI_Font_XFT.h</FilePath>
+            </File>
+            <File>
+              <FileName>Web_Color.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\Web_Color.h</FilePath>
+            </File>
+            <File>
+              <FileName>x_libc.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\x_libc.h</FilePath>
+            </File>
+            <File>
+              <FileName>x_obj.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\x_obj.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/libs</GroupName>
+          <Files>
+            <File>
+              <FileName>emXGUI100_MDK_M7.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\emXGUI100_MDK_M7.lib</FilePath>
+            </File>
+            <File>
+              <FileName>x_libc_MDK_M7.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\x_libc_MDK_M7.lib</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>base_app</GroupName>
+          <Files>
+            <File>
+              <FileName>gui_desktop.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\app\base\gui_desktop.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -3846,15 +4646,15 @@
               <FileType>1</FileType>
               <FilePath>..\..\user\main.c</FilePath>
             </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>bsp</GroupName>
+          <Files>
             <File>
-              <FileName>bsp_led.c</FileName>
+              <FileName>core_delay.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\led\bsp_led.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_lcd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\lcd\bsp_lcd.c</FilePath>
+              <FilePath>..\..\user\bsp\delay\core_delay.c</FilePath>
             </File>
             <File>
               <FileName>fonts.c</FileName>
@@ -3862,14 +4662,24 @@
               <FilePath>..\..\user\bsp\font\fonts.c</FilePath>
             </File>
             <File>
+              <FileName>bsp_key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\key\bsp_key.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_lcd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\lcd\bsp_lcd.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_led.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\led\bsp_led.c</FilePath>
+            </File>
+            <File>
               <FileName>bsp_systick.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\systick\bsp_systick.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_touch_gtxx.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\touch\bsp_touch_gtxx.c</FilePath>
             </File>
             <File>
               <FileName>bsp_i2c_touch.c</FileName>
@@ -3877,19 +4687,14 @@
               <FilePath>..\..\user\bsp\touch\bsp_i2c_touch.c</FilePath>
             </File>
             <File>
+              <FileName>bsp_touch_gtxx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\touch\bsp_touch_gtxx.c</FilePath>
+            </File>
+            <File>
               <FileName>palette.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\touch\palette.c</FilePath>
-            </File>
-            <File>
-              <FileName>core_delay.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\delay\core_delay.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_key.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\key\bsp_key.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -3960,6 +4765,161 @@
               <FileName>heap_4.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\FreeRTOS\port\MemMang\heap_4.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/arch</GroupName>
+          <Files>
+            <File>
+              <FileName>GUI_Arch.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\GUI_Arch.c</FilePath>
+            </File>
+            <File>
+              <FileName>X_GUI_FreeRTOS.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\OS_Options\X_GUI_FreeRTOS.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_drv.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\Inc\gui_drv.h</FilePath>
+            </File>
+            <File>
+              <FileName>gui_os_port.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\Inc\gui_os_port.h</FilePath>
+            </File>
+            <File>
+              <FileName>GUI_GPU.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\GUI_GPU.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/resource</GroupName>
+          <Files>
+            <File>
+              <FileName>ASCII_16_4BPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_16_4BPP.c</FilePath>
+            </File>
+            <File>
+              <FileName>ASCII_20_4BPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_20_4BPP.c</FilePath>
+            </File>
+            <File>
+              <FileName>ASCII_24_4BPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_24_4BPP.c</FilePath>
+            </File>
+            <File>
+              <FileName>GB2312_16_2BPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\resource\xft_font\GB2312_16_2BPP.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/drv</GroupName>
+          <Files>
+            <File>
+              <FileName>gui_drv_cfg.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\user\gui_drv_cfg.h</FilePath>
+            </File>
+            <File>
+              <FileName>gui_font_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_font_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_lcd_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_lcd_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_log_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_log_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_mem_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_mem_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_startup.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_startup.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/inc</GroupName>
+          <Files>
+            <File>
+              <FileName>def.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\def.h</FilePath>
+            </File>
+            <File>
+              <FileName>emXGUI.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\emXGUI.h</FilePath>
+            </File>
+            <File>
+              <FileName>emXGUI_Arch.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\emXGUI_Arch.h</FilePath>
+            </File>
+            <File>
+              <FileName>GUI_Font_XFT.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\GUI_Font_XFT.h</FilePath>
+            </File>
+            <File>
+              <FileName>Web_Color.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\Web_Color.h</FilePath>
+            </File>
+            <File>
+              <FileName>x_libc.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\x_libc.h</FilePath>
+            </File>
+            <File>
+              <FileName>x_obj.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\x_obj.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/libs</GroupName>
+          <Files>
+            <File>
+              <FileName>emXGUI100_MDK_M7.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\emXGUI100_MDK_M7.lib</FilePath>
+            </File>
+            <File>
+              <FileName>x_libc_MDK_M7.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\x_libc_MDK_M7.lib</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>base_app</GroupName>
+          <Files>
+            <File>
+              <FileName>gui_desktop.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\app\base\gui_desktop.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -4508,15 +5468,15 @@
               <FileType>1</FileType>
               <FilePath>..\..\user\main.c</FilePath>
             </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>bsp</GroupName>
+          <Files>
             <File>
-              <FileName>bsp_led.c</FileName>
+              <FileName>core_delay.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\led\bsp_led.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_lcd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\lcd\bsp_lcd.c</FilePath>
+              <FilePath>..\..\user\bsp\delay\core_delay.c</FilePath>
             </File>
             <File>
               <FileName>fonts.c</FileName>
@@ -4524,14 +5484,24 @@
               <FilePath>..\..\user\bsp\font\fonts.c</FilePath>
             </File>
             <File>
+              <FileName>bsp_key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\key\bsp_key.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_lcd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\lcd\bsp_lcd.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_led.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\led\bsp_led.c</FilePath>
+            </File>
+            <File>
               <FileName>bsp_systick.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\systick\bsp_systick.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_touch_gtxx.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\touch\bsp_touch_gtxx.c</FilePath>
             </File>
             <File>
               <FileName>bsp_i2c_touch.c</FileName>
@@ -4539,19 +5509,14 @@
               <FilePath>..\..\user\bsp\touch\bsp_i2c_touch.c</FilePath>
             </File>
             <File>
+              <FileName>bsp_touch_gtxx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\touch\bsp_touch_gtxx.c</FilePath>
+            </File>
+            <File>
               <FileName>palette.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\touch\palette.c</FilePath>
-            </File>
-            <File>
-              <FileName>core_delay.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\delay\core_delay.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_key.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\key\bsp_key.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -4622,6 +5587,161 @@
               <FileName>heap_4.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\FreeRTOS\port\MemMang\heap_4.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/arch</GroupName>
+          <Files>
+            <File>
+              <FileName>GUI_Arch.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\GUI_Arch.c</FilePath>
+            </File>
+            <File>
+              <FileName>X_GUI_FreeRTOS.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\OS_Options\X_GUI_FreeRTOS.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_drv.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\Inc\gui_drv.h</FilePath>
+            </File>
+            <File>
+              <FileName>gui_os_port.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\Inc\gui_os_port.h</FilePath>
+            </File>
+            <File>
+              <FileName>GUI_GPU.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\arch\GUI_GPU.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/resource</GroupName>
+          <Files>
+            <File>
+              <FileName>ASCII_16_4BPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_16_4BPP.c</FilePath>
+            </File>
+            <File>
+              <FileName>ASCII_20_4BPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_20_4BPP.c</FilePath>
+            </File>
+            <File>
+              <FileName>ASCII_24_4BPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\resource\xft_font\ASCII_24_4BPP.c</FilePath>
+            </File>
+            <File>
+              <FileName>GB2312_16_2BPP.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\resource\xft_font\GB2312_16_2BPP.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/drv</GroupName>
+          <Files>
+            <File>
+              <FileName>gui_drv_cfg.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\user\gui_drv_cfg.h</FilePath>
+            </File>
+            <File>
+              <FileName>gui_font_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_font_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_lcd_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_lcd_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_log_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_log_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_mem_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_mem_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_startup.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_startup.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/inc</GroupName>
+          <Files>
+            <File>
+              <FileName>def.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\def.h</FilePath>
+            </File>
+            <File>
+              <FileName>emXGUI.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\emXGUI.h</FilePath>
+            </File>
+            <File>
+              <FileName>emXGUI_Arch.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\emXGUI_Arch.h</FilePath>
+            </File>
+            <File>
+              <FileName>GUI_Font_XFT.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\GUI_Font_XFT.h</FilePath>
+            </File>
+            <File>
+              <FileName>Web_Color.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\Web_Color.h</FilePath>
+            </File>
+            <File>
+              <FileName>x_libc.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\x_libc.h</FilePath>
+            </File>
+            <File>
+              <FileName>x_obj.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\x_obj.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/libs</GroupName>
+          <Files>
+            <File>
+              <FileName>emXGUI100_MDK_M7.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\emXGUI100_MDK_M7.lib</FilePath>
+            </File>
+            <File>
+              <FileName>x_libc_MDK_M7.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\x_libc_MDK_M7.lib</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>base_app</GroupName>
+          <Files>
+            <File>
+              <FileName>gui_desktop.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\app\base\gui_desktop.c</FilePath>
             </File>
           </Files>
         </Group>

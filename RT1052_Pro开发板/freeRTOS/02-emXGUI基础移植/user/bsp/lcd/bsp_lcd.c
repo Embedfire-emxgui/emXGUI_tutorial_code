@@ -311,6 +311,20 @@ void LCD_BackLight_ON(void)
     GPIO_PinInit(LCD_BL_GPIO, LCD_BL_GPIO_PIN, &config);
 }
 
+/**
+* @brief  初始化背光引脚并点亮
+* @param  无
+* @retval 无
+*/
+void LCD_BackLed_Control(int on)
+{    
+    /* 背光，高电平点亮 */
+  if ( on )
+    GPIO_PinWrite(LCD_BL_GPIO, LCD_BL_GPIO_PIN, 1U);
+	else
+		GPIO_PinWrite(LCD_BL_GPIO, LCD_BL_GPIO_PIN, 0U);
+}
+
 
 
 /**

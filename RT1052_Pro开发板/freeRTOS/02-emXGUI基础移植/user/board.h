@@ -5,6 +5,16 @@
 #include "fsl_common.h"
 #include "fsl_gpio.h"
 
+#include "./systick/bsp_systick.h"
+
+#include "./delay/core_delay.h"   
+#include "./led/bsp_led.h" 
+#include "./key/bsp_key.h" 
+#include "./lcd/bsp_lcd.h" 
+#include "./touch/bsp_touch_gtxx.h"
+#include "./touch/bsp_i2c_touch.h"
+#include "./touch/palette.h"
+
 /*******************************************************************************
  * Definitions
  ******************************************************************************/

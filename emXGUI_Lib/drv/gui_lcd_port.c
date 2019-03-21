@@ -46,6 +46,10 @@ void LCD_HardInit(u32 fb_addr)
   #if	(LCD_FORMAT == COLOR_FORMAT_XRGB8888)
     LCD_Init(fb_addr, 0, LTDC_PIXEL_FORMAT_ARGB8888);
   #endif 
+  
+#elif defined(CPU_MIMXRT1052DVL6B)
+  LCD_Init(LCD_INTERRUPT_DISABLE);
+  
 #endif
 
 }

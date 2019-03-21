@@ -75,6 +75,7 @@ extern const elcdif_rgb_mode_config_t lcd_param[];
 															kELCDIF_DriveDataOnRisingClkEdge)
 
 
+#define  LCD_BUFFER         ((uint32_t)s_psBufferLcd)
 
 /* 缓冲区对齐配置, 为了提高性能, LCDIF缓冲区要64B对齐 */
 #define FRAME_BUFFER_ALIGN    64
@@ -176,6 +177,7 @@ extern pixel_t s_psBufferLcd[2][LCD_MAX_PIXEL_HEIGHT][LCD_MAX_PIXEL_WIDTH];
  * 函数声明
  ******************************************************************************/
 void LCD_BackLight_ON(void);
+void LCD_BackLed_Control(int on);
 void LCD_Init(bool enableInterrupt);
 void LCD_InterruptConfig(void);
 

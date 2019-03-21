@@ -76,6 +76,7 @@
 #if defined(__ICCARM__) || defined(__CC_ARM) || defined(__GNUC__)
     #include <stdint.h>
     #include "fsl_debug_console.h"
+	#include "gui_drv_cfg.h"
     extern uint32_t SystemCoreClock;
 
 #endif
@@ -167,10 +168,10 @@
 #define configUSE_MUTEXES						    1    
 
 //使用递归互斥信号量                                            
-#define configUSE_RECURSIVE_MUTEXES			0   
+#define configUSE_RECURSIVE_MUTEXES			1   
 
 //为1时使用计数信号量
-#define configUSE_COUNTING_SEMAPHORES		0
+#define configUSE_COUNTING_SEMAPHORES		1
 
 /* 设置可以注册的信号量和消息队列个数 */
 #define configQUEUE_REGISTRY_SIZE				10                                 
@@ -186,7 +187,8 @@
 //支持静态内存
 #define configSUPPORT_STATIC_ALLOCATION					0					
 //系统所有总的堆大小
-#define configTOTAL_HEAP_SIZE					((size_t)(36*1024))    
+//#define configTOTAL_HEAP_SIZE					((size_t)(36*1024))    
+#define configTOTAL_HEAP_SIZE					((size_t)GUI_CORE_MEM_SIZE)    
 
 
 /***************************************************************

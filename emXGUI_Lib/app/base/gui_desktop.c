@@ -98,7 +98,7 @@ static	void	_EraseBackgnd(HDC hdc,const RECT *lprc,HWND hwnd)
 #endif
   
 	SetTextColor(hdc,MapRGB(hdc,250,250,250));
-	TextOut(hdc,20,20,L"emXGUI@Embedfire STM32F429 ",-1);
+	TextOut(hdc,20,20,L"emXGUI@Embedfire",-1);
 
 }
 
