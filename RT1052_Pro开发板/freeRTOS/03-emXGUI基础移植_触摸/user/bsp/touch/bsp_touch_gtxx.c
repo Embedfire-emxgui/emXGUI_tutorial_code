@@ -331,8 +331,8 @@ void GTP_IRQ_Enable(void)
   * @retval 无
   */
 /*用于记录连续触摸时(长按)的上一次触摸位置，负数值表示上一次无触摸按下*/
-static int16_t pre_x[GTP_MAX_TOUCH] ={-1,-1,-1,-1,-1};
-static int16_t pre_y[GTP_MAX_TOUCH] ={-1,-1,-1,-1,-1};
+//static int16_t pre_x[GTP_MAX_TOUCH] ={-1,-1,-1,-1,-1};
+//static int16_t pre_y[GTP_MAX_TOUCH] ={-1,-1,-1,-1,-1};
 
 static void GTP_Touch_Down(int32_t id,int32_t x,int32_t y,int32_t w)
 {
@@ -344,11 +344,11 @@ static void GTP_Touch_Down(int32_t id,int32_t x,int32_t y,int32_t w)
 
 	
     /* 处理触摸按钮，用于触摸画板 */
-    Touch_Button_Down(x,y); 
+//    Touch_Button_Down(x,y); 
 	
 
     /*处理描绘轨迹，用于触摸画板 */
-    Draw_Trail(pre_x[id],pre_y[id],x,y,&brush);
+//    Draw_Trail(pre_x[id],pre_y[id],x,y,&brush);
 	
 		/************************************/
 		/*在此处添加自己的触摸点按下时处理过程即可*/
@@ -356,7 +356,7 @@ static void GTP_Touch_Down(int32_t id,int32_t x,int32_t y,int32_t w)
 		/************************************/
 	
 		/*prex,prey数组存储上一次触摸的位置，id为轨迹编号(多点触控时有多轨迹)*/
-    pre_x[id] = x; pre_y[id] =y;
+//    pre_x[id] = x; pre_y[id] =y;
 	
 }
 
@@ -371,7 +371,7 @@ static void GTP_Touch_Up( int32_t id)
 	
 
     /*处理触摸释放,用于触摸画板*/
-    Touch_Button_Up(pre_x[id],pre_y[id]);
+//    Touch_Button_Up(pre_x[id],pre_y[id]);
 
 		/*****************************************/
 		/*在此处添加自己的触摸点释放时的处理过程即可*/
@@ -381,8 +381,8 @@ static void GTP_Touch_Up( int32_t id)
 	
 	
     /*触笔释放，把pre xy 重置为负*/
-	  pre_x[id] = -1;
-	  pre_y[id] = -1;		
+//	  pre_x[id] = -1;
+//	  pre_y[id] = -1;		
   
     GTP_DEBUG("Touch id[%2d] release!", id);
 
