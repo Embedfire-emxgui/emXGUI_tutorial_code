@@ -81,3 +81,6 @@ settings
 *.log
 *.ld
 
+/emXGUI_Lib.zip
+/tutorial_code_stm32f429.zip
+/资源文件.zip
