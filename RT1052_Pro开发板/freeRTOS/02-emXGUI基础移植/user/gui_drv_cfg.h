@@ -93,9 +93,9 @@
  * 剩余的空间作为VMEM动态分配使用
 */
 /* 内存堆的基地址，可以为内部SRAM、外扩的SDRAM等 */  
-#define	VMEM_BASE	        (0x80400000)
+#define	VMEM_BASE	        (0x80450000)
 /* 内存堆的总大小，单位为字节 */ 
-#define	VMEM_SIZE	        (0x01800000)     
+#define	VMEM_SIZE	        (0x01700000)     
 /* 最小分配粒度，单位为字节*/  
 #define	VMEM_ALLOC_UNIT   (64)         //64字节   
 
