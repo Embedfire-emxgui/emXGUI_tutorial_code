@@ -310,7 +310,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>2</Optim>
+            <Optim>1</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -335,7 +335,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32H743xx,X_GUI_USE_FREERTOS,</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\Libraries\CMSIS\Include;..\..\Libraries\CMSIS\Device\ST\STM32H7xx\Include;..\..\Libraries\STM32H7xx_HAL_Driver\Inc;..\..\User;..\..\User\bsp;..\..\FreeRTOS\include;..\..\FreeRTOS\port\RVDS\ARM_CM7\r0p1;..\..\User\bsp\cm_backtrace;..\..\..\..\..\emXGUI_Lib\inc;..\..\..\..\..\emXGUI_Lib\drv;..\..\..\..\..\emXGUI_Lib\arch\Inc;..\..\..\..\..\emXGUI_Lib\app\base;..\..\User\bsp\FATFS</IncludePath>
+              <IncludePath>..\..\Libraries\CMSIS\Include;..\..\Libraries\CMSIS\Device\ST\STM32H7xx\Include;..\..\Libraries\STM32H7xx_HAL_Driver\Inc;..\..\User;..\..\User\bsp;..\..\FreeRTOS\include;..\..\FreeRTOS\port\RVDS\ARM_CM7\r0p1;..\..\User\bsp\cm_backtrace;..\..\..\..\..\emXGUI_Lib\inc;..\..\..\..\..\emXGUI_Lib\drv;..\..\..\..\..\emXGUI_Lib\arch\Inc;..\..\..\..\..\emXGUI_Lib\app\base;..\..\User\bsp\FATFS;..\..\..\..\..\emXGUI_Lib\app\base\res_writer</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -825,6 +825,11 @@
               <FilePath>..\..\User\bsp\sdram\bsp_sdram.c</FilePath>
             </File>
             <File>
+              <FileName>bsp_qspi_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\bsp\flash\bsp_qspi_flash.c</FilePath>
+            </File>
+            <File>
               <FileName>bsp_lcd.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\bsp\lcd\bsp_lcd.c</FilePath>
@@ -848,11 +853,6 @@
               <FileName>bsp_sdio_sd.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\bsp\sd_card\bsp_sdio_sd.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_qspi_flash.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\bsp\flash\bsp_qspi_flash.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1099,6 +1099,11 @@
               <FileType>4</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\libs\x_libc_MDK_M7.lib</FilePath>
             </File>
+            <File>
+              <FileName>libpng_MDK_M7.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\libpng_MDK_M7.lib</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1108,6 +1113,31 @@
               <FileName>gui_desktop.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\app\base\gui_desktop.c</FilePath>
+            </File>
+            <File>
+              <FileName>backend_res_writer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\app\base\res_writer\backend_res_writer.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUI_RES_Writer_Dialog.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\app\base\res_writer\GUI_RES_Writer_Dialog.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUI_Boot_Interface_Dialog.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\app\base\boot_interface\GUI_Boot_Interface_Dialog.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>emxgui/res</GroupName>
+          <Files>
+            <File>
+              <FileName>boot_logo.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\app\base\boot_interface\boot_logo.c</FilePath>
             </File>
           </Files>
         </Group>

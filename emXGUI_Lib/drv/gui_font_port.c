@@ -169,7 +169,6 @@ HFONT GUI_Init_Extern_Font_2RAM(const char* res_name,u8** buf)
     int font_base; 
     HFONT hFont = NULL;  
     CatalogTypeDef dir;
-  
 #if (GUI_APP_BOOT_INTERFACE_EN)
   {
     /* 启动界面的进度条 */
@@ -193,7 +192,7 @@ HFONT GUI_Init_Extern_Font_2RAM(const char* res_name,u8** buf)
     	*buf =(u8*)GUI_VMEM_Alloc(dir.size);
       if(*buf!=NULL)
       {
-        RES_DevRead((u8 *)*buf, font_base, dir.size);
+        RES_DevRead((u8*)*buf, font_base, dir.size);
 
         hFont = XFT_CreateFont(*buf);
       }

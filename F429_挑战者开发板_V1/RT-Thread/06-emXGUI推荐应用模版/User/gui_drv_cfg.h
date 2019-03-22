@@ -59,7 +59,7 @@
 #define	GUI_TOUCHSCREEN_CALIBRATE       0
 
 /* 是否显示光标 */
-#define  GUI_SHOW_CURSOR_EN        0
+#define  GUI_SHOW_CURSOR_EN        1
 
 /*===========存储器配置===gui_mem_port.c===============================================*/
 /* 通常GUI内核使用MEM内存堆，VMEM内存堆给用户使用 */

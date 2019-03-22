@@ -6,7 +6,15 @@
 extern "C"{
 #endif
 
+#if defined(STM32F429_439xx)
 #include "stm32f4xx.h"
+#elif defined(STM32H743xx)
+#include "stm32h7xx.h"
+#endif    
+  
+
+  
+  
 #include "ff.h"
   
 #include "gui_drv_cfg.h"
