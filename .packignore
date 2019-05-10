@@ -1,5 +1,7 @@
 .git
 .gitignore
-keilkill.bat
+F429_挑战者开发板_V1\keilkill.bat
+H743_Pro开发板\keilkill.bat
+RT1052_Pro开发板\keilkill.bat
 LICENSE
 README.md
