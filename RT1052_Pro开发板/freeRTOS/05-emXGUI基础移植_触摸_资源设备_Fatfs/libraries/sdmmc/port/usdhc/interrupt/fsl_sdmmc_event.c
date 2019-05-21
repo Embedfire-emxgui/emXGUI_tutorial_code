@@ -33,10 +33,14 @@
  */
 
 #include "fsl_sdmmc_event.h"
-
+#include "FreeRTOS.h"
+#include "semphr.h"
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
+/*! @brief Convert the milliseconds to ticks in FreeRTOS. */
+#define MSEC_TO_TICK(msec) \
+    (((uint32_t)(msec) + 500uL / (uint32_t)configTICK_RATE_HZ) * (uint32_t)configTICK_RATE_HZ / 1000uL)
 
 /*******************************************************************************
  * Prototypes
@@ -46,16 +50,16 @@
  * @param eventType The event type
  * @return The event instance's pointer.
  */
-static volatile uint32_t *SDMMCEVENT_GetInstance(sdmmc_event_t eventType);
+static SemaphoreHandle_t *SDMMCEVENT_GetInstance(sdmmc_event_t eventType);
 
 /*******************************************************************************
  * Variables
  ******************************************************************************/
 /*! @brief Card detect event. */
-static volatile uint32_t g_eventCardDetect;
+//static volatile uint32_t g_eventCardDetect;
 
 /*! @brief transfer complete event. */
-static volatile uint32_t g_eventTransferComplete;
+static SemaphoreHandle_t g_eventTransferComplete;
 
 /*! @brief Time variable unites as milliseconds. */
 volatile uint32_t g_eventTimeMilliseconds;
@@ -79,21 +83,18 @@ void SDMMCEVENT_InitTimer(void)
     SystemClearSystickFlag();
 #else
     /* Set systick reload value to generate 1ms interrupt */
-    SysTick_Config(CLOCK_GetFreq(kCLOCK_CoreSysClk) / 1000U);
+    //SysTick_Config(CLOCK_GetFreq(kCLOCK_CoreSysClk) / 1000U);
 #endif
 }
 
-static volatile uint32_t *SDMMCEVENT_GetInstance(sdmmc_event_t eventType)
+static SemaphoreHandle_t *SDMMCEVENT_GetInstance(sdmmc_event_t eventType)
 {
-    volatile uint32_t *event;
+    SemaphoreHandle_t *event;
 
     switch (eventType)
     {
         case kSDMMCEVENT_TransferComplete:
             event = &g_eventTransferComplete;
-            break;
-        case kSDMMCEVENT_CardDetect:
-            event = &g_eventCardDetect;
             break;
         default:
             event = NULL;
@@ -105,74 +106,64 @@ static volatile uint32_t *SDMMCEVENT_GetInstance(sdmmc_event_t eventType)
 
 bool SDMMCEVENT_Create(sdmmc_event_t eventType)
 {
-    volatile uint32_t *event = SDMMCEVENT_GetInstance(eventType);
+    //SemaphoreHandle_t *event = SDMMCEVENT_GetInstance(eventType);
+  g_eventTransferComplete = xSemaphoreCreateBinary();
 
-    if (event)
-    {
-        *event = 0;
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+
+  return true;
+
 }
 
 bool SDMMCEVENT_Wait(sdmmc_event_t eventType, uint32_t timeoutMilliseconds)
 {
-    uint32_t startTime;
-    uint32_t elapsedTime;
+    //SemaphoreHandle_t *event = SDMMCEVENT_GetInstance(eventType);
 
-    volatile uint32_t *event = SDMMCEVENT_GetInstance(eventType);
-
-    if (timeoutMilliseconds && event)
+    if (xSemaphoreTake(g_eventTransferComplete, 0xFFFFFFFF) == pdFALSE)
     {
-        startTime = g_eventTimeMilliseconds;
-        do
-        {
-            elapsedTime = (g_eventTimeMilliseconds - startTime);
-        } while ((*event == 0U) && (elapsedTime < timeoutMilliseconds));
-        *event = 0U;
-
-        return ((elapsedTime < timeoutMilliseconds) ? true : false);
+        return false; /* timeout */
     }
     else
     {
-        return false;
+        return true; /* event taken */
     }
 }
 
 bool SDMMCEVENT_Notify(sdmmc_event_t eventType)
 {
-    volatile uint32_t *event = SDMMCEVENT_GetInstance(eventType);
+//    SemaphoreHandle_t *event = SDMMCEVENT_GetInstance(eventType);
+//    BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+//    BaseType_t xResult = pdFAIL;
 
-    if (event)
+    //if (event)
     {
-        *event = 1U;
-        return true;
+        xSemaphoreGiveFromISR(g_eventTransferComplete, NULL);
+//        if (xResult != pdFAIL)
+//        {
+//            portYIELD_FROM_ISR(xHigherPriorityTaskWoken);
+            return true;
+//        }
+//        else
+//        {
+//            return false;
+//        }
     }
-    else
-    {
-        return false;
-    }
+//    else
+//    {
+//        return false;
+//    }
 }
 
 void SDMMCEVENT_Delete(sdmmc_event_t eventType)
 {
-    volatile uint32_t *event = SDMMCEVENT_GetInstance(eventType);
+    //SemaphoreHandle_t *event = SDMMCEVENT_GetInstance(eventType);
 
-    if (event)
+   // if (event)
     {
-        *event = 0U;
+        vSemaphoreDelete(g_eventTransferComplete);
     }
 }
 
 void SDMMCEVENT_Delay(uint32_t milliseconds)
 {
-    uint32_t startTime = g_eventTimeMilliseconds;
-    uint32_t periodTime = 0;
-    while (periodTime < milliseconds)
-    {
-        periodTime = g_eventTimeMilliseconds - startTime;
-    }
+  vTaskDelay(MSEC_TO_TICK(milliseconds));
 }

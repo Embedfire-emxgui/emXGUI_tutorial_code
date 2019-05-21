@@ -174,10 +174,10 @@ static void BSP_Init(void)
     /* 初始化LCD */
 //    LCD_Init(LCD_INTERRUPT_ENABLE);    
     /*挂载文件系统*/
-    f_mount_test(&g_fileSystem);
-    f_touch_test("/dir_1/he.txt"); 
-    /*打开文件*/
-    f_open_test("/dir_1/he.txt",&file_object);
+//    f_mount_test(&g_fileSystem);
+//    f_touch_test("/dir_1/he.txt"); 
+//    /*打开文件*/
+//    f_open_test("/dir_1/he.txt",&file_object);
     
      /*关闭文件*/
     f_close_test(&file_object);    

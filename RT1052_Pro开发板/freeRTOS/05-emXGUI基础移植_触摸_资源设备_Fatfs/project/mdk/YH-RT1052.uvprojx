@@ -453,6 +453,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\libraries\drivers\fsl_cache.c</FilePath>
             </File>
+            <File>
+              <FileName>fsl_gpt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_gpt.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -871,12 +876,12 @@
             <File>
               <FileName>fsl_sdmmc_event.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\libraries\sdmmc\port\usdhc\freertos\fsl_sdmmc_event.c</FilePath>
+              <FilePath>..\..\libraries\sdmmc\port\usdhc\interrupt\fsl_sdmmc_event.c</FilePath>
             </File>
             <File>
               <FileName>fsl_sdmmc_host.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\libraries\sdmmc\port\usdhc\freertos\fsl_sdmmc_host.c</FilePath>
+              <FilePath>..\..\libraries\sdmmc\port\usdhc\interrupt\fsl_sdmmc_host.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1359,6 +1364,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\libraries\drivers\fsl_cache.c</FilePath>
             </File>
+            <File>
+              <FileName>fsl_gpt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_gpt.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1777,12 +1787,12 @@
             <File>
               <FileName>fsl_sdmmc_event.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\libraries\sdmmc\port\usdhc\freertos\fsl_sdmmc_event.c</FilePath>
+              <FilePath>..\..\libraries\sdmmc\port\usdhc\interrupt\fsl_sdmmc_event.c</FilePath>
             </File>
             <File>
               <FileName>fsl_sdmmc_host.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\libraries\sdmmc\port\usdhc\freertos\fsl_sdmmc_host.c</FilePath>
+              <FilePath>..\..\libraries\sdmmc\port\usdhc\interrupt\fsl_sdmmc_host.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2265,6 +2275,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\libraries\drivers\fsl_cache.c</FilePath>
             </File>
+            <File>
+              <FileName>fsl_gpt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_gpt.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2683,12 +2698,12 @@
             <File>
               <FileName>fsl_sdmmc_event.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\libraries\sdmmc\port\usdhc\freertos\fsl_sdmmc_event.c</FilePath>
+              <FilePath>..\..\libraries\sdmmc\port\usdhc\interrupt\fsl_sdmmc_event.c</FilePath>
             </File>
             <File>
               <FileName>fsl_sdmmc_host.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\libraries\sdmmc\port\usdhc\freertos\fsl_sdmmc_host.c</FilePath>
+              <FilePath>..\..\libraries\sdmmc\port\usdhc\interrupt\fsl_sdmmc_host.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -3172,6 +3187,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\libraries\drivers\fsl_cache.c</FilePath>
             </File>
+            <File>
+              <FileName>fsl_gpt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_gpt.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -3590,12 +3610,12 @@
             <File>
               <FileName>fsl_sdmmc_event.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\libraries\sdmmc\port\usdhc\freertos\fsl_sdmmc_event.c</FilePath>
+              <FilePath>..\..\libraries\sdmmc\port\usdhc\interrupt\fsl_sdmmc_event.c</FilePath>
             </File>
             <File>
               <FileName>fsl_sdmmc_host.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\libraries\sdmmc\port\usdhc\freertos\fsl_sdmmc_host.c</FilePath>
+              <FilePath>..\..\libraries\sdmmc\port\usdhc\interrupt\fsl_sdmmc_host.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -4079,6 +4099,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\libraries\drivers\fsl_cache.c</FilePath>
             </File>
+            <File>
+              <FileName>fsl_gpt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_gpt.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -4497,12 +4522,12 @@
             <File>
               <FileName>fsl_sdmmc_event.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\libraries\sdmmc\port\usdhc\freertos\fsl_sdmmc_event.c</FilePath>
+              <FilePath>..\..\libraries\sdmmc\port\usdhc\interrupt\fsl_sdmmc_event.c</FilePath>
             </File>
             <File>
               <FileName>fsl_sdmmc_host.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\libraries\sdmmc\port\usdhc\freertos\fsl_sdmmc_host.c</FilePath>
+              <FilePath>..\..\libraries\sdmmc\port\usdhc\interrupt\fsl_sdmmc_host.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -4986,6 +5011,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\libraries\drivers\fsl_cache.c</FilePath>
             </File>
+            <File>
+              <FileName>fsl_gpt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_gpt.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -5404,12 +5434,12 @@
             <File>
               <FileName>fsl_sdmmc_event.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\libraries\sdmmc\port\usdhc\freertos\fsl_sdmmc_event.c</FilePath>
+              <FilePath>..\..\libraries\sdmmc\port\usdhc\interrupt\fsl_sdmmc_event.c</FilePath>
             </File>
             <File>
               <FileName>fsl_sdmmc_host.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\libraries\sdmmc\port\usdhc\freertos\fsl_sdmmc_host.c</FilePath>
+              <FilePath>..\..\libraries\sdmmc\port\usdhc\interrupt\fsl_sdmmc_host.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -5893,6 +5923,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\libraries\drivers\fsl_cache.c</FilePath>
             </File>
+            <File>
+              <FileName>fsl_gpt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_gpt.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -6311,12 +6346,12 @@
             <File>
               <FileName>fsl_sdmmc_event.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\libraries\sdmmc\port\usdhc\freertos\fsl_sdmmc_event.c</FilePath>
+              <FilePath>..\..\libraries\sdmmc\port\usdhc\interrupt\fsl_sdmmc_event.c</FilePath>
             </File>
             <File>
               <FileName>fsl_sdmmc_host.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\libraries\sdmmc\port\usdhc\freertos\fsl_sdmmc_host.c</FilePath>
+              <FilePath>..\..\libraries\sdmmc\port\usdhc\interrupt\fsl_sdmmc_host.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -118,7 +118,7 @@ int USDHC_Host_Init(sd_card_t* sd_struct)
     PRINTF("\r\nSD主机初始化失败\r\n");
     return -1;
   } 
-//  NVIC_SetPriority(BOARD_SD_HOST_IRQ, 6U); 
+  NVIC_SetPriority(BOARD_SD_HOST_IRQ, 6U); 
   return 0;		
 }
 
