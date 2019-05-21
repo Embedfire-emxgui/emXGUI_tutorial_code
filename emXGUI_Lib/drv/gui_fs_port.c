@@ -17,6 +17,15 @@
 #include "sdio/bsp_sdio_sd.h"
 #elif defined(STM32H743xx)
 #include "./sd_card/bsp_sdio_sd.h"
+#elif defined(CPU_MIMXRT1052DVL6B)
+#include "./bsp/sd_fatfs_test/bsp_sd_fatfs_test.h"
+
+#define BUFFER_SIZE (100U)
+
+SDK_ALIGN(uint8_t g_bufferWrite[SDK_SIZEALIGN(BUFFER_SIZE, SDMMC_DATA_BUFFER_ALIGN_CACHE)],
+          MAX(SDMMC_DATA_BUFFER_ALIGN_CACHE, SDMMCHOST_DMA_BUFFER_ADDR_ALIGN));
+SDK_ALIGN(uint8_t g_bufferRead[SDK_SIZEALIGN(BUFFER_SIZE, SDMMC_DATA_BUFFER_ALIGN_CACHE)],
+          MAX(SDMMC_DATA_BUFFER_ALIGN_CACHE, SDMMCHOST_DMA_BUFFER_ADDR_ALIGN));
 #endif  
 
 
@@ -35,7 +44,7 @@ void FileSystem_Test(void);
 BOOL FileSystem_Init(void)
 { 
   /* 文件操作结果 */
-  FRESULT res_sd;               
+                
 
 	/* 这个函数不允许使用rtt 的 printf打印
 		 只能使用printf	*/
@@ -53,8 +62,9 @@ BOOL FileSystem_Init(void)
 #endif  
 	
 
-
+#if defined(STM32F429_439xx) || defined(STM32H743xx)
 	//在外部SPI Flash挂载文件系统，文件系统挂载时会对SPI设备初始化
+  FRESULT res_sd; 
 	res_sd = f_mount(&fs,"0:",1);
 	
 	if(res_sd == FR_NO_FILESYSTEM)
@@ -99,20 +109,32 @@ BOOL FileSystem_Init(void)
       当使用extern_cc936时，可测试是否存在cc936资源*/
     ff_convert('a',1);
     
-    return TRUE;
+    
   }
-	
-	/* 关闭中断，如果不加互斥量可以在board.c中进行初始化
-		 则必须关闭中断，在任务中初始化的时候则不需要关闭中断 */
-//		rt_hw_interrupt_disable();
+#elif defined(CPU_MIMXRT1052DVL6B)
+  f_mount_test(&fs);
+  /*在SD卡根目录创建一个目录*/
+  f_mkdir_test("/dir_1");
+  
+  /*创建“/dir_1/f_1.txt”*/
+  f_touch_test("/dir_1/he.txt");  
+  memset(g_bufferWrite, '1', sizeof(g_bufferWrite));
+  g_bufferWrite[BUFFER_SIZE - 2U] = '\r';
+  g_bufferWrite[BUFFER_SIZE - 1U] = '\n';
+  
+  PRINTF("\r\n开始文件读写测试......  \r\n");
+  
+  f_write_read_test("/dir_1/he.txt", g_bufferWrite, g_bufferRead);  
+#endif
+  
+  return TRUE;
 }
 
 #if 0
 FIL fnew;													/* 文件对象 */
 UINT fnum;            					  /* 文件成功读写数量 */
-BYTE ReadBuffer[1024]={0};        /* 读缓冲区 */
-BYTE WriteBuffer[] =              /* 写缓冲区*/
-"欢迎使用野火STM32 F429开发板 今天是个好日子，新建文件系统测试文件\r\n";  
+
+ 
 
 /**
   * @brief  文件系统读写测试
