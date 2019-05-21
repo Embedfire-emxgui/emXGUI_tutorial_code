@@ -20,9 +20,9 @@ extern	"C"{
 
 #include	"def.h"
 
-#ifndef	_T
-#define	_T(s) L##s
-#endif
+//#ifndef	_T
+//#define	_T(s) L##s
+//#endif
 
 
 /*============================================================================*/
