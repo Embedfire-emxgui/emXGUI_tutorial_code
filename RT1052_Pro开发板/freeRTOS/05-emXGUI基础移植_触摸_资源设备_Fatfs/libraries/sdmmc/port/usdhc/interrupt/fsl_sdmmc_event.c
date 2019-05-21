@@ -63,13 +63,13 @@ volatile uint32_t g_eventTimeMilliseconds;
 /*******************************************************************************
  * Code
  ******************************************************************************/
-void SysTick_Handler(void)
-{
-#ifdef __CA7_REV
-    SystemClearSystickFlag();
-#endif
-    g_eventTimeMilliseconds++;
-}
+//void SysTick_Handler(void)
+//{
+//#ifdef __CA7_REV
+//    SystemClearSystickFlag();
+//#endif
+//    g_eventTimeMilliseconds++;
+//}
 
 void SDMMCEVENT_InitTimer(void)
 {

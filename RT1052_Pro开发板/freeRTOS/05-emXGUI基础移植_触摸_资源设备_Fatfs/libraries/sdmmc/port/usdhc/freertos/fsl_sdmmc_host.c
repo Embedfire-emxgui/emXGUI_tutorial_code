@@ -264,7 +264,7 @@ static status_t SDMMCHOST_CardDetectInit(SDMMCHOST_TYPE *base, const sdmmchost_d
 
 /* set IRQ priority */
 #if defined(__CORTEX_M)
-        SDMMCHOST_SET_IRQ_PRIORITY(SDMMCHOST_CARD_DETECT_GPIO_IRQ, 6U);
+        SDMMCHOST_SET_IRQ_PRIORITY(SDMMCHOST_CARD_DETECT_GPIO_IRQ, 7U);
 #else
         SDMMCHOST_SET_IRQ_PRIORITY(SDMMCHOST_CARD_DETECT_GPIO_IRQ, 26U);
 #endif
@@ -391,8 +391,8 @@ status_t SDMMCHOST_Init(SDMMCHOST_CONFIG *host, void *userData)
         .BlockGap = NULL,
     };
     /* init card power control */
-    SDMMCHOST_INIT_SD_POWER();
-    SDMMCHOST_INIT_MMC_POWER();
+//    SDMMCHOST_INIT_SD_POWER();
+//    SDMMCHOST_INIT_MMC_POWER();
 
     /* Initializes USDHC. */
     usdhcHost->config.dataTimeout = USDHC_DATA_TIMEOUT;
@@ -417,7 +417,7 @@ status_t SDMMCHOST_Init(SDMMCHOST_CONFIG *host, void *userData)
     /* Define transfer function. */
     usdhcHost->transfer = SDMMCHOST_TransferFunction;
     /* card detect init */
-    SDMMCHOST_CardDetectInit(usdhcHost->base, (sdmmchost_detect_card_t *)userData);
+//    SDMMCHOST_CardDetectInit(usdhcHost->base, (sdmmchost_detect_card_t *)userData);
 
     return kStatus_Success;
 }

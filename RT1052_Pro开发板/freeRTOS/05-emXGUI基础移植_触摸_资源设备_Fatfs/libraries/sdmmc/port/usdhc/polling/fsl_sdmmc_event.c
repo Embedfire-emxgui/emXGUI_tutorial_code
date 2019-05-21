@@ -63,23 +63,23 @@ volatile uint32_t g_eventTimeMilliseconds;
 /*******************************************************************************
  * Code
  ******************************************************************************/
-void SysTick_Handler(void)
-{
-#ifdef __CA7_REV
-    SystemClearSystickFlag();
-#endif
-    g_eventTimeMilliseconds++;
-}
+//void SysTick_Handler(void)
+//{
+//#ifdef __CA7_REV
+//    SystemClearSystickFlag();
+//#endif
+//    g_eventTimeMilliseconds++;
+//}
 
 void SDMMCEVENT_InitTimer(void)
 {
 #ifdef __CA7_REV
-    /* special for i.mx6ul */
-    SystemSetupSystick(1000U, (void *)SysTick_Handler, 32U);
-    SystemClearSystickFlag();
+  /* special for i.mx6ul */
+  SystemSetupSystick(1000U, (void *)SysTick_Handler, 32U);
+  SystemClearSystickFlag();
 #else
-    /* Set systick reload value to generate 1ms interrupt */
-    SysTick_Config(CLOCK_GetFreq(kCLOCK_CoreSysClk) / 1000U);
+  /* Set systick reload value to generate 1ms interrupt */
+  SysTick_Config(CLOCK_GetFreq(kCLOCK_CoreSysClk) / 1000U);
 #endif
 }
 

@@ -339,7 +339,7 @@
 </MiscControls>
               <Define>CPU_MIMXRT1052DVL6B,SKIP_SYSCLK_INIT,PRINTF_FLOAT_ENABLE=1, SCANF_FLOAT_ENABLE=1, PRINTF_ADVANCED_ENABLE=1, SCANF_ADVANCED_ENABLE=1,X_GUI_USE_FREERTOS</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\libraries\CMSIS\Include;..\..\libraries\drivers;..\..\libraries\utilities;..\..\libraries\utilities\str;..\..\libraries\utilities\log;..\..\libraries\utilities\io;..\..\libraries\xip;..\..\user;..\..\user\bsp;..\..\FreeRTOS\include;..\..\FreeRTOS\port\RVDS\ARM_CM7\r0p1;..\..\..\..\..\emXGUI_Lib\inc;..\..\..\..\..\emXGUI_Lib\drv;..\..\..\..\..\emXGUI_Lib\arch\Inc;..\..\..\..\..\emXGUI_Lib\app\base</IncludePath>
+              <IncludePath>..\..\libraries\CMSIS\Include;..\..\libraries\drivers;..\..\libraries\utilities;..\..\libraries\utilities\str;..\..\libraries\utilities\log;..\..\libraries\utilities\io;..\..\libraries\xip;..\..\user;..\..\user\bsp;..\..\FreeRTOS\include;..\..\FreeRTOS\port\RVDS\ARM_CM7\r0p1;..\..\..\..\..\emXGUI_Lib\inc;..\..\..\..\..\emXGUI_Lib\drv;..\..\..\..\..\emXGUI_Lib\arch\Inc;..\..\..\..\..\emXGUI_Lib\app\base;..\..\libraries\sdmmc\inc;..\..\libraries\sdmmc\port;..\..\libraries\fatfs\fsl_sd_disk;..\..\libraries\fatfs</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -442,6 +442,16 @@
               <FileName>fsl_lpi2c.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\libraries\drivers\fsl_lpi2c.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_usdhc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_usdhc.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_cache.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_cache.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -582,6 +592,16 @@
               <FileName>bsp_touch_gtxx.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\touch\bsp_touch_gtxx.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_sd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\sd\bsp_sd.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_sd_fatfs_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\sd_fatfs_test\bsp_sd_fatfs_test.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -753,6 +773,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_touch_port.c</FilePath>
             </File>
+            <File>
+              <FileName>gui_fs_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_fs_port.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -827,6 +852,61 @@
               <FileName>必读说明.txt</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\doc\必读说明.txt</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>sdmmc</GroupName>
+          <Files>
+            <File>
+              <FileName>fsl_sd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\sdmmc\src\fsl_sd.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_sdmmc_common.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\sdmmc\src\fsl_sdmmc_common.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_sdmmc_event.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\sdmmc\port\usdhc\freertos\fsl_sdmmc_event.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_sdmmc_host.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\sdmmc\port\usdhc\freertos\fsl_sdmmc_host.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>fatfs</GroupName>
+          <Files>
+            <File>
+              <FileName>diskio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\fatfs\diskio.c</FilePath>
+            </File>
+            <File>
+              <FileName>ff.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\fatfs\ff.c</FilePath>
+            </File>
+            <File>
+              <FileName>ffsystem.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\fatfs\ffsystem.c</FilePath>
+            </File>
+            <File>
+              <FileName>ffunicode.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\fatfs\ffunicode.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_sd_disk.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\fatfs\fsl_sd_disk\fsl_sd_disk.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1269,6 +1349,16 @@
               <FileType>1</FileType>
               <FilePath>..\..\libraries\drivers\fsl_lpi2c.c</FilePath>
             </File>
+            <File>
+              <FileName>fsl_usdhc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_usdhc.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_cache.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_cache.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1408,6 +1498,16 @@
               <FileName>bsp_touch_gtxx.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\touch\bsp_touch_gtxx.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_sd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\sd\bsp_sd.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_sd_fatfs_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\sd_fatfs_test\bsp_sd_fatfs_test.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1579,6 +1679,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_touch_port.c</FilePath>
             </File>
+            <File>
+              <FileName>gui_fs_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_fs_port.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1653,6 +1758,61 @@
               <FileName>必读说明.txt</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\doc\必读说明.txt</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>sdmmc</GroupName>
+          <Files>
+            <File>
+              <FileName>fsl_sd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\sdmmc\src\fsl_sd.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_sdmmc_common.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\sdmmc\src\fsl_sdmmc_common.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_sdmmc_event.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\sdmmc\port\usdhc\freertos\fsl_sdmmc_event.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_sdmmc_host.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\sdmmc\port\usdhc\freertos\fsl_sdmmc_host.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>fatfs</GroupName>
+          <Files>
+            <File>
+              <FileName>diskio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\fatfs\diskio.c</FilePath>
+            </File>
+            <File>
+              <FileName>ff.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\fatfs\ff.c</FilePath>
+            </File>
+            <File>
+              <FileName>ffsystem.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\fatfs\ffsystem.c</FilePath>
+            </File>
+            <File>
+              <FileName>ffunicode.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\fatfs\ffunicode.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_sd_disk.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\fatfs\fsl_sd_disk\fsl_sd_disk.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1989,9 +2149,9 @@
 --diag_suppress=66,1296,186 
  
 </MiscControls>
-              <Define>CPU_MIMXRT1052DVL6B,SKIP_SYSCLK_INIT,PRINTF_FLOAT_ENABLE=1, SCANF_FLOAT_ENABLE=1, PRINTF_ADVANCED_ENABLE=1, SCANF_ADVANCED_ENABLE=1,X_GUI_USE_FREERTOS,</Define>
+              <Define>FSL_SDK_ENABLE_DRIVER_CACHE_CONTROL=1,CPU_MIMXRT1052DVL6B,SKIP_SYSCLK_INIT,PRINTF_FLOAT_ENABLE=1, SCANF_FLOAT_ENABLE=1, PRINTF_ADVANCED_ENABLE=1, SCANF_ADVANCED_ENABLE=1,X_GUI_USE_FREERTOS,</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\libraries\CMSIS\Include;..\..\libraries\drivers;..\..\libraries\utilities;..\..\libraries\utilities\str;..\..\libraries\utilities\log;..\..\libraries\utilities\io;..\..\libraries\xip;..\..\user;..\..\user\bsp;..\..\FreeRTOS\include;..\..\FreeRTOS\port\RVDS\ARM_CM7\r0p1;..\..\..\..\..\emXGUI_Lib\inc;..\..\..\..\..\emXGUI_Lib\drv;..\..\..\..\..\emXGUI_Lib\arch\Inc;..\..\..\..\..\emXGUI_Lib\app\base</IncludePath>
+              <IncludePath>..\..\libraries\CMSIS\Include;..\..\libraries\drivers;..\..\libraries\utilities;..\..\libraries\utilities\str;..\..\libraries\utilities\log;..\..\libraries\utilities\io;..\..\libraries\xip;..\..\user;..\..\user\bsp;..\..\FreeRTOS\include;..\..\FreeRTOS\port\RVDS\ARM_CM7\r0p1;..\..\..\..\..\emXGUI_Lib\inc;..\..\..\..\..\emXGUI_Lib\drv;..\..\..\..\..\emXGUI_Lib\arch\Inc;..\..\..\..\..\emXGUI_Lib\app\base;..\..\libraries\fatfs;..\..\libraries\fatfs\fsl_sd_disk;..\..\libraries\sdmmc\inc;..\..\libraries\sdmmc\port</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -2094,6 +2254,16 @@
               <FileName>fsl_lpi2c.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\libraries\drivers\fsl_lpi2c.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_usdhc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_usdhc.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_cache.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_cache.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2234,6 +2404,16 @@
               <FileName>bsp_touch_gtxx.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\touch\bsp_touch_gtxx.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_sd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\sd\bsp_sd.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_sd_fatfs_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\sd_fatfs_test\bsp_sd_fatfs_test.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2405,6 +2585,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_touch_port.c</FilePath>
             </File>
+            <File>
+              <FileName>gui_fs_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_fs_port.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2479,6 +2664,61 @@
               <FileName>必读说明.txt</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\doc\必读说明.txt</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>sdmmc</GroupName>
+          <Files>
+            <File>
+              <FileName>fsl_sd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\sdmmc\src\fsl_sd.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_sdmmc_common.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\sdmmc\src\fsl_sdmmc_common.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_sdmmc_event.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\sdmmc\port\usdhc\freertos\fsl_sdmmc_event.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_sdmmc_host.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\sdmmc\port\usdhc\freertos\fsl_sdmmc_host.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>fatfs</GroupName>
+          <Files>
+            <File>
+              <FileName>diskio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\fatfs\diskio.c</FilePath>
+            </File>
+            <File>
+              <FileName>ff.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\fatfs\ff.c</FilePath>
+            </File>
+            <File>
+              <FileName>ffsystem.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\fatfs\ffsystem.c</FilePath>
+            </File>
+            <File>
+              <FileName>ffunicode.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\fatfs\ffunicode.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_sd_disk.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\fatfs\fsl_sd_disk\fsl_sd_disk.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2922,6 +3162,16 @@
               <FileType>1</FileType>
               <FilePath>..\..\libraries\drivers\fsl_lpi2c.c</FilePath>
             </File>
+            <File>
+              <FileName>fsl_usdhc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_usdhc.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_cache.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_cache.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -3061,6 +3311,16 @@
               <FileName>bsp_touch_gtxx.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\touch\bsp_touch_gtxx.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_sd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\sd\bsp_sd.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_sd_fatfs_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\sd_fatfs_test\bsp_sd_fatfs_test.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -3232,6 +3492,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_touch_port.c</FilePath>
             </File>
+            <File>
+              <FileName>gui_fs_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_fs_port.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -3306,6 +3571,61 @@
               <FileName>必读说明.txt</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\doc\必读说明.txt</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>sdmmc</GroupName>
+          <Files>
+            <File>
+              <FileName>fsl_sd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\sdmmc\src\fsl_sd.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_sdmmc_common.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\sdmmc\src\fsl_sdmmc_common.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_sdmmc_event.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\sdmmc\port\usdhc\freertos\fsl_sdmmc_event.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_sdmmc_host.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\sdmmc\port\usdhc\freertos\fsl_sdmmc_host.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>fatfs</GroupName>
+          <Files>
+            <File>
+              <FileName>diskio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\fatfs\diskio.c</FilePath>
+            </File>
+            <File>
+              <FileName>ff.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\fatfs\ff.c</FilePath>
+            </File>
+            <File>
+              <FileName>ffsystem.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\fatfs\ffsystem.c</FilePath>
+            </File>
+            <File>
+              <FileName>ffunicode.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\fatfs\ffunicode.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_sd_disk.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\fatfs\fsl_sd_disk\fsl_sd_disk.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -3437,11 +3757,11 @@
             <UseExternalTool>0</UseExternalTool>
             <RunIndependent>0</RunIndependent>
             <UpdateFlashBeforeDebugging>1</UpdateFlashBeforeDebugging>
-            <Capability>0</Capability>
-            <DriverSelection>-1</DriverSelection>
+            <Capability>1</Capability>
+            <DriverSelection>4098</DriverSelection>
           </Flash1>
           <bUseTDR>1</bUseTDR>
-          <Flash2></Flash2>
+          <Flash2>BIN\CMSIS_AGDI.dll</Flash2>
           <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
@@ -3642,9 +3962,9 @@
 --diag_suppress=66,1296,186 
  
 </MiscControls>
-              <Define>CPU_MIMXRT1052DVL6B,XIP_EXTERNAL_FLASH=1, XIP_BOOT_HEADER_ENABLE =1,XIP_BOOT_HEADER_DCD_ENABLE =1,PRINTF_FLOAT_ENABLE=1, SCANF_FLOAT_ENABLE=1, PRINTF_ADVANCED_ENABLE=1, SCANF_ADVANCED_ENABLE=1,X_GUI_USE_FREERTOS</Define>
+              <Define>FSL_SDK_ENABLE_DRIVER_CACHE_CONTROL=1,CPU_MIMXRT1052DVL6B,XIP_EXTERNAL_FLASH=1, XIP_BOOT_HEADER_ENABLE =1,XIP_BOOT_HEADER_DCD_ENABLE =1,PRINTF_FLOAT_ENABLE=1, SCANF_FLOAT_ENABLE=1, PRINTF_ADVANCED_ENABLE=1, SCANF_ADVANCED_ENABLE=1,X_GUI_USE_FREERTOS</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\libraries\CMSIS\Include;..\..\libraries\drivers;..\..\libraries\utilities;..\..\libraries\utilities\str;..\..\libraries\utilities\log;..\..\libraries\utilities\io;..\..\libraries\xip;..\..\user;..\..\user\bsp;..\..\FreeRTOS\include;..\..\FreeRTOS\port\RVDS\ARM_CM7\r0p1;..\..\..\..\..\emXGUI_Lib\inc;..\..\..\..\..\emXGUI_Lib\drv;..\..\..\..\..\emXGUI_Lib\arch\Inc;..\..\..\..\..\emXGUI_Lib\app\base</IncludePath>
+              <IncludePath>..\..\libraries\CMSIS\Include;..\..\libraries\drivers;..\..\libraries\utilities;..\..\libraries\utilities\str;..\..\libraries\utilities\log;..\..\libraries\utilities\io;..\..\libraries\xip;..\..\user;..\..\user\bsp;..\..\FreeRTOS\include;..\..\FreeRTOS\port\RVDS\ARM_CM7\r0p1;..\..\..\..\..\emXGUI_Lib\inc;..\..\..\..\..\emXGUI_Lib\drv;..\..\..\..\..\emXGUI_Lib\arch\Inc;..\..\..\..\..\emXGUI_Lib\app\base;..\..\libraries\fatfs;..\..\libraries\fatfs\fsl_sd_disk;..\..\libraries\sdmmc\inc;..\..\libraries\sdmmc\port;..\..\user\bsp\sd_fatfs_test</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -3748,6 +4068,16 @@
               <FileName>fsl_lpi2c.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\libraries\drivers\fsl_lpi2c.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_usdhc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_usdhc.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_cache.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_cache.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -3888,6 +4218,16 @@
               <FileName>bsp_touch_gtxx.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\touch\bsp_touch_gtxx.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_sd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\sd\bsp_sd.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_sd_fatfs_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\sd_fatfs_test\bsp_sd_fatfs_test.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -4059,6 +4399,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_touch_port.c</FilePath>
             </File>
+            <File>
+              <FileName>gui_fs_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_fs_port.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -4133,6 +4478,61 @@
               <FileName>必读说明.txt</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\doc\必读说明.txt</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>sdmmc</GroupName>
+          <Files>
+            <File>
+              <FileName>fsl_sd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\sdmmc\src\fsl_sd.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_sdmmc_common.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\sdmmc\src\fsl_sdmmc_common.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_sdmmc_event.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\sdmmc\port\usdhc\freertos\fsl_sdmmc_event.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_sdmmc_host.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\sdmmc\port\usdhc\freertos\fsl_sdmmc_host.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>fatfs</GroupName>
+          <Files>
+            <File>
+              <FileName>diskio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\fatfs\diskio.c</FilePath>
+            </File>
+            <File>
+              <FileName>ff.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\fatfs\ff.c</FilePath>
+            </File>
+            <File>
+              <FileName>ffsystem.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\fatfs\ffsystem.c</FilePath>
+            </File>
+            <File>
+              <FileName>ffunicode.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\fatfs\ffunicode.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_sd_disk.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\fatfs\fsl_sd_disk\fsl_sd_disk.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -4576,6 +4976,16 @@
               <FileType>1</FileType>
               <FilePath>..\..\libraries\drivers\fsl_lpi2c.c</FilePath>
             </File>
+            <File>
+              <FileName>fsl_usdhc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_usdhc.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_cache.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_cache.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -4715,6 +5125,16 @@
               <FileName>bsp_touch_gtxx.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\touch\bsp_touch_gtxx.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_sd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\sd\bsp_sd.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_sd_fatfs_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\sd_fatfs_test\bsp_sd_fatfs_test.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -4886,6 +5306,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_touch_port.c</FilePath>
             </File>
+            <File>
+              <FileName>gui_fs_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_fs_port.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -4960,6 +5385,61 @@
               <FileName>必读说明.txt</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\doc\必读说明.txt</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>sdmmc</GroupName>
+          <Files>
+            <File>
+              <FileName>fsl_sd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\sdmmc\src\fsl_sd.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_sdmmc_common.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\sdmmc\src\fsl_sdmmc_common.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_sdmmc_event.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\sdmmc\port\usdhc\freertos\fsl_sdmmc_event.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_sdmmc_host.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\sdmmc\port\usdhc\freertos\fsl_sdmmc_host.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>fatfs</GroupName>
+          <Files>
+            <File>
+              <FileName>diskio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\fatfs\diskio.c</FilePath>
+            </File>
+            <File>
+              <FileName>ff.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\fatfs\ff.c</FilePath>
+            </File>
+            <File>
+              <FileName>ffsystem.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\fatfs\ffsystem.c</FilePath>
+            </File>
+            <File>
+              <FileName>ffunicode.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\fatfs\ffunicode.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_sd_disk.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\fatfs\fsl_sd_disk\fsl_sd_disk.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -5403,6 +5883,16 @@
               <FileType>1</FileType>
               <FilePath>..\..\libraries\drivers\fsl_lpi2c.c</FilePath>
             </File>
+            <File>
+              <FileName>fsl_usdhc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_usdhc.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_cache.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_cache.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -5542,6 +6032,16 @@
               <FileName>bsp_touch_gtxx.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\touch\bsp_touch_gtxx.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_sd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\sd\bsp_sd.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_sd_fatfs_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\sd_fatfs_test\bsp_sd_fatfs_test.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -5713,6 +6213,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_touch_port.c</FilePath>
             </File>
+            <File>
+              <FileName>gui_fs_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_fs_port.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -5787,6 +6292,61 @@
               <FileName>必读说明.txt</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\doc\必读说明.txt</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>sdmmc</GroupName>
+          <Files>
+            <File>
+              <FileName>fsl_sd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\sdmmc\src\fsl_sd.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_sdmmc_common.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\sdmmc\src\fsl_sdmmc_common.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_sdmmc_event.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\sdmmc\port\usdhc\freertos\fsl_sdmmc_event.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_sdmmc_host.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\sdmmc\port\usdhc\freertos\fsl_sdmmc_host.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>fatfs</GroupName>
+          <Files>
+            <File>
+              <FileName>diskio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\fatfs\diskio.c</FilePath>
+            </File>
+            <File>
+              <FileName>ff.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\fatfs\ff.c</FilePath>
+            </File>
+            <File>
+              <FileName>ffsystem.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\fatfs\ffsystem.c</FilePath>
+            </File>
+            <File>
+              <FileName>ffunicode.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\fatfs\ffunicode.c</FilePath>
+            </File>
+            <File>
+              <FileName>fsl_sd_disk.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\fatfs\fsl_sd_disk\fsl_sd_disk.c</FilePath>
             </File>
           </Files>
         </Group>

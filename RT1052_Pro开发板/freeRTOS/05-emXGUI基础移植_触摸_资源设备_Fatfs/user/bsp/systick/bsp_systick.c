@@ -24,7 +24,7 @@
 /**********************中断服务函数******************************/
 
 extern void xPortSysTickHandler(void);
-
+extern volatile uint32_t g_eventTimeMilliseconds;
 /**
   * @brief  SysTick中断服务函数
   * @param  无
@@ -41,6 +41,10 @@ void SysTick_Handler(void)
     #if (INCLUDE_xTaskGetSchedulerState  == 1 )
       }
     #endif  /* INCLUDE_xTaskGetSchedulerState */
+#ifdef __CA7_REV
+    SystemClearSystickFlag();
+#endif
+    g_eventTimeMilliseconds++;      
 }
 
 

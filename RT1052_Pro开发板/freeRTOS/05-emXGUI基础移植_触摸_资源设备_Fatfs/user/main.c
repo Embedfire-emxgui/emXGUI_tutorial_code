@@ -32,7 +32,7 @@
 #include "./touch/bsp_touch_gtxx.h"
 #include "./touch/bsp_i2c_touch.h"
 #include "./touch/palette.h"
-
+#include "./bsp/sd_fatfs_test/bsp_sd_fatfs_test.h"
 /* FreeRTOS头文件 */
 #include "FreeRTOS.h"
 #include "task.h"
@@ -120,8 +120,8 @@ static void GUI_Thread_Entry(void* parameter)
     vTaskDelay(500);   /* 延时500个tick */
   }
 }
-
-
+FIL file_object;   //定义文件描述符，
+FATFS g_fileSystem; /* File system object */
 /***********************************************************************
   * @ 函数名  ： BSP_Init
   * @ 功能说明： 板级外设初始化，所有板子上的初始化均可放在这个函数里面
@@ -173,7 +173,14 @@ static void BSP_Init(void)
 
     /* 初始化LCD */
 //    LCD_Init(LCD_INTERRUPT_ENABLE);    
+    /*挂载文件系统*/
+    f_mount_test(&g_fileSystem);
+    f_touch_test("/dir_1/he.txt"); 
+    /*打开文件*/
+    f_open_test("/dir_1/he.txt",&file_object);
     
+     /*关闭文件*/
+    f_close_test(&file_object);    
     RGB_LED_COLOR_BLUE;    
     CORE_BOARD_LED_ON;
     
