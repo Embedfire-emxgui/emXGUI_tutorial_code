@@ -399,7 +399,7 @@
       <OPTFL>
         <tvExp>1</tvExp>
         <tvExpOptDlg>0</tvExpOptDlg>
-        <IsCurrentTarget>1</IsCurrentTarget>
+        <IsCurrentTarget>0</IsCurrentTarget>
       </OPTFL>
       <CpuCode>8</CpuCode>
       <DebugOpt>
@@ -469,18 +469,18 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>177</LineNumber>
+          <LineNumber>110</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>-2147477076</Address>
+          <Address>-2147429172</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>H:\鍏徃浜у搧\emXGUI\tutorial_code_stm32f429\RT1052_Pro寮€鍙戞澘\freeRTOS\05-emXGUI鍩虹绉绘_瑙︽懜_璧勬簮璁惧_Fatfs\user\main.c</Filename>
+          <Filename>H:\鍏徃浜у搧\emXGUI\tutorial_code_stm32f429\RT1052_Pro寮€鍙戞澘\freeRTOS\05-emXGUI鍩虹绉绘_瑙︽懜_璧勬簮璁惧_Fatfs\libraries\sdmmc\port\usdhc\interrupt\fsl_sdmmc_event.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\YH_RT1052\../../user/main.c\177</Expression>
+          <Expression>\\YH_RT1052\../../libraries/sdmmc/port/usdhc/interrupt/fsl_sdmmc_event.c\110</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -488,6 +488,11 @@
           <count>0</count>
           <WinNumber>1</WinNumber>
           <ItemText>g_eventTimeMilliseconds</ItemText>
+        </Ww>
+        <Ww>
+          <count>1</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>g_eventTransferComplete</ItemText>
         </Ww>
       </WatchWindow1>
       <MemoryWindow1>
@@ -838,6 +843,14 @@
           <AccSizeX>0</AccSizeX>
         </Mm>
       </MemoryWindow1>
+      <MemoryWindow2>
+        <Mm>
+          <WinNumber>2</WinNumber>
+          <SubType>0</SubType>
+          <ItemText>data_read</ItemText>
+          <AccSizeX>0</AccSizeX>
+        </Mm>
+      </MemoryWindow2>
       <Tracepoint>
         <THDelay>0</THDelay>
       </Tracepoint>
@@ -1095,7 +1108,7 @@
       <OPTFL>
         <tvExp>1</tvExp>
         <tvExpOptDlg>0</tvExpOptDlg>
-        <IsCurrentTarget>0</IsCurrentTarget>
+        <IsCurrentTarget>1</IsCurrentTarget>
       </OPTFL>
       <CpuCode>8</CpuCode>
       <DebugOpt>
@@ -1237,7 +1250,7 @@
 
   <Group>
     <GroupName>startup</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -2324,7 +2337,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\libraries\sdmmc\port\usdhc\interrupt\fsl_sdmmc_event.c</PathWithFileName>
+      <PathWithFileName>..\..\libraries\sdmmc\port\usdhc\freertos\fsl_sdmmc_event.c</PathWithFileName>
       <FilenameWithoutPath>fsl_sdmmc_event.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -2336,7 +2349,7 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\libraries\sdmmc\port\usdhc\interrupt\fsl_sdmmc_host.c</PathWithFileName>
+      <PathWithFileName>..\..\libraries\sdmmc\port\usdhc\freertos\fsl_sdmmc_host.c</PathWithFileName>
       <FilenameWithoutPath>fsl_sdmmc_host.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
@@ -2345,7 +2358,7 @@
 
   <Group>
     <GroupName>fatfs</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
