@@ -783,6 +783,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_fs_port.c</FilePath>
             </File>
+            <File>
+              <FileName>gui_resource_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_resource_port.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1693,6 +1698,11 @@
               <FileName>gui_fs_port.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_fs_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_resource_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_resource_port.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2605,6 +2615,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_fs_port.c</FilePath>
             </File>
+            <File>
+              <FileName>gui_resource_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_resource_port.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -3516,6 +3531,11 @@
               <FileName>gui_fs_port.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_fs_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_resource_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_resource_port.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -4479,6 +4499,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_fs_port.c</FilePath>
             </File>
+            <File>
+              <FileName>gui_resource_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_resource_port.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -5391,6 +5416,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_fs_port.c</FilePath>
             </File>
+            <File>
+              <FileName>gui_resource_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_resource_port.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -5858,7 +5888,7 @@
 </MiscControls>
               <Define>CPU_MIMXRT1052DVL6B,XIP_EXTERNAL_FLASH=1, XIP_BOOT_HEADER_ENABLE =1,XIP_BOOT_HEADER_DCD_ENABLE =1,PRINTF_FLOAT_ENABLE=1, SCANF_FLOAT_ENABLE=1, PRINTF_ADVANCED_ENABLE=1, SCANF_ADVANCED_ENABLE=1,USE_RAM_VECTOR_TABLE,X_GUI_USE_FREERTOS</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\libraries\CMSIS\Include;..\..\libraries\drivers;..\..\libraries\utilities;..\..\libraries\utilities\str;..\..\libraries\utilities\log;..\..\libraries\utilities\io;..\..\libraries\xip;..\..\user;..\..\user\bsp;..\..\FreeRTOS\include;..\..\FreeRTOS\port\RVDS\ARM_CM7\r0p1;..\..\..\..\..\emXGUI_Lib\inc;..\..\..\..\..\emXGUI_Lib\drv;..\..\..\..\..\emXGUI_Lib\arch\Inc;..\..\..\..\..\emXGUI_Lib\app\base</IncludePath>
+              <IncludePath>..\..\libraries\CMSIS\Include;..\..\libraries\drivers;..\..\libraries\utilities;..\..\libraries\utilities\str;..\..\libraries\utilities\log;..\..\libraries\utilities\io;..\..\libraries\xip;..\..\user;..\..\user\bsp;..\..\FreeRTOS\include;..\..\FreeRTOS\port\RVDS\ARM_CM7\r0p1;..\..\..\..\..\emXGUI_Lib\inc;..\..\..\..\..\emXGUI_Lib\drv;..\..\..\..\..\emXGUI_Lib\arch\Inc;..\..\..\..\..\emXGUI_Lib\app\base;..\..\libraries\fatfs;..\..\libraries\fatfs\fsl_sd_disk</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -6302,6 +6332,11 @@
               <FileName>gui_fs_port.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_fs_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_resource_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_resource_port.c</FilePath>
             </File>
           </Files>
         </Group>
