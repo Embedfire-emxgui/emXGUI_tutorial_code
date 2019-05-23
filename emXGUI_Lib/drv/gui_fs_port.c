@@ -113,18 +113,6 @@ BOOL FileSystem_Init(void)
   }
 #elif defined(CPU_MIMXRT1052DVL6B)
   f_mount_test(&fs);
-  /*在SD卡根目录创建一个目录*/
-  f_mkdir_test("/dir_1");
-  
-  /*创建“/dir_1/f_1.txt”*/
-  f_touch_test("/dir_1/he.txt");  
-  memset(g_bufferWrite, '1', sizeof(g_bufferWrite));
-  g_bufferWrite[BUFFER_SIZE - 2U] = '\r';
-  g_bufferWrite[BUFFER_SIZE - 1U] = '\n';
-  
-  PRINTF("\r\n开始文件读写测试......  \r\n");
-  
-  f_write_read_test("/dir_1/he.txt", g_bufferWrite, g_bufferRead);  
 #endif
   
   return TRUE;

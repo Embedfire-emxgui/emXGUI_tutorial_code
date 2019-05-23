@@ -26,7 +26,7 @@
 /*=========================================================================================*/
 /*访问资源设备的互斥信号量*/
 static GUI_MUTEX *mutex_lock=NULL;
-
+u8 buf[100];
 /**
   * @brief  初始化资源设备（外部FLASH）
   * @param  无
@@ -56,6 +56,8 @@ BOOL RES_DevInit(void)
     {
       //外部FLASH已经初始化过了，这里不需要再进行初始化
       //直接返回TRUE即可
+      RES_DevRead(buf,16*1024*1024, 100);
+      GUI_DEBUG("%s", buf);
       return TRUE;
     }
 #endif  
