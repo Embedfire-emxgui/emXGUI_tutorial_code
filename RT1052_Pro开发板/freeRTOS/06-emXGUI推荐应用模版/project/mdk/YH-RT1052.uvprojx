@@ -564,11 +564,6 @@
               <FilePath>..\..\user\bsp\delay\core_delay.c</FilePath>
             </File>
             <File>
-              <FileName>fonts.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\font\fonts.c</FilePath>
-            </File>
-            <File>
               <FileName>bsp_key.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\key\bsp_key.c</FilePath>
@@ -607,6 +602,11 @@
               <FileName>bsp_sd_fatfs_test.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\sd_fatfs_test\bsp_sd_fatfs_test.c</FilePath>
+            </File>
+            <File>
+              <FileName>fonts.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\font\fonts.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -828,6 +828,16 @@
               <FileType>5</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\inc\x_obj.h</FilePath>
             </File>
+            <File>
+              <FileName>emXGUI_JPEG.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\emXGUI_JPEG.h</FilePath>
+            </File>
+            <File>
+              <FileName>emxgui_png.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\emxgui_png.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -843,6 +853,21 @@
               <FileType>4</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\libs\x_libc_MDK_M7.lib</FilePath>
             </File>
+            <File>
+              <FileName>x_obj.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\x_obj.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>libjpeg_MDK_M7.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\libjpeg_MDK_M7.lib</FilePath>
+            </File>
+            <File>
+              <FileName>libpng_MDK_M7.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\libpng_MDK_M7.lib</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -852,6 +877,11 @@
               <FileName>gui_desktop.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\app\base\gui_desktop.c</FilePath>
+            </File>
+            <File>
+              <FileName>CListMenu.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\app\base\CListMenu.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -1480,11 +1510,6 @@
               <FilePath>..\..\user\bsp\delay\core_delay.c</FilePath>
             </File>
             <File>
-              <FileName>fonts.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\font\fonts.c</FilePath>
-            </File>
-            <File>
               <FileName>bsp_key.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\key\bsp_key.c</FilePath>
@@ -1523,6 +1548,11 @@
               <FileName>bsp_sd_fatfs_test.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\sd_fatfs_test\bsp_sd_fatfs_test.c</FilePath>
+            </File>
+            <File>
+              <FileName>fonts.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\font\fonts.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1744,6 +1774,16 @@
               <FileType>5</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\inc\x_obj.h</FilePath>
             </File>
+            <File>
+              <FileName>emXGUI_JPEG.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\emXGUI_JPEG.h</FilePath>
+            </File>
+            <File>
+              <FileName>emxgui_png.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\emxgui_png.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1759,6 +1799,21 @@
               <FileType>4</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\libs\x_libc_MDK_M7.lib</FilePath>
             </File>
+            <File>
+              <FileName>x_obj.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\x_obj.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>libjpeg_MDK_M7.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\libjpeg_MDK_M7.lib</FilePath>
+            </File>
+            <File>
+              <FileName>libpng_MDK_M7.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\libpng_MDK_M7.lib</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1768,6 +1823,11 @@
               <FileName>gui_desktop.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\app\base\gui_desktop.c</FilePath>
+            </File>
+            <File>
+              <FileName>CListMenu.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\app\base\CListMenu.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -2396,11 +2456,6 @@
               <FilePath>..\..\user\bsp\delay\core_delay.c</FilePath>
             </File>
             <File>
-              <FileName>fonts.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\font\fonts.c</FilePath>
-            </File>
-            <File>
               <FileName>bsp_key.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\key\bsp_key.c</FilePath>
@@ -2439,6 +2494,11 @@
               <FileName>bsp_sd_fatfs_test.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\sd_fatfs_test\bsp_sd_fatfs_test.c</FilePath>
+            </File>
+            <File>
+              <FileName>fonts.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\font\fonts.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2660,6 +2720,16 @@
               <FileType>5</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\inc\x_obj.h</FilePath>
             </File>
+            <File>
+              <FileName>emXGUI_JPEG.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\emXGUI_JPEG.h</FilePath>
+            </File>
+            <File>
+              <FileName>emxgui_png.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\emxgui_png.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2675,6 +2745,21 @@
               <FileType>4</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\libs\x_libc_MDK_M7.lib</FilePath>
             </File>
+            <File>
+              <FileName>x_obj.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\x_obj.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>libjpeg_MDK_M7.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\libjpeg_MDK_M7.lib</FilePath>
+            </File>
+            <File>
+              <FileName>libpng_MDK_M7.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\libpng_MDK_M7.lib</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2684,6 +2769,11 @@
               <FileName>gui_desktop.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\app\base\gui_desktop.c</FilePath>
+            </File>
+            <File>
+              <FileName>CListMenu.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\app\base\CListMenu.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -3313,11 +3403,6 @@
               <FilePath>..\..\user\bsp\delay\core_delay.c</FilePath>
             </File>
             <File>
-              <FileName>fonts.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\font\fonts.c</FilePath>
-            </File>
-            <File>
               <FileName>bsp_key.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\key\bsp_key.c</FilePath>
@@ -3356,6 +3441,11 @@
               <FileName>bsp_sd_fatfs_test.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\sd_fatfs_test\bsp_sd_fatfs_test.c</FilePath>
+            </File>
+            <File>
+              <FileName>fonts.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\font\fonts.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -3577,6 +3667,16 @@
               <FileType>5</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\inc\x_obj.h</FilePath>
             </File>
+            <File>
+              <FileName>emXGUI_JPEG.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\emXGUI_JPEG.h</FilePath>
+            </File>
+            <File>
+              <FileName>emxgui_png.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\emxgui_png.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -3592,6 +3692,21 @@
               <FileType>4</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\libs\x_libc_MDK_M7.lib</FilePath>
             </File>
+            <File>
+              <FileName>x_obj.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\x_obj.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>libjpeg_MDK_M7.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\libjpeg_MDK_M7.lib</FilePath>
+            </File>
+            <File>
+              <FileName>libpng_MDK_M7.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\libpng_MDK_M7.lib</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -3601,6 +3716,11 @@
               <FileName>gui_desktop.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\app\base\gui_desktop.c</FilePath>
+            </File>
+            <File>
+              <FileName>CListMenu.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\app\base\CListMenu.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -4280,11 +4400,6 @@
               <FilePath>..\..\user\bsp\delay\core_delay.c</FilePath>
             </File>
             <File>
-              <FileName>fonts.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\font\fonts.c</FilePath>
-            </File>
-            <File>
               <FileName>bsp_key.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\key\bsp_key.c</FilePath>
@@ -4323,6 +4438,11 @@
               <FileName>bsp_sd_fatfs_test.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\sd_fatfs_test\bsp_sd_fatfs_test.c</FilePath>
+            </File>
+            <File>
+              <FileName>fonts.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\font\fonts.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -4544,6 +4664,16 @@
               <FileType>5</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\inc\x_obj.h</FilePath>
             </File>
+            <File>
+              <FileName>emXGUI_JPEG.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\emXGUI_JPEG.h</FilePath>
+            </File>
+            <File>
+              <FileName>emxgui_png.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\emxgui_png.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -4559,6 +4689,21 @@
               <FileType>4</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\libs\x_libc_MDK_M7.lib</FilePath>
             </File>
+            <File>
+              <FileName>x_obj.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\x_obj.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>libjpeg_MDK_M7.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\libjpeg_MDK_M7.lib</FilePath>
+            </File>
+            <File>
+              <FileName>libpng_MDK_M7.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\libpng_MDK_M7.lib</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -4568,6 +4713,11 @@
               <FileName>gui_desktop.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\app\base\gui_desktop.c</FilePath>
+            </File>
+            <File>
+              <FileName>CListMenu.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\app\base\CListMenu.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -5197,11 +5347,6 @@
               <FilePath>..\..\user\bsp\delay\core_delay.c</FilePath>
             </File>
             <File>
-              <FileName>fonts.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\font\fonts.c</FilePath>
-            </File>
-            <File>
               <FileName>bsp_key.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\key\bsp_key.c</FilePath>
@@ -5240,6 +5385,11 @@
               <FileName>bsp_sd_fatfs_test.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\sd_fatfs_test\bsp_sd_fatfs_test.c</FilePath>
+            </File>
+            <File>
+              <FileName>fonts.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\font\fonts.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -5461,6 +5611,16 @@
               <FileType>5</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\inc\x_obj.h</FilePath>
             </File>
+            <File>
+              <FileName>emXGUI_JPEG.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\emXGUI_JPEG.h</FilePath>
+            </File>
+            <File>
+              <FileName>emxgui_png.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\emxgui_png.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -5476,6 +5636,21 @@
               <FileType>4</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\libs\x_libc_MDK_M7.lib</FilePath>
             </File>
+            <File>
+              <FileName>x_obj.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\x_obj.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>libjpeg_MDK_M7.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\libjpeg_MDK_M7.lib</FilePath>
+            </File>
+            <File>
+              <FileName>libpng_MDK_M7.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\libpng_MDK_M7.lib</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -5485,6 +5660,11 @@
               <FileName>gui_desktop.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\app\base\gui_desktop.c</FilePath>
+            </File>
+            <File>
+              <FileName>CListMenu.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\app\base\CListMenu.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -6114,11 +6294,6 @@
               <FilePath>..\..\user\bsp\delay\core_delay.c</FilePath>
             </File>
             <File>
-              <FileName>fonts.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\user\bsp\font\fonts.c</FilePath>
-            </File>
-            <File>
               <FileName>bsp_key.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\key\bsp_key.c</FilePath>
@@ -6157,6 +6332,11 @@
               <FileName>bsp_sd_fatfs_test.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\sd_fatfs_test\bsp_sd_fatfs_test.c</FilePath>
+            </File>
+            <File>
+              <FileName>fonts.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\font\fonts.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -6378,6 +6558,16 @@
               <FileType>5</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\inc\x_obj.h</FilePath>
             </File>
+            <File>
+              <FileName>emXGUI_JPEG.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\emXGUI_JPEG.h</FilePath>
+            </File>
+            <File>
+              <FileName>emxgui_png.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\inc\emxgui_png.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -6393,6 +6583,21 @@
               <FileType>4</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\libs\x_libc_MDK_M7.lib</FilePath>
             </File>
+            <File>
+              <FileName>x_obj.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\x_obj.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>libjpeg_MDK_M7.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\libjpeg_MDK_M7.lib</FilePath>
+            </File>
+            <File>
+              <FileName>libpng_MDK_M7.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\libpng_MDK_M7.lib</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -6402,6 +6607,11 @@
               <FileName>gui_desktop.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\app\base\gui_desktop.c</FilePath>
+            </File>
+            <File>
+              <FileName>CListMenu.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\app\base\CListMenu.cpp</FilePath>
             </File>
           </Files>
         </Group>

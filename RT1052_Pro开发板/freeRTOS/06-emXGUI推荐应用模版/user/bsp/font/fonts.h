@@ -34,7 +34,9 @@ extern sFONT Font8x16;
 //要支持中文需要实现本函数，可参考“液晶显示中英文（字库在外部FLASH）”例程
 #define      GetGBKCode( ucBuffer, usChar ) 
 
-
+#ifdef __cplusplus
+}
+#endif
 #endif /*end of __FONT_H    */
 
 
