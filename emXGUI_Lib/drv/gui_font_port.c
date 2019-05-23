@@ -46,7 +46,7 @@ extern const char ASCII_32_4BPP[];
 
 /* 默认字体 */
 HFONT defaultFont =NULL;
-
+HFONT logoFont100 =NULL;
 /* 默认英文字体 */
 HFONT defaultFontEn = NULL;
 
@@ -64,6 +64,7 @@ const FONT_PARAM_TypeDef gui_font_param[GUI_LCD_TYPE_NUM] = {
   {   
     .default_en = ASCII_24_4BPP,                /* 默认英文字体，内部flash */
     .default_extern_cn = "GB2312_24_4BPP.xft", /* 默认中文字体，外部 */
+    .default_extern_logo100 = "APP_ICON_100_100_4BPP.xft",
   },
   /* 7寸屏 */
   {   
@@ -79,6 +80,7 @@ const FONT_PARAM_TypeDef gui_font_param[GUI_LCD_TYPE_NUM] = {
 
 #if (GUI_FONT_LOAD_TO_RAM_EN)
   u8 *default_font_buf;
+  u8 *logo_font_buf_100;
 #endif
 
 /*===================================================================================*/
@@ -223,6 +225,7 @@ HFONT GUI_Init_Extern_Font(void)
 #if (GUI_FONT_LOAD_TO_RAM_EN  )
   {  
     defaultFont = GUI_Init_Extern_Font_2RAM(GUI_DEFAULT_EXTERN_FONT,&default_font_buf);
+    logoFont100 =  GUI_Init_Extern_Font_2RAM(GUI_LOGO_FONT_100,&logo_font_buf_100);
   }
   
 #else

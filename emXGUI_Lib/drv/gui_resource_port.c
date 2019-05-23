@@ -48,7 +48,7 @@ BOOL RES_DevInit(void)
     GUI_DEBUG("\r\nFlash Status Reg1 is 0x%02X", QSPI_FLASH_ReadStatusReg(1));	
     GUI_DEBUG("\r\nFlash Status Reg2 is 0x%02X", QSPI_FLASH_ReadStatusReg(2));
     GUI_DEBUG("\r\nFlash Status Reg3 is 0x%02X", QSPI_FLASH_ReadStatusReg(3));    
-    RES_DevTest();
+    //RES_DevTest();
     return TRUE;
   }
 #elif defined(CPU_MIMXRT1052DVL6B)

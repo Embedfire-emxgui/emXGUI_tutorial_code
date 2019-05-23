@@ -1084,6 +1084,11 @@
               <FileType>5</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\inc\x_obj.h</FilePath>
             </File>
+            <File>
+              <FileName>x_obj.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\x_obj.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1103,6 +1108,11 @@
               <FileName>libpng_MDK_M7.lib</FileName>
               <FileType>4</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\libs\libpng_MDK_M7.lib</FilePath>
+            </File>
+            <File>
+              <FileName>libjpeg_MDK_M7.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\libjpeg_MDK_M7.lib</FilePath>
             </File>
           </Files>
         </Group>
@@ -1128,6 +1138,11 @@
               <FileName>GUI_Boot_Interface_Dialog.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\app\base\boot_interface\GUI_Boot_Interface_Dialog.c</FilePath>
+            </File>
+            <File>
+              <FileName>CListMenu.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\app\base\CListMenu.cpp</FilePath>
             </File>
           </Files>
         </Group>

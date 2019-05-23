@@ -130,7 +130,7 @@
 
 /* 要使用的外部默认字体文件，USE_EXTERN_FONT为1时生效 */
 #define GUI_DEFAULT_EXTERN_FONT   gui_font_param[cur_lcd].default_extern_cn
-
+#define GUI_LOGO_FONT_100         gui_font_param[cur_lcd].default_extern_logo100
 
 /*===========日志输出设备配置===gui_log_port.c===============================================*/
 

@@ -42,10 +42,12 @@ typedef	unsigned short int  WCHAR;
 
 typedef	char		    CHAR;
 typedef	unsigned char	UCHAR;
+typedef unsigned short	WORD;
 typedef signed int		INT;
 typedef unsigned int	UINT;
 typedef signed long		LONG;
 typedef	unsigned long	ULONG;
+typedef unsigned long	DWORD;
 typedef float       	FLOAT;
 typedef	double			DOUBLE;
 typedef	void*		    PVOID;
@@ -54,10 +56,12 @@ typedef	void*		    LPVOID;
 typedef	signed 		char	    s8,S8;
 typedef	unsigned 	char 	    u8,U8;
 typedef	signed		short int	s16,S16;
+typedef short			SHORT;
 typedef	unsigned 	short int	u16,U16;
 typedef	signed 		int		    s32,S32;
 typedef	unsigned 	int 	    u32,U32;
 
+typedef unsigned char	BYTE;
 /*=========================================================================================*/
 
 typedef int         BOOL;

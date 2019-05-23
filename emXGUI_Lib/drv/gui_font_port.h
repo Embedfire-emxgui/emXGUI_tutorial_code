@@ -16,12 +16,13 @@ typedef struct
 {
   const char *default_en;  //默认英文字体
   const char *default_extern_cn;  //默认中文字体
+  const char *default_extern_logo100;  //LOGO字体
 
 }FONT_PARAM_TypeDef;
 
 /* 字体参数配置 */
 extern const FONT_PARAM_TypeDef gui_font_param[];
-
+extern HFONT logoFont100;
 /* 默认字体 */
 extern HFONT defaultFont;
 /* 默认英文字体 */
