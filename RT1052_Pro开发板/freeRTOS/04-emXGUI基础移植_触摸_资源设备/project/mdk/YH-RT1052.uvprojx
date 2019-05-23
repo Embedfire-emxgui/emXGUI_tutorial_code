@@ -443,6 +443,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\libraries\drivers\fsl_lpi2c.c</FilePath>
             </File>
+            <File>
+              <FileName>fsl_flexspi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_flexspi.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -582,6 +587,16 @@
               <FileName>bsp_touch_gtxx.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\touch\bsp_touch_gtxx.c</FilePath>
+            </File>
+            <File>
+              <FileName>norflash_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\norflash\norflash_test.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_norflash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\norflash\bsp_norflash.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -752,6 +767,11 @@
               <FileName>gui_touch_port.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_touch_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_resource_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_resource_port.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1269,6 +1289,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\libraries\drivers\fsl_lpi2c.c</FilePath>
             </File>
+            <File>
+              <FileName>fsl_flexspi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_flexspi.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1408,6 +1433,16 @@
               <FileName>bsp_touch_gtxx.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\touch\bsp_touch_gtxx.c</FilePath>
+            </File>
+            <File>
+              <FileName>norflash_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\norflash\norflash_test.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_norflash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\norflash\bsp_norflash.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1578,6 +1613,11 @@
               <FileName>gui_touch_port.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_touch_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_resource_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_resource_port.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2095,6 +2135,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\libraries\drivers\fsl_lpi2c.c</FilePath>
             </File>
+            <File>
+              <FileName>fsl_flexspi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_flexspi.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2234,6 +2279,16 @@
               <FileName>bsp_touch_gtxx.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\touch\bsp_touch_gtxx.c</FilePath>
+            </File>
+            <File>
+              <FileName>norflash_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\norflash\norflash_test.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_norflash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\norflash\bsp_norflash.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2404,6 +2459,11 @@
               <FileName>gui_touch_port.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_touch_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_resource_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_resource_port.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2922,6 +2982,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\libraries\drivers\fsl_lpi2c.c</FilePath>
             </File>
+            <File>
+              <FileName>fsl_flexspi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_flexspi.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -3061,6 +3126,16 @@
               <FileName>bsp_touch_gtxx.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\touch\bsp_touch_gtxx.c</FilePath>
+            </File>
+            <File>
+              <FileName>norflash_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\norflash\norflash_test.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_norflash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\norflash\bsp_norflash.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -3231,6 +3306,11 @@
               <FileName>gui_touch_port.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_touch_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_resource_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_resource_port.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -3749,6 +3829,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\libraries\drivers\fsl_lpi2c.c</FilePath>
             </File>
+            <File>
+              <FileName>fsl_flexspi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_flexspi.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -3888,6 +3973,16 @@
               <FileName>bsp_touch_gtxx.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\touch\bsp_touch_gtxx.c</FilePath>
+            </File>
+            <File>
+              <FileName>norflash_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\norflash\norflash_test.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_norflash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\norflash\bsp_norflash.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -4058,6 +4153,11 @@
               <FileName>gui_touch_port.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_touch_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_resource_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_resource_port.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -4576,6 +4676,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\libraries\drivers\fsl_lpi2c.c</FilePath>
             </File>
+            <File>
+              <FileName>fsl_flexspi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_flexspi.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -4715,6 +4820,16 @@
               <FileName>bsp_touch_gtxx.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\touch\bsp_touch_gtxx.c</FilePath>
+            </File>
+            <File>
+              <FileName>norflash_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\norflash\norflash_test.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_norflash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\norflash\bsp_norflash.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -4885,6 +5000,11 @@
               <FileName>gui_touch_port.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_touch_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_resource_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_resource_port.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -5403,6 +5523,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\libraries\drivers\fsl_lpi2c.c</FilePath>
             </File>
+            <File>
+              <FileName>fsl_flexspi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\libraries\drivers\fsl_flexspi.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -5542,6 +5667,16 @@
               <FileName>bsp_touch_gtxx.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\user\bsp\touch\bsp_touch_gtxx.c</FilePath>
+            </File>
+            <File>
+              <FileName>norflash_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\norflash\norflash_test.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_norflash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\user\bsp\norflash\bsp_norflash.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -5712,6 +5847,11 @@
               <FileName>gui_touch_port.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_touch_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>gui_resource_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\drv\gui_resource_port.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -14,7 +14,7 @@
 #include "./touch/bsp_touch_gtxx.h"
 #include "./touch/bsp_i2c_touch.h"
 #include "./touch/palette.h"
-
+#include "./norflash/bsp_norflash.h"  
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
