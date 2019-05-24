@@ -173,6 +173,7 @@ void		GUI_MutexDelete(GUI_MUTEX *hMutex);
 GUI_SEM*	GUI_SemCreate(int init,int max);
 BOOL		GUI_SemWait(GUI_SEM *hSem,U32 time);
 void		GUI_SemPost(GUI_SEM *hSem);
+void GUI_SemPostISR(GUI_SEM *hsem);
 void		GUI_SemDelete(GUI_SEM *hSem);
 HANDLE		GUI_GetCurThreadHandle(void);
 U32			GUI_GetTickCount(void);

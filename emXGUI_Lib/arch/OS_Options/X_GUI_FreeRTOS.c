@@ -113,7 +113,22 @@ void	GUI_SemPost(GUI_SEM *hsem)
 {
 	xSemaphoreGive((SemaphoreHandle_t)hsem);
 }
-
+/*
+函数功能: 信号量发送(受freertos管理的中断)
+参数: hsem(由GUI_SemCreate返回的句柄);  
+返回: 无
+说明: 若在受freertos管理的中断中调用GUI_SemPost,会导致port.c：425
+*/
+void GUI_SemPostISR(GUI_SEM *hsem)
+{
+   
+  BaseType_t pxHigherPriorityTaskWoken;
+  
+  
+	xSemaphoreGiveFromISR((SemaphoreHandle_t)hsem, &pxHigherPriorityTaskWoken);
+  
+  portYIELD_FROM_ISR(pxHigherPriorityTaskWoken);
+}
 /*===================================================================================*/
 /*
 函数功能: 信号量删除

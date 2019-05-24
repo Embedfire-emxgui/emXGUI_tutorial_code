@@ -120,7 +120,9 @@ SURFACE* GUI_DisplayInit(void)
 #if  DMA2D_EN 
   DMA2D_DrvInit();
 #endif
-  
+#if  G2D_EN 
+  PXP_DrvInit();
+#endif  
 #if FRAME_BUFFER_EN
   {
     const SURFACE *pSurf_FB;
