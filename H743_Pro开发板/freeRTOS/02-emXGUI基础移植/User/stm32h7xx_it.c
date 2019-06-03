@@ -34,12 +34,10 @@
 #include "stm32h7xx_hal.h"
 #include "stm32h7xx.h"
 #include "stm32h7xx_it.h"
-#include "./touch/bsp_i2c_touch.h"
-#include "./led/bsp_led.h"
-extern void GTP_TouchProcess(void);
-/* USER CODE BEGIN 0 */
+/* FreeRTOS头文件 */
+#include "FreeRTOS.h"
+#include "task.h"
 
-/* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
 
@@ -124,18 +122,8 @@ void UsageFault_Handler(void)
   /* USER CODE END UsageFault_IRQn 1 */
 }
 
-/**
-* @brief This function handles System service call via SWI instruction.
-*/
-//void SVC_Handler(void)
-//{
-//  /* USER CODE BEGIN SVCall_IRQn 0 */
 
-//  /* USER CODE END SVCall_IRQn 0 */
-//  /* USER CODE BEGIN SVCall_IRQn 1 */
 
-//  /* USER CODE END SVCall_IRQn 1 */
-//}
 
 /**
 * @brief This function handles Debug monitor.
@@ -150,50 +138,45 @@ void DebugMon_Handler(void)
   /* USER CODE END DebugMonitor_IRQn 1 */
 }
 
-/**
-* @brief This function handles Pendable request for system service.
-*/
-//void PendSV_Handler(void)
-//{
-//  /* USER CODE BEGIN PendSV_IRQn 0 */
 
-//  /* USER CODE END PendSV_IRQn 0 */
-//  /* USER CODE BEGIN PendSV_IRQn 1 */
-
-//  /* USER CODE END PendSV_IRQn 1 */
-//}
 
 /**
 * @brief This function handles System tick timer.
 */
+extern void xPortSysTickHandler(void);
+
+//systick中断服务函数
 void SysTick_Handler(void)
-{
-  /* USER CODE BEGIN SysTick_IRQn 0 */
-
-  /* USER CODE END SysTick_IRQn 0 */
-  HAL_IncTick();
-  HAL_SYSTICK_IRQHandler();
-  /* USER CODE BEGIN SysTick_IRQn 1 */
-
-  /* USER CODE END SysTick_IRQn 1 */
+{	
+    #if (INCLUDE_xTaskGetSchedulerState  == 1 )
+      if (xTaskGetSchedulerState() != taskSCHEDULER_NOT_STARTED)
+      {
+    #endif  /* INCLUDE_xTaskGetSchedulerState */  
+        xPortSysTickHandler();
+    #if (INCLUDE_xTaskGetSchedulerState  == 1 )
+      }
+    #endif  /* INCLUDE_xTaskGetSchedulerState */
 }
 
-/******************************************************************************/
-/* STM32H7xx Peripheral Interrupt Handlers                                    */
-/* Add here the Interrupt Handlers for the used peripherals.                  */
-/* For the available peripheral interrupt handler names,                      */
-/* please refer to the startup file (startup_stm32h7xx.s).                    */
-/******************************************************************************/
+///* 用于统计运行时间 */
 
-/* USER CODE BEGIN 1 */
-//void GTP_IRQHandler(void)
+//volatile uint32_t CPU_RunTime = 0UL;
+//extern TIM_HandleTypeDef TIM_Base;
+
+//void BASIC_TIM_IRQHandler(void)
 //{
-//	if(__HAL_GPIO_EXTI_GET_IT(GTP_INT_GPIO_PIN) != RESET) //确保是否产生了EXTI Line中断
-//	{
-//		LED2_TOGGLE;
-//        GTP_TouchProcess();    
-//        __HAL_GPIO_EXTI_CLEAR_IT(GTP_INT_GPIO_PIN);     //清除中断标志位
-//	}  
+//    HAL_TIM_IRQHandler(&TIM_Base);
 //}
-/* USER CODE END 1 */
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+///**
+//  * @brief  定时器更新中断回调函数
+//  * @param  htim : TIM句柄
+//  * @retval 无
+//  */
+//void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+//{
+//    if(htim->Instance == TIM6)
+//        CPU_RunTime++;
+//}
+
+
+
