@@ -3211,5 +3211,19 @@ void SD_SDIO_DMA_IRQHANDLER(void)
   taskEXIT_CRITICAL_FROM_ISR( ulReturn );
 	
 }
+void BL8782_PDN_INIT(void)
+{
+  /*定义一个GPIO_InitTypeDef类型的结构体*/
+  GPIO_InitTypeDef GPIO_InitStructure;
 
+  RCC_AHB1PeriphClockCmd ( RCC_AHB1Periph_GPIOG, ENABLE); 							   
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;	
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;   
+  GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+  GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_DOWN;
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz; 
+  GPIO_Init(GPIOG, &GPIO_InitStructure);	
+  
+  GPIO_ResetBits(GPIOG,GPIO_Pin_9);  //禁用WiFi模块
+}
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

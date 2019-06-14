@@ -39,6 +39,7 @@ BOOL RES_DevInit(void)
 #if defined(STM32F429_439xx)
 	if(SPI_FLASH_Init() == 0)
   {
+  }
 #elif defined(STM32H743xx)
   if(QSPI_FLASH_Init() == 0)
   {

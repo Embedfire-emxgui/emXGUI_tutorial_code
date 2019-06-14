@@ -28,10 +28,22 @@ static u32 file_num = 0;
 extern HWND wnd_res_writer_info_textbox ;
 extern HWND wnd_res_writer_progbar;
 
-//extern void SPI_FLASH_BulkErase_GUI(void);
+
 #if defined(STM32H743xx)
 #define SPI_FLASH_BufferWrite BSP_QSPI_Write
 #define SPI_FLASH_BufferRead  BSP_QSPI_Read 
+enum
+{
+  eRES_OK = QSPI_OK,
+  eRES_ERROR = QSPI_ERROR
+};
+#elif defined(STM32F429_439xx)
+extern void SPI_FLASH_BulkErase_GUI(void);
+enum 
+{
+  eRES_OK = 1,
+  eRES_ERROR = 0
+};
 #endif
 
 
@@ -380,7 +392,7 @@ void Burn_Catalog(void)
   /* 遍历目录文件 */
   for(i=0;1;i++)
   {
-    uint8_t state = QSPI_ERROR;
+    uint8_t state = eRES_ERROR;
     is_end = Read_CatalogInfo(i, 
                                 &dir,
                                 full_file_name);  
@@ -401,7 +413,7 @@ void Burn_Catalog(void)
 //    
 //    
 //    GUI_VMEM_Free(rx_buff);
-    if(state != QSPI_OK)
+    if(state != eRES_OK)
       printf("Error Write\n");
   }
   
@@ -664,13 +676,15 @@ FRESULT BurnFile(void)
   BURN_INFO("正在进行整片擦除，时间很长，请耐心等候...");  
 
   /* 整片FLASH擦除 */
-  //SPI_FLASH_BulkErase_GUI();
-  if(BSP_QSPI_Erase_Chip() != QSPI_OK)
+#if defined(STM32F429_439xx)  
+  SPI_FLASH_BulkErase_GUI();
+#elif defined(STM32H743xx)  
+  if(BSP_QSPI_Erase_Chip() != eRES_OK)
   {
     printf("Erase Error\n");
     while(1);
   }
-  
+#endif  
   /* 生成烧录目录信息文件 */
   Make_Catalog(src_dir,0);
   
