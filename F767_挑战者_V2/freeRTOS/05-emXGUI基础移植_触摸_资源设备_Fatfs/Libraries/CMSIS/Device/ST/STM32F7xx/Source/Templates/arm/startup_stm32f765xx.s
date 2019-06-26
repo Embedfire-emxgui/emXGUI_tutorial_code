@@ -1,9 +1,9 @@
 ;******************** (C) COPYRIGHT 2016 STMicroelectronics ********************
-;* File Name          : startup_stm32f767xx.s
+;* File Name          : startup_stm32f765xx.s
 ;* Author             : MCD Application Team
 ;* Version            : V1.1.2
 ;* Date               : 23-September-2016
-;* Description        : STM32F767xx devices vector table for MDK-ARM toolchain. 
+;* Description        : STM32F765xx devices vector table for MDK-ARM toolchain. 
 ;*                      This module performs:
 ;*                      - Set the initial SP
 ;*                      - Set the initial PC == Reset_Handler
@@ -170,7 +170,7 @@ __Vectors       DCD     __initial_sp               ; Top of Stack
                 DCD     OTG_HS_WKUP_IRQHandler            ; USB OTG HS Wakeup through EXTI                         
                 DCD     OTG_HS_IRQHandler                 ; USB OTG HS                                      
                 DCD     DCMI_IRQHandler                   ; DCMI                                            
-                DCD     0                                 ; Reserved                                     
+                DCD     0                                 ; Reserved
                 DCD     RNG_IRQHandler                    ; Rng
                 DCD     FPU_IRQHandler                    ; FPU
                 DCD     UART7_IRQHandler                  ; UART7
@@ -179,8 +179,8 @@ __Vectors       DCD     __initial_sp               ; Top of Stack
                 DCD     SPI5_IRQHandler                   ; SPI5
                 DCD     SPI6_IRQHandler                   ; SPI6
                 DCD     SAI1_IRQHandler                   ; SAI1
-                DCD     LTDC_IRQHandler                   ; LTDC
-                DCD     LTDC_ER_IRQHandler                ; LTDC error
+                DCD     0                                 ; Reserved
+                DCD     0                                 ; Reserved
                 DCD     DMA2D_IRQHandler                  ; DMA2D
                 DCD     SAI2_IRQHandler                   ; SAI2
                 DCD     QUADSPI_IRQHandler                ; QUADSPI
@@ -199,7 +199,7 @@ __Vectors       DCD     __initial_sp               ; Top of Stack
                 DCD     CAN3_RX0_IRQHandler               ; CAN3 RX0
                 DCD     CAN3_RX1_IRQHandler               ; CAN3 RX1
                 DCD     CAN3_SCE_IRQHandler               ; CAN3 SCE
-                DCD     JPEG_IRQHandler                   ; JPEG
+                DCD     0                                 ; Reserved
                 DCD     MDIOS_IRQHandler                  ; MDIOS
 __Vectors_End
 
@@ -210,11 +210,10 @@ __Vectors_Size  EQU  __Vectors_End - __Vectors
 ; Reset handler
 Reset_Handler    PROC
                  EXPORT  Reset_Handler             [WEAK]
-                 IMPORT  SystemInit
-                 IMPORT  __main
+        IMPORT  SystemInit
+        IMPORT  __main
 
-
-LDR     R0, =SystemInit
+                 LDR     R0, =SystemInit
                  BLX     R0
                  LDR     R0, =__main
                  BX      R0
@@ -344,7 +343,7 @@ Default_Handler PROC
                 EXPORT  OTG_HS_EP1_IN_IRQHandler          [WEAK]                      
                 EXPORT  OTG_HS_WKUP_IRQHandler            [WEAK]                        
                 EXPORT  OTG_HS_IRQHandler                 [WEAK]                                      
-                EXPORT  DCMI_IRQHandler                   [WEAK]                                                                                  
+                EXPORT  DCMI_IRQHandler                   [WEAK]                                             
                 EXPORT  RNG_IRQHandler                    [WEAK]
                 EXPORT  FPU_IRQHandler                    [WEAK]
                 EXPORT  UART7_IRQHandler                  [WEAK]
@@ -353,8 +352,6 @@ Default_Handler PROC
                 EXPORT  SPI5_IRQHandler                   [WEAK]
                 EXPORT  SPI6_IRQHandler                   [WEAK]
                 EXPORT  SAI1_IRQHandler                   [WEAK]
-                EXPORT  LTDC_IRQHandler                   [WEAK]
-                EXPORT  LTDC_ER_IRQHandler                [WEAK]
                 EXPORT  DMA2D_IRQHandler                  [WEAK]
                 EXPORT  SAI2_IRQHandler                   [WEAK]   
                 EXPORT  QUADSPI_IRQHandler                [WEAK]
@@ -372,7 +369,6 @@ Default_Handler PROC
                 EXPORT  CAN3_RX0_IRQHandler               [WEAK]
                 EXPORT  CAN3_RX1_IRQHandler               [WEAK]
                 EXPORT  CAN3_SCE_IRQHandler               [WEAK]
-                EXPORT  JPEG_IRQHandler                   [WEAK]
                 EXPORT  MDIOS_IRQHandler                  [WEAK]
                 
 WWDG_IRQHandler                                                       
@@ -453,7 +449,7 @@ OTG_HS_EP1_OUT_IRQHandler
 OTG_HS_EP1_IN_IRQHandler                            
 OTG_HS_WKUP_IRQHandler                                
 OTG_HS_IRQHandler                                                   
-DCMI_IRQHandler                                                                                                                
+DCMI_IRQHandler                                                            
 RNG_IRQHandler
 FPU_IRQHandler  
 UART7_IRQHandler                  
@@ -462,8 +458,6 @@ SPI4_IRQHandler
 SPI5_IRQHandler                   
 SPI6_IRQHandler                   
 SAI1_IRQHandler                 
-LTDC_IRQHandler
-LTDC_ER_IRQHandler
 DMA2D_IRQHandler   
 SAI2_IRQHandler        
 QUADSPI_IRQHandler
@@ -481,7 +475,6 @@ CAN3_TX_IRQHandler
 CAN3_RX0_IRQHandler
 CAN3_RX1_IRQHandler
 CAN3_SCE_IRQHandler
-JPEG_IRQHandler
 MDIOS_IRQHandler
                 B       .
 

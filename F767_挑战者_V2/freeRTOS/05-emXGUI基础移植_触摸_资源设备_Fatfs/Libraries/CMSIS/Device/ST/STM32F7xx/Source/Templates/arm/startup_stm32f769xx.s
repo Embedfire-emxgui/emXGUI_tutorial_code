@@ -1,9 +1,9 @@
 ;******************** (C) COPYRIGHT 2016 STMicroelectronics ********************
-;* File Name          : startup_stm32f767xx.s
+;* File Name          : startup_stm32f769xx.s
 ;* Author             : MCD Application Team
 ;* Version            : V1.1.2
 ;* Date               : 23-September-2016
-;* Description        : STM32F767xx devices vector table for MDK-ARM toolchain. 
+;* Description        : STM32F769xx devices vector table for MDK-ARM toolchain. 
 ;*                      This module performs:
 ;*                      - Set the initial SP
 ;*                      - Set the initial PC == Reset_Handler
@@ -140,7 +140,7 @@ __Vectors       DCD     __initial_sp               ; Top of Stack
                 DCD     TIM8_CC_IRQHandler                ; TIM8 Capture Compare                                   
                 DCD     DMA1_Stream7_IRQHandler           ; DMA1 Stream7                                           
                 DCD     FMC_IRQHandler                    ; FMC                                             
-                DCD     SDMMC1_IRQHandler                 ; SDMMC1                                            
+                DCD     SDMMC1_IRQHandler                  ; SDMMC1                                            
                 DCD     TIM5_IRQHandler                   ; TIM5                                            
                 DCD     SPI3_IRQHandler                   ; SPI3                                            
                 DCD     UART4_IRQHandler                  ; UART4                                           
@@ -189,7 +189,7 @@ __Vectors       DCD     __initial_sp               ; Top of Stack
                 DCD     I2C4_EV_IRQHandler                ; I2C4 Event
                 DCD     I2C4_ER_IRQHandler                ; I2C4 Error 
                 DCD     SPDIF_RX_IRQHandler               ; SPDIF_RX
-                DCD     0                                 ; Reserved
+                DCD     DSI_IRQHandler                    ; DSI
                 DCD     DFSDM1_FLT0_IRQHandler            ; DFSDM1 Filter 0 global Interrupt
                 DCD     DFSDM1_FLT1_IRQHandler            ; DFSDM1 Filter 1 global Interrupt
                 DCD     DFSDM1_FLT2_IRQHandler            ; DFSDM1 Filter 2 global Interrupt
@@ -210,11 +210,10 @@ __Vectors_Size  EQU  __Vectors_End - __Vectors
 ; Reset handler
 Reset_Handler    PROC
                  EXPORT  Reset_Handler             [WEAK]
-                 IMPORT  SystemInit
-                 IMPORT  __main
+        IMPORT  SystemInit
+        IMPORT  __main
 
-
-LDR     R0, =SystemInit
+                 LDR     R0, =SystemInit
                  BLX     R0
                  LDR     R0, =__main
                  BX      R0
@@ -363,6 +362,7 @@ Default_Handler PROC
                 EXPORT  I2C4_EV_IRQHandler                [WEAK]
                 EXPORT  I2C4_ER_IRQHandler                [WEAK] 
                 EXPORT  SPDIF_RX_IRQHandler               [WEAK]
+                EXPORT  DSI_IRQHandler                    [WEAK]
                 EXPORT  DFSDM1_FLT0_IRQHandler            [WEAK]
                 EXPORT  DFSDM1_FLT1_IRQHandler            [WEAK]
                 EXPORT  DFSDM1_FLT2_IRQHandler            [WEAK]
@@ -461,9 +461,9 @@ UART8_IRQHandler
 SPI4_IRQHandler                   
 SPI5_IRQHandler                   
 SPI6_IRQHandler                   
-SAI1_IRQHandler                 
-LTDC_IRQHandler
-LTDC_ER_IRQHandler
+SAI1_IRQHandler                   
+LTDC_IRQHandler                   
+LTDC_ER_IRQHandler                 
 DMA2D_IRQHandler   
 SAI2_IRQHandler        
 QUADSPI_IRQHandler
@@ -472,6 +472,7 @@ CEC_IRQHandler
 I2C4_EV_IRQHandler
 I2C4_ER_IRQHandler
 SPDIF_RX_IRQHandler
+DSI_IRQHandler
 DFSDM1_FLT0_IRQHandler
 DFSDM1_FLT1_IRQHandler
 DFSDM1_FLT2_IRQHandler
