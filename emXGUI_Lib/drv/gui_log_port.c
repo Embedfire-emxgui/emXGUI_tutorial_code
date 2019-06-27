@@ -26,9 +26,9 @@
   */
 BOOL	GUI_Log_Init(void)
 {
-  /* 本例子在board.c文件中 rtt系统启动时就已初始化，此处不再重复 */
+  /* 使用串口作为日志输出接口 */
   /* 初始化串口 */
-//  Debug_USART_Config();
+  Debug_USART_Config();
   return TRUE;
 }
 

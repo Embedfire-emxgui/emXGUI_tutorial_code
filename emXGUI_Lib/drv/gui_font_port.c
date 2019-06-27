@@ -90,6 +90,7 @@ const FONT_PARAM_TypeDef gui_font_param[GUI_LCD_TYPE_NUM] = {
   #error Use extern must enable macro 'GUI_RES_DEV_EN' first!
 #endif
 
+/***********************第1部分*************************/
 /**
   * @brief  从流媒体加载内容的回调函数
   * @param  buf[out] 存储读取到的数据缓冲区
@@ -109,7 +110,7 @@ static int font_read_data_exFlash(void *buf,int offset,int size,LONG lParam)
 	RES_DevRead(buf,offset,size);
 	return size;
 }
-
+/***********************第2部分*************************/
 /**
   * @brief  初始化外部FLASH字体(流设备方式)
   * @param  res_name 字体资源名字
@@ -194,8 +195,20 @@ HFONT GUI_Init_Extern_Font_2RAM(const char* res_name,u8** buf)
     	*buf =(u8*)GUI_VMEM_Alloc(dir.size);
       if(*buf!=NULL)
       {
-        RES_DevRead((u8*)*buf, font_base, dir.size);
-
+        #if STM32F767xx
+          uint32_t z = dir.size/4096;
+          uint32_t x = dir.size%4096;
+          uint32_t i=0;
+          for(i=0;i<z;i++)
+          {
+            RES_DevRead((u8*)*buf, font_base+4096*i, 4096);
+            *buf = (u8*)*buf + 4096;
+          }
+          RES_DevRead((u8*)*buf, font_base+4096*i, x);
+          *buf = (u8*)*buf - 4096*i;
+        #else
+          RES_DevRead((u8*)*buf, font_base, dir.size);
+        #endif
         hFont = XFT_CreateFont(*buf);
       }
     }
@@ -225,7 +238,7 @@ HFONT GUI_Init_Extern_Font(void)
 #if (GUI_FONT_LOAD_TO_RAM_EN  )
   {  
     defaultFont = GUI_Init_Extern_Font_2RAM(GUI_DEFAULT_EXTERN_FONT,&default_font_buf);
-    logoFont100 =  GUI_Init_Extern_Font_2RAM(GUI_LOGO_FONT_100,&logo_font_buf_100);
+//    logoFont100 = GUI_Init_Extern_Font_2RAM(GUI_LOGO_FONT_100,&logo_font_buf_100);
   }
   
 #else

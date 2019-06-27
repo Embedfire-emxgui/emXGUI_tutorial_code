@@ -149,7 +149,7 @@
 #define GUI_FS_EN         1
 
 /* 资源所在的基地址 */
-#define GUI_RES_BASE             4096
+#define GUI_RES_BASE             (16*1024*1024)
 
 /* 存储在FLASH中的资源目录大小 */
 #define GUI_CATALOG_SIZE         (8*1024)

@@ -8,6 +8,11 @@
   #if GUI_RES_DEV_EN
     #include "./flash/bsp_qspi_flash.h"
   #endif
+#elif defined(STM32F767xx)
+#include "stm32f7xx.h"
+  #if GUI_RES_DEV_EN
+    #include "./flash/bsp_qspi_flash.h"
+  #endif
 #endif
 #include	"emXGUI.h"
 #include	"gui_drv_cfg.h"

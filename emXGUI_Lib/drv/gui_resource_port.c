@@ -39,6 +39,7 @@ BOOL RES_DevInit(void)
 #if defined(STM32F429_439xx)
 	if(SPI_FLASH_Init() == 0)
   {
+    return TRUE;
   }
 #elif defined(STM32H743xx)
   if(QSPI_FLASH_Init() == 0)
@@ -50,6 +51,11 @@ BOOL RES_DevInit(void)
     GUI_DEBUG("\r\nFlash Status Reg2 is 0x%02X", QSPI_FLASH_ReadStatusReg(2));
     GUI_DEBUG("\r\nFlash Status Reg3 is 0x%02X", QSPI_FLASH_ReadStatusReg(3));    
     //RES_DevTest();
+    return TRUE;
+  }
+#elif defined(STM32F767xx)
+  if(QSPI_FLASH_Init() == 0)
+  {
     return TRUE;
   }
 #elif defined(CPU_MIMXRT1052DVL6B)
@@ -81,6 +87,8 @@ U32 RES_DevGetID(void)
 	id =SPI_FLASH_ReadID();
 #elif defined(STM32H743xx)
   id = QSPI_FLASH_ReadID();
+#elif defined(STM32F767xx)
+  id = QSPI_FLASH_ReadID();
 #endif  
   
 	GUI_MutexUnlock(mutex_lock);
@@ -102,6 +110,8 @@ BOOL RES_DevWrite(u8 *buf,u32 addr,u32 size)
 	SPI_FLASH_BufferWrite(buf,addr,size);
 #elif defined(STM32H743xx)
   BSP_QSPI_Write(buf,addr,size);
+#elif defined(STM32F767xx)
+  BSP_QSPI_Write(buf,addr,size);
 #endif    
 	GUI_MutexUnlock(mutex_lock);
 	return TRUE;
@@ -122,6 +132,9 @@ BOOL RES_DevRead(u8 *buf,u32 addr,u32 size)
 	SPI_FLASH_BufferRead(buf,addr,size);
 #elif defined(STM32H743xx)
   BSP_QSPI_Read(buf,addr,size);
+#elif defined(STM32F767xx)
+//  BSP_QSPI_Read(buf,addr,size);
+  BSP_QSPI_FastRead(buf,addr,size);
 #elif defined(CPU_MIMXRT1052DVL6B)
   
    
@@ -144,6 +157,8 @@ int RES_DevEraseSector(u32 addr)
 #if defined(STM32F429_439xx)  
 	SPI_FLASH_SectorErase(addr&0xFFFFF000);
 #elif defined(STM32H743xx)
+  //BSP_QSPI_Erase_Block(addr&0xFFFFF000);
+#elif defined(STM32F767xx)
   //BSP_QSPI_Erase_Block(addr&0xFFFFF000);
 #endif     
 	GUI_MutexUnlock(mutex_lock);
@@ -184,7 +199,7 @@ void RES_DevTest(void)
 
 #if 0  
 	while(1)
-	{	
+	{
     int i = 0;
 
 		RES_DevEraseSector(i);

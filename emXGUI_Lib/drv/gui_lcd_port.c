@@ -47,6 +47,16 @@ void LCD_HardInit(u32 fb_addr)
     LCD_Init(fb_addr, 0, LTDC_PIXEL_FORMAT_ARGB8888);
   #endif 
   
+#elif defined(STM32F767xx)
+  /* 初始化液晶屏 */  
+  #if	(LCD_FORMAT == COLOR_FORMAT_RGB565)
+    LCD_Init(fb_addr, 0, LTDC_PIXEL_FORMAT_RGB565);
+  #endif
+    
+  #if	(LCD_FORMAT == COLOR_FORMAT_XRGB8888)
+    LCD_Init(fb_addr, 0, LTDC_PIXEL_FORMAT_ARGB8888);
+  #endif 
+  
 #elif defined(CPU_MIMXRT1052DVL6B)
   LCD_Init(LCD_INTERRUPT_DISABLE);
   
@@ -63,7 +73,7 @@ void LCD_BkLight(int on)
   LCD_BackLed_Control(on);
 }
 
-
+/***********************第1部分*************************/
 /**
   * @brief  初始化显示设备接口，并创建SURFACE表面
   * @param  无
@@ -73,7 +83,8 @@ SURFACE* GUI_DisplayInit(void)
 {
   /* 绘图表面 */
 	SURFACE *pSurf;
-
+  
+/***********************第2部分*************************/
 #if	(LCD_FORMAT == COLOR_FORMAT_RGB565)
 
   //创建绘图表面
@@ -108,7 +119,8 @@ SURFACE* GUI_DisplayInit(void)
                               (void*)LCD_FRAME_BUFFER);                             
 
 #endif
-  
+
+/***********************第3部分*************************/
   if(pSurf == NULL)
   {
     GUI_Printf("#Error: GUI_CreateSurface Failed.\r\n");
@@ -117,12 +129,21 @@ SURFACE* GUI_DisplayInit(void)
   //LCD硬件初始化
  	LCD_HardInit((u32)pSurf->Bits); 
   
+/***********************第4部分*************************/
+  //清屏
+	pSurf->GL->FillArea(pSurf,0,0,LCD_XSIZE,LCD_YSIZE,pSurf->CC->MapRGB(0,0,0)); 
+	//打开背光
+  LCD_BkLight(TRUE);
+  
+/***********************第5部分*************************/
 #if  DMA2D_EN 
   DMA2D_DrvInit();
 #endif
 #if  G2D_EN 
   PXP_DrvInit();
-#endif  
+#endif 
+
+/***********************第6部分*************************/  
 #if FRAME_BUFFER_EN
   {
     const SURFACE *pSurf_FB;
@@ -133,11 +154,6 @@ SURFACE* GUI_DisplayInit(void)
 
   }
 #endif  
-
-  //清屏
-	pSurf->GL->FillArea(pSurf,0,0,LCD_XSIZE,LCD_YSIZE,pSurf->CC->MapRGB(0,0,0)); 
-	//打开背光
-  LCD_BkLight(TRUE);
 
 	while(0)
 	{ //测试
@@ -155,6 +171,7 @@ SURFACE* GUI_DisplayInit(void)
 		break;
 	}
 
+/***********************第7部分*************************/
 	return pSurf;
 }
 

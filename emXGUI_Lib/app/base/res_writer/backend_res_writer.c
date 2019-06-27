@@ -29,7 +29,7 @@ extern HWND wnd_res_writer_info_textbox ;
 extern HWND wnd_res_writer_progbar;
 
 
-#if defined(STM32H743xx)
+#if defined(STM32H743xx) || defined(STM32F767xx)
 #define SPI_FLASH_BufferWrite BSP_QSPI_Write
 #define SPI_FLASH_BufferRead  BSP_QSPI_Read 
 enum
@@ -679,6 +679,12 @@ FRESULT BurnFile(void)
 #if defined(STM32F429_439xx)  
   SPI_FLASH_BulkErase_GUI();
 #elif defined(STM32H743xx)  
+  if(BSP_QSPI_Erase_Chip() != eRES_OK)
+  {
+    printf("Erase Error\n");
+    while(1);
+  }
+#elif defined(STM32F767xx)  
   if(BSP_QSPI_Erase_Chip() != eRES_OK)
   {
     printf("Erase Error\n");

@@ -108,14 +108,9 @@ void GUI_VMEM_Free(void *p)
   */
 void	GUI_MEM_Init(void)
 {
-  /* 本示例中的GUI内核对象使用 rt_malloc ，
-    它已由rtt系统初始化*/
-  
-//  mutex_core_mem = GUI_MutexCreate();
-//	x_heap_init(&heap_core_mem,
-//                (void*)buff_core_mem,
-//                  GUI_CORE_MEM_SIZE,
-//                  GUI_CORE_MEM_ALLOC_UNIT);	 /* 创建一个内存堆 */
+  /* 本示例中的GUI内核对象使用 pvPortMalloc ，
+    它已由FreeRTOS系统初始化*/
+
 	return ;
 }
 
@@ -127,17 +122,8 @@ void	GUI_MEM_Init(void)
 */
 void*	GUI_MEM_Alloc(U32 size)
 {
-//  u8 *p;
-//	
-//	GUI_MutexLock(mutex_core_mem,5000);
-//	p =x_heap_alloc(&heap_core_mem,size);
-//	GUI_MutexUnlock(mutex_core_mem);
-//	return p;
-  
 	void *p=NULL;
-
 	p =OS_MALLOC(size);
-
 	if(p==NULL)
 	{
 	    GUI_ERROR("GUI_MEM_Alloc.");
@@ -155,10 +141,6 @@ void*	GUI_MEM_Alloc(U32 size)
 */
 void	GUI_MEM_Free(void *p)
 {
-//  GUI_MutexLock(mutex_core_mem,5000);
-//	x_heap_free(&heap_core_mem,p);
-//	GUI_MutexUnlock(mutex_core_mem);
-
 	OS_FREE(p);
 }
 

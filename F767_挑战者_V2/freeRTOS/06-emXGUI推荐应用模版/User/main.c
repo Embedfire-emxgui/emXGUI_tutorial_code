@@ -123,9 +123,7 @@ static void GUI_Thread_Entry(void* parameter)
     vTaskDelay(500);   /* 延时500个tick */
   }
 }
-#include "gui_fs_port.h"
-#include "ff.h"
-extern BOOL FileSystem_Init(void);
+
 /***********************************************************************
   * @ 函数名  ： BSP_Init
   * @ 功能说明： 板级外设初始化，所有板子上的初始化均可放在这个函数里面
@@ -133,17 +131,17 @@ extern BOOL FileSystem_Init(void);
   * @ 返回值  ： 无
   *********************************************************************/
 static void BSP_Init(void)
-{
-  /* 系统时钟初始化成400MHz */
+{ 
+  /* 系统时钟初始化成216MHz */
 	SystemClock_Config();
-  
+
   /* 初始化SysTick */
-//  HAL_SYSTICK_Config( HAL_RCC_GetSysClockFreq() / configTICK_RATE_HZ );	
+  HAL_SYSTICK_Config( HAL_RCC_GetSysClockFreq() / configTICK_RATE_HZ );	
 
 	/* 硬件BSP初始化统统放在这里，比如LED，串口，LCD等 */
-    
+
 	/* LED 端口初始化 */
-	LED_GPIO_Config();	
+	LED_GPIO_Config();
   
   /* SDRAM 初始化 */
   SDRAM_Init();

@@ -21,7 +21,7 @@
 
 /* W25Q256JV Micron memory */
 /* Size of the flash */
-#define QSPI_FLASH_SIZE            24     /* Address bus width to access whole memory space */
+#define QSPI_FLASH_SIZE            32     /* Address bus width to access whole memory space */
 #define QSPI_PAGE_SIZE             256
 
 /* QSPI Info */
@@ -151,6 +151,7 @@ uint8_t QSPI_FLASH_Init(void);
 uint8_t BSP_QSPI_Init(void);
 uint8_t BSP_QSPI_Erase_Block(uint32_t BlockAddress);
 uint8_t BSP_QSPI_Read(uint8_t* pData, uint32_t ReadAddr, uint32_t Size);
+uint8_t BSP_QSPI_FastRead(uint8_t* pData, uint32_t ReadAddr, uint32_t Size);
 uint8_t BSP_QSPI_Write(uint8_t* pData, uint32_t WriteAddr, uint32_t Size);
 static uint8_t BSP_QSPI_4BYTE_ADDR_MOD(void);
 
@@ -160,6 +161,8 @@ static uint8_t QSPI_AutoPollingMemReady  (uint32_t Timeout);
 
 uint32_t QSPI_FLASH_ReadDeviceID(void);
 uint32_t QSPI_FLASH_ReadID(void);
+
+uint8_t BSP_QSPI_Erase_Chip(void);
 
 #endif /* __SPI_FLASH_H */
 
