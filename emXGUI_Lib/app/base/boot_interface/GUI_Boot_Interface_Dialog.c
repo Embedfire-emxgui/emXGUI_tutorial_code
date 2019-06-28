@@ -256,7 +256,7 @@ void	GUI_Boot_Interface_Dialog(void *param)
         /* 若找不到资源，进入资源烧录应用 */      
         GUI_Thread_Create(GUI_RES_Writer_Dialog,  /* 任务入口函数 */
                               "GUI_FLASH_WRITER",/* 任务名字 */
-                              8*1024,  /* 任务栈大小 */
+                              5*1024,  /* 任务栈大小 */
                               NULL, /* 任务入口函数参数 */
                               5,    /* 任务的优先级 */
                               10); /* 任务时间片，部分任务不支持 */

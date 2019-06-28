@@ -289,6 +289,10 @@ FRESULT Make_Catalog (char* path,uint8_t clear)
     } //for
     f_closedir(&dir);
   }
+  else
+  {
+    printf("文件打开失败\n");
+  }
   
   /* 输出烧录文件信息 */
   if(clear == 0)
@@ -395,7 +399,7 @@ void Burn_Catalog(void)
     uint8_t state = eRES_ERROR;
     is_end = Read_CatalogInfo(i, 
                                 &dir,
-                                full_file_name);  
+                              full_file_name);  
     /* 已遍历完毕,跳出循环 */
     if(is_end !=0)   
       break;

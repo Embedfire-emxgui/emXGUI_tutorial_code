@@ -26,6 +26,7 @@
 #include "./key/bsp_key.h"   
 #include "./usart/bsp_debug_usart.h"
 #include "./touch/gt9xx.h"
+#include <cm_backtrace.h>
 /* FreeRTOS头文件 */
 #include "FreeRTOS.h"
 #include "task.h"
@@ -54,7 +55,10 @@
 /*
  * 当我们在写应用程序的时候，可能需要用到一些全局变量。
  */
-
+ 
+/* hardfault跟踪器需要的定义 */
+#define HARDWARE_VERSION               "V1.0.0"
+#define SOFTWARE_VERSION               "V0.1.0"
 
 /*
 *************************************************************************
@@ -151,6 +155,8 @@ static void BSP_Init(void)
 
   /* KEY 端口初始化 */
   Key_GPIO_Config();
+  /*hardfault 跟踪器初始化*/ 
+  cm_backtrace_init("Fire_FreeRTOS", HARDWARE_VERSION, SOFTWARE_VERSION);
 }
  
 
