@@ -16,7 +16,7 @@
 /*I2CÒý½Å*/
 #define GTP_I2C                          I2C2
 #define GTP_I2C_CLK_ENABLE()             __HAL_RCC_I2C2_CLK_ENABLE()
-#define GTP_I2C_CLK_INIT				 RCC_APB1PeriphClockCmd	
+#define GTP_I2C_CLK_INIT				         RCC_APB1PeriphClockCmd	
 
 #define GTP_I2C_SCL_PIN                  GPIO_PIN_4                 
 #define GTP_I2C_SCL_GPIO_PORT            GPIOH                       

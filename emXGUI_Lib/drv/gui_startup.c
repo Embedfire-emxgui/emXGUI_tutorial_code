@@ -65,16 +65,6 @@ void	GUI_Startup(void)
 		return;
 	}
   
-/***********************第5部分*************************/
-  /* 初始化液晶屏 */
-	pSurf =GUI_DisplayInit(); 
-	if(pSurf==NULL)
-	{
-    GUI_ERROR("GUI_DisplayInit Failed.");
-		return;
-	}
-	GUI_SetScreenSurface(pSurf); //设置屏幕Surface对象
-  
 /***********************第6部分*************************/
   #if(GUI_RES_DEV_EN)  
    //资源设备初始化（FLASH）
@@ -93,6 +83,16 @@ void	GUI_Startup(void)
     GUI_ERROR("GUI_InputInit Failed.");
   }  
 #endif
+  
+/***********************第5部分*************************/
+  /* 初始化液晶屏 */
+	pSurf =GUI_DisplayInit(); 
+	if(pSurf==NULL)
+	{
+    GUI_ERROR("GUI_DisplayInit Failed.");
+		return;
+	}
+	GUI_SetScreenSurface(pSurf); //设置屏幕Surface对象
   
 #if (GUI_SHOW_CURSOR_EN)
 	GL_CursorInit(pSurf,pSurf->Width>>1,pSurf->Height>>1); //初始化光标
