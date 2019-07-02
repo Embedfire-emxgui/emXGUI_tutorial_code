@@ -81,7 +81,7 @@ static	void	_EraseBackgnd(HDC hdc,const RECT *lprc,HWND hwnd)
 	}
 
   /* »Ö¸´Ä¬ÈÏ×ÖÌå */
-  SetFont(hdc, defaultFont);
+//  SetFont(hdc, defaultFont);
 
 	SetBrushColor(hdc,MapRGB(hdc,32,72,144));
 	FillRect(hdc,&rc);
@@ -183,7 +183,7 @@ static 	 LRESULT  	desktop_proc(HWND hwnd,UINT msg,WPARAM wParam,LPARAM lParam)
        }
        else
        {
-          SetBrushColor(hdc, MapRGB(hdc, 0, 0, 0));
+          SetBrushColor(hdc, MapRGB(hdc, 255, 0, 0));
           FillRect(hdc, &rc);
        }
 		}

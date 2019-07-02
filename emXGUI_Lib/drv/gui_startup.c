@@ -8,6 +8,14 @@ extern BOOL	GUI_Arch_Init(void);
 
 extern void GUI_DesktopStartup(void);
 static BOOL GUI_LowLevelInit(void);
+
+#ifdef STM32F10X_HD
+  HFONT GUI_FontInit(void);
+  void GUI_MEM_Init(void){}
+  extern void GUI_VMEM_Init(void);
+  BOOL GUI_Log_Init(void){}
+#endif
+    
 /***********************第1部分*************************/
 /**
   * @brief  GUI低级别的初始化,这是GUI的第一个初始化函数
@@ -99,7 +107,11 @@ void	GUI_Startup(void)
 #endif  
   
 /***********************第8部分*************************/
-  hFont =GUI_Default_FontInit(); //初始化默认的字体
+#ifdef STM32F10X_HD
+  hFont = GUI_FontInit(); //初始化默认的字体
+#else
+  hFont = GUI_Default_FontInit(); //初始化默认的字体
+#endif
 	if(hFont==NULL)
 	{
     GUI_ERROR("GUI_Default_FontInit Failed.");
