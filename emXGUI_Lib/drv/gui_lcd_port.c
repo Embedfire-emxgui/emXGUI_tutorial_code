@@ -15,6 +15,7 @@
 #include "gui_drv.h"
 #include "gui_drv_cfg.h"
 #include "gui_lcd_port.h"
+
 /*============================================================================*/
 
 
@@ -68,10 +69,10 @@ void LCD_HardInit(u32 fb_addr)
   * @brief  液晶背光控制接口
   * @param  on 1为亮，其余值为灭
   */
-void LCD_BkLight(int on)
-{
-  LCD_BackLed_Control(on);
-}
+//void LCD_BkLight(int on)
+//{
+//  LCD_BackLed_Control(on);
+//}
 
 /***********************第1部分*************************/
 /**
@@ -79,101 +80,101 @@ void LCD_BkLight(int on)
   * @param  无
   * @retval 显示设备Surface对象指针，创建得到的绘图表面
   */
-SURFACE* GUI_DisplayInit(void)
-{
-  /* 绘图表面 */
-	SURFACE *pSurf;
-  
-/***********************第2部分*************************/
-#if	(LCD_FORMAT == COLOR_FORMAT_RGB565)
+//SURFACE* GUI_DisplayInit(void)
+//{
+//  /* 绘图表面 */
+//	SURFACE *pSurf;
+//  
+///***********************第2部分*************************/
+//#if	(LCD_FORMAT == COLOR_FORMAT_RGB565)
 
-  //创建绘图表面
-  /* 动态申请的方式  */
+//  //创建绘图表面
+//  /* 动态申请的方式  */
+//// pSurf = GUI_CreateSurface(SURF_RGB565, 
+////                              LCD_XSIZE,LCD_YSIZE,
+////                              LCD_XSIZE*2,
+////                              NULL);  
+//                              
+//  /* 直接指定地址的方式， 显存地址，*/
 // pSurf = GUI_CreateSurface(SURF_RGB565, 
 //                              LCD_XSIZE,LCD_YSIZE,
 //                              LCD_XSIZE*2,
-//                              NULL);  
-                              
-  /* 直接指定地址的方式， 显存地址，*/
- pSurf = GUI_CreateSurface(SURF_RGB565, 
-                              LCD_XSIZE,LCD_YSIZE,
-                              LCD_XSIZE*2,
-                              (void*)LCD_FRAME_BUFFER);    
+//                              (void*)FSMC_Addr_ILI9341_DATA);    
 
-#endif
+//#endif
 
-#if	(LCD_FORMAT == COLOR_FORMAT_XRGB8888)
-	//动态申请的方式，初始化LCD Surface结构数据(XRGB8888格式)
-	//lcd_buffer =(u8*)GUI_GRAM_Alloc(LCD_XSIZE,LCD_YSIZE*4);
-  
-  /* 直接指定地址的方式， 显存地址，*/
-  /* 动态申请的方式  */
-// pSurf = GUI_CreateSurface(SURF_XRGB8888, 
+//#if	(LCD_FORMAT == COLOR_FORMAT_XRGB8888)
+//	//动态申请的方式，初始化LCD Surface结构数据(XRGB8888格式)
+//	//lcd_buffer =(u8*)GUI_GRAM_Alloc(LCD_XSIZE,LCD_YSIZE*4);
+//  
+//  /* 直接指定地址的方式， 显存地址，*/
+//  /* 动态申请的方式  */
+//// pSurf = GUI_CreateSurface(SURF_XRGB8888, 
+////                              LCD_XSIZE,LCD_YSIZE,
+////                              LCD_XSIZE*4,
+////                              NULL);  
+//                          
+//  pSurf = GUI_CreateSurface(SURF_XRGB8888, 
 //                              LCD_XSIZE,LCD_YSIZE,
 //                              LCD_XSIZE*4,
-//                              NULL);  
-                          
-  pSurf = GUI_CreateSurface(SURF_XRGB8888, 
-                              LCD_XSIZE,LCD_YSIZE,
-                              LCD_XSIZE*4,
-                              (void*)LCD_FRAME_BUFFER);                             
+//                              (void*)LCD_FRAME_BUFFER);                             
 
-#endif
+//#endif
 
-/***********************第3部分*************************/
-  if(pSurf == NULL)
-  {
-    GUI_Printf("#Error: GUI_CreateSurface Failed.\r\n");
-  }
+///***********************第3部分*************************/
+//  if(pSurf == NULL)
+//  {
+//    GUI_Printf("#Error: GUI_CreateSurface Failed.\r\n");
+//  }
 
-  //LCD硬件初始化
- 	LCD_HardInit((u32)pSurf->Bits); 
-  
-/***********************第4部分*************************/
-  //清屏
-	pSurf->GL->FillArea(pSurf,0,0,LCD_XSIZE,LCD_YSIZE,pSurf->CC->MapRGB(0,0,0)); 
-	//打开背光
-  LCD_BkLight(TRUE);
-  
-/***********************第5部分*************************/
-#if  DMA2D_EN 
-  DMA2D_DrvInit();
-#endif
-#if  G2D_EN 
-  PXP_DrvInit();
-#endif 
+//  //LCD硬件初始化
+// 	LCD_HardInit((u32)pSurf->Bits); 
+//  
+///***********************第4部分*************************/
+//  //清屏
+//	pSurf->GL->FillArea(pSurf,0,0,LCD_XSIZE,LCD_YSIZE,pSurf->CC->MapRGB(0,0,0)); 
+//	//打开背光
+//  LCD_BkLight(TRUE);
+//  
+///***********************第5部分*************************/
+//#if  DMA2D_EN 
+//  DMA2D_DrvInit();
+//#endif
+//#if  G2D_EN 
+//  PXP_DrvInit();
+//#endif 
 
-/***********************第6部分*************************/  
-#if FRAME_BUFFER_EN
-  {
-    const SURFACE *pSurf_FB;
-    pSurf_FB = GUI_CreateSurface((SURF_FORMAT)pSurf->Format,pSurf->Width,pSurf->Height,0,NULL);
-    GUI_SetFrameBufferSurface(pSurf_FB);  
-    //清屏
-	  pSurf_FB->GL->FillArea(pSurf_FB,0,0,LCD_XSIZE,LCD_YSIZE,pSurf_FB->CC->MapRGB(0,0,0)); 
+///***********************第6部分*************************/  
+//#if FRAME_BUFFER_EN
+//  {
+//    const SURFACE *pSurf_FB;
+//    pSurf_FB = GUI_CreateSurface((SURF_FORMAT)pSurf->Format,pSurf->Width,pSurf->Height,0,NULL);
+//    GUI_SetFrameBufferSurface(pSurf_FB);  
+//    //清屏
+//	  pSurf_FB->GL->FillArea(pSurf_FB,0,0,LCD_XSIZE,LCD_YSIZE,pSurf_FB->CC->MapRGB(0,0,0)); 
 
-  }
-#endif  
+//  }
+//#endif  
 
-	while(0)
-	{ //测试
+//	while(0)
+//	{ //测试
 
-		pSurf->GL->FillArea(pSurf,20,30,128,80,pSurf->CC->MapRGB(255,255,255));
-		GUI_msleep(200);
-		pSurf->GL->FillArea(pSurf,20,30,128,80,pSurf->CC->MapRGB(255,0,0));
-		GUI_msleep(200);
-		pSurf->GL->FillArea(pSurf,20,30,128,80,pSurf->CC->MapRGB(0,255,0));
-		GUI_msleep(200);
-		pSurf->GL->FillArea(pSurf,20,30,128,80,pSurf->CC->MapRGB(0,0,255));
-		GUI_msleep(200);
-		pSurf->GL->FillArea(pSurf,20,30,128,80,pSurf->CC->MapRGB(0,0,0));
-		GUI_msleep(200);
-		break;
-	}
+//		pSurf->GL->FillArea(pSurf,20,30,128,80,pSurf->CC->MapRGB(255,255,255));
+//		GUI_msleep(200);
+//		pSurf->GL->FillArea(pSurf,20,30,128,80,pSurf->CC->MapRGB(255,0,0));
+//		GUI_msleep(200);
+//		pSurf->GL->FillArea(pSurf,20,30,128,80,pSurf->CC->MapRGB(0,255,0));
+//		GUI_msleep(200);
+//		pSurf->GL->FillArea(pSurf,20,30,128,80,pSurf->CC->MapRGB(0,0,255));
+//		GUI_msleep(200);
+//		pSurf->GL->FillArea(pSurf,20,30,128,80,pSurf->CC->MapRGB(0,0,0));
+//		GUI_msleep(200);
+//		break;
+//	}
 
-/***********************第7部分*************************/
-	return pSurf;
-}
+///***********************第7部分*************************/
+//	return pSurf;
+//}
 
 
 /********************************END OF FILE****************************/
