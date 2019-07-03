@@ -139,7 +139,7 @@ static void BSP_Init(void)
 	LED_GPIO_Config();	
 	
 	/* usart ¶Ë¿Ú³õÊ¼»¯ */
-  USART_Config();
+  Debug_USART_Config();
   
   FSMC_Init();
 	FSMC_InitSRAM();

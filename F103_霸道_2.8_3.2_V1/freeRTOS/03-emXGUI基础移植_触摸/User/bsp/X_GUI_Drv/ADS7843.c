@@ -28,8 +28,6 @@
 #define	IRQ_PORT	GPIOF
 #define	IRQ_PIN		GPIO_Pin_9
 
-
-
 // CS   - PB0
 #define	CS_0()		CS_PORT->BRR = CS_PIN
 #define	CS_1()		CS_PORT->BSRR = CS_PIN
@@ -54,7 +52,6 @@ static BOOL	ADS7843_HardInit(void)
 {
 
 	GPIO_InitTypeDef gpio_init;
-	int i;
 
 
 	gpio_init.GPIO_Speed = GPIO_Speed_10MHz;
@@ -125,7 +122,7 @@ static BOOL	ADS7843_IsPenDown(void)
 
 static	void ADS7843_WrByte(U8 dat)
 {
-	int  i, j ;
+	int  i;
 	
     SCLK_0();
 	for( i = 0; i < 8; i++ )
@@ -222,7 +219,7 @@ static	int ad_dat[COUNT];
 static BOOL	ADS7843_GetXY(u16 *X_Addata,u16 *Y_Addata)
 {
 
-	U16	i,j,x_dat,y_dat;
+	U16	i,x_dat,y_dat;
 
 
 //	while( ADS7843_IsBusy());			//如果BUSY，等待直到转换完毕，这个可以不用
@@ -268,7 +265,7 @@ static BOOL	ADS7843_GetXY(u16 *X_Addata,u16 *Y_Addata)
 
 /*============================================================================*/
 
-static int ts_x=0,ts_y=0;
+//static int ts_x=0,ts_y=0;
 static int ts_down=0;
 
 static BOOL Init(void)

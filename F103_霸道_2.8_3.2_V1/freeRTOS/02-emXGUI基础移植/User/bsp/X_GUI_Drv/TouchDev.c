@@ -4,7 +4,7 @@
 #include 	"GUI_Drv_Cfg.h"
 #include 	"GUI_Drv.h"
 
-#if	GUI_TOUCHSCREEN_EN
+#if	GUI_TOUCHSCREEN_EN && 0
 
 /*============================================================================*/
 

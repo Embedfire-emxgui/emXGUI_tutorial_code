@@ -23,7 +23,7 @@
   * @param  нч
   * @retval нч
   */
-void USART_Config(void)
+void Debug_USART_Config(void)
 {
 	GPIO_InitTypeDef GPIO_InitStructure;
 	USART_InitTypeDef USART_InitStructure;

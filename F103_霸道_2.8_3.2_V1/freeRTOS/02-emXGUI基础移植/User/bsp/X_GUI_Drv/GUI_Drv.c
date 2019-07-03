@@ -8,9 +8,9 @@
 /*===================================================================================*/
 
 HFONT	XFT_CreateFont(const void *xft_dat);
-void LCD_HardInit(void);
+//void LCD_HardInit(void);
 extern SURFACE*	EXT_LCD_CreateSurfaceRGB565(int Width,int Height);
-void LCD_BkLight(int on);
+//void LCD_BkLight(int on);
 extern BOOL Load_state;
 /*===================================================================================*/
 /*===================================================================================*/
@@ -21,13 +21,13 @@ extern BOOL Load_state;
 返回: TRUE:成功; FALSE：失败.
 说明: 这是GUI的第一个初始化函数.
 */
-void GUI_VMEM_Init(void);
-BOOL GUI_LowLevelInit(void)
-{
-  GUI_VMEM_Init();
-  
-	return TRUE;
-}
+//void GUI_VMEM_Init(void);
+//BOOL GUI_LowLevelInit(void)
+//{
+//  GUI_VMEM_Init();
+//  
+//	return TRUE;
+//}
 
 
 /*===================================================================================*/
@@ -38,15 +38,11 @@ BOOL GUI_LowLevelInit(void)
 返回: 显示设备Surface对象指针
 说明:
 */
-
+#if 0
 SURFACE* GUI_DisplayInit(void)
 {
-
 	int width_bytes;
 	SURFACE *pSurf;
-	////
-
-//	DebugPuts("GUI_DisplayInit\r\n");
 
 	//LCD硬件初始化
 	LCD_HardInit();
@@ -54,7 +50,7 @@ SURFACE* GUI_DisplayInit(void)
 	pSurf =EXT_LCD_CreateSurfaceRGB565(LCD_XSIZE,LCD_YSIZE);
 
 	pSurf->GL->FillArea(pSurf,0,0,LCD_XSIZE,LCD_YSIZE,pSurf->CC->MapRGB(0,0,0)); //清屏
-	LCD_BkLight(TRUE); //打开背光
+//	LCD_BkLight(TRUE); //打开背光
 
 	while(0)
 	{ //测试
@@ -82,7 +78,7 @@ SURFACE* GUI_DisplayInit(void)
 
 	return pSurf;
 }
-
+#endif
 
 /*===================================================================================*/
 /*
@@ -91,37 +87,37 @@ SURFACE* GUI_DisplayInit(void)
 返回: 无
 说明:
 */
-void GUI_InputInit(void)
-{
-#if(GUI_KEYBOARD_EN)
-{
-	KeyBoardDev_Init();
-}
-#endif
+//void GUI_InputInit(void)
+//{
+//#if(GUI_KEYBOARD_EN)
+//{
+//	KeyBoardDev_Init();
+//}
+//#endif
 
-#if(GUI_TOUCHSCREEN_EN)
-{
-	if(TouchDev_Init()) /*触摸屏设备初始化*/
-	{
-#if(GUI_TOUCHSCREEN_CALIBRATE)
-		TS_CFG_DATA ts_cfg;
-		if(TouchDev_LoadCfg(&ts_cfg)) /*加载校正数据(电阻屏需要)*/
-		{
-			TouchPanel_TranslateInit(&ts_cfg); /*初始化坐标转换函数(电阻屏需要)*/
-		}
-#endif
-	}
+//#if(GUI_TOUCHSCREEN_EN)
+//{
+//	if(TouchDev_Init()) /*触摸屏设备初始化*/
+//	{
+//#if(GUI_TOUCHSCREEN_CALIBRATE)
+//		TS_CFG_DATA ts_cfg;
+//		if(TouchDev_LoadCfg(&ts_cfg)) /*加载校正数据(电阻屏需要)*/
+//		{
+//			TouchPanel_TranslateInit(&ts_cfg); /*初始化坐标转换函数(电阻屏需要)*/
+//		}
+//#endif
+//	}
 
-}
-#endif
+//}
+//#endif
 
-#if(GUI_MOUSE_EN)
-{
-	MouseDev_Init();
-}
-#endif
+//#if(GUI_MOUSE_EN)
+//{
+//	MouseDev_Init();
+//}
+//#endif
 
-}
+//}
 
 /*===================================================================================*/
 /*
@@ -130,34 +126,34 @@ void GUI_InputInit(void)
 返回: 无
 说明: 该函数会被周期性轮询调用
 */
-void GUI_InputHandler(void)
-{
+//void GUI_InputHandler(void)
+//{
 
-#if(GUI_KEYBOARD_EN)
-{
-	if(KeyBoardDev_IsActive())
-	{
-		KeyBoardDev_Handler();
-	}
-}
-#endif
+//#if(GUI_KEYBOARD_EN)
+//{
+//	if(KeyBoardDev_IsActive())
+//	{
+//		KeyBoardDev_Handler();
+//	}
+//}
+//#endif
 
-#if(GUI_TOUCHSCREEN_EN)
-{
-	TouchDev_Handler(); //调用触摸屏处理函数
-}
-#endif
+//#if(GUI_TOUCHSCREEN_EN)
+//{
+//	TouchDev_Handler(); //调用触摸屏处理函数
+//}
+//#endif
 
-#if(GUI_MOUSE_EN)
-{
-	if(MouseDev_IsActive())
-	{
-		MouseDev_Handler();
-	}
-}
-#endif
+//#if(GUI_MOUSE_EN)
+//{
+//	if(MouseDev_IsActive())
+//	{
+//		MouseDev_Handler();
+//	}
+//}
+//#endif
 
-}
+//}
 
 /*===================================================================================*/
 /*
@@ -167,18 +163,18 @@ void GUI_InputHandler(void)
 说明:
 */
 
-void*	GUI_MEM_Alloc(U32 size)
-{
-	void *p=NULL;
+//void*	GUI_MEM_Alloc(U32 size)
+//{
+//	void *p=NULL;
 
-	p =vmalloc(size);
-	if(p==NULL)
-	{
-	    GUI_Printf("#Error: GUI_MEM_Alloc.\r\n");
-	}
+//	p =vmalloc(size);
+//	if(p==NULL)
+//	{
+//	    GUI_Printf("#Error: GUI_MEM_Alloc.\r\n");
+//	}
 
-	return p;
-}
+//	return p;
+//}
 
 /*===================================================================================*/
 /*
@@ -187,11 +183,11 @@ void*	GUI_MEM_Alloc(U32 size)
 返回: 无
 说明:
 */
-void	vfree(void *p);
-void	GUI_MEM_Free(void *p)
-{
-	vfree(p);
-}
+//void	vfree(void *p);
+//void	GUI_MEM_Free(void *p)
+//{
+//	vfree(p);
+//}
 
 /*===================================================================================*/
 /*
@@ -201,10 +197,10 @@ void	GUI_MEM_Free(void *p)
 说明:
 */
 
-void*	GUI_GRAM_Alloc(U32 size)
-{
-	return vmalloc(size);
-}
+//void*	GUI_GRAM_Alloc(U32 size)
+//{
+//	return vmalloc(size);
+//}
 
 /*===================================================================================*/
 /*
@@ -214,10 +210,10 @@ void*	GUI_GRAM_Alloc(U32 size)
 说明:
 */
 
-void	GUI_GRAM_Free(void *p)
-{
-	vfree(p);
-}
+//void	GUI_GRAM_Free(void *p)
+//{
+//	vfree(p);
+//}
 
 /*===================================================================================*/
 
@@ -227,10 +223,10 @@ void	GUI_GRAM_Free(void *p)
 返回: 无
 说明: 如果不用输出GUI调试信息,这个函数可以为空
 */
-
+#if 0
 void	GUI_Printf(const char *fmt,...)
 {
-#if 0
+
   	x_va_list ap;
     char *buf;
     static	char str_buf[256];
@@ -253,9 +249,9 @@ void	GUI_Printf(const char *fmt,...)
 
 		//GUI_MEM_Free(buf);
 	}
-#endif
-}
 
+}
+#endif
 /*===================================================================================*/
 /*===================================================================================*/
 
@@ -315,7 +311,7 @@ static int read_data(void *buf,int offset,int size,LONG lParam)
 返回: 返回默认字体的句柄
 说明:
 */
-
+#if 0
 HFONT GUI_FontInit(void)
 {
 
@@ -409,7 +405,7 @@ HFONT GUI_FontInit(void)
 
 	return hFont;
 }
-
+#endif
 
 /*===================================================================================*/
 void	GUI_UserAppStart(void);
