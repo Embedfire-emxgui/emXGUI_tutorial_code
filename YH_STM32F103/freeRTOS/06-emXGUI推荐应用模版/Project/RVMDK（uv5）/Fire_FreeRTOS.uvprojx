@@ -312,7 +312,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>2</Optim>
+            <Optim>1</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>0</OneElfS>
@@ -1411,15 +1411,53 @@
               <FileType>4</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\libs\emXGUI100_MDK_M3.lib</FilePath>
             </File>
+            <File>
+              <FileName>libjpeg_MDK_CM3.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\libjpeg_MDK_CM3.lib</FilePath>
+            </File>
+            <File>
+              <FileName>libpng_MDK_CM3.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\libs\libpng_MDK_CM3.lib</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>base_app</GroupName>
           <Files>
             <File>
+              <FileName>GUI_Boot_Interface_Dialog.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\app\base\boot_interface\GUI_Boot_Interface_Dialog.c</FilePath>
+            </File>
+            <File>
               <FileName>gui_desktop.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\app\base\gui_desktop.c</FilePath>
+            </File>
+            <File>
+              <FileName>backend_res_writer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\app\base\res_writer\backend_res_writer.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUI_RES_Writer_Dialog.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\app\base\res_writer\GUI_RES_Writer_Dialog.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>gui_app</GroupName>
+        </Group>
+        <Group>
+          <GroupName>app_res</GroupName>
+          <Files>
+            <File>
+              <FileName>boot_logo.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\app\base\boot_interface\boot_logo.c</FilePath>
             </File>
           </Files>
         </Group>

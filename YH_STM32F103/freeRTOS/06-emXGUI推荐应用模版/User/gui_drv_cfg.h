@@ -38,7 +38,7 @@
 #define  GUI_LCD_TYPE_NUM     LCD_TYPE_NUM
 
 //屏幕旋转，默认
-//#define	LCD_ROTATE      ROTATE_0
+#define	LCD_ROTATE      ROTATE_0
 
 /* 是否使用硬件图形加速器（DMA2D之类，驱动需要重新定制） */
 #define	DMA2D_EN                   0
@@ -58,7 +58,7 @@
 /* 是否需要触摸校准-电阻屏才需要 */
 #define	GUI_TOUCHSCREEN_CALIBRATE       1
 
-/* 是否需要触摸校准-电阻屏才需要 */
+/* 电阻触摸屏校准参数 */
 #define	GUI_TOUCH_CALIBRATEParamAddr       0x0
 
 /* 是否显示光标 */
@@ -122,17 +122,17 @@
 *  流设备和整体加载方式都要把这个宏设置为1
 *  使用本功能时需要把GUI_RES_DEV_EN设置为1
 */
-#define GUI_EXTERN_FONT_EN       0
+#define GUI_EXTERN_FONT_EN       1
 
 /*
 * 是否把整个外部字体数据加载至VMEM区域，初始化加载时需要较长时间，
 * 加载后可大幅提高字符显示的速度
 * 若设置为真，则使用整体加载方式，否则使用流设备方式
 */
-#define GUI_FONT_LOAD_TO_RAM_EN    (1 && GUI_EXTERN_FONT_EN)
+#define GUI_FONT_LOAD_TO_RAM_EN    (0 && GUI_EXTERN_FONT_EN)
 
 /* 要使用的外部默认字体文件，USE_EXTERN_FONT为1时生效 */
-#define GUI_DEFAULT_EXTERN_FONT   gui_font_param[cur_lcd].default_extern_cn
+#define GUI_DEFAULT_EXTERN_FONT    "GB2312_16_4BPP.xft"
 
 
 /*===========日志输出设备配置===gui_log_port.c===============================================*/
@@ -141,8 +141,6 @@
 #define GUI_DEBUG_EN         	      1
 #define GUI_DEBUG_ARRAY_EN          0
 #define GUI_DEBUG_FUNC_EN   	       0
-
-
 
 /*===========资源设备配置===gui_resource_port.c===============================================*/
 /* 是否使用资源设备 */
@@ -177,59 +175,8 @@
 
 /* 资源烧录器，使能后缺少资源会自动进入资源烧录界面 */
 /* 需要sd文件系统/flash资源设备支持 */
-#define GUI_APP_RES_WRITER_EN          0
+#define GUI_APP_RES_WRITER_EN          1
 /*============================================================================*/
 
-/*============================================================================*/
-//#define	DMA2D_EN                          0
-#define	GUI_KEYBOARD_EN                 0
-#define	GUI_MOUSE_EN                    0
-//#define	GUI_TOUCHSCREEN_EN              1
-
-//#define	GUI_TOUCHSCREEN_CALIBRATE       1
-
-#define	FONT_XFT_EN		1
-#define	FONT_TTF_EN		0
-
-#define	FRAMEBUFFER_EN	1
-
-
-/*============================================================================*/
-
-#ifndef	MIN
-#define	MIN(a,b)	(((a)<(b))?(a):(b))
-#endif
-
-#ifndef	MAX
-#define	MAX(a,b)	(((a)>(b))?(a):(b))
-#endif
-
-
-/*============================================================================*/
-
-#define	LCD_FORMAT	COLOR_FORMAT_RGB565
-//#define	LCD_FORMAT	COLOR_FORMAT_XRGB8888
-
-//#define	LCD_XSIZE	    240
-//#define	LCD_YSIZE	    320
-#define LCD_FRAME_RATE	60
-#define	LCD_ROTATE      ROTATE_0
-
-/*============================================================================*/
-#if	(LCD_FORMAT==COLOR_FORMAT_RGB565)
-
-#define	LCD_COLOR	    U16
-#define	LCD_BUF_SIZE	(LCD_XSIZE*LCD_YSIZE*2)
-
-#endif
-
-////////
-
-#if	(LCD_FORMAT==COLOR_FORMAT_XRGB8888)
-
-#define	LCD_COLOR       U32
-#define	LCD_BUF_SIZE	(LCD_XSIZE*LCD_YSIZE*4)
-
-#endif
 
 #endif	/*__GUI_DRV_CFG_H__*/
