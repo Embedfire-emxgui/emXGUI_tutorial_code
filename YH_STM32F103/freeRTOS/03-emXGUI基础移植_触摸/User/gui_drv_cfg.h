@@ -48,7 +48,7 @@
 
 /*==========输入设备配置===gui_input_port.c==================================================*/
 /* 是否使用输入设备 */
-#define  GUI_INPUT_DEV_EN        0
+#define  GUI_INPUT_DEV_EN        1
 
 /* 是否使能键盘、鼠标、触摸屏 */
 #define	GUI_TOUCHSCREEN_EN      1
@@ -56,7 +56,10 @@
 #define	GUI_MOUSE_EN             0
 
 /* 是否需要触摸校准-电阻屏才需要 */
-#define	GUI_TOUCHSCREEN_CALIBRATE       0
+#define	GUI_TOUCHSCREEN_CALIBRATE       1
+
+/* 是否需要触摸校准-电阻屏才需要 */
+#define	GUI_TOUCH_CALIBRATEParamAddr       0x0
 
 /* 是否显示光标 */
 #define  GUI_SHOW_CURSOR_EN        1
@@ -143,7 +146,7 @@
 
 /*===========资源设备配置===gui_resource_port.c===============================================*/
 /* 是否使用资源设备 */
-#define GUI_RES_DEV_EN         0
+#define GUI_RES_DEV_EN         1
 
 /* 是否支持文件系统接口,需要移植fatfs文件系统 */
 #define GUI_FS_EN         0

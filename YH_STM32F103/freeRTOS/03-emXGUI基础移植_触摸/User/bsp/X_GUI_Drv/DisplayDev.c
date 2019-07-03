@@ -3,49 +3,18 @@
 #include "GUI_Drv.h"
 
 /*============================================================================*/
-
-#define	LCD_RST_PIN	GPIOG,GPIO_Pin_11
-#define	LCD_BL_PIN	GPIOG,GPIO_Pin_6
-
+#if 0
 void	LCD_Init(void);
 
 void LCD_HardInit(void)
 {
-	GPIO_InitTypeDef gpio_init;
-
-	gpio_init.GPIO_Mode  = GPIO_Mode_Out_PP; //复用输出
-	gpio_init.GPIO_Speed = GPIO_Speed_50MHz; //50MHz
-
-	//PG6 - LCD BackLight: 0:ON; 1:OFF
-	gpio_init.GPIO_Pin = GPIO_Pin_6;
-	GPIO_Init(GPIOG, &gpio_init); //初始化
-
-	//PG11 - LCD_nRST:
-	gpio_init.GPIO_Pin = GPIO_Pin_11;
-	GPIO_Init(GPIOG, &gpio_init); //初始化
-
-	GPIO_SetBits(LCD_RST_PIN);
-	GUI_msleep(50);
-	GPIO_ResetBits(LCD_RST_PIN);
-	GUI_msleep(50);
-	GPIO_SetBits(LCD_RST_PIN);
-	GUI_msleep(50);
+	
 
 	LCD_Init();
 }
 
+#endif
 
-void LCD_BkLight(int on)
-{
-	if(on)
-	{
-		GPIO_ResetBits(LCD_BL_PIN);
-	}
-	else
-	{
-		GPIO_SetBits(LCD_BL_PIN);
-	}
-}
 
 /*===================================================================================*/
 

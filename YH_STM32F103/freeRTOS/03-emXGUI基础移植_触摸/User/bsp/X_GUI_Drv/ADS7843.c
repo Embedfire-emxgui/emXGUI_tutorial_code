@@ -319,6 +319,7 @@ static BOOL GetPoint(POINT *pt)
 
 static BOOL LoadCfg(TS_CFG_DATA *cfg)
 {
+#if 0
 	X_FILE *fp=NULL;
 	int i;
 
@@ -352,15 +353,33 @@ static BOOL LoadCfg(TS_CFG_DATA *cfg)
 		printf("ts_load_config Error\r\n");
 		return FALSE;
 	}
+#endif
 
+/* 设置一个默认值 */
+  cfg->LUx =0x10;
+  cfg->LUy =0x10;
+
+  cfg->RUx =0x20;
+  cfg->RUy =0x10;
+
+  cfg->RDx =0x20;
+  cfg->RDy =0x20;
+
+  cfg->LDx =0x10;
+  cfg->LDy =0x20;
+
+  SPI_FLASH_BufferRead((uint8_t *)cfg, GUI_TOUCH_CALIBRATEParamAddr, sizeof(TS_CFG_DATA));    // 保存数据
+  
+  return TRUE;
 }
 
 static BOOL SaveCfg(TS_CFG_DATA *cfg)
 {
+#if 0
 	X_FILE *fp;
 
 		////
-	#if 1
+	
 	printf("ts_save_cfg\n");
 
 	fp=x_fopen("B:ts_cfg.bin","wb+");
@@ -372,9 +391,14 @@ static BOOL SaveCfg(TS_CFG_DATA *cfg)
 		return TRUE;
 	}
 	////
-	#endif
-
-	return FALSE;
+#endif
+  
+  cfg->rsv = 0;    // 写入校准标志
+  
+  SPI_FLASH_SectorErase(GUI_TOUCH_CALIBRATEParamAddr);    // 擦除要保存的地址
+  SPI_FLASH_BufferWrite((uint8_t *)cfg, GUI_TOUCH_CALIBRATEParamAddr, sizeof(TS_CFG_DATA));    // 保存数据
+  
+	return TRUE;
 }
 
 /*============================================================================*/
@@ -388,6 +412,7 @@ const GUI_TOUCH_DEV TouchDev_ADS7843=
 	.LoadCfg	=LoadCfg,
 	.SaveCfg	=SaveCfg,
 };
+
 
 /*============================================================================*/
 
