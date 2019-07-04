@@ -31,28 +31,28 @@ void	gui_app_thread(void *p)
 {
     #if(GUI_TOUCHSCREEN_EN & GUI_TOUCHSCREEN_CALIBRATE)
     {
-        int i=0;
-        while(TouchPanel_IsPenDown())
+      TS_CFG_DATA ts_cfg;
+      TouchDev_LoadCfg(&ts_cfg); /*加载校正数据(电阻屏需要)*/
+
+      int i=0;
+      while(TouchPanel_IsPenDown() || ts_cfg.rsv != 0)    // 开机长按 1S 或者没有检测到校准标志位则开始校准
     	{
     		GUI_msleep(100);
     		if(i++>10)
     		{
     			ShowCursor(FALSE);
-    			TouchScreenCalibrate(NULL);
+          #ifdef  STM32F10X_HD
+            TouchScreenCalibrate();
+          #endif
     			ShowCursor(TRUE);
     			break;
     		}
     	}
     }
     #endif
-		
-  /* 调用APP函数 */  
-//	GUI_AppMain();
- //   GUI_UserAppStart();
-//   	ShellWindowStartup();
+
     while(1)
     {
-//      GUI_DEBUG("gui_app_thread");
       GUI_msleep(500);
     }
 }
@@ -87,7 +87,6 @@ static	void	_EraseBackgnd(HDC hdc,const RECT *lprc,HWND hwnd)
 	FillRect(hdc,&rc);
   	
   SetTextColor(hdc,MapRGB(hdc,250,250,250));
-
 
 #if (GUI_EXTERN_FONT_EN || GUI_INER_CN_FONT_EN)
   /* 居中显示结果 */

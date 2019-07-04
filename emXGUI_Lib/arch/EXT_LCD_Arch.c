@@ -6,12 +6,6 @@
 /*=========================================================================================*/
 
 #ifdef	EXT_LCD_ARCH
-//#if 1
-//void __lcd_write_start(u16 sx,u16 sy,u16 ex,u16 ey);
-//void __lcd_read_start(u16 sx,u16 sy,u16 ex,u16 ey);
-//void __lcd_write_rgb(U8 r,U8 g,U8 b);
-//u16 __lcd_read_pixel(void);
-//void __lcd_read_rgb(u8 *r,u8 *g,u8 *b);
 
 /*=========================================================================================*/
 

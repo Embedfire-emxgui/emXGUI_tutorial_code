@@ -13,7 +13,7 @@
 
 #include	"emXGUI.h"
 #include  "gui_drv_cfg.h"
-
+#include  "string.h"
 #include "gui_mem_port.h"
 #include "gui_font_port.h"
 #include "gui_resource_port.h"
@@ -59,6 +59,7 @@ BOOL res_not_found_flag = FALSE;
   *  不需要使用不同字体参数时，直接设置gui_drv_cfg.h文件即可
   *  这些参数用在gui_drv_cfg.h文件的宏GUI_DEFAULT_FONT_EN和GUI_DEFAULT_EXTERN_FONT
 */  
+#if !(STM32F10X_HD)
 const FONT_PARAM_TypeDef gui_font_param[GUI_LCD_TYPE_NUM] = {
   /* 5寸屏 */
   {   
@@ -77,7 +78,7 @@ const FONT_PARAM_TypeDef gui_font_param[GUI_LCD_TYPE_NUM] = {
     .default_extern_cn = "GB2312_20_4BPP.xft", /* 默认中文字体，外部 */
   },
 };
-
+#endif
 #if (GUI_FONT_LOAD_TO_RAM_EN)
   u8 *default_font_buf;
   u8 *logo_font_buf_100;
@@ -142,6 +143,63 @@ HFONT GUI_Init_Extern_Font_Stream(const char* res_name)
   if(font_base > 0)
   {
     hFont =XFT_CreateFontEx(font_read_data_exFlash,font_base);
+    #if 0
+    
+    uint32_t loop = 0;
+    
+    FRESULT result; 
+    UINT  bw;            					    /* File R/W count */
+    uint32_t read_addr=0,j=0;
+    uint8_t tempbuf[256],flash_buf[256];
+    FIL file_temp;
+   
+//    res_name = strcat(",res_name);
+    
+      result = f_open(&file_temp,"0:/srcdata/GB2312_16_4BPP.xft",FA_OPEN_EXISTING | FA_READ);
+      if(result != FR_OK)
+      {
+          printf("打开文件失败！\n");
+          LED_RED;
+      }
+      else
+      {
+        printf("打开文件：%s  成功\n", res_name);
+      }
+      
+       //校验数据
+      read_addr = font_base;
+     
+      f_lseek(&file_temp,0);
+      loop = 0;
+      while(result == FR_OK) 
+      {
+        loop++;
+        result = f_read( &file_temp, tempbuf, 256, &bw);//读取数据	 
+        if(result!=FR_OK)			 //执行错误
+        {
+          printf("读取文件失败！\n");
+          LED_RED;
+        }    
+
+        if(bw == 0)break;//为0时不进行读写，跳出
+  
+        SPI_FLASH_BufferRead(flash_buf,read_addr,bw);  //从FLASH中读取数据
+        read_addr+=bw;		
+        
+        for(j=0;j<bw;j++)
+        {
+          if(tempbuf[j] != flash_buf[j])
+          {
+            printf("数据校验失败！\n");
+            LED_RED;
+          }   
+        }  
+     
+        if(bw !=256)break;//到了文件尾
+      }   
+      printf("数据校验OK\n");
+    
+    #endif
   }
   else
   {
@@ -237,9 +295,13 @@ HFONT GUI_Init_Extern_Font(void)
    /* 整个字体文件加载至RAM */
 #if (GUI_FONT_LOAD_TO_RAM_EN  )
   {  
+#ifdef STM32F10X_HD
+    defaultFont = GUI_Init_Extern_Font_2RAM(GUI_DEFAULT_EXTERN_FONT,&default_font_buf);
+#else
     defaultFont = GUI_Init_Extern_Font_2RAM(GUI_DEFAULT_EXTERN_FONT,&default_font_buf);
 //    logoFont100 = GUI_Init_Extern_Font_2RAM(GUI_LOGO_FONT_100,&logo_font_buf_100);
-  }
+#endif 
+    }
   
 #else
    /* 使用流设备加载字体，按需要读取 */
@@ -267,8 +329,14 @@ HFONT GUI_Default_FontInit(void)
     */
   
     /* 默认英文字体 */ 
-    defaultFontEn = XFT_CreateFont(GUI_DEFAULT_FONT_EN);        
-
+#if STM32F10X_HD
+    defaultFontEn =XFT_CreateFont(GUI_DEFAULT_FONT_EN);
+#if GUI_EXTERN_FONT_EN
+    defaultFont = GUI_Init_Extern_Font();  
+#endif
+#else
+    defaultFontEn = XFT_CreateFont(GUI_DEFAULT_FONT_EN);  
+#endif
     /* 如果使用了启动界面，在启动界面再加载外部字体 */
 #if (GUI_EXTERN_FONT_EN && (!GUI_APP_BOOT_INTERFACE_EN))
  

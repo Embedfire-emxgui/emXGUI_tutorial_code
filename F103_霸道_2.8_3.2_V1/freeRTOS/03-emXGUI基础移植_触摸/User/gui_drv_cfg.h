@@ -110,7 +110,7 @@
 
 
 /* 默认内部英文字体数组名，USE_EXTERN_FONT为0或 外部字体加载失败时会采用的字体 */
-#define GUI_DEFAULT_FONT_EN          gui_font_param[cur_lcd].default_en
+#define GUI_DEFAULT_FONT_EN          ASCII_16_4BPP
 
 /* 是否使用内部中文字体，中文字体太大，不建议放在内部 */
 #define GUI_INER_CN_FONT_EN      0

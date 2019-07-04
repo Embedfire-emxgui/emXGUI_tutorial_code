@@ -19,12 +19,13 @@
 #define	ROTATE_270	3
 
 /*============================================================================*/
-
-
+#ifdef STM32F10X_HD
+void LCD_Init(void);
+void LCD_BackLed_Control(int on);
+#endif
 SURFACE* GUI_DisplayInit(void);
 SURFACE*	GUI_CreateSurface(SURF_FORMAT Format,int Width,int Height,int LineBytes,void *bits);
+SURFACE*	EXT_LCD_CreateSurfaceRGB565(int Width,int Height);
 void	GUI_DeleteSurface(const SURFACE *pSurf);
-
-
 
 #endif /* __GUI_LCD_PORT_H */

@@ -10,15 +10,21 @@ extern "C" {
 #include "stm32f4xx.h"
 #elif defined(STM32H743xx)
 #include "stm32h7xx.h"
+#elif STM32F10X_HD
+#include "stm32f10x.h"
 #endif
+
 
 ////Touch State
 #define	TS_ACT_NONE	 	0
 #define	TS_ACT_DOWN	 	1
 #define   TS_ACT_UP		2
 
+#ifdef STM32F10X_HD
+  extern const GUI_TOUCH_DEV *pTouchDev;
+#endif
 
-BOOL TouchDev_Init(void);
+BOOL GTP_Init_Panel(void);
 int TouchDev_GetAction(void);
 BOOL TouchDev_GetPoint(POINT *pt);
 

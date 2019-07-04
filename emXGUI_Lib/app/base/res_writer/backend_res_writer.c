@@ -37,7 +37,7 @@ enum
   eRES_OK = QSPI_OK,
   eRES_ERROR = QSPI_ERROR
 };
-#elif defined(STM32F429_439xx)
+#elif defined(STM32F429_439xx) || defined(STM32F10X_HD) 
 extern void SPI_FLASH_BulkErase_GUI(void);
 enum 
 {
@@ -694,6 +694,8 @@ FRESULT BurnFile(void)
     printf("Erase Error\n");
     while(1);
   }
+#elif defined(STM32F10X_HD)  
+  SPI_FLASH_BulkErase();
 #endif  
   /* 生成烧录目录信息文件 */
   Make_Catalog(src_dir,0);

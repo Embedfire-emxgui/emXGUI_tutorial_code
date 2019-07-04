@@ -18,6 +18,17 @@
 
 /*============================================================================*/
 
+/* 注册触摸设备 */
+#if	GUI_TOUCHSCREEN_EN
+#ifdef STM32F10X_HD
+#if GUI_TOUCHSCREEN_CALIBRATE
+#define	SET_TOUCH_DEV(obj)	  extern const GUI_TOUCH_DEV obj; \
+							  const GUI_TOUCH_DEV *pTouchDev=(GUI_TOUCH_DEV*)&obj;
+
+SET_TOUCH_DEV(TouchDev_ADS7843);
+#endif
+#endif
+#endif	/* GUI_TOUCHSCREEN_EN */
 
 /*========================触摸接口部分===================================*/
 /**
@@ -25,15 +36,16 @@
   * @note  需要在本函数初始化触摸屏相关硬件
   * @retval 是否初始化正常
   */
+
 BOOL TouchDev_Init(void)
 {	
-  /* 初始化配套的5/7寸屏 */
+  /* 初始化配套的5/7/3.2寸屏 */
   if(GTP_Init_Panel() == 0)
     return TRUE;
   else
-    return FALSE;    
+    return FALSE;  
 }
-
+ 
 
 /**
   * @brief  获取触摸状态及坐标，不需要用户修改 
@@ -45,8 +57,12 @@ BOOL TouchDev_Init(void)
   *    @arg  TS_ACT_UP    触摸释放
   *    @arg  TS_ACT_NONE  无触摸动作
   */
+
 BOOL TouchDev_GetPoint(POINT *pt)
 {
+#if GUI_TOUCHSCREEN_CALIBRATE
+  return pTouchDev->GetPoint(pt);
+#else
   static int ts_state=TS_ACT_NONE;
 
   /* 通过GTP_Execu获取触摸坐标和状态 */
@@ -66,20 +82,37 @@ BOOL TouchDev_GetPoint(POINT *pt)
 		}
 	}
 	return ts_state;
-
+#endif
 }
-
 /**
   * @brief  需要被定时调用的触摸处理函数
   * @note   本例子中通过gui_input_port.c文件的GUI_InputHandler被定时调用
   * @param  无
   * @retval 无
-  */
-void	GUI_TouchHandler(void)
+  */ 
+
+void GUI_TouchHandler(void)
 {
 	int act;
 	POINT pt;
+  
+#if GUI_TOUCHSCREEN_CALIBRATE
+  /* 电阻屏调用 */
+  act =TouchDev_GetAction();
+	if(act==TS_ACT_DOWN)
+	{
+		if(TouchDev_GetPoint(&pt))
+		{
+			MouseInput(pt.x,pt.y,MK_LBUTTON);
+		}
+	}
 
+	if(act==TS_ACT_UP)
+	{
+		GetCursorPos(&pt);
+		MouseInput(pt.x,pt.y,0);
+	}
+#else
   /* 判断触摸状态及坐标 */
 	act =TouchDev_GetPoint(&pt);
 	if(act==TS_ACT_DOWN)
@@ -94,6 +127,7 @@ void	GUI_TouchHandler(void)
 		GetCursorPos(&pt);
 		MouseInput(pt.x,pt.y,0);
 	}
+#endif
 }
 
 

@@ -27,6 +27,7 @@ HWND Boot_progbar = NULL;
 /**
   * @brief  加载资源线程
   */
+
 static void App_Load_Res(void )
 {
   static int thread=0;
@@ -36,7 +37,7 @@ static void App_Load_Res(void )
     /* 创建线程运行自己 */
     GUI_Thread_Create((void(*)(void*))App_Load_Res,  /* 任务入口函数 */
                         "Load Res",/* 任务名字 */
-                        5*1024,  /* 任务栈大小 */
+                        10*1024,  /* 任务栈大小 */
                         NULL, /* 任务入口函数参数 */
                         1,    /* 任务的优先级 */
                         10); /* 任务时间片，部分任务不支持 */
@@ -211,6 +212,29 @@ void	GUI_Boot_Interface_Dialog(void *param)
 
   WNDCLASS	wcex;
   MSG msg;
+
+  /* 先判断是否需要触摸校准 */
+  #if(GUI_TOUCHSCREEN_EN & GUI_TOUCHSCREEN_CALIBRATE)
+  {
+    TS_CFG_DATA ts_cfg;
+    TouchDev_LoadCfg(&ts_cfg); /*加载校正数据(电阻屏需要)*/
+
+    int i=0;
+    while(TouchPanel_IsPenDown() || ts_cfg.rsv != 0)    // 开机长按 1S 或者没有检测到校准标志位则开始校准
+    {
+      GUI_msleep(100);
+      if(i++>10)
+      {
+        ShowCursor(FALSE);
+        #ifdef STM32F10X_HD
+          TouchScreenCalibrate();
+        #endif
+        ShowCursor(TRUE);
+        break;
+      }
+    }
+  }
+  #endif
   
   /* 设默认字体为ASCII 内部flash字库，防止出错 */
   GUI_SetDefFont(defaultFontEn);  
@@ -274,7 +298,6 @@ void	GUI_Boot_Interface_Dialog(void *param)
 //        rt_thread_startup(h);
 //     }   
 //  } 
-
     /* 部分操作系统在退出任务函数时，必须删除线程自己 */
     GUI_Thread_Delete(GUI_GetCurThreadHandle());
 

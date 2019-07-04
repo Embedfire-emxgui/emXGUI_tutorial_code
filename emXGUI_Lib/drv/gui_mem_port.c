@@ -39,7 +39,7 @@ static GUI_MUTEX *mutex_vmem = NULL;
 heap_t heap_vmem;
 
 /* VMEM缓冲区 */
-static uint8_t buff_vmem[VMEM_SIZE] __attribute__((at(VMEM_BASE)));
+static uint8_t buff_vmem[VMEM_SIZE]    __attribute__((at(VMEM_BASE)));
 #endif
 
 /* GUI_CORE内存管理 */
@@ -169,7 +169,7 @@ void	GUI_GRAM_Free(void *p)
 }
 
 
-void* vmalloc(int size)
+void* vmalloc(u32 size)
 {
 	return GUI_VMEM_Alloc(size);
 }

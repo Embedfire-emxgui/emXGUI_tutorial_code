@@ -46,6 +46,7 @@ extern "C"{
 //#include "Components/WM8978/WM8978.h"
 
 #include "gui_drv_cfg.h"
+#include "gui_drv.h"
 
 /*=========================================================================================*/
 

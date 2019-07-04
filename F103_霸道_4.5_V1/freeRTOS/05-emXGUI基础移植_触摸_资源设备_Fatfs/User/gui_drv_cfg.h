@@ -27,12 +27,12 @@
 //#define	LCD_FORMAT	  COLOR_FORMAT_XRGB8888
 
 /* 当前使用液晶的宽高 */
-#define	LCD_XSIZE	    320
-#define	LCD_YSIZE	    240
+#define	LCD_XSIZE	    854//480
+#define	LCD_YSIZE	    480//854 
 
 /* 使用最大液晶屏的宽高，用于计算显存空间 */
-#define	LCD_MAX_XSIZE	    320//LCD_MAX_PIXEL_WIDTH
-#define	LCD_MAX_YSIZE	    240//LCD_MAX_PIXEL_HEIGHT
+#define	LCD_MAX_XSIZE	    854//LCD_MAX_PIXEL_WIDTH
+#define	LCD_MAX_YSIZE	    480//LCD_MAX_PIXEL_HEIGHT
 
 /* 使用的LCD种类数，方便支持不同的分辨率，使用不同的字体 */
 #define  GUI_LCD_TYPE_NUM     LCD_TYPE_NUM
@@ -56,10 +56,7 @@
 #define	GUI_MOUSE_EN             0
 
 /* 是否需要触摸校准-电阻屏才需要 */
-#define	GUI_TOUCHSCREEN_CALIBRATE       1
-
-/* 是否需要触摸校准-电阻屏才需要 */
-#define	GUI_TOUCH_CALIBRATEParamAddr       0x0
+#define	GUI_TOUCHSCREEN_CALIBRATE       0
 
 /* 是否显示光标 */
 #define  GUI_SHOW_CURSOR_EN        1
@@ -98,7 +95,7 @@
 /* 内存堆的基地址，可以为内部SRAM、外扩的SDRAM等 */  
 #define	VMEM_BASE	        (EXT_SRAM_BASE)
 /* 内存堆的总大小，单位为字节 */ 
-#define	VMEM_SIZE	        ((600*1024))
+#define	VMEM_SIZE	        ((512*1024))
 /* 最小分配粒度，单位为字节*/  
 #define	VMEM_ALLOC_UNIT   (64)         //64字节   
 
@@ -110,12 +107,12 @@
 
 
 /* 默认内部英文字体数组名，USE_EXTERN_FONT为0或 外部字体加载失败时会采用的字体 */
-#define GUI_DEFAULT_FONT_EN          gui_font_param[cur_lcd].default_en
+#define GUI_DEFAULT_FONT_EN          ASCII_24_4BPP    //gui_font_param[cur_lcd].default_en
 
 /* 是否使用内部中文字体，中文字体太大，不建议放在内部 */
 #define GUI_INER_CN_FONT_EN      0
 /* 默认内部中文字体数组名 */
-#define GUI_DEFAULT_FONT_CN          GB2312_16_2BPP
+#define GUI_DEFAULT_FONT_CN          GB2312_20_2BPP
 
 
 /* 是否使用外部FLASH中的字体
@@ -129,10 +126,10 @@
 * 加载后可大幅提高字符显示的速度
 * 若设置为真，则使用整体加载方式，否则使用流设备方式
 */
-#define GUI_FONT_LOAD_TO_RAM_EN    (1 && GUI_EXTERN_FONT_EN)
+#define GUI_FONT_LOAD_TO_RAM_EN    (0 && GUI_EXTERN_FONT_EN)
 
 /* 要使用的外部默认字体文件，USE_EXTERN_FONT为1时生效 */
-#define GUI_DEFAULT_EXTERN_FONT   gui_font_param[cur_lcd].default_extern_cn
+#define GUI_DEFAULT_EXTERN_FONT   "GB2312_20_4BPP.xft"
 
 
 /*===========日志输出设备配置===gui_log_port.c===============================================*/
@@ -178,58 +175,6 @@
 /* 资源烧录器，使能后缺少资源会自动进入资源烧录界面 */
 /* 需要sd文件系统/flash资源设备支持 */
 #define GUI_APP_RES_WRITER_EN          0
-/*============================================================================*/
 
-/*============================================================================*/
-//#define	DMA2D_EN                          0
-#define	GUI_KEYBOARD_EN                 0
-#define	GUI_MOUSE_EN                    0
-//#define	GUI_TOUCHSCREEN_EN              1
-
-//#define	GUI_TOUCHSCREEN_CALIBRATE       1
-
-#define	FONT_XFT_EN		1
-#define	FONT_TTF_EN		0
-
-#define	FRAMEBUFFER_EN	1
-
-
-/*============================================================================*/
-
-#ifndef	MIN
-#define	MIN(a,b)	(((a)<(b))?(a):(b))
-#endif
-
-#ifndef	MAX
-#define	MAX(a,b)	(((a)>(b))?(a):(b))
-#endif
-
-
-/*============================================================================*/
-
-#define	LCD_FORMAT	COLOR_FORMAT_RGB565
-//#define	LCD_FORMAT	COLOR_FORMAT_XRGB8888
-
-//#define	LCD_XSIZE	    240
-//#define	LCD_YSIZE	    320
-#define LCD_FRAME_RATE	60
-#define	LCD_ROTATE      ROTATE_0
-
-/*============================================================================*/
-#if	(LCD_FORMAT==COLOR_FORMAT_RGB565)
-
-#define	LCD_COLOR	    U16
-#define	LCD_BUF_SIZE	(LCD_XSIZE*LCD_YSIZE*2)
-
-#endif
-
-////////
-
-#if	(LCD_FORMAT==COLOR_FORMAT_XRGB8888)
-
-#define	LCD_COLOR       U32
-#define	LCD_BUF_SIZE	(LCD_XSIZE*LCD_YSIZE*4)
-
-#endif
 
 #endif	/*__GUI_DRV_CFG_H__*/

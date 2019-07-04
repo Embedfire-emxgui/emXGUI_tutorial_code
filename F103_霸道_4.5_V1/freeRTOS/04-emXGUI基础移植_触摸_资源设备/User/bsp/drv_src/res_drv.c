@@ -8,14 +8,14 @@
 #define RES_BASE_OFFSET 0x00200000
 
 /* 目录信息类型 */
-//typedef struct 
-//{
-//	char 	name[40];  /* 资源的名字 */
-//	u32  	size;      /* 资源的大小 */ 
-//	u32 	offset;    /* 资源相对于基地址的偏移 */
-//}CatalogTypeDef;
+typedef struct 
+{
+	char 	name[40];  /* 资源的名字 */
+	u32  	size;      /* 资源的大小 */ 
+	u32 	offset;    /* 资源相对于基地址的偏移 */
+}CatalogTypeDef;
 
-//s32 GetResOffset(u32 res_base,const char *res_name);
+s32 GetResOffset(u32 res_base,const char *res_name);
 
 /*=========================================================================================*/
 
@@ -28,56 +28,58 @@ static GUI_MUTEX *mutex_lock=NULL;
 #define SYS_mutex_lock GUI_MutexLock
 #define SYS_mutex_unlock GUI_MutexUnlock
 
-//BOOL RES_DevInit(void)
-//{
-//	mutex_lock=SYS_mutex_create();
+void RES_DevInit(void)
+{
+	mutex_lock=SYS_mutex_create();
 
-//  return SPI_FLASH_Init();//TRUE;
-//	//RES_DevTest();
-//}
+  
+	SPI_FLASH_Init();
 
-//U32 RES_DevGetID(void)
-//{
-//	U32 id;
-//	SYS_mutex_lock(mutex_lock,5000);
+	//RES_DevTest();
+}
 
-//	id =SPI_FLASH_ReadID();
-//	SYS_mutex_unlock(mutex_lock);
-//	return id;
-//}
+U32 RES_DevGetID(void)
+{
+	U32 id;
+	SYS_mutex_lock(mutex_lock,5000);
 
-//BOOL RES_DevWrite(u8 *buf,u32 addr,u32 size)
-//{
-//	addr += RES_BASE_OFFSET;
-//	SYS_mutex_lock(mutex_lock,5000);
-//	SPI_FLASH_SectorErase(addr&0xFFFFF000);
-//	SPI_FLASH_BufferWrite(buf,addr,size);
-//	SYS_mutex_unlock(mutex_lock);
-//	return TRUE;
-//}
+	id =SPI_FLASH_ReadID();
+	SYS_mutex_unlock(mutex_lock);
+	return id;
+}
 
-//BOOL RES_DevRead(u8 *buf,u32 addr,u32 size)
-//{
-//	addr += RES_BASE_OFFSET;
-//	SYS_mutex_lock(mutex_lock,5000);
+BOOL RES_DevWrite(u8 *buf,u32 addr,u32 size)
+{
+	addr += RES_BASE_OFFSET;
+	SYS_mutex_lock(mutex_lock,5000);
+	SPI_FLASH_SectorErase(addr&0xFFFFF000);
+	SPI_FLASH_BufferWrite(buf,addr,size);
+	SYS_mutex_unlock(mutex_lock);
+	return TRUE;
+}
 
-//	SPI_FLASH_BufferRead(buf,addr,size);
-//	SYS_mutex_unlock(mutex_lock);
-//	return TRUE;
-//}
+BOOL RES_DevRead(u8 *buf,u32 addr,u32 size)
+{
+	addr += RES_BASE_OFFSET;
+	SYS_mutex_lock(mutex_lock,5000);
 
-//int RES_DevEraseSector(u32 addr)
-//{
-//	u32 sector;
-///*
-//	sector =addr;
-//	SYS_mutex_lock(mutex_lock,5000);
+	SPI_FLASH_BufferRead(buf,addr,size);
+	SYS_mutex_unlock(mutex_lock);
+	return TRUE;
+}
 
-//	SPI_FLASH_SectorErase(sector);
-//	SYS_mutex_unlock(mutex_lock);*/
-//	return 4096;
-//}
-#if 0
+int RES_DevEraseSector(u32 addr)
+{
+	u32 sector;
+/*
+	sector =addr;
+	SYS_mutex_lock(mutex_lock,5000);
+
+	SPI_FLASH_SectorErase(sector);
+	SYS_mutex_unlock(mutex_lock);*/
+	return 4096;
+}
+
 /*=========================================================================================*/
 
 #if 1
@@ -142,7 +144,6 @@ void RES_DevTest(void)
 	vfree(buf);
 }
 
-#endif
 /*=========================================================================================*/
 
 

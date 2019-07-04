@@ -105,7 +105,7 @@ BOOL SPI_FLASH_Init(void);
 void SPI_FLASH_SectorErase(u32 SectorAddr);
 void SPI_FLASH_BulkErase(void);
 void SPI_FLASH_PageWrite(u8* pBuffer, u32 WriteAddr, u16 NumByteToWrite);
-uint8_t SPI_FLASH_BufferWrite(u8* pBuffer, u32 WriteAddr, u16 NumByteToWrite);
+void SPI_FLASH_BufferWrite(u8* pBuffer, u32 WriteAddr, u16 NumByteToWrite);
 void SPI_FLASH_BufferRead(u8* pBuffer, u32 ReadAddr, uint32_t NumByteToRead);
 u32 SPI_FLASH_ReadID(void);
 u32 SPI_FLASH_ReadDeviceID(void);

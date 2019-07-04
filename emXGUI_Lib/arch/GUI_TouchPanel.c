@@ -1,7 +1,7 @@
 
-#include <emXGUI.h>
 #include    <string.h>
 
+#include <emXGUI.h>
 #include	"GUI_Drv.h"
 
 #if 1/*(GUI_TOUCHSCREEN_EN > 0)*/
@@ -29,21 +29,16 @@ void TouchPanel_TranslateInit(const TS_CFG_DATA *cfg)
 }
 
 /*============================================================================*/
-/**
-  * @brief  需要被定时调用的触摸处理函数
-  * @param  无
-  * @retval 无
-  */
+
+#if 0
 void	GUI_TouchHandler(void)
 {
 	int act;
 	POINT pt;
 
-  /* 判断触摸状态 */
 	act =TouchDev_GetAction();
 	if(act==TS_ACT_DOWN)
 	{
-    /* 读取触摸坐标 */
 		if(TouchDev_GetPoint(&pt))
 		{
 			MouseInput(pt.x,pt.y,MK_LBUTTON);
@@ -57,14 +52,10 @@ void	GUI_TouchHandler(void)
 	}
 
 }
+#endif
 
 /*============================================================================*/
-/**
-  * @brief  坐标转换，用于电阻触摸屏
-  * @param  width height 触摸屏像素 宽 高
-  * @param  pt[in out] 转换后输出的坐标
-  * @retval 是否操作正常
-  */
+
 BOOL	TouchPanel_TranslatePoint(int width,int height,POINT *pt)
 {
 	s16 x,y,adx,ady;
@@ -75,11 +66,11 @@ BOOL	TouchPanel_TranslatePoint(int width,int height,POINT *pt)
 		adx	=pt->x;
 		ady	=pt->y;
 
-		adx_min	=ts_cfg_data.LUAdx;
-		ady_min	=ts_cfg_data.LUAdy;
+		adx_min	=ts_cfg_data.LUx;
+		ady_min	=ts_cfg_data.LUy;
 
-		adx_max	=ts_cfg_data.RDAdx;
-		ady_max	=ts_cfg_data.RDAdy;
+		adx_max	=ts_cfg_data.RDx;
+		ady_max	=ts_cfg_data.RDy;
 
 		if((adx_min==adx_max) || (ady_min==ady_max))
 		{
@@ -116,26 +107,26 @@ int	TouchPanel_SetCalibrationSample(POINT *pt,int idx)
 	{
 		
 		case	0:
-				ts_cal_data.LUAdx	=pt->x;
-				ts_cal_data.LUAdy	=pt->y;
+				ts_cal_data.LUx	=pt->x;
+				ts_cal_data.LUy	=pt->y;
 				return	1;
 				////
 			
 		case	1:
-				ts_cal_data.RUAdx	=pt->x;
-				ts_cal_data.RUAdy	=pt->y;
+				ts_cal_data.RUx	=pt->x;
+				ts_cal_data.RUy	=pt->y;
 				return	1;
 				////
 				
 		case	2:
-				ts_cal_data.RDAdx	=pt->x;
-				ts_cal_data.RDAdy	=pt->y;
+				ts_cal_data.RDx	=pt->x;
+				ts_cal_data.RDy	=pt->y;
 				return	1;
 				////
 				
 		case	3:
-				ts_cal_data.LDAdx	=pt->x;
-				ts_cal_data.LDAdy	=pt->y;
+				ts_cal_data.LDx	=pt->x;
+				ts_cal_data.LDy	=pt->y;
 				return	1;
 				////
 		default:
@@ -194,10 +185,10 @@ int	TouchPanel_CalibrationFinish(void)
 {
 
 	ts_cal_data.ChkSum	= 0;
-	ts_cal_data.ChkSum	+= ts_cal_data.LUAdx+ts_cal_data.LUAdy;
-	ts_cal_data.ChkSum	+= ts_cal_data.RUAdx+ts_cal_data.RUAdy;
-	ts_cal_data.ChkSum	+= ts_cal_data.RDAdx+ts_cal_data.RDAdy;
-	ts_cal_data.ChkSum	+= ts_cal_data.LDAdx+ts_cal_data.LDAdy;
+	ts_cal_data.ChkSum	+= ts_cal_data.LUx+ts_cal_data.LUy;
+	ts_cal_data.ChkSum	+= ts_cal_data.RUx+ts_cal_data.RUy;
+	ts_cal_data.ChkSum	+= ts_cal_data.RDx+ts_cal_data.RDy;
+	ts_cal_data.ChkSum	+= ts_cal_data.LDx+ts_cal_data.LDy;
 
 	memcpy(&ts_cfg_data,&ts_cal_data,sizeof(TS_CFG_DATA));
 	
@@ -253,11 +244,11 @@ static BOOL	check_touch_screen_swap(const TS_CFG_DATA *pDat)
 	int	dx,dy;
 	////
 	
-	lu_x = pDat->LUAdx;
-	ru_x = pDat->RUAdx;
+	lu_x = pDat->LUx;
+	ru_x = pDat->RUx;
 	
-	lu_y = pDat->LUAdy;
-	ru_y = pDat->RUAdy;
+	lu_y = pDat->LUy;
+	ru_y = pDat->RUy;
 	
 	dx	=x_abs(lu_x-ru_x);
 	dy	=x_abs(lu_y-ru_y);
@@ -302,7 +293,111 @@ static int	touch_screen_data_init(void)
 
 /*============================================================================*/
 
+/*============================================================================*/
 
+extern const GUI_TOUCH_DEV *pTouchDev;
+
+static int ts_state=TS_ACT_NONE;
+static int ts_x,ts_y;
+
+
+//BOOL TouchDev_Init(void)
+BOOL GTP_Init_Panel(void)
+{
+	ts_state=TS_ACT_NONE;
+	ts_x=0;
+	ts_y=0;
+
+
+	if(pTouchDev)
+	{
+		pTouchDev->Init();
+	}
+
+	return 0;
+}
+
+
+int TouchDev_GetAction(void)
+{
+	static u8 act=0;
+//	int old;
+
+	act<<=1;
+	act|=pTouchDev->GetState();
+
+//	old =ts_state;
+
+	switch(act&0x03)
+	{
+		case 0:
+			ts_state = TS_ACT_NONE;
+			break;
+		case 1:
+			ts_state = TS_ACT_DOWN;
+			break;
+		case 2:
+			ts_state = TS_ACT_UP;
+			break;
+	}
+	return ts_state;
+/*
+	if(ts_state!=old)
+	{
+		old =ts_state;
+		return ts_state;
+	}
+	return TS_ACT_NONE;
+*/
+
+}
+
+
+BOOL TouchDev_GetSample(POINT *pt)
+{
+	return pTouchDev->GetSample(pt);
+}
+
+//BOOL TouchDev_GetPoint(POINT *pt)
+//{
+//	return pTouchDev->GetPoint(pt);
+//}
+
+BOOL TouchDev_LoadCfg(TS_CFG_DATA *cfg)
+{
+	return pTouchDev->LoadCfg(cfg);
+}
+
+BOOL TouchDev_SaveCfg(TS_CFG_DATA *cfg)
+{
+	return pTouchDev->SaveCfg(cfg);
+}
+
+/*============================================================================*/
+
+//void	TouchDev_Handler(void)
+//{
+//	int act;
+//	POINT pt;
+
+//	act =TouchDev_GetAction();
+//	if(act==TS_ACT_DOWN)
+//	{
+//		if(TouchDev_GetPoint(&pt))
+//		{
+//			MouseInput(pt.x,pt.y,MK_LBUTTON);
+//		}
+//	}
+
+//	if(act==TS_ACT_UP)
+//	{
+//		GetCursorPos(&pt);
+//		MouseInput(pt.x,pt.y,0);
+//	}
+
+//}
+
+/*============================================================================*/
 /*============================================================================*/
 
 #endif /*(GUI_TOUCHSCREEN_EN)*/

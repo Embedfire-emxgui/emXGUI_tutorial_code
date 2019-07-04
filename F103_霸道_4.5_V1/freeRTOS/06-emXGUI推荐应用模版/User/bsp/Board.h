@@ -32,7 +32,6 @@ extern "C"{
 //#include "drv_inc/bsp_eeprom_24xx.h"
 //#include "drv_inc/audio_drv.h"
 //#include "drv_inc/adc_drv.h"
-#include "./led/bsp_led.h" 
 #include "spi_flash/bsp_flash_spi.h"
 
 
@@ -47,6 +46,7 @@ extern "C"{
 //#include "Components/WM8978/WM8978.h"
 
 #include "gui_drv_cfg.h"
+#include "gui_drv.h"
 
 /*=========================================================================================*/
 

@@ -69,7 +69,7 @@ WIFI_PDN_INIT();
 #endif  
 	
 
-#if defined(STM32F429_439xx) || defined(STM32H743xx) || defined(STM32F767xx)
+#if defined(STM32F429_439xx) || defined(STM32H743xx) || defined(STM32F767xx) || defined(STM32F10X_HD)
 	//在外部SPI Flash挂载文件系统，文件系统挂载时会对SPI设备初始化
   FRESULT res_sd; 
 #if defined(STM32F767xx)

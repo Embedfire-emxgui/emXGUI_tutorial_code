@@ -74,6 +74,7 @@
 #include "./usart/bsp_usart.h"
 
 
+
 //针对不同的编译器调用不同的stdint.h文件
 #if defined(__ICCARM__) || defined(__CC_ARM) || defined(__GNUC__)
     #include <stdint.h>
@@ -184,7 +185,8 @@
 //支持静态内存
 #define configSUPPORT_STATIC_ALLOCATION					0					
 //系统所有总的堆大小
-#define configTOTAL_HEAP_SIZE					((size_t)(36*1024))    
+#define configTOTAL_HEAP_SIZE					((size_t)(32*1024)) 
+//#define configTOTAL_HEAP_SIZE					((size_t)GUI_CORE_MEM_SIZE) 
 
 
 /***************************************************************

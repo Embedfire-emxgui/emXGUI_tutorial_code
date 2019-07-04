@@ -27,12 +27,12 @@
 //#define	LCD_FORMAT	  COLOR_FORMAT_XRGB8888
 
 /* 当前使用液晶的宽高 */
-#define	LCD_XSIZE	    320
-#define	LCD_YSIZE	    240
+#define	LCD_XSIZE	    854
+#define	LCD_YSIZE	    480 
 
 /* 使用最大液晶屏的宽高，用于计算显存空间 */
-#define	LCD_MAX_XSIZE	    320//LCD_MAX_PIXEL_WIDTH
-#define	LCD_MAX_YSIZE	    240//LCD_MAX_PIXEL_HEIGHT
+#define	LCD_MAX_XSIZE	    854//LCD_MAX_PIXEL_WIDTH
+#define	LCD_MAX_YSIZE	    480//LCD_MAX_PIXEL_HEIGHT
 
 /* 使用的LCD种类数，方便支持不同的分辨率，使用不同的字体 */
 #define  GUI_LCD_TYPE_NUM     LCD_TYPE_NUM
@@ -95,7 +95,7 @@
 /* 内存堆的基地址，可以为内部SRAM、外扩的SDRAM等 */  
 #define	VMEM_BASE	        (EXT_SRAM_BASE)
 /* 内存堆的总大小，单位为字节 */ 
-#define	VMEM_SIZE	        ((600*1024))
+#define	VMEM_SIZE	        ((900*1024))
 /* 最小分配粒度，单位为字节*/  
 #define	VMEM_ALLOC_UNIT   (64)         //64字节   
 
@@ -107,12 +107,12 @@
 
 
 /* 默认内部英文字体数组名，USE_EXTERN_FONT为0或 外部字体加载失败时会采用的字体 */
-#define GUI_DEFAULT_FONT_EN          gui_font_param[cur_lcd].default_en
+#define GUI_DEFAULT_FONT_EN          ASCII_24_4BPP    //gui_font_param[cur_lcd].default_en
 
 /* 是否使用内部中文字体，中文字体太大，不建议放在内部 */
 #define GUI_INER_CN_FONT_EN      0
 /* 默认内部中文字体数组名 */
-#define GUI_DEFAULT_FONT_CN          GB2312_16_2BPP
+#define GUI_DEFAULT_FONT_CN          GB2312_24_2BPP
 
 
 /* 是否使用外部FLASH中的字体

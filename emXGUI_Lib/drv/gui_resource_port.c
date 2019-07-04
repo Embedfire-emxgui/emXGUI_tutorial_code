@@ -67,11 +67,14 @@ BOOL RES_DevInit(void)
       GUI_DEBUG("%s", buf);
       return TRUE;
     }
+#elif defined(STM32F10X_HD)
+	if(SPI_FLASH_Init() == TRUE)
+  {
+    return TRUE;
+  }
 #endif  
   else
     return FALSE;
-
-	
 }
 
 /**
@@ -89,6 +92,8 @@ U32 RES_DevGetID(void)
   id = QSPI_FLASH_ReadID();
 #elif defined(STM32F767xx)
   id = QSPI_FLASH_ReadID();
+#elif defined(STM32F10X_HD)
+  id =SPI_FLASH_ReadID();
 #endif  
   
 	GUI_MutexUnlock(mutex_lock);
@@ -112,6 +117,8 @@ BOOL RES_DevWrite(u8 *buf,u32 addr,u32 size)
   BSP_QSPI_Write(buf,addr,size);
 #elif defined(STM32F767xx)
   BSP_QSPI_Write(buf,addr,size);
+#elif defined(STM32F10X_HD)
+  SPI_FLASH_BufferWrite(buf,addr,size);
 #endif    
 	GUI_MutexUnlock(mutex_lock);
 	return TRUE;
@@ -133,14 +140,12 @@ BOOL RES_DevRead(u8 *buf,u32 addr,u32 size)
 #elif defined(STM32H743xx)
   BSP_QSPI_Read(buf,addr,size);
 #elif defined(STM32F767xx)
-//  BSP_QSPI_Read(buf,addr,size);
+//BSP_QSPI_Read(buf,addr,size);
   BSP_QSPI_FastRead(buf,addr,size);
+#elif defined(STM32F10X_HD)
+	SPI_FLASH_BufferRead(buf,addr,size);
 #elif defined(CPU_MIMXRT1052DVL6B)
-  
-   
-  
   memcpy(buf, (void *)(QSPIFLASH_ADDR+addr), size);
-  
 #endif      
 	GUI_MutexUnlock(mutex_lock);
 	return TRUE;
@@ -160,6 +165,8 @@ int RES_DevEraseSector(u32 addr)
   //BSP_QSPI_Erase_Block(addr&0xFFFFF000);
 #elif defined(STM32F767xx)
   //BSP_QSPI_Erase_Block(addr&0xFFFFF000);
+#elif defined(STM32F10X_HD)
+  SPI_FLASH_SectorErase(addr);
 #endif     
 	GUI_MutexUnlock(mutex_lock);
 	return 0;
