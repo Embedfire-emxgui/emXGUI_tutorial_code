@@ -59,7 +59,7 @@ BOOL res_not_found_flag = FALSE;
   *  不需要使用不同字体参数时，直接设置gui_drv_cfg.h文件即可
   *  这些参数用在gui_drv_cfg.h文件的宏GUI_DEFAULT_FONT_EN和GUI_DEFAULT_EXTERN_FONT
 */  
-#if !(STM32F10X_HD)
+#if !((STM32F10X_HD) || (STM32F40_41xxx))
 const FONT_PARAM_TypeDef gui_font_param[GUI_LCD_TYPE_NUM] = {
   /* 5寸屏 */
   {   
@@ -313,10 +313,8 @@ HFONT GUI_Default_FontInit(void)
     */
   
     /* 默认英文字体 */ 
-#if STM32F10X_HD
+#if (STM32F10X_HD) || (STM32F40_41xxx)
     defaultFontEn =XFT_CreateFont(GUI_DEFAULT_FONT_EN);
-#else
-    defaultFontEn = XFT_CreateFont(GUI_DEFAULT_FONT_EN);  
 #endif
     /* 如果使用了启动界面，在启动界面再加载外部字体 */
 #if (GUI_EXTERN_FONT_EN && (!GUI_APP_BOOT_INTERFACE_EN))

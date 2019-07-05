@@ -58,7 +58,7 @@ void LCD_HardInit(u32 fb_addr)
     LCD_Init(fb_addr, 0, LTDC_PIXEL_FORMAT_ARGB8888);
   #endif 
   
-#elif defined(STM32F10X_HD)
+#elif defined(STM32F10X_HD) || defined(STM32F40_41xxx)
   /* 初始化液晶屏 */  
   #if	(LCD_FORMAT == COLOR_FORMAT_RGB565)
     LCD_Init();
@@ -100,7 +100,7 @@ SURFACE* GUI_DisplayInit(void)
 //                              LCD_XSIZE,LCD_YSIZE,
 //                              LCD_XSIZE*2,
 //                              NULL);  
-#ifdef STM32F10X_HD
+#if (STM32F10X_HD) || (STM32F40_41xxx)
   pSurf = EXT_LCD_CreateSurfaceRGB565(LCD_XSIZE,LCD_YSIZE);
 #else
   /* 直接指定地址的方式， 显存地址，*/

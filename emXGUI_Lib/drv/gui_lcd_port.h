@@ -19,7 +19,7 @@
 #define	ROTATE_270	3
 
 /*============================================================================*/
-#ifdef STM32F10X_HD
+#if (STM32F10X_HD) || (STM32F40_41xxx)
 void LCD_Init(void);
 void LCD_BackLed_Control(int on);
 #endif
