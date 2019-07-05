@@ -39,7 +39,7 @@ SET_TOUCH_DEV(TouchDev_ADS7843);
 
 BOOL TouchDev_Init(void)
 {	
-  /* 初始化配套的5/7/3.2寸屏 */
+  /* 初始化配套的5/7/3.2/4.5寸屏 */
   if(GTP_Init_Panel() == 0)
     return TRUE;
   else
