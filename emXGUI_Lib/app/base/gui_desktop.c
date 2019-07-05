@@ -81,7 +81,7 @@ static	void	_EraseBackgnd(HDC hdc,const RECT *lprc,HWND hwnd)
 	}
 
   /* »Ö¸´Ä¬ÈÏ×ÖÌå */
-//  SetFont(hdc, defaultFont);
+  SetFont(hdc, defaultFont);
 
 	SetBrushColor(hdc,MapRGB(hdc,32,72,144));
 	FillRect(hdc,&rc);

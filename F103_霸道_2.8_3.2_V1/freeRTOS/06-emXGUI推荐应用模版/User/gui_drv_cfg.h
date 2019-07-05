@@ -110,7 +110,7 @@
 
 
 /* 默认内部英文字体数组名，USE_EXTERN_FONT为0或 外部字体加载失败时会采用的字体 */
-#define GUI_DEFAULT_FONT_EN          gui_font_param[cur_lcd].default_en
+#define GUI_DEFAULT_FONT_EN          ASCII_16_4BPP//gui_font_param[cur_lcd].default_en
 
 /* 是否使用内部中文字体，中文字体太大，不建议放在内部 */
 #define GUI_INER_CN_FONT_EN      0
@@ -171,7 +171,7 @@
 /*===========是否启用各种APP===============================================*/
 
 /* 启动界面 */
-#define GUI_APP_BOOT_INTERFACE_EN     0
+#define GUI_APP_BOOT_INTERFACE_EN     1
 
 /* 资源烧录器，使能后缺少资源会自动进入资源烧录界面 */
 /* 需要sd文件系统/flash资源设备支持 */

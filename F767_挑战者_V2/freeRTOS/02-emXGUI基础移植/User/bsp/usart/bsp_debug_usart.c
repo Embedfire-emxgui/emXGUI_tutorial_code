@@ -24,7 +24,7 @@ extern uint8_t ucTemp;
   * @param  нч
   * @retval нч
   */  
-void DEBUG_USART_Config(void)
+void Debug_USART_Config(void)
 {
     GPIO_InitTypeDef GPIO_InitStruct;
     RCC_PeriphCLKInitTypeDef RCC_PeriphClkInit;       

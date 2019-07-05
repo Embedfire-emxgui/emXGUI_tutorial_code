@@ -31,7 +31,7 @@
 //´®¿Ú²¨ÌØÂÊ
 #define UARTx_BAUDRATE                    115200
 
-void UARTx_Config(void);
+void Debug_USART_Config(void);
 //int fputc(int ch, FILE *f);
 extern UART_HandleTypeDef UartHandle;
 #endif /* __USART1_H */

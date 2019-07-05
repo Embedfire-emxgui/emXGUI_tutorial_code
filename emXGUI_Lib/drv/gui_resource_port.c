@@ -46,7 +46,7 @@ BOOL RES_DevInit(void)
   {
     QSPI_FLASH_WriteStatusReg(1,0X00);
     QSPI_FLASH_WriteStatusReg(2,0X00);
-    QSPI_FLASH_WriteStatusReg(3,0X60);
+    QSPI_FLASH_WriteStatusReg(3,0X61);
     GUI_DEBUG("\r\nFlash Status Reg1 is 0x%02X", QSPI_FLASH_ReadStatusReg(1));	
     GUI_DEBUG("\r\nFlash Status Reg2 is 0x%02X", QSPI_FLASH_ReadStatusReg(2));
     GUI_DEBUG("\r\nFlash Status Reg3 is 0x%02X", QSPI_FLASH_ReadStatusReg(3));    
@@ -56,6 +56,10 @@ BOOL RES_DevInit(void)
 #elif defined(STM32F767xx)
   if(QSPI_FLASH_Init() == 0)
   {
+    GUI_DEBUG("\r\nFlash Status Reg1 is 0x%02X", QSPI_FLASH_ReadStatusReg(1));	
+    GUI_DEBUG("\r\nFlash Status Reg2 is 0x%02X", QSPI_FLASH_ReadStatusReg(2));
+    GUI_DEBUG("\r\nFlash Status Reg3 is 0x%02X", QSPI_FLASH_ReadStatusReg(3));    
+
     return TRUE;
   }
 #elif defined(CPU_MIMXRT1052DVL6B)
@@ -138,7 +142,8 @@ BOOL RES_DevRead(u8 *buf,u32 addr,u32 size)
 #if defined(STM32F429_439xx)
 	SPI_FLASH_BufferRead(buf,addr,size);
 #elif defined(STM32H743xx)
-  BSP_QSPI_Read(buf,addr,size);
+//  BSP_QSPI_Read(buf,addr,size);
+  BSP_QSPI_FastRead(buf,addr,size);
 #elif defined(STM32F767xx)
 //BSP_QSPI_Read(buf,addr,size);
   BSP_QSPI_FastRead(buf,addr,size);

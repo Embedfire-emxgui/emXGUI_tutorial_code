@@ -33,7 +33,7 @@
 
 
 void Usart_SendString(uint8_t *str);
-void DEBUG_USART_Config(void);
+void Debug_USART_Config(void);
 //int fputc(int ch, FILE *f);
 extern UART_HandleTypeDef UartHandle;
 #endif /* __USART1_H */

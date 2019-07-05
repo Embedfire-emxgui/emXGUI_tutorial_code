@@ -119,11 +119,11 @@ typedef struct
   QUADSPI_TypeDef            *Instance;        /* QSPI registers base address        */
   QSPI_InitTypeDef           Init;             /* QSPI communication parameters      */
   uint8_t                    *pTxBuffPtr;      /* Pointer to QSPI Tx transfer Buffer */
-  __IO uint16_t              TxXferSize;       /* QSPI Tx Transfer size              */
-  __IO uint16_t              TxXferCount;      /* QSPI Tx Transfer Counter           */
+  __IO uint32_t              TxXferSize;       /* QSPI Tx Transfer size              */
+  __IO uint32_t              TxXferCount;      /* QSPI Tx Transfer Counter           */
   uint8_t                    *pRxBuffPtr;      /* Pointer to QSPI Rx transfer Buffer */
-  __IO uint16_t              RxXferSize;       /* QSPI Rx Transfer size              */
-  __IO uint16_t              RxXferCount;      /* QSPI Rx Transfer Counter           */
+  __IO uint32_t              RxXferSize;       /* QSPI Rx Transfer size              */
+  __IO uint32_t              RxXferCount;      /* QSPI Rx Transfer Counter           */
   DMA_HandleTypeDef          *hdma;            /* QSPI Rx/Tx DMA Handle parameters   */
   __IO HAL_LockTypeDef       Lock;             /* Locking object                     */
   __IO HAL_QSPI_StateTypeDef State;            /* QSPI communication state           */

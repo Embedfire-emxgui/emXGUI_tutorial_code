@@ -148,7 +148,7 @@ static void BSP_Init(void)
   SDRAM_Init();
 	
 	/* usart 端口初始化 */
-  DEBUG_USART_Config();
+  Debug_USART_Config();
 
   /* KEY 端口初始化 */
   Key_GPIO_Config();

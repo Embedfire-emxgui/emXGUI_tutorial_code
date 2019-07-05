@@ -154,6 +154,7 @@ uint8_t BSP_QSPI_Read(uint8_t* pData, uint32_t ReadAddr, uint32_t Size);
 uint8_t BSP_QSPI_FastRead(uint8_t* pData, uint32_t ReadAddr, uint32_t Size);
 uint8_t BSP_QSPI_Write(uint8_t* pData, uint32_t WriteAddr, uint32_t Size);
 static uint8_t BSP_QSPI_4BYTE_ADDR_MOD(void);
+uint32_t QSPI_FLASH_ReadStatusReg(uint8_t reg);
 
 static uint8_t QSPI_ResetMemory          (void);
 static uint8_t QSPI_WriteEnable          (void);

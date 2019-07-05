@@ -33,8 +33,8 @@ uint8_t QSPI_FLASH_Init(void)
     QSPI_FLASH_CLK_ENABLE();
     QSPI_FLASH_CLK_GPIO_ENABLE();
     QSPI_FLASH_BK1_IO0_CLK_ENABLE();
-    QSPI_FLASH_BK1_IO1_CLK_ENABLE();
-    QSPI_FLASH_BK1_IO2_CLK_ENABLE();
+	QSPI_FLASH_BK1_IO1_CLK_ENABLE();
+	QSPI_FLASH_BK1_IO2_CLK_ENABLE();
     QSPI_FLASH_BK1_IO3_CLK_ENABLE();
     QSPI_FLASH_CS_GPIO_CLK_ENABLE();
     
@@ -91,7 +91,9 @@ uint8_t QSPI_FLASH_Init(void)
 	QSPIHandle.Init.FlashID = QSPI_FLASH_ID_1;
     HAL_QSPI_Init(&QSPIHandle);
     /*初始化QSPI接口*/
-	return BSP_QSPI_Init();
+	BSP_QSPI_Init();
+  
+  return 0;
 }
 
 /**
@@ -691,6 +693,60 @@ uint32_t QSPI_FLASH_ReadDeviceID(void)
 
 	Temp = pData[1] |( pData[0]<<8 ) ;
 
+	return Temp;
+}
+
+/**
+  * @brief  读取ReadStatusReg
+  * @param 	无
+  * @retval ReadStatusReg
+  */
+uint32_t QSPI_FLASH_ReadStatusReg(uint8_t reg)
+{  
+	QSPI_CommandTypeDef s_command;
+	uint32_t Temp = 0;
+	uint8_t pData[10];
+
+	/* 读取制造/设备 ID */
+	s_command.InstructionMode   = QSPI_INSTRUCTION_1_LINE;
+	if(reg == 1)
+	s_command.Instruction       = READ_STATUS_REG1_CMD;
+	else if(reg == 2)
+	s_command.Instruction       = READ_STATUS_REG2_CMD;
+	else if(reg == 3)
+	s_command.Instruction       = READ_STATUS_REG3_CMD;
+	
+	s_command.AddressMode       = QSPI_ADDRESS_1_LINE;
+	s_command.AddressSize       = QSPI_ADDRESS_24_BITS;
+	s_command.Address           = 0x000000;
+	s_command.AlternateByteMode = QSPI_ALTERNATE_BYTES_NONE;
+	s_command.DataMode          = QSPI_DATA_1_LINE;
+	s_command.DummyCycles       = 0;
+	s_command.NbData            = 1;
+	s_command.DdrMode           = QSPI_DDR_MODE_DISABLE;
+	s_command.DdrHoldHalfCycle  = QSPI_DDR_HHC_ANALOG_DELAY;
+	s_command.SIOOMode          = QSPI_SIOO_INST_EVERY_CMD;
+
+	if (HAL_QSPI_Command(&QSPIHandle, &s_command, HAL_QPSI_TIMEOUT_DEFAULT_VALUE) != HAL_OK)
+	{
+		printf("something wrong ....\r\n");
+		/* 用户可以在这里添加一些代码来处理这个错误 */
+		while(1)
+		{
+			
+		}
+	}
+	if (HAL_QSPI_Receive(&QSPIHandle, pData, HAL_QPSI_TIMEOUT_DEFAULT_VALUE) != HAL_OK)
+	{
+		printf("something wrong ....\r\n");
+		/* 用户可以在这里添加一些代码来处理这个错误 */
+		while(1)
+		{
+			
+		}
+	}
+
+		Temp = pData[0] ;
 	return Temp;
 }
 

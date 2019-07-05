@@ -62,6 +62,7 @@ typedef struct {
 
 #define ENTER_QPI_MODE_CMD                   0x38
 #define EXIT_QPI_MODE_CMD                    0xFF
+#define ENTER_4_BYTE_ADDR_MODE_CMD           0xB7
 
 /* Identification Operations */
 #define READ_ID_CMD                          0x90
@@ -306,6 +307,7 @@ void SPI_FLASH_StartReadSequence(uint32_t ReadAddr);
 void SPI_Flash_PowerDown(void);
 void SPI_Flash_WAKEUP(void);
 
+uint8_t BSP_QSPI_FastRead(uint8_t* pData, uint32_t ReadAddr, uint32_t Size);
 
 uint8_t SPI_FLASH_ReadByte(void);
 uint8_t SPI_FLASH_SendByte(uint8_t byte);

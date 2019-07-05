@@ -253,20 +253,8 @@ HFONT GUI_Init_Extern_Font_2RAM(const char* res_name,u8** buf)
     	*buf =(u8*)GUI_VMEM_Alloc(dir.size);
       if(*buf!=NULL)
       {
-        #if STM32F767xx
-          uint32_t z = dir.size/4096;
-          uint32_t x = dir.size%4096;
-          uint32_t i=0;
-          for(i=0;i<z;i++)
-          {
-            RES_DevRead((u8*)*buf, font_base+4096*i, 4096);
-            *buf = (u8*)*buf + 4096;
-          }
-          RES_DevRead((u8*)*buf, font_base+4096*i, x);
-          *buf = (u8*)*buf - 4096*i;
-        #else
-          RES_DevRead((u8*)*buf, font_base, dir.size);
-        #endif
+        RES_DevRead((u8*)*buf, font_base, dir.size);
+
         hFont = XFT_CreateFont(*buf);
       }
     }
@@ -295,12 +283,8 @@ HFONT GUI_Init_Extern_Font(void)
    /* 整个字体文件加载至RAM */
 #if (GUI_FONT_LOAD_TO_RAM_EN  )
   {  
-#ifdef STM32F10X_HD
-    defaultFont = GUI_Init_Extern_Font_2RAM(GUI_DEFAULT_EXTERN_FONT,&default_font_buf);
-#else
     defaultFont = GUI_Init_Extern_Font_2RAM(GUI_DEFAULT_EXTERN_FONT,&default_font_buf);
 //    logoFont100 = GUI_Init_Extern_Font_2RAM(GUI_LOGO_FONT_100,&logo_font_buf_100);
-#endif 
     }
   
 #else
@@ -331,9 +315,6 @@ HFONT GUI_Default_FontInit(void)
     /* 默认英文字体 */ 
 #if STM32F10X_HD
     defaultFontEn =XFT_CreateFont(GUI_DEFAULT_FONT_EN);
-#if GUI_EXTERN_FONT_EN
-    defaultFont = GUI_Init_Extern_Font();  
-#endif
 #else
     defaultFontEn = XFT_CreateFont(GUI_DEFAULT_FONT_EN);  
 #endif

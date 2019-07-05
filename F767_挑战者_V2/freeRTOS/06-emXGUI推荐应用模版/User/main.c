@@ -99,7 +99,6 @@ int main(void)
   while(1);   /* 正常不会执行到这里 */    
 }
 
-
 extern void GUI_Startup(void);
 
 /**********************************************************************
@@ -134,6 +133,7 @@ static void GUI_Thread_Entry(void* parameter)
   * @ 参数    ：   
   * @ 返回值  ： 无
   *********************************************************************/
+
 static void BSP_Init(void)
 { 
   /* 系统时钟初始化成216MHz */
@@ -155,6 +155,7 @@ static void BSP_Init(void)
 
   /* KEY 端口初始化 */
   Key_GPIO_Config();
+
   /*hardfault 跟踪器初始化*/ 
   cm_backtrace_init("Fire_FreeRTOS", HARDWARE_VERSION, SOFTWARE_VERSION);
 }
