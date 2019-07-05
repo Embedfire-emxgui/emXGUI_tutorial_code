@@ -975,6 +975,51 @@
             </File>
           </Files>
         </Group>
+        <Group>
+          <GroupName>OME_Face</GroupName>
+          <Files>
+            <File>
+              <FileName>OEM_Button.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_Button.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_CheckBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_CheckBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_GroupBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_GroupBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_ListBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_ListBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_ProgressBar.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_ProgressBar.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_RadioBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_RadioBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_ScrollBar.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_ScrollBar.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_TextBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_TextBox.c</FilePath>
+            </File>
+          </Files>
+        </Group>
       </Groups>
     </Target>
   </Targets>
