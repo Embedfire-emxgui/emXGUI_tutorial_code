@@ -573,16 +573,6 @@
           <GroupName>BSP</GroupName>
           <Files>
             <File>
-              <FileName>DisplayDev.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\bsp\X_GUI_Drv\DisplayDev.c</FilePath>
-            </File>
-            <File>
-              <FileName>ILI9341_16Bit.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\bsp\X_GUI_Drv\ILI9341_16Bit.c</FilePath>
-            </File>
-            <File>
               <FileName>bsp_usart.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\bsp\usart\bsp_usart.c</FilePath>
@@ -603,9 +593,14 @@
               <FilePath>..\..\User\bsp\Key\bsp_key.c</FilePath>
             </File>
             <File>
+              <FileName>ILI9341_16Bit.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\bsp\LCD\ILI9341_16Bit.c</FilePath>
+            </File>
+            <File>
               <FileName>bsp_fsmc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\User\bsp\drv_src\bsp_fsmc.c</FilePath>
+              <FilePath>..\..\User\bsp\fsmc\bsp_fsmc.c</FilePath>
             </File>
           </Files>
         </Group>

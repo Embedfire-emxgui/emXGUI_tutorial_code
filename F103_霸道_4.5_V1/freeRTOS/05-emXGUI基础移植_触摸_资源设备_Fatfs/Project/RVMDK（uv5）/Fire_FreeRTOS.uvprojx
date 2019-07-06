@@ -593,16 +593,6 @@
               <FilePath>..\..\User\bsp\Key\bsp_key.c</FilePath>
             </File>
             <File>
-              <FileName>bsp_fsmc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\bsp\drv_src\bsp_fsmc.c</FilePath>
-            </File>
-            <File>
-              <FileName>ILI9806_16Bit.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\bsp\X_GUI_Drv\ILI9806_16Bit.c</FilePath>
-            </File>
-            <File>
               <FileName>bsp_i2c_touch.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\bsp\touch\bsp_i2c_touch.c</FilePath>
@@ -621,6 +611,16 @@
               <FileName>bsp_sdio_sdcard.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\bsp\sdio\bsp_sdio_sdcard.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_fsmc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\bsp\fsmc\bsp_fsmc.c</FilePath>
+            </File>
+            <File>
+              <FileName>ILI9806_16Bit.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\bsp\LCD\ILI9806_16Bit.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -573,16 +573,6 @@
           <GroupName>BSP</GroupName>
           <Files>
             <File>
-              <FileName>ILI9341_16Bit.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\bsp\X_GUI_Drv\ILI9341_16Bit.c</FilePath>
-            </File>
-            <File>
-              <FileName>ADS7843.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\bsp\X_GUI_Drv\ADS7843.c</FilePath>
-            </File>
-            <File>
               <FileName>bsp_usart.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\bsp\usart\bsp_usart.c</FilePath>
@@ -603,14 +593,24 @@
               <FilePath>..\..\User\bsp\Key\bsp_key.c</FilePath>
             </File>
             <File>
-              <FileName>bsp_fsmc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\bsp\drv_src\bsp_fsmc.c</FilePath>
-            </File>
-            <File>
               <FileName>bsp_sdio_sdcard.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\bsp\sdio\bsp_sdio_sdcard.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_fsmc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\bsp\fsmc\bsp_fsmc.c</FilePath>
+            </File>
+            <File>
+              <FileName>ADS7843.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\bsp\LCD\ADS7843.c</FilePath>
+            </File>
+            <File>
+              <FileName>ILI9341_16Bit.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\bsp\LCD\ILI9341_16Bit.c</FilePath>
             </File>
           </Files>
         </Group>
