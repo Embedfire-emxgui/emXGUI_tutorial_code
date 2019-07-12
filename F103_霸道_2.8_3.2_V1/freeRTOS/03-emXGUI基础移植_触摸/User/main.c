@@ -137,7 +137,10 @@ static void BSP_Init(void)
     
 	/* LED 端口初始化 */
 	LED_GPIO_Config();	
-	
+  
+  /* 优先级分组 */
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
+  
 	/* usart 端口初始化 */
   Debug_USART_Config();
   

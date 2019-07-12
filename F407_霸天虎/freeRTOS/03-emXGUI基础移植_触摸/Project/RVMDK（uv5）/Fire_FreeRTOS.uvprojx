@@ -815,6 +815,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\User\bsp\touch\gt5xx.c</FilePath>
             </File>
+            <File>
+              <FileName>DMA_LCD.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\bsp\lcd\DMA_LCD.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

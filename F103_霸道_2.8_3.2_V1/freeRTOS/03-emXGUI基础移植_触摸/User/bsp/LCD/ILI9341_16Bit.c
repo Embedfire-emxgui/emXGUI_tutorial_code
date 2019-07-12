@@ -333,7 +333,7 @@ static void ILI9341_Init ( void )
 #if 1
 
 #define		EXT_LCD_ARCH
-//#define		EXT_LCD_DMA
+#define		EXT_LCD_DMA
 #include 	"EXT_LCD_Arch.c"
 //#ifdef	EXT_LCD_ARCH
 

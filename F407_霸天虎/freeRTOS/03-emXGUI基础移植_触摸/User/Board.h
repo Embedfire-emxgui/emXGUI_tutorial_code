@@ -26,7 +26,10 @@ extern "C"{
 
 #include "system_stm32f4xx.h"
 
-
+#include	"emXGUI.h"
+#include "def.h"
+#include "x_libc.h"
+#include "board.h"
 //#include "drv_inc/bsp_spi_flash.h"
 //#include "drv_inc/bsp_eeprom_24xx.h"
 //#include "drv_inc/audio_drv.h"

@@ -607,6 +607,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\User\bsp\LCD\ILI9341_16Bit.c</FilePath>
             </File>
+            <File>
+              <FileName>DMA_LCD.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\bsp\LCD\DMA_LCD.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

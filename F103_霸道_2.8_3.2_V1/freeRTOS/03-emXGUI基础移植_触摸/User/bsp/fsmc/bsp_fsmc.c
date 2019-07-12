@@ -64,9 +64,9 @@ void FSMC_InitSRAM(void)
 
 
 	 /*-- FSMC Configuration ------------------------------------------------------*/
-	  p.FSMC_AddressSetupTime = 1;
+	  p.FSMC_AddressSetupTime = 2;
 	  p.FSMC_AddressHoldTime = 0;
-	  p.FSMC_DataSetupTime = 1;
+	  p.FSMC_DataSetupTime = 2;
 	  p.FSMC_BusTurnAroundDuration = 0;
 	  p.FSMC_CLKDivision = 0;
 	  p.FSMC_DataLatency = 0;
