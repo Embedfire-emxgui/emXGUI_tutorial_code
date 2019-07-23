@@ -321,12 +321,9 @@ BOOL GTP_Init_Panel(void)
 int TouchDev_GetAction(void)
 {
 	static u8 act=0;
-//	int old;
 
 	act<<=1;
 	act|=pTouchDev->GetState();
-
-//	old =ts_state;
 
 	switch(act&0x03)
 	{

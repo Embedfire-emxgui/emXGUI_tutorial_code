@@ -11,6 +11,7 @@
 #include "backend_res_mgr.h"
 #include "gui_resource_port.h"
 #include "board.h"
+#include "ff.h"
 
 /*============================================================================*/
 
@@ -37,7 +38,7 @@ enum
   eRES_OK = QSPI_OK,
   eRES_ERROR = QSPI_ERROR
 };
-#elif defined(STM32F429_439xx) || defined(STM32F10X_HD) 
+#elif defined(STM32F429_439xx) || defined(STM32F10X_HD) || defined(STM32F40_41xxx)
 extern void SPI_FLASH_BulkErase_GUI(void);
 enum 
 {

@@ -41,7 +41,7 @@ void	gui_app_thread(void *p)
     		if(i++>10)
     		{
     			ShowCursor(FALSE);
-          #ifdef  STM32F10X_HD
+          #ifdef  GUI_TOUCHSCREEN_CALIBRATE
             TouchScreenCalibrate();
           #endif
     			ShowCursor(TRUE);

@@ -109,6 +109,7 @@ static BOOL	ADS7843_IsPenDown(void)
 {
 	if(!TP_IRQ())
 	{
+    GUI_DEBUG ("°´ÏÂ");
 		return TRUE;
 	}
 	else
