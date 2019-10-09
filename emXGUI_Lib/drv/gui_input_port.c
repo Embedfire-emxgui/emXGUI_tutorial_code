@@ -17,7 +17,7 @@
 #include "gui_touch_port.h"
 #include "gui_input_port.h"
 /*============================================================================*/
-
+GUI_SEM *Input_Sem;
 /**
   * @brief  GUI输入设备的初始化
   * @param  无
@@ -34,6 +34,7 @@ BOOL GUI_InputInit(void)
 
   #if(GUI_TOUCHSCREEN_EN)
   {
+		Input_Sem = GUI_SemCreate(0, 1);
     state = TouchDev_Init();
     if(state) /*触摸屏设备初始化*/
     {

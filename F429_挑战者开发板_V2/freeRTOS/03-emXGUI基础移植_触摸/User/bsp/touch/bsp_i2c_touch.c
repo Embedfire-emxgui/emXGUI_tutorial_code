@@ -19,7 +19,6 @@
 #include "./touch/bsp_touch_gtxx.h"
 #include "./usart/bsp_debug_usart.h"
 
-
 /* STM32 I2C 快速模式 */
 #define I2C_Speed              400000
 
@@ -66,8 +65,8 @@ void I2C_GTP_IRQEnable(void)
   
 	/*使能中断*/
   NVIC_InitStructure.NVIC_IRQChannel = GTP_INT_EXTI_IRQ;
-  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
-  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
+  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 5;
+  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
   NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
   NVIC_Init(&NVIC_InitStructure);
 
@@ -734,6 +733,7 @@ cmd_fail: /* 命令执行失败后，切记发送停止信号，避免影响I2C总线上其他设备 */
 }
 
 #endif
+
 
 
 /*********************************************END OF FILE**********************/

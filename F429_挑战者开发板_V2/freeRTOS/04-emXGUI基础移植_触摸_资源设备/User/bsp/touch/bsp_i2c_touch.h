@@ -31,9 +31,9 @@
 #define GTP_I2C_SDA_AF                   GPIO_AF_I2C2
 
 /*复位引脚*/
-#define GTP_RST_GPIO_PORT                GPIOD
-#define GTP_RST_GPIO_CLK                 RCC_AHB1Periph_GPIOD
-#define GTP_RST_GPIO_PIN                 GPIO_Pin_11
+#define GTP_RST_GPIO_PORT                GPIOI
+#define GTP_RST_GPIO_CLK                 RCC_AHB1Periph_GPIOI
+#define GTP_RST_GPIO_PIN                 GPIO_Pin_8
 /*中断引脚*/
 #define GTP_INT_GPIO_PORT                GPIOD
 #define GTP_INT_GPIO_CLK                 RCC_AHB1Periph_GPIOD

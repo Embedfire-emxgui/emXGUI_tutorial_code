@@ -1048,14 +1048,23 @@ static int32_t GT91xx_Config_Write_Proc(void)
   * @param 无
   * @retval 无
   */
+#include "emXGUI_Arch.h"
+extern GUI_SEM *Input_Sem;
 void GTP_IRQHandler(void)
 {
+  uint32_t ulReturn;
+  /* 进入临界段，临界段可以嵌套 */
+  ulReturn = taskENTER_CRITICAL_FROM_ISR();
+  
 	if(EXTI_GetITStatus(GTP_INT_EXTI_LINE) != RESET) //确保是否产生了EXTI Line中断
 	{
-		//LED2_TOGGLE;
-        GTP_TouchProcess();    
+    GUI_SemPostISR(Input_Sem);
+    
 		EXTI_ClearITPendingBit(GTP_INT_EXTI_LINE);     //清除中断标志位
 	}  
+  
+  /* 退出临界段 */
+  taskEXIT_CRITICAL_FROM_ISR( ulReturn );
 }
 
 /**
