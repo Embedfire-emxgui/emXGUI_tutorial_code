@@ -200,7 +200,7 @@ void SPI_FLASH_PageWrite(u8* pBuffer, u32 WriteAddr, u16 NumByteToWrite)
   * @param  NumByteToWrite，写入数据长度
   * @retval 无
   */
-void SPI_FLASH_BufferWrite(u8* pBuffer, u32 WriteAddr, u16 NumByteToWrite)
+uint8_t SPI_FLASH_BufferWrite(u8* pBuffer, u32 WriteAddr, u16 NumByteToWrite)
 {
   u8 NumOfPage = 0, NumOfSingle = 0, Addr = 0, count = 0, temp = 0;
 	
@@ -285,6 +285,7 @@ void SPI_FLASH_BufferWrite(u8* pBuffer, u32 WriteAddr, u16 NumByteToWrite)
       }
     }
   }
+  return 1;
 }
 
  /**
@@ -621,8 +622,9 @@ static  uint16_t SPI_TIMEOUT_UserCallback(uint8_t errorCode)
   FLASH_ERROR("SPI 等待超时!errorCode = %d",errorCode);
   return 0;
 }
-  
+ 
 #include "gui_drv_cfg.h"
+
 #if (GUI_APP_RES_WRITER_EN)
 
 extern HWND wnd_res_writer_progbar;

@@ -57,8 +57,8 @@ void DMA2D_DrvInit(void)
 	{
 		NVIC_InitTypeDef   nvic_init;
 		nvic_init.NVIC_IRQChannel = DMA2D_IRQn;
-		nvic_init.NVIC_IRQChannelPreemptionPriority =0x00;//抢占优先级0
-		nvic_init.NVIC_IRQChannelSubPriority = 0x01;//子优先级1
+		nvic_init.NVIC_IRQChannelPreemptionPriority =0x03;//抢占优先级0
+		nvic_init.NVIC_IRQChannelSubPriority = 0x00;//子优先级1
 		nvic_init.NVIC_IRQChannelCmd = ENABLE;//使能外部中断通道
 		NVIC_Init(&nvic_init);//配置
 	}

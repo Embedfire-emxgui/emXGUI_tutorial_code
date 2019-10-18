@@ -67,7 +67,7 @@
 /* GUI内核使用的存储区的基地址 */  
 //#define	GUI_CORE_MEM_BASE	  0xD0100000  //本例子使用RTT管理，使用内部sram，不指定地址
 
-/* GUI内核使用的存储区大小，推荐最小值为8KB */
+/* GUI内核使用的存储区大小，推荐最小值为8KB (96*1024)*/
 #define  GUI_CORE_MEM_SIZE  (96*1024) //本例子使用系统管理，在rtt系统在board.c实现，freertos在heap_4.c实现
 /* 最小分配粒度，单位为字节*/  
 #define	GUI_CORE_MEM_ALLOC_UNIT   (64)         

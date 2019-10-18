@@ -101,6 +101,8 @@
         <sRunDeb>0</sRunDeb>
         <sLrtime>0</sLrtime>
         <bEvRecOn>1</bEvRecOn>
+        <bSchkAxf>0</bSchkAxf>
+        <bTchkAxf>0</bTchkAxf>
         <nTsel>2</nTsel>
         <sDll></sDll>
         <sDllPa></sDllPa>
@@ -138,7 +140,7 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>CMSIS_AGDI</Key>
-          <Name>-X"Fire CMSIS-DAP" -UHS-00001111 -O206 -S9 -C0 -P00 -N00("ARM CoreSight SW-DP") -D00(2BA01477) -L00(0) -TO18 -TC10000000 -TP20 -TDS8007 -TDT0 -TDC1F -TIEFFFFFFFF -TIP8 -FO15 -FD20000000 -FC1000 -FN1 -FF0STM32F4xx_1024.FLM -FS08000000 -FL0100000 -FP0($$Device:STM32F429IG$CMSIS\Flash\STM32F4xx_1024.FLM)</Name>
+          <Name>-X"Fire CMSIS-DAP" -UHS-00000000 -O206 -S9 -C0 -P00 -N00("ARM CoreSight SW-DP") -D00(2BA01477) -L00(0) -TO65554 -TC10000000 -TT10000000 -TP20 -TDS8007 -TDT0 -TDC1F -TIEFFFFFFFF -TIP8 -FO15 -FD20000000 -FC1000 -FN1 -FF0STM32F4xx_1024.FLM -FS08000000 -FL0100000 -FP0($$Device:STM32F429IG$CMSIS\Flash\STM32F4xx_1024.FLM)</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -150,68 +152,79 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>225</LineNumber>
+          <LineNumber>140</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134242324</Address>
+          <Address>134239574</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>H:\emXGUI寮€鍙?tutorial_code_stm32f429\RT-Thread\emXGUI_Lib\tutorial_app\gui_desktop.c</Filename>
+          <Filename>F:\Git_Test\tutorial_code_stm32f429\F429_鎸戞垬鑰呭紑鍙戞澘_V2\emXGUI_Lib\drv\gui_lcd_port.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\emXGUI\../../../../emXGUI_Lib/tutorial_app/gui_desktop.c\225</Expression>
+          <Expression>\\emXGUI\../../../../../emXGUI_Lib/drv/gui_lcd_port.c\140</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>182</LineNumber>
+          <LineNumber>90</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134271966</Address>
+          <Address>134241344</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>H:\emXGUI寮€鍙?tutorial_code_stm32f429\RT-Thread\emXGUI_Lib\tutorial_app\gui_desktop.c</Filename>
+          <Filename>F:\Git_Test\tutorial_code_stm32f429\F429_鎸戞垬鑰呭紑鍙戞澘_V2\emXGUI_Lib\drv\gui_startup.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\\../../../../emXGUI_Lib/tutorial_app/gui_desktop.c\182</Expression>
+          <Expression>\\emXGUI\../../../../../emXGUI_Lib/drv/gui_startup.c\90</Expression>
         </Bp>
         <Bp>
           <Number>2</Number>
           <Type>0</Type>
-          <LineNumber>228</LineNumber>
+          <LineNumber>144</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134242332</Address>
+          <Address>134239580</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>H:\emXGUI寮€鍙?tutorial_code_stm32f429\RT-Thread\emXGUI_Lib\tutorial_app\gui_desktop.c</Filename>
+          <Filename>F:\Git_Test\tutorial_code_stm32f429\F429_鎸戞垬鑰呭紑鍙戞澘_V2\emXGUI_Lib\drv\gui_lcd_port.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\emXGUI\../../../../emXGUI_Lib/tutorial_app/gui_desktop.c\228</Expression>
-        </Bp>
-        <Bp>
-          <Number>3</Number>
-          <Type>0</Type>
-          <LineNumber>235</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134242342</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>H:\emXGUI寮€鍙?tutorial_code_stm32f429\RT-Thread\emXGUI_Lib\tutorial_app\gui_desktop.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\emXGUI\../../../../emXGUI_Lib/tutorial_app/gui_desktop.c\235</Expression>
+          <Expression>\\emXGUI\../../../../../emXGUI_Lib/drv/gui_lcd_port.c\144</Expression>
         </Bp>
       </Breakpoint>
+      <WatchWindow1>
+        <Ww>
+          <count>0</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>Temp</ItemText>
+        </Ww>
+        <Ww>
+          <count>1</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>pSurf</ItemText>
+        </Ww>
+        <Ww>
+          <count>2</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>LCD_XSIZE</ItemText>
+        </Ww>
+        <Ww>
+          <count>3</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>LCD_YSIZE</ItemText>
+        </Ww>
+        <Ww>
+          <count>4</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>LCD_FRAME_BUFFER</ItemText>
+        </Ww>
+      </WatchWindow1>
       <Tracepoint>
         <THDelay>0</THDelay>
       </Tracepoint>
@@ -250,8 +263,13 @@
       <pszMrule></pszMrule>
       <pSingCmds></pSingCmds>
       <pMultCmds></pMultCmds>
+      <pMisraNamep></pMisraNamep>
+      <pszMrulep></pszMrulep>
+      <pSingCmdsp></pSingCmdsp>
+      <pMultCmdsp></pMultCmdsp>
       <DebugDescription>
         <Enable>1</Enable>
+        <EnableFlashSeq>0</EnableFlashSeq>
         <EnableLog>0</EnableLog>
         <Protocol>2</Protocol>
         <DbgClock>5000000</DbgClock>
@@ -809,7 +827,7 @@
 
   <Group>
     <GroupName>USER</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -877,7 +895,7 @@
 
   <Group>
     <GroupName>BSP</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1601,7 +1619,7 @@
 
   <Group>
     <GroupName>emxgui/inc</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1693,7 +1711,7 @@
 
   <Group>
     <GroupName>emxgui/libs</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1725,7 +1743,7 @@
 
   <Group>
     <GroupName>app</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1738,6 +1756,110 @@
       <bDave2>0</bDave2>
       <PathWithFileName>..\..\..\..\..\emXGUI_Lib\app\base\gui_desktop.c</PathWithFileName>
       <FilenameWithoutPath>gui_desktop.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+  </Group>
+
+  <Group>
+    <GroupName>OEM_FACE</GroupName>
+    <tvExp>0</tvExp>
+    <tvExpOptDlg>0</tvExpOptDlg>
+    <cbSel>0</cbSel>
+    <RteFlg>0</RteFlg>
+    <File>
+      <GroupNumber>17</GroupNumber>
+      <FileNumber>114</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_Button.c</PathWithFileName>
+      <FilenameWithoutPath>OEM_Button.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>17</GroupNumber>
+      <FileNumber>115</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_CheckBox.c</PathWithFileName>
+      <FilenameWithoutPath>OEM_CheckBox.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>17</GroupNumber>
+      <FileNumber>116</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_GroupBox.c</PathWithFileName>
+      <FilenameWithoutPath>OEM_GroupBox.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>17</GroupNumber>
+      <FileNumber>117</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_ListBox.c</PathWithFileName>
+      <FilenameWithoutPath>OEM_ListBox.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>17</GroupNumber>
+      <FileNumber>118</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_ProgressBar.c</PathWithFileName>
+      <FilenameWithoutPath>OEM_ProgressBar.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>17</GroupNumber>
+      <FileNumber>119</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_RadioBox.c</PathWithFileName>
+      <FilenameWithoutPath>OEM_RadioBox.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>17</GroupNumber>
+      <FileNumber>120</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_ScrollBar.c</PathWithFileName>
+      <FilenameWithoutPath>OEM_ScrollBar.c</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>17</GroupNumber>
+      <FileNumber>121</FileNumber>
+      <FileType>1</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_TextBox.c</PathWithFileName>
+      <FilenameWithoutPath>OEM_TextBox.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

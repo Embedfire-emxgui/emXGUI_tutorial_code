@@ -40,7 +40,7 @@
 #define	LCD_ROTATE      ROTATE_0
 
 /* 是否使用硬件图形加速器（DMA2D之类，驱动需要重新定制） */
-#define	DMA2D_EN                   0
+#define	DMA2D_EN                   1
 
 /* 是否使用缓冲型控件，使用的话会增加一层液晶像素数据的消耗，显示效果减少闪烁*/
 #define  FRAME_BUFFER_EN            0
@@ -118,7 +118,7 @@
 *  流设备和整体加载方式都要把这个宏设置为1
 *  使用本功能时需要把GUI_RES_DEV_EN设置为1
 */
-#define GUI_EXTERN_FONT_EN       1
+#define GUI_EXTERN_FONT_EN       0
 
 /*
 * 是否把整个外部字体数据加载至VMEM区域，初始化加载时需要较长时间，

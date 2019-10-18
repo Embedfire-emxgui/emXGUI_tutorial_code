@@ -10,8 +10,9 @@
       <TargetName>Fire_emxgui</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pArmCC>5060422::V5.06 update 4 (build 422)::ARMCC</pArmCC>
-      <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
+      <pArmCC>5060750::V5.06 update 6 (build 750)::ARMCC</pArmCC>
+      <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F429IG</Device>
@@ -184,6 +185,7 @@
             <hadXRAM>0</hadXRAM>
             <uocXRam>0</uocXRam>
             <RvdsVP>2</RvdsVP>
+            <RvdsMve>0</RvdsMve>
             <hadIRAM2>1</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>8</StupSel>
@@ -311,7 +313,7 @@
           </ArmAdsMisc>
           <Cads>
             <interw>1</interw>
-            <Optim>2</Optim>
+            <Optim>1</Optim>
             <oTime>0</oTime>
             <SplitLS>0</SplitLS>
             <OneElfS>1</OneElfS>
@@ -324,6 +326,7 @@
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
+            <uGnu>0</uGnu>
             <useXO>0</useXO>
             <v6Lang>0</v6Lang>
             <v6LangP>0</v6LangP>
@@ -367,7 +370,7 @@
             <TextAddressRange>0x08000000</TextAddressRange>
             <DataAddressRange>0x20000000</DataAddressRange>
             <pXoBase></pXoBase>
-            <ScatterFile></ScatterFile>
+            <ScatterFile>..\..\Output\emXGUI.sct</ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
             <Misc></Misc>
@@ -532,6 +535,7 @@
                     <uThumb>2</uThumb>
                     <uSurpInc>2</uSurpInc>
                     <uC99>2</uC99>
+                    <uGnu>2</uGnu>
                     <useXO>2</useXO>
                     <v6Lang>0</v6Lang>
                     <v6LangP>0</v6LangP>
@@ -922,6 +926,7 @@
                     <uThumb>2</uThumb>
                     <uSurpInc>2</uSurpInc>
                     <uC99>2</uC99>
+                    <uGnu>2</uGnu>
                     <useXO>2</useXO>
                     <v6Lang>0</v6Lang>
                     <v6LangP>0</v6LangP>
@@ -1169,6 +1174,51 @@
               <FileName>boot_logo.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\..\..\emXGUI_Lib\app\base\boot_interface\boot_logo.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>OEM_FACE</GroupName>
+          <Files>
+            <File>
+              <FileName>OEM_Button.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_Button.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_CheckBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_CheckBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_GroupBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_GroupBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_ListBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_ListBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_ProgressBar.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_ProgressBar.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_RadioBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_RadioBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_ScrollBar.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_ScrollBar.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_TextBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_TextBox.c</FilePath>
             </File>
           </Files>
         </Group>
