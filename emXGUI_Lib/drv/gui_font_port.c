@@ -313,7 +313,7 @@ HFONT GUI_Default_FontInit(void)
     */
   
     /* 默认英文字体 */ 
-#if (STM32F10X_HD) || (STM32F40_41xxx)|| (STM32F429_439xx)
+#if (STM32F10X_HD) || (STM32F40_41xxx)|| (STM32F429_439xx) || (STM32H743xx)
     defaultFontEn =XFT_CreateFont(GUI_DEFAULT_FONT_EN);
 #endif
     /* 如果使用了启动界面，在启动界面再加载外部字体 */
