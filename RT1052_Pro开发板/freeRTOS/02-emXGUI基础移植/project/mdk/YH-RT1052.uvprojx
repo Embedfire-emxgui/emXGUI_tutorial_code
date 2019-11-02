@@ -11,11 +11,12 @@
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>MIMXRT1052DVL6B</Device>
           <Vendor>NXP</Vendor>
-          <PackID>NXP.MIMXRT1052_DFP.10.0.1</PackID>
+          <PackID>NXP.MIMXRT1052_DFP.11.0.1</PackID>
           <PackURL>http://mcuxpresso.nxp.com/cmsis_pack/repo/</PackURL>
           <Cpu>IRAM(0x20000000,0x020000) IRAM2(0x00000000,0x020000) XRAM(0x20200000,0x040000) CPUTYPE("Cortex-M7") FPU3(DFPU) CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -183,6 +184,7 @@
             <hadXRAM>1</hadXRAM>
             <uocXRam>0</uocXRam>
             <RvdsVP>3</RvdsVP>
+            <RvdsMve>0</RvdsMve>
             <hadIRAM2>1</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>0</StupSel>
@@ -323,6 +325,7 @@
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
+            <uGnu>0</uGnu>
             <useXO>0</useXO>
             <v6Lang>1</v6Lang>
             <v6LangP>1</v6LangP>
@@ -825,6 +828,51 @@
             </File>
           </Files>
         </Group>
+        <Group>
+          <GroupName>OEM_Face</GroupName>
+          <Files>
+            <File>
+              <FileName>OEM_Button.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_Button.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_CheckBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_CheckBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_GroupBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_GroupBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_ListBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_ListBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_ProgressBar.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_ProgressBar.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_RadioBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_RadioBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_ScrollBar.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_ScrollBar.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_TextBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_TextBox.c</FilePath>
+            </File>
+          </Files>
+        </Group>
       </Groups>
     </Target>
     <Target>
@@ -832,11 +880,12 @@
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>MIMXRT1052DVL6B</Device>
           <Vendor>NXP</Vendor>
-          <PackID>NXP.MIMXRT1052_DFP.10.0.1</PackID>
+          <PackID>NXP.MIMXRT1052_DFP.11.0.1</PackID>
           <PackURL>http://mcuxpresso.nxp.com/cmsis_pack/repo/</PackURL>
           <Cpu>IRAM(0x20000000,0x020000) IRAM2(0x00000000,0x020000) XRAM(0x20200000,0x040000) CPUTYPE("Cortex-M7") FPU3(DFPU) CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -1004,6 +1053,7 @@
             <hadXRAM>1</hadXRAM>
             <uocXRam>0</uocXRam>
             <RvdsVP>3</RvdsVP>
+            <RvdsMve>0</RvdsMve>
             <hadIRAM2>1</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>0</StupSel>
@@ -1144,6 +1194,7 @@
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
+            <uGnu>0</uGnu>
             <useXO>0</useXO>
             <v6Lang>1</v6Lang>
             <v6LangP>1</v6LangP>
@@ -1646,6 +1697,51 @@
             </File>
           </Files>
         </Group>
+        <Group>
+          <GroupName>OEM_Face</GroupName>
+          <Files>
+            <File>
+              <FileName>OEM_Button.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_Button.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_CheckBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_CheckBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_GroupBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_GroupBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_ListBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_ListBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_ProgressBar.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_ProgressBar.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_RadioBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_RadioBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_ScrollBar.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_ScrollBar.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_TextBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_TextBox.c</FilePath>
+            </File>
+          </Files>
+        </Group>
       </Groups>
     </Target>
     <Target>
@@ -1653,11 +1749,12 @@
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>MIMXRT1052DVL6B</Device>
           <Vendor>NXP</Vendor>
-          <PackID>NXP.MIMXRT1052_DFP.10.0.1</PackID>
+          <PackID>NXP.MIMXRT1052_DFP.11.0.1</PackID>
           <PackURL>http://mcuxpresso.nxp.com/cmsis_pack/repo/</PackURL>
           <Cpu>IRAM(0x20000000,0x020000) IRAM2(0x00000000,0x020000) XRAM(0x20200000,0x040000) CPUTYPE("Cortex-M7") FPU3(DFPU) CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -1825,6 +1922,7 @@
             <hadXRAM>1</hadXRAM>
             <uocXRam>0</uocXRam>
             <RvdsVP>3</RvdsVP>
+            <RvdsMve>0</RvdsMve>
             <hadIRAM2>1</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>0</StupSel>
@@ -1965,6 +2063,7 @@
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
+            <uGnu>0</uGnu>
             <useXO>0</useXO>
             <v6Lang>1</v6Lang>
             <v6LangP>1</v6LangP>
@@ -2467,18 +2566,64 @@
             </File>
           </Files>
         </Group>
+        <Group>
+          <GroupName>OEM_Face</GroupName>
+          <Files>
+            <File>
+              <FileName>OEM_Button.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_Button.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_CheckBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_CheckBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_GroupBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_GroupBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_ListBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_ListBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_ProgressBar.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_ProgressBar.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_RadioBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_RadioBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_ScrollBar.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_ScrollBar.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_TextBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_TextBox.c</FilePath>
+            </File>
+          </Files>
+        </Group>
       </Groups>
     </Target>
     <Target>
       <TargetName>nor_txt_ram</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
+      <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>MIMXRT1052DVL6B</Device>
           <Vendor>NXP</Vendor>
-          <PackID>NXP.MIMXRT1052_DFP.10.0.1</PackID>
+          <PackID>NXP.MIMXRT1052_DFP.11.0.1</PackID>
           <PackURL>http://mcuxpresso.nxp.com/cmsis_pack/repo/</PackURL>
           <Cpu>IRAM(0x20000000,0x020000) IRAM2(0x00000000,0x020000) XRAM(0x20200000,0x040000) CPUTYPE("Cortex-M7") FPU3(DFPU) CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -2595,7 +2740,7 @@
             <UseExternalTool>0</UseExternalTool>
             <RunIndependent>0</RunIndependent>
             <UpdateFlashBeforeDebugging>1</UpdateFlashBeforeDebugging>
-            <Capability>0</Capability>
+            <Capability>1</Capability>
             <DriverSelection>-1</DriverSelection>
           </Flash1>
           <bUseTDR>1</bUseTDR>
@@ -2646,6 +2791,7 @@
             <hadXRAM>1</hadXRAM>
             <uocXRam>0</uocXRam>
             <RvdsVP>3</RvdsVP>
+            <RvdsMve>0</RvdsMve>
             <hadIRAM2>1</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>0</StupSel>
@@ -2786,6 +2932,7 @@
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
+            <uGnu>0</uGnu>
             <useXO>0</useXO>
             <v6Lang>1</v6Lang>
             <v6LangP>1</v6LangP>
@@ -3289,6 +3436,51 @@
             </File>
           </Files>
         </Group>
+        <Group>
+          <GroupName>OEM_Face</GroupName>
+          <Files>
+            <File>
+              <FileName>OEM_Button.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_Button.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_CheckBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_CheckBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_GroupBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_GroupBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_ListBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_ListBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_ProgressBar.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_ProgressBar.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_RadioBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_RadioBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_ScrollBar.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_ScrollBar.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_TextBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_TextBox.c</FilePath>
+            </File>
+          </Files>
+        </Group>
       </Groups>
     </Target>
     <Target>
@@ -3296,11 +3488,12 @@
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>MIMXRT1052DVL6B</Device>
           <Vendor>NXP</Vendor>
-          <PackID>NXP.MIMXRT1052_DFP.10.0.1</PackID>
+          <PackID>NXP.MIMXRT1052_DFP.11.0.1</PackID>
           <PackURL>http://mcuxpresso.nxp.com/cmsis_pack/repo/</PackURL>
           <Cpu>IRAM(0x20000000,0x020000) IRAM2(0x00000000,0x020000) XRAM(0x20200000,0x040000) CPUTYPE("Cortex-M7") FPU3(DFPU) CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -3468,6 +3661,7 @@
             <hadXRAM>1</hadXRAM>
             <uocXRam>0</uocXRam>
             <RvdsVP>3</RvdsVP>
+            <RvdsMve>0</RvdsMve>
             <hadIRAM2>1</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>0</StupSel>
@@ -3608,6 +3802,7 @@
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
+            <uGnu>0</uGnu>
             <useXO>0</useXO>
             <v6Lang>1</v6Lang>
             <v6LangP>1</v6LangP>
@@ -4111,6 +4306,51 @@
             </File>
           </Files>
         </Group>
+        <Group>
+          <GroupName>OEM_Face</GroupName>
+          <Files>
+            <File>
+              <FileName>OEM_Button.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_Button.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_CheckBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_CheckBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_GroupBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_GroupBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_ListBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_ListBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_ProgressBar.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_ProgressBar.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_RadioBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_RadioBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_ScrollBar.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_ScrollBar.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_TextBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_TextBox.c</FilePath>
+            </File>
+          </Files>
+        </Group>
       </Groups>
     </Target>
     <Target>
@@ -4118,11 +4358,12 @@
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>MIMXRT1052DVL6B</Device>
           <Vendor>NXP</Vendor>
-          <PackID>NXP.MIMXRT1052_DFP.10.0.1</PackID>
+          <PackID>NXP.MIMXRT1052_DFP.11.0.1</PackID>
           <PackURL>http://mcuxpresso.nxp.com/cmsis_pack/repo/</PackURL>
           <Cpu>IRAM(0x20000000,0x020000) IRAM2(0x00000000,0x020000) XRAM(0x20200000,0x040000) CPUTYPE("Cortex-M7") FPU3(DFPU) CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -4290,6 +4531,7 @@
             <hadXRAM>1</hadXRAM>
             <uocXRam>0</uocXRam>
             <RvdsVP>3</RvdsVP>
+            <RvdsMve>0</RvdsMve>
             <hadIRAM2>1</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>0</StupSel>
@@ -4430,6 +4672,7 @@
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
+            <uGnu>0</uGnu>
             <useXO>0</useXO>
             <v6Lang>1</v6Lang>
             <v6LangP>1</v6LangP>
@@ -4933,6 +5176,51 @@
             </File>
           </Files>
         </Group>
+        <Group>
+          <GroupName>OEM_Face</GroupName>
+          <Files>
+            <File>
+              <FileName>OEM_Button.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_Button.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_CheckBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_CheckBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_GroupBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_GroupBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_ListBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_ListBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_ProgressBar.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_ProgressBar.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_RadioBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_RadioBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_ScrollBar.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_ScrollBar.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_TextBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_TextBox.c</FilePath>
+            </File>
+          </Files>
+        </Group>
       </Groups>
     </Target>
     <Target>
@@ -4940,11 +5228,12 @@
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>MIMXRT1052DVL6B</Device>
           <Vendor>NXP</Vendor>
-          <PackID>NXP.MIMXRT1052_DFP.10.0.1</PackID>
+          <PackID>NXP.MIMXRT1052_DFP.11.0.1</PackID>
           <PackURL>http://mcuxpresso.nxp.com/cmsis_pack/repo/</PackURL>
           <Cpu>IRAM(0x20000000,0x020000) IRAM2(0x00000000,0x020000) XRAM(0x20200000,0x040000) CPUTYPE("Cortex-M7") FPU3(DFPU) CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -5112,6 +5401,7 @@
             <hadXRAM>1</hadXRAM>
             <uocXRam>0</uocXRam>
             <RvdsVP>3</RvdsVP>
+            <RvdsMve>0</RvdsMve>
             <hadIRAM2>1</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>0</StupSel>
@@ -5252,6 +5542,7 @@
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
+            <uGnu>0</uGnu>
             <useXO>0</useXO>
             <v6Lang>1</v6Lang>
             <v6LangP>1</v6LangP>
@@ -5752,6 +6043,51 @@
               <FileName>必读说明.txt</FileName>
               <FileType>5</FileType>
               <FilePath>..\..\doc\必读说明.txt</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>OEM_Face</GroupName>
+          <Files>
+            <File>
+              <FileName>OEM_Button.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_Button.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_CheckBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_CheckBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_GroupBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_GroupBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_ListBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_ListBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_ProgressBar.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_ProgressBar.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_RadioBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_RadioBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_ScrollBar.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_ScrollBar.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_TextBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\..\emXGUI_Lib\OEM_Face\OEM_TextBox.c</FilePath>
             </File>
           </Files>
         </Group>

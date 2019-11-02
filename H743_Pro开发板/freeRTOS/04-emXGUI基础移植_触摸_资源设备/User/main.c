@@ -99,7 +99,7 @@ static void BSP_Init(void)
 	LED_GPIO_Config();	
 	
 	/* usart 端口初始化 */
-  UARTx_Config();
+  Debug_USART_Config();
  
   /*hardfault 跟踪器初始化*/  
   cm_backtrace_init("Fire_emxgui", HARDWARE_VERSION, SOFTWARE_VERSION);
