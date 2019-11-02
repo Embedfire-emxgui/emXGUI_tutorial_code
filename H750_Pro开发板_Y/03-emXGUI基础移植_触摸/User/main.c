@@ -93,7 +93,7 @@ static void BSP_Init(void)
 	 */
   HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);
   
-  UARTx_Config();  
+  Debug_USART_Config();  
 	/* 硬件BSP初始化统统放在这里，比如LED，串口，LCD等 */
 //  SDRAM_Init();
   SDRAM_Test();

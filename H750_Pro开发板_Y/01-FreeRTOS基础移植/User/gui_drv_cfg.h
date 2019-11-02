@@ -14,8 +14,6 @@
 #ifndef	__GUI_DRV_CFG_H__
 #define	__GUI_DRV_CFG_H__
 
-#include "board.h"
-
 /*===========显示器配置===gui_lcd_port.c===============================================*/
 //野火5.0 / 7.0TFT,800x480 ,4.3寸480*272
 
@@ -48,7 +46,7 @@
 
 /*==========输入设备配置===gui_input_port.c==================================================*/
 /* 是否使用输入设备 */
-#define  GUI_INPUT_DEV_EN        1
+#define  GUI_INPUT_DEV_EN        0
 
 /* 是否使能键盘、鼠标、触摸屏 */
 #define	GUI_TOUCHSCREEN_EN      1
@@ -59,7 +57,7 @@
 #define	GUI_TOUCHSCREEN_CALIBRATE       0
 
 /* 是否显示光标 */
-#define  GUI_SHOW_CURSOR_EN        1
+#define  GUI_SHOW_CURSOR_EN        0
 
 /*===========存储器配置===gui_mem_port.c===============================================*/
 /* 通常GUI内核使用MEM内存堆，VMEM内存堆给用户使用 */
@@ -143,10 +141,10 @@
 
 /*===========资源设备配置===gui_resource_port.c===============================================*/
 /* 是否使用资源设备 */
-#define GUI_RES_DEV_EN         1
+#define GUI_RES_DEV_EN         0
 
 /* 是否支持文件系统接口,需要移植fatfs文件系统 */
-#define GUI_FS_EN         1
+#define GUI_FS_EN         0
 
 /* 资源所在的基地址 */
 #define GUI_RES_BASE             4096

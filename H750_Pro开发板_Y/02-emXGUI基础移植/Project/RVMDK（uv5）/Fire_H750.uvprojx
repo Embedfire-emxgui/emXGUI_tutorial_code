@@ -11,6 +11,7 @@
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
       <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32H750XBHx</Device>
@@ -183,6 +184,7 @@
             <hadXRAM>0</hadXRAM>
             <uocXRam>0</uocXRam>
             <RvdsVP>3</RvdsVP>
+            <RvdsMve>0</RvdsMve>
             <hadIRAM2>1</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>8</StupSel>
@@ -323,6 +325,7 @@
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
+            <uGnu>0</uGnu>
             <useXO>0</useXO>
             <v6Lang>3</v6Lang>
             <v6LangP>3</v6LangP>
@@ -1057,6 +1060,51 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>OEM_Face</GroupName>
+          <Files>
+            <File>
+              <FileName>OEM_Button.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\OEM_Face\OEM_Button.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_CheckBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\OEM_Face\OEM_CheckBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_GroupBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\OEM_Face\OEM_GroupBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_ListBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\OEM_Face\OEM_ListBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_ProgressBar.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\OEM_Face\OEM_ProgressBar.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_RadioBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\OEM_Face\OEM_RadioBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_ScrollBar.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\OEM_Face\OEM_ScrollBar.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_TextBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\OEM_Face\OEM_TextBox.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>base_app</GroupName>
           <Files>
             <File>
@@ -1082,7 +1130,8 @@
       <TargetName>Fire_emxgui_ExtFlash</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060422::V5.06 update 4 (build 422)::ARMCC</pCCUsed>
+      <pCCUsed>5060750::V5.06 update 6 (build 750)::ARMCC</pCCUsed>
+      <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32H750XBHx</Device>
@@ -1255,6 +1304,7 @@
             <hadXRAM>0</hadXRAM>
             <uocXRam>0</uocXRam>
             <RvdsVP>3</RvdsVP>
+            <RvdsMve>0</RvdsMve>
             <hadIRAM2>1</hadIRAM2>
             <hadIROM2>0</hadIROM2>
             <StupSel>1</StupSel>
@@ -1395,6 +1445,7 @@
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
+            <uGnu>0</uGnu>
             <useXO>0</useXO>
             <v6Lang>3</v6Lang>
             <v6LangP>3</v6LangP>
@@ -1405,7 +1456,7 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>APPLICATION_ADDRESS=0x90000000,USE_HAL_DRIVER,STM32H743xx,X_GUI_USE_FREERTOS,</Define>
+              <Define>APPLICATION_ADDRESS=0x90000000,USE_HAL_DRIVER,STM32H750xx,STM32H743xx,X_GUI_USE_FREERTOS,</Define>
               <Undefine></Undefine>
               <IncludePath>..\..\Libraries\CMSIS\Include;..\..\Libraries\CMSIS\Device\ST\STM32H7xx\Include;..\..\Libraries\STM32H7xx_HAL_Driver\Inc;..\..\User;..\..\User\bsp;..\..\FreeRTOS\include;..\..\FreeRTOS\port\RVDS\ARM_CM7\r0p1;..\..\User\bsp\cm_backtrace;..\..\..\..\emXGUI_Lib\inc;..\..\..\..\emXGUI_Lib\drv;..\..\..\..\emXGUI_Lib\arch\Inc;..\..\..\..\emXGUI_Lib\app\base</IncludePath>
             </VariousControls>
@@ -2125,6 +2176,51 @@
               <FileName>x_libc_MDK_M4.lib</FileName>
               <FileType>4</FileType>
               <FilePath>..\..\..\..\emXGUI_Lib\libs\x_libc_MDK_M4.lib</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>OEM_Face</GroupName>
+          <Files>
+            <File>
+              <FileName>OEM_Button.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\OEM_Face\OEM_Button.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_CheckBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\OEM_Face\OEM_CheckBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_GroupBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\OEM_Face\OEM_GroupBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_ListBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\OEM_Face\OEM_ListBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_ProgressBar.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\OEM_Face\OEM_ProgressBar.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_RadioBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\OEM_Face\OEM_RadioBox.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_ScrollBar.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\OEM_Face\OEM_ScrollBar.c</FilePath>
+            </File>
+            <File>
+              <FileName>OEM_TextBox.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\..\emXGUI_Lib\OEM_Face\OEM_TextBox.c</FilePath>
             </File>
           </Files>
         </Group>

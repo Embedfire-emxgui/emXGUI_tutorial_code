@@ -227,33 +227,33 @@ static void BSP_Init(void)
   
   printf("\r\nclk=%d,hz=%d\r\n",HAL_RCC_GetSysClockFreq(),configTICK_RATE_HZ);
 
-//  GTP_Init_Panel(); 
-//	/* LCD 端口初始化 */ 
-//	LCD_Init();
-//	/* LCD 第一层初始化 */ 
-//	LCD_LayerInit(0, LCD_FB_START_ADDRESS,RGB888);
-//	/* LCD 第二层初始化 */ 
-//	LCD_LayerInit(1, LCD_FB_START_ADDRESS+(LCD_GetXSize()*LCD_GetYSize()*4),RGB888);
-//	/* 使能LCD，包括开背光 */ 
-//	LCD_DisplayOn(); 
+  GTP_Init_Panel(); 
+	/* LCD 端口初始化 */ 
+	LCD_Init();
+	/* LCD 第一层初始化 */ 
+	LCD_LayerInit(0, LCD_FB_START_ADDRESS,RGB888);
+	/* LCD 第二层初始化 */ 
+	LCD_LayerInit(1, LCD_FB_START_ADDRESS+(LCD_GetXSize()*LCD_GetYSize()*4),RGB888);
+	/* 使能LCD，包括开背光 */ 
+	LCD_DisplayOn(); 
 
-//	/* 选择LCD第一层 */
-//	LCD_SelectLayer(0);
+	/* 选择LCD第一层 */
+	LCD_SelectLayer(0);
 
-//	/* 第一层清屏，显示全黑 */ 
-//	LCD_Clear(LCD_COLOR_BLACK);  
+	/* 第一层清屏，显示全黑 */ 
+	LCD_Clear(LCD_COLOR_BLACK);  
 
-//	/* 选择LCD第二层 */
-//	LCD_SelectLayer(1);
+	/* 选择LCD第二层 */
+	LCD_SelectLayer(1);
 
-//	/* 第二层清屏，显示全黑 */ 
-//	LCD_Clear(LCD_COLOR_TRANSPARENT);
+	/* 第二层清屏，显示全黑 */ 
+	LCD_Clear(LCD_COLOR_TRANSPARENT);
 
-//	/* 配置第一和第二层的透明度,最小值为0，最大值为255*/
-//	LCD_SetTransparency(0, 0);
-//	LCD_SetTransparency(1, 255);
-//	/*调用画板函数*/
-//	Palette_Init();
+	/* 配置第一和第二层的透明度,最小值为0，最大值为255*/
+	LCD_SetTransparency(0, 0);
+	LCD_SetTransparency(1, 255);
+	/*调用画板函数*/
+	Palette_Init();
   
 }
 

@@ -143,7 +143,7 @@
 
 /*===========资源设备配置===gui_resource_port.c===============================================*/
 /* 是否使用资源设备 */
-#define GUI_RES_DEV_EN         0
+#define GUI_RES_DEV_EN         1
 
 /* 是否支持文件系统接口,需要移植fatfs文件系统 */
 #define GUI_FS_EN         0
