@@ -53,9 +53,14 @@ tmp/
 JLink*.*
 
 # Output directories
-Output
+#Output
 Lst
 Obj
+
+#Do not ignore output folder, ignore other files
+!/Output
+/Output/*
+!/Output/*.sct
 
 # cscope
 cscope.*
@@ -80,7 +85,3 @@ settings
 *.sim
 *.log
 *.ld
-
-/emXGUI_Lib.zip
-/tutorial_code_stm32f429.zip
-/资源文件.zip
