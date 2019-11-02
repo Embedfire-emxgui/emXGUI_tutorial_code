@@ -130,6 +130,13 @@ SURFACE* GUI_DisplayInit(void)
 
 #endif
 
+#if  DMA2D_EN 
+  DMA2D_DrvInit();
+#endif
+#if  G2D_EN 
+  PXP_DrvInit();
+#endif 
+
 /***********************第3部分*************************/
   if(pSurf == NULL)
   {
@@ -146,12 +153,7 @@ SURFACE* GUI_DisplayInit(void)
   LCD_BkLight(TRUE);
   
 /***********************第5部分*************************/
-#if  DMA2D_EN 
-  DMA2D_DrvInit();
-#endif
-#if  G2D_EN 
-  PXP_DrvInit();
-#endif 
+
 
 /***********************第6部分*************************/  
 #if FRAME_BUFFER_EN
