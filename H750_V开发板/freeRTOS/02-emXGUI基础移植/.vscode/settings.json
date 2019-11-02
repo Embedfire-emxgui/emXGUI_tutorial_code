@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "invensense.h": "c",
+        "mlmath.h": "c"
+    }
+}
