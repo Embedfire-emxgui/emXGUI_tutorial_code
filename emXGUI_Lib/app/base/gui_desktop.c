@@ -103,7 +103,7 @@ static	void	_EraseBackgnd(HDC hdc,const RECT *lprc,HWND hwnd)
 
 extern GUI_SEM *Input_Sem;
 /* 使用专用的线程来处理输入 */
-#if 1
+#if 0
 static	int	gui_input_thread(void *p)
 {
 	while(1)
