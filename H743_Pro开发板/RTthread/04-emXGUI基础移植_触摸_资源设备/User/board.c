@@ -49,11 +49,10 @@ void rt_hw_board_init()
 	LED_GPIO_Config();	
 	
 	/* usart 端口初始化 */
-  UARTx_Config();
+  Debug_USART_Config();
   
   SDRAM_Init();  
-  /* 初始化串口 */
-  UARTx_Config();
+
 /*================================================================================*/    
 	
 /* 调用组件初始化函数 (use INIT_BOARD_EXPORT()) */

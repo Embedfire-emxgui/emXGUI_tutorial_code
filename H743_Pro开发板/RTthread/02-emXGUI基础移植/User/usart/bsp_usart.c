@@ -23,7 +23,7 @@ UART_HandleTypeDef UartHandle;
   * @param  нч
   * @retval нч
   */  
-void UARTx_Config(void)
+void Debug_USART_Config(void)
 {
 	GPIO_InitTypeDef GPIO_InitStruct;
 
