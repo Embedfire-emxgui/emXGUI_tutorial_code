@@ -24,6 +24,8 @@
   #define NULL        0
 #endif
 
+#define UPDATE_CONFIG    0    // 1 ：更新配置    0 ：不更新配置
+
 
 /*flags的可取值，注释掉的在本工程没有用到*/
 //#define I2C_M_TEN		0x0010	/* 表示这是个10位地址 */
@@ -154,8 +156,8 @@ extern const TOUCH_PARAM_TypeDef touch_param[];
 
 //***************************PART1:ON/OFF define*******************************
 
-#define GTP_DEBUG_ON         	0
-#define GTP_DEBUG_ARRAY_ON    0
+#define GTP_DEBUG_ON         	1
+#define GTP_DEBUG_ARRAY_ON    1
 #define GTP_DEBUG_FUNC_ON   	0
 // Log define
 #define GTP_INFO(fmt,arg...)           printf("<<-GTP-INFO->> "fmt"\n",##arg)
