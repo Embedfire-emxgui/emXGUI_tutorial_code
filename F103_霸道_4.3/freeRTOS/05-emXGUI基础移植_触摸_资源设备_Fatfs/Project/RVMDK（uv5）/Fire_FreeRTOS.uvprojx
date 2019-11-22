@@ -598,11 +598,6 @@
               <FilePath>..\..\User\bsp\touch\bsp_i2c_touch.c</FilePath>
             </File>
             <File>
-              <FileName>gt5xx.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\bsp\touch\gt5xx.c</FilePath>
-            </File>
-            <File>
               <FileName>core_delay.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\bsp\dwt_delay\core_delay.c</FilePath>
@@ -618,9 +613,14 @@
               <FilePath>..\..\User\bsp\fsmc\bsp_fsmc.c</FilePath>
             </File>
             <File>
-              <FileName>ILI9806_16Bit.c</FileName>
+              <FileName>gt9xx.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\..\User\bsp\LCD\ILI9806_16Bit.c</FilePath>
+              <FilePath>..\..\User\bsp\touch\gt9xx.c</FilePath>
+            </File>
+            <File>
+              <FileName>NT35510_16Bit.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\bsp\LCD\NT35510_16Bit.c</FilePath>
             </File>
           </Files>
         </Group>

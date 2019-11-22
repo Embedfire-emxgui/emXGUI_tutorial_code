@@ -31,7 +31,7 @@
    这样每次调用函数都会初始化一遍。
    把本宏值设置为0，然后在main函数刚运行时调用CPU_TS_TmrInit可避免每次都初始化 */  
 
-#define CPU_TS_INIT_IN_DELAY_FUNCTION   0
+#define CPU_TS_INIT_IN_DELAY_FUNCTION   1
 
 
 /*******************************************************************************

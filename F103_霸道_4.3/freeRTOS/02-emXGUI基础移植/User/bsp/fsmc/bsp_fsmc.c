@@ -54,6 +54,9 @@ void FSMC_Init(void)
 	  /* NBL0, NBL1 configuration */
 	  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1;
 	  GPIO_Init(GPIOE, &GPIO_InitStructure);
+    
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2;
+	  GPIO_Init(GPIOE, &GPIO_InitStructure);
 }
 
 void FSMC_InitSRAM(void)
@@ -99,55 +102,45 @@ void FSMC_InitSRAM(void)
 void FSMC_InitLCD(void)
 {
 	FSMC_NORSRAMInitTypeDef  FSMC_NORSRAMInitStructure;
-	FSMC_NORSRAMTimingInitTypeDef  wr_t,rd_t;
+	FSMC_NORSRAMTimingInitTypeDef  readWriteTiming; 
+	FSMC_NORSRAMTimingInitTypeDef  writeTiming;
+	
+//	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_FSMC,ENABLE);	//使能FSMC时钟
+	readWriteTiming.FSMC_AddressSetupTime = 0x00;	 //地址建立时间（ADDSET）为2个HCLK 1/36M=27ns
+	readWriteTiming.FSMC_AddressHoldTime = 0x00;	 //地址保持时间（ADDHLD）模式A未用到	
+	readWriteTiming.FSMC_DataSetupTime = 0x0f;		 // 数据保存时间为16个HCLK,因为液晶驱动IC的读数据的时候，速度不能太快，尤其对1289这个IC。
+	readWriteTiming.FSMC_BusTurnAroundDuration = 0x00;
+	readWriteTiming.FSMC_CLKDivision = 0x00;
+	readWriteTiming.FSMC_DataLatency = 0x00;
+	readWriteTiming.FSMC_AccessMode = FSMC_AccessMode_A;	 //模式A 	
 
-	GPIO_InitTypeDef GPIO_InitStructure;
+	writeTiming.FSMC_AddressSetupTime = 0x01;	 //地址建立时间（ADDSET）为1个HCLK  
+	writeTiming.FSMC_AddressHoldTime = 0x00;	 //地址保持时间（A		
+	writeTiming.FSMC_DataSetupTime = 0x04;		 ////数据保存时间为4个HCLK	
+	writeTiming.FSMC_BusTurnAroundDuration = 0x00;
+	writeTiming.FSMC_CLKDivision = 0x00;
+	writeTiming.FSMC_DataLatency = 0x00;
+	writeTiming.FSMC_AccessMode = FSMC_AccessMode_A;	 //模式A  
 
-	//PE2 -> FSMC_A23 - LCD_RS
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-	GPIO_Init(GPIOE, &GPIO_InitStructure);
-
-
-	wr_t.FSMC_AddressSetupTime      = 0x01;	 //地址建立时间
-	wr_t.FSMC_AddressHoldTime       = 0x00;	 //地址保持时间
-	wr_t.FSMC_DataSetupTime         = 0x01;	 //数据建立时间
-	wr_t.FSMC_BusTurnAroundDuration = 0x00;
-	wr_t.FSMC_CLKDivision           = 0x00;
-	wr_t.FSMC_DataLatency           = 0x00;
-	wr_t.FSMC_AccessMode            = FSMC_AccessMode_B;
-
-	rd_t.FSMC_AddressSetupTime      = 0x01;	 //地址建立时间
-	rd_t.FSMC_AddressHoldTime       = 0x00;	 //地址保持时间
-	rd_t.FSMC_DataSetupTime         = 0x02;	 //数据建立时间
-	rd_t.FSMC_BusTurnAroundDuration = 0x00;
-	rd_t.FSMC_CLKDivision           = 0x00;
-	rd_t.FSMC_DataLatency           = 0x00;
-	rd_t.FSMC_AccessMode            = FSMC_AccessMode_B;
-
-	FSMC_NORSRAMInitStructure.FSMC_Bank                  = EXT_LCD_FSMC_BANK;
-	FSMC_NORSRAMInitStructure.FSMC_DataAddressMux        = FSMC_DataAddressMux_Disable;
-	//FSMC_NORSRAMInitStructure.FSMC_MemoryType          = FSMC_MemoryType_SRAM;
-	FSMC_NORSRAMInitStructure.FSMC_MemoryType            = FSMC_MemoryType_NOR;
-	FSMC_NORSRAMInitStructure.FSMC_MemoryDataWidth       = FSMC_MemoryDataWidth_16b;
-	FSMC_NORSRAMInitStructure.FSMC_BurstAccessMode       = FSMC_BurstAccessMode_Disable;
-	FSMC_NORSRAMInitStructure.FSMC_AsynchronousWait 	 = FSMC_AsynchronousWait_Disable;
+	FSMC_NORSRAMInitStructure.FSMC_Bank           = EXT_LCD_FSMC_BANK;// FSMC_Bank1_NORSRAM4;//  这里使用NE1 ，也就对应BTCR[6],[7]。
+	FSMC_NORSRAMInitStructure.FSMC_DataAddressMux = FSMC_DataAddressMux_Disable; // 不复用数据地址
+	FSMC_NORSRAMInitStructure.FSMC_MemoryType     =FSMC_MemoryType_SRAM;// FSMC_MemoryType_SRAM;  //SRAM 
+	FSMC_NORSRAMInitStructure.FSMC_MemoryDataWidth       = FSMC_MemoryDataWidth_16b;  //存储器数据宽度为16bit	
+	FSMC_NORSRAMInitStructure.FSMC_BurstAccessMode       = FSMC_BurstAccessMode_Disable;// FSMC_BurstAccessMode_Disable; 
 	FSMC_NORSRAMInitStructure.FSMC_WaitSignalPolarity    = FSMC_WaitSignalPolarity_Low;
-	FSMC_NORSRAMInitStructure.FSMC_WrapMode              = FSMC_WrapMode_Disable;
-	FSMC_NORSRAMInitStructure.FSMC_WaitSignalActive      = FSMC_WaitSignalActive_BeforeWaitState;
-	FSMC_NORSRAMInitStructure.FSMC_WriteOperation        = FSMC_WriteOperation_Enable;
-	FSMC_NORSRAMInitStructure.FSMC_WaitSignal            = FSMC_WaitSignal_Disable;
+	FSMC_NORSRAMInitStructure.FSMC_AsynchronousWait      = FSMC_AsynchronousWait_Disable; 
+	FSMC_NORSRAMInitStructure.FSMC_WrapMode              = FSMC_WrapMode_Disable;   
+	FSMC_NORSRAMInitStructure.FSMC_WaitSignalActive      = FSMC_WaitSignalActive_BeforeWaitState;  
+	FSMC_NORSRAMInitStructure.FSMC_WriteOperation        = FSMC_WriteOperation_Enable;	//  存储器写使能
+	FSMC_NORSRAMInitStructure.FSMC_WaitSignal            = FSMC_WaitSignal_Disable;   
 	FSMC_NORSRAMInitStructure.FSMC_ExtendedMode          = FSMC_ExtendedMode_Enable; // 读写使用不同的时序
-	FSMC_NORSRAMInitStructure.FSMC_WriteBurst            = FSMC_WriteBurst_Disable;
-	FSMC_NORSRAMInitStructure.FSMC_ReadWriteTimingStruct = &rd_t;
-	FSMC_NORSRAMInitStructure.FSMC_WriteTimingStruct     = &wr_t;
+	FSMC_NORSRAMInitStructure.FSMC_WriteBurst            = FSMC_WriteBurst_Disable; 
+	FSMC_NORSRAMInitStructure.FSMC_ReadWriteTimingStruct = &readWriteTiming; //读写时序
+	FSMC_NORSRAMInitStructure.FSMC_WriteTimingStruct     = &writeTiming;  //写时序
 
-	FSMC_NORSRAMInit ( & FSMC_NORSRAMInitStructure );
+	FSMC_NORSRAMInit(&FSMC_NORSRAMInitStructure);  //初始化FSMC配置
 
-
-	/* 使能 FSMC_Bank1_NORSRAM4 */
-	FSMC_NORSRAMCmd ( EXT_LCD_FSMC_BANK, ENABLE );
+	FSMC_NORSRAMCmd(EXT_LCD_FSMC_BANK, ENABLE);  // 使能BANK1  
 }
 
 /*=========================================================================================*/

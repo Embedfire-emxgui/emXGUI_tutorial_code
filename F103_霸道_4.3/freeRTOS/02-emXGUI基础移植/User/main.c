@@ -71,7 +71,7 @@ static void BSP_Init(void);
             第三步：启动FreeRTOS，开始多任务调度
   ****************************************************************/
 int main(void)
-{	
+ {	
   BaseType_t xReturn = pdPASS;/* 定义一个创建信息返回值，默认为pdPASS */
   
   /* 开发板硬件初始化 */
@@ -140,7 +140,7 @@ static void BSP_Init(void)
 	
 	/* usart 端口初始化 */
   Debug_USART_Config();
-  
+
   FSMC_Init();
 	FSMC_InitSRAM();
 	FSMC_InitLCD();
