@@ -27,11 +27,11 @@
 //#define	LCD_FORMAT	  COLOR_FORMAT_XRGB8888
 
 /* 当前使用液晶的宽高 */
-#define	LCD_XSIZE	    854
+#define	LCD_XSIZE	    800
 #define	LCD_YSIZE	    480 
 
 /* 使用最大液晶屏的宽高，用于计算显存空间 */
-#define	LCD_MAX_XSIZE	    854//LCD_MAX_PIXEL_WIDTH
+#define	LCD_MAX_XSIZE	    800//LCD_MAX_PIXEL_WIDTH
 #define	LCD_MAX_YSIZE	    480//LCD_MAX_PIXEL_HEIGHT
 
 /* 使用的LCD种类数，方便支持不同的分辨率，使用不同的字体 */

@@ -159,51 +159,51 @@ void FSMC_InitLCD(void)
 	FSMC_NORSRAMTimingInitTypeDef rd_timing;
 	FSMC_NORSRAMTimingInitTypeDef wt_timing;
 
-	gpio_init.GPIO_Mode  = GPIO_Mode_AF; //复用输出
-	gpio_init.GPIO_OType = GPIO_OType_PP; //推挽输出
-	gpio_init.GPIO_Speed = GPIO_Speed_100MHz; //100MHz
-	gpio_init.GPIO_PuPd  = GPIO_PuPd_UP; //上拉
-	gpio_init.GPIO_Pin = GPIO_Pin_12; //PG12
-	GPIO_Init(GPIOG, &gpio_init); //初始化
-	GPIO_PinAFConfig(GPIOG,GPIO_PinSource12,GPIO_AF_FSMC); 	//PG12,NE4
+	gpio_init.GPIO_Mode  = GPIO_Mode_AF;      // 复用输出
+	gpio_init.GPIO_OType = GPIO_OType_PP;     // 推挽输出
+	gpio_init.GPIO_Speed = GPIO_Speed_100MHz; // 100MHz
+	gpio_init.GPIO_PuPd  = GPIO_PuPd_UP;      // 上拉
+	gpio_init.GPIO_Pin = GPIO_Pin_12;         // PG12
+	GPIO_Init(GPIOG, &gpio_init);             // 初始化
+	GPIO_PinAFConfig(GPIOG,GPIO_PinSource12,GPIO_AF_FSMC);
 
 	//FSMC读时序控制寄存器
-	rd_timing.FSMC_AddressSetupTime = 1; //地址建立时间 16个HCLK =16X(1/168M)=96ns
+	rd_timing.FSMC_AddressSetupTime = 3; //地址建立时间 16 个 HCLK =16X(1/168M)=96ns
 	rd_timing.FSMC_AddressHoldTime = 0;  //地址保持时间模式A未用到
-	rd_timing.FSMC_DataSetupTime = 6;    //数据保存时间为25个HCLK 25x(1/168M)=150ns
+	rd_timing.FSMC_DataSetupTime = 20;    //数据保存时间为 25 个 HCLK 25x(1/168M)=150ns
 	rd_timing.FSMC_BusTurnAroundDuration = 0x00;
 	rd_timing.FSMC_CLKDivision = 0;
 	rd_timing.FSMC_DataLatency = 0;
 	rd_timing.FSMC_AccessMode = FSMC_AccessMode_A; //模式A
 
 	//FSMC写时序控制寄存器
-	wt_timing.FSMC_AddressSetupTime = 2;  //地址建立时间为8个HCLK 8x(1/168M)=48ns
+	wt_timing.FSMC_AddressSetupTime = 2;  //地址建立时间为 8 个 HCLK 8x(1/168M)=48ns
 	wt_timing.FSMC_AddressHoldTime = 0;   //地址保持时间在模式A未用到
-	wt_timing.FSMC_DataSetupTime = 2;	  //应为某些液晶驱动芯片的原因,所以数据保持时间至少为9个HCLK 为9x6=54ns
+	wt_timing.FSMC_DataSetupTime = 2;	    //应为某些液晶驱动芯片的原因,所以数据保持时间至少为 9 个HCLK 为9x6=54ns
 	wt_timing.FSMC_BusTurnAroundDuration = 0x00;
 	wt_timing.FSMC_CLKDivision = 0;
 	wt_timing.FSMC_DataLatency = 0;
-	wt_timing.FSMC_AccessMode = FSMC_AccessMode_A; //模式A
+	wt_timing.FSMC_AccessMode = FSMC_AccessMode_A;                           // 模式A
 
-	fsmc_init.FSMC_Bank = EXT_LCD_FSMC_BANK;  //NOR/SRAM的Bank4
-	fsmc_init.FSMC_DataAddressMux = FSMC_DataAddressMux_Disable; //不复用数据线
+	fsmc_init.FSMC_Bank = EXT_LCD_FSMC_BANK;                                 // NOR/SRAM的Bank4
+	fsmc_init.FSMC_DataAddressMux = FSMC_DataAddressMux_Disable;             // 不复用数据线
 	fsmc_init.FSMC_MemoryType = FSMC_MemoryType_SRAM;
-	fsmc_init.FSMC_MemoryDataWidth = FSMC_MemoryDataWidth_16b;  //16位数据宽度
-	fsmc_init.FSMC_BurstAccessMode = FSMC_BurstAccessMode_Disable; //是否使能突发访问,仅对同步突发存储器有效,此处未用到
-	fsmc_init.FSMC_AsynchronousWait = FSMC_AsynchronousWait_Disable;//是否使能同步传输模式下的等待信号,此处未用到
-	fsmc_init.FSMC_WaitSignalPolarity = FSMC_WaitSignalPolarity_Low; //等待信号的极性,仅在突发模式访问下有用
-	fsmc_init.FSMC_WrapMode = FSMC_WrapMode_Disable;  //是否使能环路突发模式,此处未用到
-	fsmc_init.FSMC_WaitSignalActive = FSMC_WaitSignalActive_BeforeWaitState; //存储器是在等待周期之前的一个时钟周期还是等待周期期间使能NWAIT
-	fsmc_init.FSMC_WriteOperation = FSMC_WriteOperation_Enable; //存储器写使能
-	fsmc_init.FSMC_WaitSignal = FSMC_WaitSignal_Disable;   //等待使能位,此处未用到
-	fsmc_init.FSMC_ExtendedMode = FSMC_ExtendedMode_Enable; //读写使用不同的时序
-	fsmc_init.FSMC_WriteBurst = FSMC_WriteBurst_Disable;  //异步传输期间的等待信号
+	fsmc_init.FSMC_MemoryDataWidth = FSMC_MemoryDataWidth_16b;               // 16位数据宽度
+	fsmc_init.FSMC_BurstAccessMode = FSMC_BurstAccessMode_Disable;           // 是否使能突发访问,仅对同步突发存储器有效,此处未用到
+	fsmc_init.FSMC_AsynchronousWait = FSMC_AsynchronousWait_Disable;         // 是否使能同步传输模式下的等待信号,此处未用到
+	fsmc_init.FSMC_WaitSignalPolarity = FSMC_WaitSignalPolarity_Low;         // 等待信号的极性,仅在突发模式访问下有用
+	fsmc_init.FSMC_WrapMode = FSMC_WrapMode_Disable;                         // 是否使能环路突发模式,此处未用到
+	fsmc_init.FSMC_WaitSignalActive = FSMC_WaitSignalActive_BeforeWaitState; // 存储器是在等待周期之前的一个时钟周期还是等待周期期间使能NWAIT
+	fsmc_init.FSMC_WriteOperation = FSMC_WriteOperation_Enable;              // 存储器写使能
+	fsmc_init.FSMC_WaitSignal = FSMC_WaitSignal_Disable;                     // 等待使能位,此处未用到
+	fsmc_init.FSMC_ExtendedMode = FSMC_ExtendedMode_Enable;                  // 读写使用不同的时序
+	fsmc_init.FSMC_WriteBurst = FSMC_WriteBurst_Disable;                     // 异步传输期间的等待信号
 	fsmc_init.FSMC_ReadWriteTimingStruct = &rd_timing;
-	fsmc_init.FSMC_WriteTimingStruct = &wt_timing; //写时序
+	fsmc_init.FSMC_WriteTimingStruct = &wt_timing;                           // 写时序
 
-	FSMC_NORSRAMInit(&fsmc_init);  //FSMC初始化
+	FSMC_NORSRAMInit(&fsmc_init);               // FSMC初始化
 
-	FSMC_NORSRAMCmd(EXT_LCD_FSMC_BANK,ENABLE);  //使能NOR/SRAM功能
+	FSMC_NORSRAMCmd(EXT_LCD_FSMC_BANK,ENABLE);  // 使能 NOR/SRAM 功能
 
 }
 

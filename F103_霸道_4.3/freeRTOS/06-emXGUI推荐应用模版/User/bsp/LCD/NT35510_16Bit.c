@@ -18,7 +18,7 @@
 #define	LCD_CMD	(*(volatile u16*)(LCD_CMD_ADDR))
 #define	LCD_DAT	(*(volatile u16*)(LCD_DAT_ADDR))
 
-/******************************* 定义 ILI934 常用命令 ********************************/
+/******************************* 定义 NT35510 常用命令 ********************************/
 #define      CMD_SetCoordinateX		 		    0x2A00	     //设置X坐标
 #define      CMD_SetCoordinateY		 		    0x2B00	     //设置Y坐标
 #define      CMD_SetPixel		 		          0X2C00	     //填充像素

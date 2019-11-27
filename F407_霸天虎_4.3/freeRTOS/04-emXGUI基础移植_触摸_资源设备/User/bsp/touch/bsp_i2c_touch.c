@@ -16,7 +16,7 @@
   */ 
 
 #include "./touch/bsp_i2c_touch.h"
-#include "./touch/gt5xx.h"
+#include "./touch/gt9xx.h"
 #include "./uart/bsp_debug_usart.h"
 
 
@@ -229,7 +229,7 @@ static void i2c_Delay(void)
 		循环次数为30时，SCL频率 = 533KHz，  
 	 	循环次数为20时，SCL频率 = 727KHz， 
   */
-	for (i = 0; i < 10*2; i++);
+	for (i = 0; i < 10*3; i++);
 }
 
 /*

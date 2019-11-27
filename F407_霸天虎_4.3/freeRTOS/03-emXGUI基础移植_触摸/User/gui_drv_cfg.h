@@ -27,7 +27,7 @@
 //#define	LCD_FORMAT	  COLOR_FORMAT_XRGB8888
 
 /* 当前使用液晶的宽高 */
-#define	LCD_XSIZE	    854
+#define	LCD_XSIZE	    800
 #define	LCD_YSIZE	    480 
 
 /* 使用最大液晶屏的宽高，用于计算显存空间 */

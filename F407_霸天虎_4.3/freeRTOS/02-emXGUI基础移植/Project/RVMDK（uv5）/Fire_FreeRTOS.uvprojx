@@ -791,11 +791,6 @@
               <FilePath>..\..\User\bsp\led\bsp_led.c</FilePath>
             </File>
             <File>
-              <FileName>ILI9806_16Bit.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\..\User\bsp\lcd\ILI9806_16Bit.c</FilePath>
-            </File>
-            <File>
               <FileName>bsp_key.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\bsp\key\bsp_key.c</FilePath>
@@ -804,6 +799,11 @@
               <FileName>bsp_fsmc.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\User\bsp\fsmc\bsp_fsmc.c</FilePath>
+            </File>
+            <File>
+              <FileName>NT35510_16Bit.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\User\bsp\lcd\NT35510_16Bit.c</FilePath>
             </File>
           </Files>
         </Group>

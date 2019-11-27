@@ -38,7 +38,7 @@ extern "C"{
 #include "./led/bsp_led.h" 
 #include "./uart/bsp_debug_usart.h"
 #include "./key/bsp_key.h" 
-#include "./touch/gt5xx.h"
+#include "./touch/gt9xx.h"
 
 
 //#include "Common/drv_inc/my_iic.h"
