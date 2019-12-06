@@ -85,3 +85,5 @@ settings
 *.sim
 *.log
 *.ld
+
+tutorial_code_stm32f429.zip
