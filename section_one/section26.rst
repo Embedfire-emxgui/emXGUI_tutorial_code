@@ -218,26 +218,26 @@ font_read_data_SDCARD函数从SD卡读取字库文件，得到的字体数组存
     BOOL font_read_data_SDCARD(char** buf, u32 size)
 
      {
-     /* file objects */
-     FIL *file;
-     FRESULT fresult;
-     BOOL result = TRUE;
-     UINT br;
-     file =(FIL*)GUI_VMEM_Alloc(sizeof(FIL));
+        /* file objects */
+        FIL *file;
+        FRESULT fresult;
+        BOOL result = TRUE;
+        UINT br;
+        file =(FIL*)GUI_VMEM_Alloc(sizeof(FIL));
 
-     fresult = f_open(file, GUI_DEFAULT_SDCARD_FONT, FA_OPEN_EXISTING | FA_READ );
+        fresult = f_open(file, GUI_DEFAULT_SDCARD_FONT, FA_OPEN_EXISTING | FA_READ );
 
-     size = f_size(file);
-     /* 文件内容空间 */
-     *buf = (char *)GUI_VMEM_Alloc(size);
-     fresult = f_read(file, *buf, size, &br);
-     /* 关闭文件 */
-     f_close(file);
+        size = f_size(file);
+        /* 文件内容空间 */
+        *buf = (char *)GUI_VMEM_Alloc(size);
+        fresult = f_read(file, *buf, size, &br);
+        /* 关闭文件 */
+        f_close(file);
 
-     /* 释放空间 */
-     GUI_VMEM_Free(file);
+        /* 释放空间 */
+        GUI_VMEM_Free(file);
 
-     return result;
+        return result;
      }
 
 f_open函数的参数GUI_DEFAULT_SDCARD_FONT是我们的字库文件名字，见 代码清单26_5_。如果我们存放的字库文件不是这个文件的话， 则需要修改该宏定义。
@@ -283,36 +283,36 @@ f_open函数的参数GUI_DEFAULT_SDCARD_FONT是我们的字库文件名字，见
      HFONT GUI_Default_FontInit(void)
      {
 
-     HFONT hFont=NULL;
-     //此处省略一些代码
-     #elif (GUI_USE_SDCARD_FONT)
-     {
-     /* 指向缓冲区的指针 */
-     static u8 *pFontData_XFT=NULL;
+        HFONT hFont=NULL;
+        //此处省略一些代码
+    #elif (GUI_USE_SDCARD_FONT)
+        {
+        /* 指向缓冲区的指针 */
+        static u8 *pFontData_XFT=NULL;
 
-     u32 fsize;
+        u32 fsize;
 
-     if(hFont==NULL)
-     {
-     res = font_read_data_SDCARD((char **)&pFontData_XFT, fsize);
-     hFont_SDCARD = XFT_CreateFont(pFontData_XFT);
-     }
+        if(hFont==NULL)
+        {
+            res = font_read_data_SDCARD((char **)&pFontData_XFT, fsize);
+            hFont_SDCARD = XFT_CreateFont(pFontData_XFT);
+        }
 
-     }
-     #endif
-     /* 若前面的字体加载失败，使用内部FLASH中的数据（工程中的C语言数组）
-     * 添加字体数据时，把数组文件添加到工程，在本文件头添加相应字体数组的声明，
-     * 然后调用XFT_CreateFont函数创建字体即可
-     */
-     if(hFont==NULL)
-     {
-     /* 从本地加载(本地数组数据) */
-     hFont =XFT_CreateFont(GUI_DEFAULT_FONT); /* ASCii字库,20x20,4BPP抗锯齿*/
-     /* 中文字库存储占用空间非常大，不推荐放在内部FLASH */
-     //hFont =XFT_CreateFont(GB2312_16_2BPP); /* GB2312字库,16x16,2BPP抗锯齿*/
-     //hFont =XFT_CreateFont(GB2312_20_4BPP); /* GB2312字库,20x20,4BPP抗锯齿*/
-     }
-     return hFont;
+        }
+    #endif
+        /* 若前面的字体加载失败，使用内部FLASH中的数据（工程中的C语言数组）
+        * 添加字体数据时，把数组文件添加到工程，在本文件头添加相应字体数组的声明，
+        * 然后调用XFT_CreateFont函数创建字体即可
+        */
+        if(hFont==NULL)
+        {
+            /* 从本地加载(本地数组数据) */
+            hFont =XFT_CreateFont(GUI_DEFAULT_FONT); /* ASCii字库,20x20,4BPP抗锯齿*/
+            /* 中文字库存储占用空间非常大，不推荐放在内部FLASH */
+            //hFont =XFT_CreateFont(GB2312_16_2BPP); /* GB2312字库,16x16,2BPP抗锯齿*/
+            //hFont =XFT_CreateFont(GB2312_20_4BPP); /* GB2312字库,20x20,4BPP抗锯齿*/
+        }
+        return hFont;
      }
 
 这里使用了条件编译，只有打开GUI_USE_SDCARD_FONT这个宏，见 代码清单26_7_，emXGUI才会从SD卡读取字库文件。
@@ -348,47 +348,46 @@ f_open函数的参数GUI_DEFAULT_SDCARD_FONT是我们的字库文件名字，见
 
      case WM_PAINT: //窗口需要绘制时，会自动产生该消息.
      {
-     PAINTSTRUCT ps;
-     HDC hdc;
-     RECT rc;
-     int i,t,y;
-     WCHAR wbuf[128];
+        PAINTSTRUCT ps;
+        HDC hdc;
+        RECT rc;
+        int i,t,y;
+        WCHAR wbuf[128];
 
-     GetClientRect(hwnd,&rc);
+        GetClientRect(hwnd,&rc);
 
-     hdc =BeginPaint(hwnd,&ps); //开始绘图
+        hdc =BeginPaint(hwnd,&ps); //开始绘图
 
-     ////用户的绘制内容...
-     SetTextColor(hdc,MapRGB(hdc,10,10,100));
-     t=GUI_GetTickCount();
-     y=24;
-     i=0;
-     while(y<rc.h)
-     {
-     if(i == 11)//11行的后面使用wildfire字体文件
-     {
-     old_hfont = SetFont(hdc, hFont_SDCARD);
-     }
-     TextOut(hdc,10,y,L"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",-1);
-     y+=20;
+        ////用户的绘制内容...
+        SetTextColor(hdc,MapRGB(hdc,10,10,100));
+        t=GUI_GetTickCount();
+        y=24;
+        i=0;
+        while(y<rc.h)
+        {
+            if(i == 11)//11行的后面使用wildfire字体文件
+            {
+                old_hfont = SetFont(hdc, hFont_SDCARD);
+            }
+            TextOut(hdc,10,y,L"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",-1);
+            y+=20;
+            i++;
+        }
+        t =GUI_GetTickCount()-t;
 
-     i++;
-     }
-     t =GUI_GetTickCount()-t;
-
-     SetTextColor(hdc,MapRGB(hdc,250,10,10));
-     SetFont(hdc, old_hfont);
-     if(rc.w < 300)
-     {
-     x_wsprintf(wbuf,L"Time:%dms; %.1fms/line",t,(float)t/(float)i);
-     }
-     else
-     {
-     x_wsprintf(wbuf,L"TextOut Time used:%dms; %.1fms/line",t,(float)t/(float)i);
-     }
-     TextOut(hdc,10,4,wbuf,-1);
-     EndPaint(hwnd,&ps); //结束绘图
-     break;
+        SetTextColor(hdc,MapRGB(hdc,250,10,10));
+        SetFont(hdc, old_hfont);
+        if(rc.w < 300)
+        {
+            x_wsprintf(wbuf,L"Time:%dms; %.1fms/line",t,(float)t/(float)i);
+        }
+        else
+        {
+            x_wsprintf(wbuf,L"TextOut Time used:%dms; %.1fms/line",t,(float)t/(float)i);
+        }
+        TextOut(hdc,10,4,wbuf,-1);
+        EndPaint(hwnd,&ps); //结束绘图
+        break;
      }
 
 WM_PAINT消息中，在客户区显示多行文字，内容为： “0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ”，使用宽字符型字符串。

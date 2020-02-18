@@ -35,25 +35,25 @@ emXGUI提供了各种绘图API，下表主要列出了一些常用的绘图API�
       - \
     * - Line(HDC hdc,int sx,int sy,int ex,int ey);
       - 画一条大小为一个像素的线
-    * - DrawRect(HDC hdc,const RECT *lpRect);
+    * - DrawRect(HDC hdc,const RECT \*lpRect);
       - 画空心矩形
-    * - DrawRoundRect(HDC hdc,const RECT *lpRect,int r);
+    * - DrawRoundRect(HDC hdc,const RECT \*lpRect,int r);
       - 画空心圆角矩形
     * - DrawCircle(HDC hdc,int cx,int cy,int r);
       - 画空心圆
     * - DrawEllipse(HDC hdc,int cx, int cy, int rx, int ry);
       - 画空心椭圆
-    * - FillRect(HDC hdc,const RECT *lpRect);
+    * - FillRect(HDC hdc,const RECT \*lpRect);
       - 填充矩形
-    * - GradientFillRect(HDC hdc,const RECT *lpRect,COLORREF Color0,COLORREF Color1,BOOL bVert);
+    * - GradientFillRect(HDC hdc,const RECT \*lpRect,COLORREF Color0,COLORREF Color1,BOOL bVert);
       - 渐变色填充矩形
-    * - FillRoundRect(HDC hdc,const RECT *lpRect,int r);
+    * - FillRoundRect(HDC hdc,const RECT \*lpRect,int r);
       - 填充圆角矩形
     * - FillCircle(HDC hdc,int cx,int cy,int r);
       - 画实心圆
     * - FillEllipse(HDC hdc,int cx, int cy, intrx,int ry);
       - 画实心椭圆
-    * - FillPolygon(HDC hdc,int xOff,int yOff,const POINT *pt,int count);
+    * - FillPolygon(HDC hdc,int xOff,int yOff,const POINT \*pt,int count);
       - 画实心多边形
 
 颜色API
@@ -256,37 +256,37 @@ DrawEllipse()
 
      void GUI_DEMO_DrawTest(void)
      {
-     HWND hwnd;
-     WNDCLASS wcex;
-     MSG msg;
-     wcex.Tag = WNDCLASS_TAG;
+      HWND hwnd;
+      WNDCLASS wcex;
+      MSG msg;
+      wcex.Tag = WNDCLASS_TAG;
 
-     wcex.Style = CS_HREDRAW | CS_VREDRAW;
-     wcex.lpfnWndProc = WinProc; //设置主窗口消息处理的回调函数.
+      wcex.Style = CS_HREDRAW | CS_VREDRAW;
+      wcex.lpfnWndProc = WinProc; //设置主窗口消息处理的回调函数.
 
-     wcex.cbClsExtra = 0;
-     wcex.cbWndExtra = 0;
-     wcex.hInstance = NULL;
-     wcex.hIcon = NULL;
-     wcex.hCursor = NULL;
+      wcex.cbClsExtra = 0;
+      wcex.cbWndExtra = 0;
+      wcex.hInstance = NULL;
+      wcex.hIcon = NULL;
+      wcex.hCursor = NULL;
 
-     //创建主窗口
-     hwnd =CreateWindowEx(NULL,
-     &wcex,
-     _T("emXGUI Window"), //窗口名称
-     WS_CLIPCHILDREN,
-     0,0,GUI_XSIZE,GUI_YSIZE, //窗口位置和大小
-     NULL,NULL,NULL,NULL);
+      //创建主窗口
+      hwnd =CreateWindowEx(NULL,
+      &wcex,
+      _T("emXGUI Window"), //窗口名称
+      WS_CLIPCHILDREN,
+      0,0,GUI_XSIZE,GUI_YSIZE, //窗口位置和大小
+      NULL,NULL,NULL,NULL);
 
-     //显示主窗口
-     ShowWindow(hwnd,SW_SHOW);
+      //显示主窗口
+      ShowWindow(hwnd,SW_SHOW);
 
-     //开始窗口消息循环(窗口关闭并销毁时,GetMessage将返回FALSE,退出本消息循环)。
-     while(GetMessage(&msg,hwnd))
-     {
-     TranslateMessage(&msg);
-     DispatchMessage(&msg);
-     }
+      //开始窗口消息循环(窗口关闭并销毁时,GetMessage将返回FALSE,退出本消息循环)。
+      while(GetMessage(&msg,hwnd))
+      {
+        TranslateMessage(&msg);
+        DispatchMessage(&msg);
+      }
      }
 
 创建父窗口，标题栏为“GUI_DEMO_DrawTest”，设置winProc作为窗口回调函数。
@@ -300,55 +300,55 @@ DrawEllipse()
 
      static LRESULT WinProc(HWND hwnd,UINT msg,WPARAM wParam,LPARAM lParam)
      {
-     RECT rc;
-     switch(msg)
-     {
-     //窗口创建时,会自动产生该消息,
-     //在这里做一些初始化的操作或创建子窗口.
-     case WM_CREATE:
-     {
+		RECT rc;
+		switch(msg)
+		{
+		//窗口创建时,会自动产生该消息,
+		//在这里做一些初始化的操作或创建子窗口.
+			case WM_CREATE:
+			{
 
-     GetClientRect(hwnd,&rc); //获得窗口的客户区矩形.
-     CreateWindow(BUTTON,L"OK",WS_VISIBLE,
-     rc.w-80,8,68,32,hwnd,ID_OK,NULL,NULL); //创建一个按钮(示例).
-     return TRUE;
-     }
-     //WM_NOTIFY消息:wParam低16位为发送该消息的控件ID,
-     //高16位为通知码;lParam指向了一个NMHDR结构体
-     case WM_NOTIFY:
-     {
-     u16 code,id;
+				GetClientRect(hwnd,&rc); //获得窗口的客户区矩形.
+				CreateWindow(BUTTON,L"OK",WS_VISIBLE,
+				rc.w-80,8,68,32,hwnd,ID_OK,NULL,NULL); //创建一个按钮(示例).
+				return TRUE;
+			}
+			//WM_NOTIFY消息:wParam低16位为发送该消息的控件ID,
+			//高16位为通知码;lParam指向了一个NMHDR结构体
+			case WM_NOTIFY:
+			{
+				u16 code,id;
 
-     code =HIWORD(wParam); //获得通知码类型.
-     id =LOWORD(wParam); //获得产生该消息的控件ID.
+				code =HIWORD(wParam); //获得通知码类型.
+				id =LOWORD(wParam); //获得产生该消息的控件ID.
 
-     if(id==ID_OK && code==BN_CLICKED) // 按钮“单击”了.
-     {
-     PostCloseMessage(hwnd); //使产生WM_CLOSE消息关闭窗口.
-     }
-     break;
-     }
-     case WM_PAINT: //窗口需要绘制时，会自动产生该消息.
-     {
-     PAINTSTRUCT ps;
-     HDC hdc;
-     RECT rc;
-     hdc =BeginPaint(hwnd,&ps); //开始绘图
-     GetClientRect(hwnd,&rc);
-     SetBrushColor(hdc, MapRGB(hdc, 0, 0, 0));
-     FillRect(hdc, &rc);
-     Draw_Func(hwnd, hdc);
+				if(id==ID_OK && code==BN_CLICKED) // 按钮“单击”了.
+				{
+				PostCloseMessage(hwnd); //使产生WM_CLOSE消息关闭窗口.
+				}
+				break;
+			}
+			case WM_PAINT: //窗口需要绘制时，会自动产生该消息.
+			{
+				PAINTSTRUCT ps;
+				HDC hdc;
+				RECT rc;
+				hdc =BeginPaint(hwnd,&ps); //开始绘图
+				GetClientRect(hwnd,&rc);
+				SetBrushColor(hdc, MapRGB(hdc, 0, 0, 0));
+				FillRect(hdc, &rc);
+				Draw_Func(hwnd, hdc);
 
-     EndPaint(hwnd,&ps); //结束绘图
-     break;
-     }
-     default: //用户不关心的消息,由系统处理.
-     {
-     return DefWindowProc(hwnd,msg,wParam,lParam);
-     }
+				EndPaint(hwnd,&ps); //结束绘图
+				break;
+			}
+			default: //用户不关心的消息,由系统处理.
+			{
+				return DefWindowProc(hwnd,msg,wParam,lParam);
+			}
 
-     }
-     return WM_NULL;
+			}
+			return WM_NULL;
      }
 
 例程的窗口函数相对简单一点，有不明白的地方，可以查阅前面的章节，这里就进行展开讲解，重点看WM_PAINT消息。
@@ -362,25 +362,25 @@ DrawEllipse()
 
      void Draw_Func(HWND hwnd, HDC hdc)
      {
-     RECT rc;
-     //设置矩形参数
-     rc.x =50;
-     rc.y =80;
-     rc.w =140;
-     rc.h =75;
-     SetPenColor(hdc,MapRGB888(hdc, DrawRect_col)); //设置画笔颜色(用于画线，框).
+		RECT rc;
+		//设置矩形参数
+		rc.x =50;
+		rc.y =80;
+		rc.w =140;
+		rc.h =75;
+		SetPenColor(hdc,MapRGB888(hdc, DrawRect_col)); //设置画笔颜色(用于画线，框).
 
-     DrawRect(hdc,&rc); //绘制一个空心矩形
-     //绘制一个空心圆.
+		DrawRect(hdc,&rc); //绘制一个空心矩形
+		//绘制一个空心圆.
 
-     SetPenColor(hdc,MapRGB888(hdc,DrawCir_col));
-     DrawCircle(hdc,80,100,50);
-     //画斜线
-     SetPenColor(hdc,MapRGB888(hdc,DrawLine_col));
-     Line(hdc,30,160,200,230);
-     //画椭圆
-     SetPenColor(hdc,MapRGB888(hdc,DrawEllipse_col));
-     DrawEllipse(hdc, 150, 155, 65, 40);
+		SetPenColor(hdc,MapRGB888(hdc,DrawCir_col));
+		DrawCircle(hdc,80,100,50);
+		//画斜线
+		SetPenColor(hdc,MapRGB888(hdc,DrawLine_col));
+		Line(hdc,30,160,200,230);
+		//画椭圆
+		SetPenColor(hdc,MapRGB888(hdc,DrawEllipse_col));
+		DrawEllipse(hdc, 150, 155, 65, 40);
      }
 
 代码清单20_13_ 中，Drawxxx每绘制一种图形，都调用一次SetPenColor函数来改变图形的颜色，这些颜色值采用RGB888的颜色格式，采用宏定义的形式，方便修改，见 代码清单20_14_。
@@ -405,20 +405,20 @@ DrawEllipse()
 
      void GUI_AppMain(void)
      {
-     while(1)
-     {
-     GUI_DEMO_Button();
-     GUI_DEMO_Checkbox();
-     GUI_DEMO_Radiobox();
-     GUI_DEMO_Textbox();
-     GUI_DEMO_Progressbar();
+		while(1)
+		{
+			GUI_DEMO_Button();
+			GUI_DEMO_Checkbox();
+			GUI_DEMO_Radiobox();
+			GUI_DEMO_Textbox();
+			GUI_DEMO_Progressbar();
 
-     GUI_DEMO_Scrollbar();
-     GUI_DEMO_Listbox();
-     GUI_DEMO_TextOut();
-     GUI_DEMO_Messagebox();
-     GUI_DEMO_DrawTest();
-     }
+			GUI_DEMO_Scrollbar();
+			GUI_DEMO_Listbox();
+			GUI_DEMO_TextOut();
+			GUI_DEMO_Messagebox();
+			GUI_DEMO_DrawTest();
+		}
      }
 
 .. _实验结果-2:
@@ -617,18 +617,18 @@ FillPolygon()
 
      case WM_PAINT: //窗口需要绘制时，会自动产生该消息.
      {
-     PAINTSTRUCT ps;
-     HDC hdc;
-     RECT rc;
-     hdc =BeginPaint(hwnd,&ps); //开始绘图
-     GetClientRect(hwnd,&rc);
-     SetBrushColor(hdc, MapRGB(hdc, 0, 0, 0));
-     FillRect(hdc, &rc);
+        PAINTSTRUCT ps;
+        HDC hdc;
+        RECT rc;
+        hdc =BeginPaint(hwnd,&ps); //开始绘图
+        GetClientRect(hwnd,&rc);
+        SetBrushColor(hdc, MapRGB(hdc, 0, 0, 0));
+        FillRect(hdc, &rc);
 
-     Draw_Func(hwnd, hdc);
-     Fill_Func(hwnd, hdc);
-     EndPaint(hwnd,&ps); //结束绘图
-     break;
+        Draw_Func(hwnd, hdc);
+        Fill_Func(hwnd, hdc);
+        EndPaint(hwnd,&ps); //结束绘图
+        break;
      }
 
 代码清单20_22_ 中，调用了Fill_Func函数，来绘制图形，见 代码清单20_23_。
@@ -638,15 +638,15 @@ FillPolygon()
     :linenos:
     :name: 代码清单20_23
 
-     void Fill_Func(HWND hwnd, HDC hdc)
-     {
-     POINT pt_RTri[3]={{35, 200},
-     {35, 300},
-     {235, 300}
-     };
-     //绘制直角三角形
-     SetBrushColor(hdc, MapRGB888(hdc, FillRTri_col)); //设置颜色， 使用BrushColor。
-     FillPolygon(hdc, 10, 30, &pt_RTri[0],3); //填充多边形。
+    void Fill_Func(HWND hwnd, HDC hdc)
+    {
+        POINT pt_RTri[3]={{35, 200},
+                        {35, 300},
+                        {235, 300}
+    };
+    //绘制直角三角形
+    SetBrushColor(hdc, MapRGB888(hdc, FillRTri_col)); //设置颜色， 使用BrushColor。
+    FillPolygon(hdc, 10, 30, &pt_RTri[0],3); //填充多边形。
 
     //绘制等边三角形
     POINT pt_EqTri[3]={{220, 120},{320, 120},{270, 13}};
@@ -752,7 +752,7 @@ InflateRect函数
     :linenos:
     :name: 代码清单20_25
 
-     BOOL InflateRect(RECT *lprc，int dx，int dy);
+    BOOL InflateRect(RECT * lprc，int dx，int dy);
 
 1) lprc：指向矩形数据结构。
 

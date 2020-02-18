@@ -79,27 +79,24 @@ ST官方的5.0.1版本，这个版本相对于以前使用的4.5.0版本要稳�
     :linenos:
     :name: 代码清单16_1
 
-       /*
-       * 函数名：SDIO_IRQHandler
-       * 描述 ：在SDIO_ITConfig(）这个函数开启了sdio中断 ，
-       * 数据传输结束时产生中断
-       * 输入 ：无
-       * 输出 ：无
-       */
-       void SDIO_IRQHandler(void)
+    /*
+    * 函数名：SDIO_IRQHandler
+    * 描述  ：在SDIO_ITConfig(）这个函数开启了sdio中断 ，
+    *         数据传输结束时产生中断
+    * 输入  ：无
+    * 输出  ：无
+    */
+    void SDIO_IRQHandler(void)
+        {
+        /* Process All SDIO Interrupt Sources */
+        SD_ProcessIRQSrc();
+        }
 
-       {
-       /* Process All SDIO Interrupt Sources */
-       SD_ProcessIRQSrc();
-       }
-
-
-       void SD_SDIO_DMA_IRQHANDLER(void)
-       {
-       /* Process DMA2 Stream3 or DMA2 Stream6 Interrupt Sources */
-       SD_ProcessDMAIRQ();
-       }
-
+    void SD_SDIO_DMA_IRQHANDLER(void)
+        {
+        /* Process DMA2 Stream3 or DMA2 Stream6 Interrupt Sources */
+        SD_ProcessDMAIRQ();
+        }
 
 完成了以上的步骤，就可以编写测试程序了，本工程的main文件内容见 代码清单16_2_。
 
@@ -108,62 +105,62 @@ ST官方的5.0.1版本，这个版本相对于以前使用的4.5.0版本要稳�
     :linenos:
     :name: 代码清单16_2
 
-      #include "stm32f10x.h"
-      #include "bsp_led.h"
-      #include "GUI.h"
-      #include "diskio.h"
-      #include "bsp_touch.h"
-      #include "bsp_SysTick.h"
-      #include "bsp_usart1.h"
-      #include "bsp_sdio_sdcard.h"
+    #include "stm32f10x.h"
+    #include "bsp_led.h"
+    #include "GUI.h"
+    #include "diskio.h"
+    #include "bsp_touch.h"
+    #include "bsp_SysTick.h"
+    #include "bsp_usart1.h"
+    #include "bsp_sdio_sdcard.h"
 
-       extern void Touch_MainTask(void);
-       extern void Fatfs_MainTask(void);
+    extern void Touch_MainTask(void);
+    extern void Fatfs_MainTask(void);
 
-       /**
-       * @brief 主函数
-       * @param 无
-       * @retval 无
-       */
-       int main(void)
-       {
-       /* LED 端口初始化 */
-       LED_GPIO_Config();
+    /**
+    * @brief  主函数
+    * @param  无
+    * @retval 无
+    */
+    int main(void)
+        {
+        /* LED 端口初始化 */
+        LED_GPIO_Config();
 
-       /* 初始化触屏 */
-       Touch_Init();
+        /* 初始化触屏 */
+        Touch_Init();
 
-       /* 初始化定时器 */
-       SysTick_Init();
+        /* 初始化定时器 */
+        SysTick_Init();
 
-       /* 初始化sd卡 */
-       disk_initialize(0);
+        /*初始化sd卡*/
+        disk_initialize(0);
 
-       /*CRC和emXGUI没有关系，只是他们为了库的保护而做的，
-       这样STemXGUI的库只能用在ST的芯片上面，别的芯片是无法使用的。 */
-       RCC_AHBPeriphClockCmd(RCC_AHBPeriph_CRC, ENABLE);
+        /*CRC和emXGUI没有关系，只是他们为了库的保护而做的，
+        这样STemXGUI的库只能用在ST的芯片上面，别的芯片是无法使用的。 */
+        RCC_AHBPeriphClockCmd(RCC_AHBPeriph_CRC, ENABLE);
 
-       /* 初始化GUI */
-       GUI_Init();
+        /* 初始化GUI */
+        GUI_Init();
 
-       /* 初始化串口*/
-       USART1_Config();
+        /* 初始化串口*/
+        USART1_Config();
 
-       DEBUG("\r\n wildfire ISO board emXGUI test \r\n");
+        DEBUG("\r\n wildfire ISO board emXGUI test \r\n");
 
-       GUI_Delay (20);
+        GUI_Delay (20);
 
-       #if 0
-       /* 触摸校准demo */
-       Touch_MainTask();
-       #else
-       Fatfs_MainTask();
-       #endif
+    #if 0
+        /* 触摸校准demo */
+        Touch_MainTask();
+    #else
+        Fatfs_MainTask();
+    #endif
 
-       }
+        }
 
+    /**************************END OF FILE**********************/
 
-       /END OF FILE/
 
 
 在emXGUI_touch工程的基础上，初始化了各种外设用emXGUI后，在第32行添加了disk_initialize函数用于初始化SD卡及文件系统，在第52行，调用了自己编写的文件系统测试函数Fatfs_MainTask，其内容见 代码清单16_3_。
@@ -173,97 +170,94 @@ ST官方的5.0.1版本，这个版本相对于以前使用的4.5.0版本要稳�
     :linenos:
     :name: 代码清单16_3
 
-       /**
-       *
-       * @file GUIDEMO_Fatfs.c
-       * @author fire
-       * @version V1.0
-       * @date 2013-xx-xx
-       * @brief 测试文件系统
-       *
-       * @attention
+    /**
+    *********************************************
+    * @file    GUIDEMO_Fatfs.c
+    * @author  fire
+    * @version V1.0
+    * @date    2013-xx-xx
+    * @brief   测试文件系统
+    *********************************************
+    * @attention
+    *
+    * 实验平台:野火 iSO STM32 开发板
+    * 论坛    :http://www.chuxue123.com
+    * 淘宝    :http://firestm32.taobao.com
+    *
+    *********************************************
+    */
 
-       *
-       * 实验平台:野火 iSO STM32 开发板
-       * 论坛 :http://www.chuxue123.com
-       * 淘宝 :http://firestm32.taobao.com
-       *
-       *
-       */
+    #include "stm32f10x.h"
+    #include "bsp_sdio_sdcard.h"
+    #include "bsp_usart1.h"
+    #include "ff.h"
+    #include "GUI.h"
 
-       #include "stm32f10x.h"
-       #include "bsp_sdio_sdcard.h"
-       #include "bsp_usart1.h"
-       #include "ff.h"
-       #include "GUI.h"
+    FIL fnew;             /* file objects */
+    FATFS fs;             /* Work area (file system object) for logical drives */
+    FRESULT res;
+    UINT br, bw;                  /* File R/W count */
+    BYTE buffer[4096]= {0};           /* file copy buffer */
+    BYTE textFileBuffer[] = "Welcome to use Wildfire iso stm32 Development 
+    Board today is a good day";
 
-       FIL fnew; /* file objects */
-       FATFS fs; /* Work area (file system object) for logical drives */
-       FRESULT res;
-       UINT br, bw; /* File R/W count */
-       BYTE buffer[4096]= {0}; /* file copy buffer */
-       BYTE textFileBuffer[] = "Welcome to use Wildfire iso stm32 Development Board today is a good day";
+    void Fatfs_MainTask(void)
+        {
+        /* 用于显示文件内容的窗口大小 */
+        GUI_RECT file_content= {5,120,235,200};
 
-       void Fatfs_MainTask(void)
-       {
-       /* 用于显示文件内容的窗口大小 */
-       GUI_RECT file_content= {5,120,235,200};
+        /* 给屏幕刷上背景颜色 */
+        GUI_ClearRect(0,0,240,320);
 
-       /* 给屏幕刷上背景颜色 */
-       GUI_ClearRect(0,0,240,320);
+        /* 设置字体颜色 */
+        GUI_SetFont(&GUI_Font8x16);
 
-       /* 设置字体颜色 */
-       GUI_SetFont(&GUI_Font8x16);
+        GUI_DispStringAt ("f_mount...",5,20);
 
-       GUI_DispStringAt ("f_mount...",5,20);
+        /* Register work area for each volume
+        (Always succeeds regardless of disk status) */
+        f_mount(0,&fs);
 
-       /* Register work area for each volume
-       (Always succeeds regardless of disk status) */
-       f_mount(0,&fs);
+        /* function disk_initialize() has been called in f_open */
 
-       /* function disk_initialize() has been called in f_open */
+        GUI_DispStringAt ("f_open :newfile.txt ...",5,40);
 
-       GUI_DispStringAt ("f_open :newfile.txt ...",5,40);
+        /* Create new file on the drive 0 */
+        res = f_open(&fnew, "0:newfile.txt", FA_CREATE_ALWAYS | FA_WRITE );
 
-       /* Create new file on the drive 0 */
-       res = f_open(&fnew, "0:newfile.txt", FA_CREATE_ALWAYS | FA_WRITE );
+        if ( res == FR_OK )
+            {
+            res = f_write(&fnew, textFileBuffer, sizeof(textFileBuffer), &bw);
+            f_close(&fnew);
+            }
 
-       if ( res == FR_OK )
-       {
-       res = f_write(&fnew, textFileBuffer, sizeof(textFileBuffer), &bw);
-       f_close(&fnew);
-       }
+        GUI_DispStringAt ("f_read :newfile.txt ...",5,60);
 
-       GUI_DispStringAt ("f_read :newfile.txt ...",5,60);
+        res = f_open(&fnew, "0:newfile.txt", FA_OPEN_EXISTING | FA_READ);
+        res = f_read(&fnew, buffer, sizeof(buffer), &br);
 
-       res = f_open(&fnew, "0:newfile.txt", FA_OPEN_EXISTING | FA_READ);
-       res = f_read(&fnew, buffer, sizeof(buffer), &br);
+        printf("\r\n %s ", buffer);
 
-       printf("\r\n %s ", buffer);
+        GUI_DispStringAt ("file content:",5,100);
 
-       GUI_DispStringAt ("file content:",5,100);
+        /* 设置前景颜色（字体颜色）*/
+        GUI_SetColor(GUI_RED);
 
-       /* 设置前景颜色（字体颜色）*/
-       GUI_SetColor(GUI_RED);
+        /* 设置字体 */
+        GUI_SetFont(GUI_FONT_COMIC18B_ASCII);
 
-       /* 设置字体 */
-       GUI_SetFont(GUI_FONT_COMIC18B_ASCII);
+        /* 显示文本到屏幕上 */
+        GUI_DispStringInRectWrap((const char*)buffer, 
+    &file_content,GUI_TA_LEFT,GUI_WRAPMODE_WORD) ;
 
-       /* 显示文本到屏幕上 */
-       GUI_DispStringInRectWrap((const char*)buffer, &file_content,GUI_TA_LEFT,GUI_WRAPMODE_WORD) ;
+        /* Close open files */
+        f_close(&fnew);
 
-       /* Close open files */
-       f_close(&fnew);
+        /* Unregister work area prior to discard it */
+        f_mount(0, NULL);
 
-       /* Unregister work area prior to discard it */
-       f_mount(0, NULL);
-
-       while (1);
-       }
-
-
-
-
+        while (1);
+    }
 
 本函数先在sd卡中创建一个空白的txt文件，并向txt文件写入句子“Welcome to use Wildfire iso stm32 Development Board today is a good
 day”，关闭文件后重新打开，读取文件的内容，并把读到的内容使用emXGUI的库函数显示到液晶屏上。
@@ -402,41 +396,41 @@ ST固件库            所有ST3.5版本标准库文件
      */
      int main(void)
      {
-     /* LED 端口初始化 */
-     LED_GPIO_Config();
+        /* LED 端口初始化 */
+        LED_GPIO_Config();
 
-     /* 初始化触屏 */
-     Touch_Init();
+        /* 初始化触屏 */
+        Touch_Init();
 
-     /* 初始化定时器 */
-     SysTick_Init();
+        /* 初始化定时器 */
+        SysTick_Init();
 
-     /* 配置 FSMC Bank1 NOR/SRAM3 */
-     FSMC_SRAM_Init();
+        /* 配置 FSMC Bank1 NOR/SRAM3 */
+        FSMC_SRAM_Init();
 
-     /* 初始化sd卡 */
-     disk_initialize(0);
+        /* 初始化sd卡 */
+        disk_initialize(0);
 
-     /*CRC和emXGUI没有关系，只是他们为了库的保护而做的，
-     这样STemXGUI的库只能用在ST的芯片上面，别的芯片是无法使用的。 */
-     RCC_AHBPeriphClockCmd(RCC_AHBPeriph_CRC, ENABLE);
+        /*CRC和emXGUI没有关系，只是他们为了库的保护而做的，
+        这样STemXGUI的库只能用在ST的芯片上面，别的芯片是无法使用的。 */
+        RCC_AHBPeriphClockCmd(RCC_AHBPeriph_CRC, ENABLE);
 
-     /* 初始化GUI */
-     GUI_Init();
+        /* 初始化GUI */
+        GUI_Init();
 
-     /* 初始化串口*/
-     USART1_Config();
+        /* 初始化串口*/
+        USART1_Config();
 
-     DEBUG("\r\n wildfire ISO board emXGUI test \\r\n");
+        DEBUG("\r\n wildfire ISO board emXGUI test \\r\n");
 
-     GUI_Delay (20);
+        GUI_Delay (20);
 
-     #if 0
-     /* 触摸校准demo */
-     Touch_MainTask();
-     #else
-     Fatfs_MainTask();
-     #endif
+    #if 0
+        /* 触摸校准demo */
+        Touch_MainTask();
+    #else
+        Fatfs_MainTask();
+    #endif
 
      }
 
@@ -486,36 +480,36 @@ ST固件库            所有ST3.5版本标准库文件
      */
      void GUI_X_Config(void)
      {
-     #if 0
-     //
-     // 32 bit aligned memory area
-     //
-     static U32 aMemory[GUI_NUMBYTES / 4];
-     //
-     // Assign memory to emXGUI
-     //
-     GUI_ALLOC_AssignMemory(aMemory, GUI_NUMBYTES);
+    #if 0
+        //
+        // 32 bit aligned memory area
+        //
+        static U32 aMemory[GUI_NUMBYTES / 4];
+        //
+        // Assign memory to emXGUI
+        //
+        GUI_ALLOC_AssignMemory(aMemory, GUI_NUMBYTES);
 
-     GUI_ALLOC_SetAvBlockSize(GUI_BLOCKSIZE);
-     //
-     // Set default font
-     //
-     GUI_SetDefaultFont(GUI_FONT_6X8);
-     #else
-     //
-     // 32 bit aligned memory area
-     //
-     //
-     // Assign memory to emXGUI
-     //
-     GUI_ALLOC_AssignMemory((U32 *)Bank1_SRAM3_ADDR, 1024*1024);
+        GUI_ALLOC_SetAvBlockSize(GUI_BLOCKSIZE);
+        //
+        // Set default font
+        //
+        GUI_SetDefaultFont(GUI_FONT_6X8);
+    #else
+        //
+        // 32 bit aligned memory area
+        //
+        //
+        // Assign memory to emXGUI
+        //
+        GUI_ALLOC_AssignMemory((U32 *)Bank1_SRAM3_ADDR, 1024*1024);
 
-     GUI_ALLOC_SetAvBlockSize(GUI_BLOCKSIZE);
-     //
-     // Set default font
-     //
-     GUI_SetDefaultFont(GUI_FONT_6X8);
-     #endif
+        GUI_ALLOC_SetAvBlockSize(GUI_BLOCKSIZE);
+        //
+        // Set default font
+        //
+        GUI_SetDefaultFont(GUI_FONT_6X8);
+    #endif
      }
 
      /* End of file */

@@ -61,13 +61,13 @@ WM_NOTIFY的wParam低16位存放着发送该消息的控件ID，lParam参数是�
 
      typedef struct tagSCROLLINFO
      {
-     u16 cbSize; //SCROLLINFO结构体大小
-     u16 fMask; //功能选择位
-     s32 nMin; //最小值
-     s32 nMax; //最大值
-     s32 nValue; //当前值
-     u16 TrackSize; //滑块大小
-     u16 ArrowSize; //箭头框的大小
+        u16 cbSize; //SCROLLINFO结构体大小
+        u16 fMask; //功能选择位
+        s32 nMin; //最小值
+        s32 nMax; //最大值
+        s32 nValue; //当前值
+        u16 TrackSize; //滑块大小
+        u16 ArrowSize; //箭头框的大小
      }SCROLLINFO,SCROLLBAR_CFG;
 
 1) cbSize：用来存放结构体的大小。必须要将cbSize值设置成 sizeof(SCROLLINFO)。
@@ -96,8 +96,8 @@ WM_NOTIFY的wParam低16位存放着发送该消息的控件ID，lParam参数是�
     :name: 代码清单12_3
 
      HWND CreateWindowEx( U32 dwExStyle, LPCVOID lpClass, LPCWSTR lpWindowName,
-     U32 dwStyle, int x, int y, int nWidth, int nHeight,
-     HWND hwndParent, UINT WinId,HINSTANCE hInstance,LPVOID lpParam);
+                        U32 dwStyle, int x, int y, int nWidth, int nHeight,
+                        HWND hwndParent, UINT WinId,HINSTANCE hInstance,LPVOID lpParam);
 
 1) lpClass：窗口类。对于系统标准控件，可以为：BUTTON(常规按钮，复选框，单选框，组合框)，SCROLLBAR(水平/垂直滚动条)， LISTBOX(列表框)。TEXTBOX（文本框）…等等。这里选择SCROLLBAR。
 
@@ -134,30 +134,30 @@ WM_NOTIFY的wParam低16位存放着发送该消息的控件ID，lParam参数是�
 
      void GUI_DEMO_Scrollbar(void)
      {
-     HWND hwnd;
-     WNDCLASS wcex;
-     MSG msg;
-     wcex.Tag = WNDCLASS_TAG;
-     wcex.Style = CS_HREDRAW | CS_VREDRAW;
-     wcex.lpfnWndProc = win_proc;
-     wcex.cbClsExtra = 0;
+        HWND hwnd;
+        WNDCLASS wcex;
+        MSG msg;
+        wcex.Tag = WNDCLASS_TAG;
+        wcex.Style = CS_HREDRAW | CS_VREDRAW;
+        wcex.lpfnWndProc = win_proc;
+        wcex.cbClsExtra = 0;
 
-     wcex.cbWndExtra = 0;
-     wcex.hInstance = 0;//hInst;
-     wcex.hIcon = 0;//LoadIcon(hInstance, (LPCTSTR)IDI_WIN32_APP_TEST);
-     wcex.hCursor = 0;//LoadCursor(NULL, IDC_ARROW);
-     hwnd =CreateWindowEx( NULL,
-     &wcex,
-     _T("GUI Demo - Scrollbar"),
-     /*WS_MEMSURFACE|*/WS_CAPTION|WS_DLGFRAME|WS_BORDER|WS_CLIPCHILDREN,
-     0,0,GUI_XSIZE,GUI_YSIZE,
-     NULL,NULL,NULL,NULL);
-     ShowWindow(hwnd,SW_SHOW);
-     while(GetMessage(&msg,hwnd))
-     {
-     TranslateMessage(&msg);
-     DispatchMessage(&msg);
-     }
+        wcex.cbWndExtra = 0;
+        wcex.hInstance = 0;//hInst;
+        wcex.hIcon = 0;//LoadIcon(hInstance, (LPCTSTR)IDI_WIN32_APP_TEST);
+        wcex.hCursor = 0;//LoadCursor(NULL, IDC_ARROW);
+        hwnd =CreateWindowEx( NULL,
+        &wcex,
+        _T("GUI Demo - Scrollbar"),
+        /*WS_MEMSURFACE|*/WS_CAPTION|WS_DLGFRAME|WS_BORDER|WS_CLIPCHILDREN,
+        0,0,GUI_XSIZE,GUI_YSIZE,
+        NULL,NULL,NULL,NULL);
+        ShowWindow(hwnd,SW_SHOW);
+        while(GetMessage(&msg,hwnd))
+        {
+        TranslateMessage(&msg);
+        DispatchMessage(&msg);
+        }
      }
 
 创建父窗口，标题栏为“GUI Demo - Scrollbar”，带有大小边框，设置WinProc作为窗口回调函数。
@@ -173,38 +173,38 @@ WM_NOTIFY的wParam低16位存放着发送该消息的控件ID，lParam参数是�
 
      case WM_CREATE:
      {
-     GetClientRect(hwnd,&rc);
-     if(1)
-     {
-     //滚动条参数结构体
-     SCROLLINFO sif;
-     sif.cbSize =sizeof(sif);//结构体大小
-     sif.fMask =SIF_ALL; //使能所有功能
+        GetClientRect(hwnd,&rc);
+        if(1)
+        {
+        //滚动条参数结构体
+        SCROLLINFO sif;
+        sif.cbSize =sizeof(sif);//结构体大小
+        sif.fMask =SIF_ALL; //使能所有功能
 
-     //取值范围：-50~50
-     sif.nMin =-50;
-     sif.nMax =+50;
-     //当前值为0
-     sif.nValue =0;
-     //滑块的大小为60
-     sif.TrackSize =60;
-     //两端的大小为60
-     sif.ArrowSize =60;
-     //创建垂直风格滑动条
-     wnd = CreateWindow(SCROLLBAR,L"VScroll",SBS_VERT|WS_VISIBLE,
-     40,20,40,400,hwnd,ID_SCROLLBAR1,NULL,NULL);
-     //配置滑动条的属性
-     SendMessage(wnd,SBM_SETSCROLLINFO,TRUE,(LPARAM)&sif);
-     //创建自绘制滑动条
-     wnd = CreateWindow(SCROLLBAR,L"HScroll",WS_OWNERDRAW|WS_VISIBLE,
-     130,120,400,40,hwnd,ID_SCROLLBAR2,NULL,NULL);
-     SendMessage(wnd,SBM_SETSCROLLINFO,TRUE,(LPARAM)&sif);
-     //创建滑动条
-     wnd = CreateWindow(SCROLLBAR,L"HScroll",WS_VISIBLE,
-     130,240,400,40,hwnd,ID_SCROLLBAR3,NULL,NULL);
-     SendMessage(wnd,SBM_SETSCROLLINFO,TRUE,(LPARAM)&sif);
-     }
-     return TRUE;
+        //取值范围：-50~50
+        sif.nMin =-50;
+        sif.nMax =+50;
+        //当前值为0
+        sif.nValue =0;
+        //滑块的大小为60
+        sif.TrackSize =60;
+        //两端的大小为60
+        sif.ArrowSize =60;
+        //创建垂直风格滑动条
+        wnd = CreateWindow(SCROLLBAR,L"VScroll",SBS_VERT|WS_VISIBLE,
+        40,20,40,400,hwnd,ID_SCROLLBAR1,NULL,NULL);
+        //配置滑动条的属性
+        SendMessage(wnd,SBM_SETSCROLLINFO,TRUE,(LPARAM)&sif);
+        //创建自绘制滑动条
+        wnd = CreateWindow(SCROLLBAR,L"HScroll",WS_OWNERDRAW|WS_VISIBLE,
+        130,120,400,40,hwnd,ID_SCROLLBAR2,NULL,NULL);
+        SendMessage(wnd,SBM_SETSCROLLINFO,TRUE,(LPARAM)&sif);
+        //创建滑动条
+        wnd = CreateWindow(SCROLLBAR,L"HScroll",WS_VISIBLE,
+        130,240,400,40,hwnd,ID_SCROLLBAR3,NULL,NULL);
+        SendMessage(wnd,SBM_SETSCROLLINFO,TRUE,(LPARAM)&sif);
+        }
+        return TRUE;
      }
 
 设置滚动条的取值范围在-50~50，滑块的大小为60px，初始位置位于0处，箭头框的大小为60px。调用CreateWindow函数来创建滚动条。创建完成后，发送消息SBM_SETSCROLLINFO来设置滚动条的属性。这里创建了三个滚动条，分别是SCROLLBAR1、SCROLLBAR2和SCROLLBAR3。
@@ -218,24 +218,23 @@ WM_NOTIFY的wParam低16位存放着发送该消息的控件ID，lParam参数是�
 
      case WM_CTLCOLOR:
      {
-     u16 id;
-     id =LOWORD(wParam);
-     if(id== ID_SCROLLBAR3)
-     {
-     CTLCOLOR *cr;
-     cr =(CTLCOLOR*)lParam;
-     cr->TextColor =RGB888(100,255,255);
+        u16 id;
+        id =LOWORD(wParam);
+        if(id== ID_SCROLLBAR3)
+        {
+        CTLCOLOR *cr;
+        cr =(CTLCOLOR*)lParam;
+        cr->TextColor =RGB888(100,255,255);
 
-     cr->BackColor =RGB888(100,100,150);
-     cr->BorderColor =RGB888(50,50,150);
-     cr->ForeColor =RGB888(50,150,250);
-     return TRUE;
-     }
-     else
-     {
-     return FALSE;
-     }
-
+        cr->BackColor =RGB888(100,100,150);
+        cr->BorderColor =RGB888(50,50,150);
+        cr->ForeColor =RGB888(50,150,250);
+        return TRUE;
+        }
+        else
+        {
+        return FALSE;
+        }
      }
 
 在WM_CTLCOLOR中，对SCROLLBAR3滚动条的外观颜色进行更改，并返回TRUE。其余两个滚动条按照系统默认方案来配置。
@@ -249,12 +248,12 @@ WM_NOTIFY的wParam低16位存放着发送该消息的控件ID，lParam参数是�
 
      case WM_DRAWITEM:
      {
-     DRAWITEM_HDR *ds;
-     ds =(DRAWITEM_HDR*)lParam;
-     {
-     scrollbar_owner_draw(ds);
-     return TRUE;
-     }
+        DRAWITEM_HDR *ds;
+        ds =(DRAWITEM_HDR*)lParam;
+        {
+            scrollbar_owner_draw(ds);
+            return TRUE;
+        }
      }
 
 滚动条控件SCROLLBAR2拥有自定义绘制属性WS_OWNERDRAW，在绘制前都会给父窗口发送WM_DRAWITEM消息。在WM_DRAWITEM消息中，调用函数scrollbar_owner_draw实现控件自定义，最后返回TURE。
@@ -266,35 +265,35 @@ WM_NOTIFY的wParam低16位存放着发送该消息的控件ID，lParam参数是�
 
      static void scrollbar_owner_draw(DRAWITEM_HDR *ds)
      {
-     HWND hwnd;
-     HDC hdc;
-     RECT rc;
-     WCHAR wbuf[128];
-     SCROLLINFO sif;
-     hwnd =ds->hwnd;
-     hdc =ds->hDC;
+        HWND hwnd;
+        HDC hdc;
+        RECT rc;
+        WCHAR wbuf[128];
+        SCROLLINFO sif;
+        hwnd =ds->hwnd;
+        hdc =ds->hDC;
 
-     //绘制滚动条的背景（第一步）
-     SetBrushColor(hdc,MapRGB(hdc,150,200,250));
-     FillRect(hdc,&ds->rc);
-     sif.fMask =SIF_ALL;
-     SendMessage(hwnd,SBM_GETSCROLLINFO,0,(LPARAM)&sif);
-     //得到滑块的大小（第二步）
-     SendMessage(hwnd,SBM_GETTRACKRECT,0,(LPARAM)&rc);
-     //滑块被选中
-     if(ds->State & SST_THUMBTRACK)
-     {
-     SetPenColor(hdc,MapRGB(hdc,250,50,50));
-     }
-     else//滑块未被选中
-     {
-     SetPenColor(hdc,MapRGB(hdc,50,50,50));
-     }
-     DrawRect(hdc,&rc);
-     //显示滑块的位置
-     x_wsprintf(wbuf,L"%d",sif.nValue);
+        //绘制滚动条的背景（第一步）
+        SetBrushColor(hdc,MapRGB(hdc,150,200,250));
+        FillRect(hdc,&ds->rc);
+        sif.fMask =SIF_ALL;
+        SendMessage(hwnd,SBM_GETSCROLLINFO,0,(LPARAM)&sif);
+        //得到滑块的大小（第二步）
+        SendMessage(hwnd,SBM_GETTRACKRECT,0,(LPARAM)&rc);
+        //滑块被选中
+        if(ds->State & SST_THUMBTRACK)
+        {
+            SetPenColor(hdc,MapRGB(hdc,250,50,50));
+        }
+        else//滑块未被选中
+        {
+            SetPenColor(hdc,MapRGB(hdc,50,50,50));
+        }
+        DrawRect(hdc,&rc);
+        //显示滑块的位置
+        x_wsprintf(wbuf,L"%d",sif.nValue);
 
-     DrawText(hdc,wbuf,-1,&rc,DT_VCENTER|DT_CENTER);
+        DrawText(hdc,wbuf,-1,&rc,DT_VCENTER|DT_CENTER);
      }
 
 图12_4_ 的中滚动条SCROLLBAR2重绘，就是在窗口处绘制两个矩形，一个作为滚动条的背景，另一个则作为滑块。如 图12_5_ 所示。
@@ -322,16 +321,16 @@ WM_NOTIFY的wParam低16位存放着发送该消息的控件ID，lParam参数是�
 
      void GUI_AppMain(void)
      {
-     while(1)
-     {
-     GUI_DEMO_Button();//需要修改教程
-     GUI_DEMO_Checkbox();
-     GUI_DEMO_Radiobox();
-     GUI_DEMO_Textbox();
-     GUI_DEMO_Progressbar();//有瑕疵
+        while(1)
+        {
+            GUI_DEMO_Button();//需要修改教程
+            GUI_DEMO_Checkbox();
+            GUI_DEMO_Radiobox();
+            GUI_DEMO_Textbox();
+            GUI_DEMO_Progressbar();//有瑕疵
 
-     GUI_DEMO_Scrollbar();
-     }
+            GUI_DEMO_Scrollbar();
+        }
      }
 
 实验结果

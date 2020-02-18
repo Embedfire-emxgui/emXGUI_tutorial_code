@@ -75,11 +75,11 @@ bfOffBits   0a~0dh 实际位图数据的偏移字节数，即bmp文件头，位�
 
      typedef struct tagBITMAPFILEHEADER
      {
-     //attention: sizeof(DWORD)=4 sizeof(WORD)=2
-     DWORD bfSize; //文件大小
-     WORD bfReserved1; //保留字，不考虑
-     WORD bfReserved2; //保留字，同上
-     DWORD bfOffBits; //实际位图数据的偏移字节数，即前三个部分长度之和
+        //attention: sizeof(DWORD)=4 sizeof(WORD)=2
+        DWORD bfSize; //文件大小
+        WORD bfReserved1; //保留字，不考虑
+        WORD bfReserved2; //保留字，同上
+        DWORD bfOffBits; //实际位图数据的偏移字节数，即前三个部分长度之和
      } BITMAPFILEHEADER,tagBITMAPFILEHEADER;
 
 位图信息头
@@ -124,19 +124,19 @@ biClrImportant  32~35h 重要颜色数，如果为0，则表示所有颜色都�
 
      typedef struct tagBITMAPINFOHEADER
      {
-     //attention: sizeof(DWORD)=4 sizeof(WORD)=2
-     DWORD biSize; //指定此结构体的长度，为40
-     LONG biWidth; //位图宽，说明本图的宽度，以像素为单位
-     LONG biHeight; //位图高，指明本图的高度，像素为单位
-     WORD biPlanes; //平面数，为1
-     WORD biBitCount; //采用颜色位数，可以是1，2，4，8，16，24新的可以是32
-     DWORD biCompression; //压缩方式，可以是0，1，2，其中0表示不压缩
+        //attention: sizeof(DWORD)=4 sizeof(WORD)=2
+        DWORD biSize; //指定此结构体的长度，为40
+        LONG biWidth; //位图宽，说明本图的宽度，以像素为单位
+        LONG biHeight; //位图高，指明本图的高度，像素为单位
+        WORD biPlanes; //平面数，为1
+        WORD biBitCount; //采用颜色位数，可以是1，2，4，8，16，24新的可以是32
+        DWORD biCompression; //压缩方式，可以是0，1，2，其中0表示不压缩
 
-     DWORD biSizeImage; //实际位图数据占用的字节数
-     LONG biXPelsPerMeter; //X方向分辨率
-     LONG biYPelsPerMeter; //Y方向分辨率
-     DWORD biClrUsed; //使用的颜色数，如果为0，则表示默认值(2^颜色位数)
-     DWORD biClrImportant; //重要颜色数，如果为0，则表示所有颜色都是重要的
+        DWORD biSizeImage; //实际位图数据占用的字节数
+        LONG biXPelsPerMeter; //X方向分辨率
+        LONG biYPelsPerMeter; //Y方向分辨率
+        DWORD biClrUsed; //使用的颜色数，如果为0，则表示默认值(2^颜色位数)
+        DWORD biClrImportant; //重要颜色数，如果为0，则表示所有颜色都是重要的
      } BITMAPINFOHEADER,tagBITMAPINFOHEADER;
 
 由于使用的是24位的位图，所以没有调色板。而且位图的大小为92*184，和开头提到的一致。
@@ -197,12 +197,12 @@ emXGUI使用tagBITMAP结构体来存放位图的相关信息，见 代码清单2
 
      typedef struct tagBITMAP
      {
-     U32 Format; // 位图格式。
-     U32 Width; // 位图宽度(行)。
-     U32 Height; // 位图高度(列)。
-     U32 WidthBytes;// 位图图像每一行的字节数。
-     LPVOID Bits; // 指向位图数据。
-     COLORREF *LUT; // 颜色表,只有索引位图,BM_ALPHA4,BM_ALPHA8格式时才用到。
+        U32 Format; // 位图格式。
+        U32 Width; // 位图宽度(行)。
+        U32 Height; // 位图高度(列)。
+        U32 WidthBytes;// 位图图像每一行的字节数。
+        LPVOID Bits; // 指向位图数据。
+        COLORREF *LUT; // 颜色表,只有索引位图,BM_ALPHA4,BM_ALPHA8格式时才用到。
      } BITMAP;
 
 1) Format：位图的格式，对应位图文件的biBitCount（1C~1Dh），可以是BM_ARGB8888、BM_RGB888、BM_RGB565等等。
@@ -271,38 +271,38 @@ bmp的图像铺满整个屏幕，如 图21_8_。
 
      void GUI_DEMO_Drawbitmap(void)
      {
-     HWND hwnd;
-     WNDCLASS wcex;
-     MSG msg;
+        HWND hwnd;
+        WNDCLASS wcex;
+        MSG msg;
 
-     /////
-     wcex.Tag = WNDCLASS_TAG;
+        /////
+        wcex.Tag = WNDCLASS_TAG;
 
-     wcex.Style = CS_HREDRAW | CS_VREDRAW;
-     wcex.lpfnWndProc = WinProc; //设置主窗口消息处理的回调函数.
-     wcex.cbClsExtra = 0;
-     wcex.cbWndExtra = 0;
-     wcex.hInstance = NULL;//hInst;
-     wcex.hIcon = NULL;//LoadIcon(hInstance, (LPCTSTR)IDI_WIN32_APP_TEST);
-     wcex.hCursor = NULL;//LoadCursor(NULL, IDC_ARROW);
+        wcex.Style = CS_HREDRAW | CS_VREDRAW;
+        wcex.lpfnWndProc = WinProc; //设置主窗口消息处理的回调函数.
+        wcex.cbClsExtra = 0;
+        wcex.cbWndExtra = 0;
+        wcex.hInstance = NULL;//hInst;
+        wcex.hIcon = NULL;//LoadIcon(hInstance, (LPCTSTR)IDI_WIN32_APP_TEST);
+        wcex.hCursor = NULL;//LoadCursor(NULL, IDC_ARROW);
 
-     //创建主窗口
-     hwnd =CreateWindowEx( NULL,
-     &wcex,
-     _T("DrawBitmap(ARGB8888 Format)"),
-     WS_CLIPCHILDREN,
-     0,0,GUI_XSIZE,GUI_YSIZE,
-     NULL,NULL,NULL,NULL);
+        //创建主窗口
+        hwnd =CreateWindowEx( NULL,
+        &wcex,
+        _T("DrawBitmap(ARGB8888 Format)"),
+        WS_CLIPCHILDREN,
+        0,0,GUI_XSIZE,GUI_YSIZE,
+        NULL,NULL,NULL,NULL);
 
-     //显示主窗口
-     ShowWindow(hwnd,SW_SHOW);
+        //显示主窗口
+        ShowWindow(hwnd,SW_SHOW);
 
-     //开始窗口消息循环(窗口关闭并销毁时,GetMessage将返回FALSE,退出本消息循环)。
-     while(GetMessage(&msg,hwnd))
-     {
-     TranslateMessage(&msg);
-     DispatchMessage(&msg);
-     }
+        //开始窗口消息循环(窗口关闭并销毁时,GetMessage将返回FALSE,退出本消息循环)。
+        while(GetMessage(&msg,hwnd))
+        {
+            TranslateMessage(&msg);
+            DispatchMessage(&msg);
+        }
      }
 
 创建父窗口，标题栏为“DrawBitmap(ARGB8888 Format)”，设置winProc作为窗口回调函数。
@@ -319,15 +319,15 @@ bmp的图像铺满整个屏幕，如 图21_8_。
      static BITMAP bm_0;
      case WM_CREATE: //窗口创建时,会自动产生该消息,在这里做一些初始化的操作或创建子窗口
      {
-     //设置位图结构参数
-     bm_0.Format = BM_ARGB8888; //位图格式
-     bm_0.Width = 92; //宽度
-     bm_0.Height = 184; //高度
-     bm_0.WidthBytes =bm_0.Width*4; //每行字节数
-     bm_0.LUT =NULL; //查找表(RGB/ARGB格式不使用该参数)
+        //设置位图结构参数
+        bm_0.Format = BM_ARGB8888; //位图格式
+        bm_0.Width = 92; //宽度
+        bm_0.Height = 184; //高度
+        bm_0.WidthBytes =bm_0.Width*4; //每行字节数
+        bm_0.LUT =NULL; //查找表(RGB/ARGB格式不使用该参数)
 
-     bm_0.Bits =(void*)gImage_0; //位图数据
-     return TRUE;
+        bm_0.Bits =(void*)gImage_0; //位图数据
+        return TRUE;
      }
 
 定义一个BITMAP 类型的结构体变量bm_0，前面我们讲过 图21_1_ 是32位的位图，因此，使用的颜色格式为BM_ARGB8888，宽和高为92和184，每行的字节数为宽度*4。32位色的位图，没有调试板，所以不使用查找表参数。
@@ -343,11 +343,11 @@ bmp的图像铺满整个屏幕，如 图21_8_。
      //清除背景
      case WM_ERASEBKGND:
      {
-     HDC hdc=(HDC)wParam;
-     GetClientRect(hwnd,&rc);
-     SetBrushColor(hdc,MapRGB(hdc,0,30,130));
-     FillRect(hdc,&rc);
-     return TRUE;
+        HDC hdc=(HDC)wParam;
+        GetClientRect(hwnd,&rc);
+        SetBrushColor(hdc,MapRGB(hdc,0,30,130));
+        FillRect(hdc,&rc);
+        return TRUE;
      }
 
 这里使用WM_ERASEBKGND消息，来绘制窗口的背景：以RGB为(0,30,130)的颜色来填充背景。
@@ -361,30 +361,30 @@ bmp的图像铺满整个屏幕，如 图21_8_。
 
      case WM_PAINT: //窗口需要绘制时，会自动产生该消息.
      {
-     PAINTSTRUCT ps;
-     HDC hdc;
-     RECT rc0;
-     int x,y;
-     hdc =BeginPaint(hwnd,&ps);
-     //获取客户区的位置和大小
-     GetClientRect(hwnd,&rc0);
+        PAINTSTRUCT ps;
+        HDC hdc;
+        RECT rc0;
+        int x,y;
+        hdc =BeginPaint(hwnd,&ps);
+        //获取客户区的位置和大小
+        GetClientRect(hwnd,&rc0);
 
-     SetPenColor(hdc,MapRGB(hdc,200,200,220));
-     for(y=0; y<rc0.h; y+=bm_0.Height)
-     {
-     for(x=0; x<rc0.w; x+=bm_0.Width)
-     {
-     //绘制图片
-     DrawBitmap(hdc,x,y,&bm_0,NULL);
-     rc.x=x;
-     rc.y=y;
-     rc.w=bm_0.Width;
-     rc.h=bm_0.Height;
-     DrawRect(hdc,&rc);//绘制矩形
-     }
-     }
-     EndPaint(hwnd,&ps);
-     break;
+        SetPenColor(hdc,MapRGB(hdc,200,200,220));
+        for(y=0; y<rc0.h; y+=bm_0.Height)
+        {
+            for(x=0; x<rc0.w; x+=bm_0.Width)
+            {
+                //绘制图片
+                DrawBitmap(hdc,x,y,&bm_0,NULL);
+                rc.x=x;
+                rc.y=y;
+                rc.w=bm_0.Width;
+                rc.h=bm_0.Height;
+                DrawRect(hdc,&rc);//绘制矩形
+            }
+        }
+        EndPaint(hwnd,&ps);
+        break;
      }
 
 在WM_PAINT消息，调用BeginPaint函数开始绘图。变量x和y用来记录窗口可以显示的图片张数。利用DrawBitmap函数绘制图片，且使用DrawRect给图片绘制一个外边框。
@@ -436,7 +436,7 @@ BMP_DrawEx
 
 代码清单 21‑10 BMP_DrawEx（文件emXGUI.h）
 
-1 BOOL BMP_DrawEx(HDC hdc,int x,int y,GUI_GET_DATA *read_data,const RECT *lprc);
+1 BOOL BMP_DrawEx(HDC hdc,int x,int y,GUI_GET_DATA \*read_data,const RECT \*lprc);
 
 1) hdc：绘图上下文；
 
@@ -475,37 +475,37 @@ SD卡内有一张图片（ 图21_10_ ）。使用上述的API，将它显示在�
 
      void GUI_DEMO_Drawbitmap_Extern(void)
      {
-     HWND hwnd;
-     WNDCLASS wcex;
-     MSG msg;
+        HWND hwnd;
+        WNDCLASS wcex;
+        MSG msg;
 
-     wcex.Tag = WNDCLASS_TAG;
-     wcex.Style = CS_HREDRAW | CS_VREDRAW;
-     wcex.lpfnWndProc = WinProc; //设置主窗口消息处理的回调函数.
+        wcex.Tag = WNDCLASS_TAG;
+        wcex.Style = CS_HREDRAW | CS_VREDRAW;
+        wcex.lpfnWndProc = WinProc; //设置主窗口消息处理的回调函数.
 
-     wcex.cbClsExtra = 0;
-     wcex.cbWndExtra = 0;
-     wcex.hInstance = NULL;//hInst;
-     wcex.hIcon = NULL;//LoadIcon(hInstance, (LPCTSTR)IDI_WIN32_APP_TEST);
-     wcex.hCursor = NULL;//LoadCursor(NULL, IDC_ARROW);
+        wcex.cbClsExtra = 0;
+        wcex.cbWndExtra = 0;
+        wcex.hInstance = NULL;//hInst;
+        wcex.hIcon = NULL;//LoadIcon(hInstance, (LPCTSTR)IDI_WIN32_APP_TEST);
+        wcex.hCursor = NULL;//LoadCursor(NULL, IDC_ARROW);
 
-     //创建主窗口
-     hwnd =CreateWindowEx( NULL,
-                            &wcex,
-                            _T("DrawBitmap_Extern"),
-                            /*WS_MEMSURFACE|*/WS_CAPTION|WS_BORDER|WS_CLIPCHILDREN,
-                            0,0,GUI_XSIZE,GUI_YSIZE,
-                            NULL,NULL,NULL,NULL);
+        //创建主窗口
+        hwnd =CreateWindowEx( NULL,
+                                &wcex,
+                                _T("DrawBitmap_Extern"),
+                                /*WS_MEMSURFACE|*/WS_CAPTION|WS_BORDER|WS_CLIPCHILDREN,
+                                0,0,GUI_XSIZE,GUI_YSIZE,
+                                NULL,NULL,NULL,NULL);
 
-     //显示主窗口
-     ShowWindow(hwnd,SW_SHOW);
+        //显示主窗口
+        ShowWindow(hwnd,SW_SHOW);
 
-     //开始窗口消息循环(窗口关闭并销毁时,GetMessage将返回FALSE,退出本消息循环)。
-     while(GetMessage(&msg,hwnd))
-     {
-     TranslateMessage(&msg);
-     DispatchMessage(&msg);
-     }
+        //开始窗口消息循环(窗口关闭并销毁时,GetMessage将返回FALSE,退出本消息循环)。
+        while(GetMessage(&msg,hwnd))
+        {
+            TranslateMessage(&msg);
+            DispatchMessage(&msg);
+        }
      }
 
 创建父窗口，标题栏为“DrawBitmap_Extern”，设置winProc作为窗口回调函数。
@@ -523,29 +523,29 @@ SD卡内有一张图片（ 图21_10_ ）。使用上述的API，将它显示在�
 
      {
 
-     HWND wnd;
+        HWND wnd;
 
-     GetClientRect(hwnd,&rc); //获得窗口的客户区矩形
+        GetClientRect(hwnd,&rc); //获得窗口的客户区矩形
 
-     /* 读取文件系统中的图片信息*/
+        /* 读取文件系统中的图片信息*/
 
-     PIC_BMP_GetInfo_FS(&bm_0, DEMO_BMP_NAME);
+        PIC_BMP_GetInfo_FS(&bm_0, DEMO_BMP_NAME);
 
-     CreateWindow(BUTTON,L"OK",WS_VISIBLE,
+        CreateWindow(BUTTON,L"OK",WS_VISIBLE,
 
-     rc.w-70,rc.h-40,68,32,hwnd,ID_OK,NULL,NULL);
+        rc.w-70,rc.h-40,68,32,hwnd,ID_OK,NULL,NULL);
 
 
 
-     /* 创建内存对象 */
+        /* 创建内存对象 */
 
-     hdc_mem =CreateMemoryDC(SURF_SCREEN,bm_0.Width,bm_0.Height);
+        hdc_mem =CreateMemoryDC(SURF_SCREEN,bm_0.Width,bm_0.Height);
 
-     /* 绘制至内存对象 */
+        /* 绘制至内存对象 */
 
-     PIC_BMP_Draw_FS(hdc_mem,0,0,DEMO_BMP_NAME,NULL);
+        PIC_BMP_Draw_FS(hdc_mem,0,0,DEMO_BMP_NAME,NULL);
 
-     return TRUE;
+        return TRUE;
 
      }
 
@@ -564,35 +564,35 @@ SD卡内有一张图片（ 图21_10_ ）。使用上述的API，将它显示在�
      */
      BOOL PIC_BMP_GetInfo_FS(BITMAPINFO *bm_info, char *file_name)
      {
-     /* file objects */
+        /* file objects */
 
-     FIL *file;
-     FRESULT fresult;
-     BOOL res = TRUE;
-     GUI_GET_DATA get_data;
-    
-     file =(FIL*)GUI_VMEM_Alloc(sizeof(FIL));
-    
-     /* 打开文件 */
-     fresult = f_open(file, file_name, FA_OPEN_EXISTING | FA_READ );
-     if (fresult != FR_OK)
-     {
-     GUI_ERROR("Open Pic failed!");
-     GUI_VMEM_Free(file);
-     return FALSE;
-     }
-     /* 把文件指针作为lParam参数*/
-     get_data.lParam = (LPARAM)file;
-     /* 读取数据的回调函数 */
-     get_data.pfReadData = bmp_read_data_fs;
-     /* 获取图片信息 */
-     res = BMP_GetInfoEx(bm_info,&get_data);
-     f_close(file);
-    
-     /* 释放空间 */
-     GUI_VMEM_Free(file);
-    
-     return res;
+        FIL *file;
+        FRESULT fresult;
+        BOOL res = TRUE;
+        GUI_GET_DATA get_data;
+        
+        file =(FIL*)GUI_VMEM_Alloc(sizeof(FIL));
+        
+        /* 打开文件 */
+        fresult = f_open(file, file_name, FA_OPEN_EXISTING | FA_READ );
+        if (fresult != FR_OK)
+        {
+            GUI_ERROR("Open Pic failed!");
+            GUI_VMEM_Free(file);
+            return FALSE;
+        }
+        /* 把文件指针作为lParam参数*/
+        get_data.lParam = (LPARAM)file;
+        /* 读取数据的回调函数 */
+        get_data.pfReadData = bmp_read_data_fs;
+        /* 获取图片信息 */
+        res = BMP_GetInfoEx(bm_info,&get_data);
+        f_close(file);
+        
+        /* 释放空间 */
+        GUI_VMEM_Free(file);
+        
+        return res;
      }
 
 调用GUI_VMEM_Alloc函数，在VMEM申请内存，并将申请到内存地址转换为FIL指针类型。使用文件之前，必须使用f_open函数打开文件，不再使用文件必须使用f_close函数关闭文件，f_close函数运行可以确保缓冲区完全写入到文件内。定义一个GUI_GET_DATA类型的结构体变量，把文件指针作为lParam参数，读取数据的回调函数设置为bmp_read_data_fs。
@@ -614,17 +614,17 @@ SD卡内有一张图片（ 图21_10_ ）。使用上述的API，将它显示在�
      static int bmp_read_data_fs(void *buf,int offset,int size,LPARAM lParam)
 
      {
-     int rw;
+        int rw;
 
-     /* 本回调函数中lParam是对应的文件指针*/
-     FIL * p_file = (FIL*)lParam;
+        /* 本回调函数中lParam是对应的文件指针*/
+        FIL * p_file = (FIL*)lParam;
 
-     /* 偏移到指定位置 */
-     f_lseek(p_file, offset);
-     /* 读取数据到缓冲区 */
-     f_read(p_file, buf, (UINT)size, (UINT *)&rw);
-     /* 返回读取到的数据大小 */
-     return rw;
+        /* 偏移到指定位置 */
+        f_lseek(p_file, offset);
+        /* 读取数据到缓冲区 */
+        f_read(p_file, buf, (UINT)size, (UINT *)&rw);
+        /* 返回读取到的数据大小 */
+        return rw;
      }
 
 bmp_read_data_fs函数的形参lParam是用户自定义的参数，这里传递的是文件指针。使用文件系统函数f_lseek偏移到指定位置offset，从SD卡中读取数据到缓冲区，最后返回读取到的数据大小。
@@ -659,9 +659,9 @@ bmp_read_data_fs函数的形参lParam是用户自定义的参数，这里传递�
      fresult = f_open(file, file_name, FA_OPEN_EXISTING | FA_READ );
      if (fresult != FR_OK)
      {
-     GUI_ERROR("Open Pic failed!");
-     GUI_VMEM_Free(file);
-     return FALSE;
+        GUI_ERROR("Open Pic failed!");
+        GUI_VMEM_Free(file);
+        return FALSE;
      }
 
      /* 把文件指针作为lParam参数 */
@@ -692,15 +692,14 @@ bmp_read_data_fs函数的形参lParam是用户自定义的参数，这里传递�
      /* wParam低16位为发送该消息的控件ID,高16位为通知码;lParam指向了一个NMHDR结构体 */
      case WM_NOTIFY:
      {
-     u16 code,id;
-     code =HIWORD(wParam); //获得通知码类型.
-     id =LOWORD(wParam); //获得产生该消息的控件ID.
-     if(id==ID_OK && code==BN_CLICKED)
-     {
-     PostCloseMessage(hwnd); //产生WM_CLOSE消息关闭窗口
-
-     }
-     break;
+        u16 code,id;
+        code =HIWORD(wParam); //获得通知码类型.
+        id =LOWORD(wParam); //获得产生该消息的控件ID.
+        if(id==ID_OK && code==BN_CLICKED)
+        {
+            PostCloseMessage(hwnd); //产生WM_CLOSE消息关闭窗口
+        }
+        break;
      }
 
 WM_NOTIFY消息中的wParam低16位为发送该消息的控件ID，高16位为通知码。单击OK按键，则发送WM_CLOSE消息关闭窗口。
@@ -714,11 +713,11 @@ WM_NOTIFY消息中的wParam低16位为发送该消息的控件ID，高16位为�
 
      case WM_ERASEBKGND:
      {
-     HDC hdc=(HDC)wParam;
-     GetClientRect(hwnd,&rc);
-     SetBrushColor(hdc,MapRGB(hdc,0,30,130));
-     FillRect(hdc,&rc);
-     return TRUE;
+        HDC hdc=(HDC)wParam;
+        GetClientRect(hwnd,&rc);
+        SetBrushColor(hdc,MapRGB(hdc,0,30,130));
+        FillRect(hdc,&rc);
+        return TRUE;
      }
 
 在客户区绘制一个矩形，大小为整个客户区的大小，填充颜色设置为RGB(0，30，130)。
@@ -732,30 +731,30 @@ WM_NOTIFY消息中的wParam低16位为发送该消息的控件ID，高16位为�
 
      case WM_PAINT: //窗口需要绘制时，会自动产生该消息.
      {
-     PAINTSTRUCT ps;
-     HDC hdc;
-     RECT rc0;
-     int x,y;
-     hdc =BeginPaint(hwnd,&ps);//开始绘制
-     ////用户的绘制内容...
-     GetClientRect(hwnd,&rc0);
+        PAINTSTRUCT ps;
+        HDC hdc;
+        RECT rc0;
+        int x,y;
+        hdc =BeginPaint(hwnd,&ps);//开始绘制
+        ////用户的绘制内容...
+        GetClientRect(hwnd,&rc0);
 
-     SetPenColor(hdc,MapRGB(hdc,200,200,220));
-     for(y=0; y<rc0.h; y+=bm_0.Height)
-     {
-     for(x=0; x<rc0.w; x+=bm_0.Width)
-     {
-     /* 显示文件系统中的图片文件 */
-     BitBlt(hdc,x,y,bm_0.Width,bm_0.Height,hdc_mem,0,0,SRCCOPY); //将MEMDC输出到窗口中。
-     rc.x=x;
-     rc.y=y;
-     rc.w=bm_0.Width;
-     rc.h=bm_0.Height;
-     DrawRect(hdc,&rc);
-     }
-     }
-     EndPaint(hwnd,&ps);
-     break;
+        SetPenColor(hdc,MapRGB(hdc,200,200,220));
+        for(y=0; y<rc0.h; y+=bm_0.Height)
+        {
+            for(x=0; x<rc0.w; x+=bm_0.Width)
+            {
+                /* 显示文件系统中的图片文件 */
+                BitBlt(hdc,x,y,bm_0.Width,bm_0.Height,hdc_mem,0,0,SRCCOPY); //将MEMDC输出到窗口中。
+                rc.x=x;
+                rc.y=y;
+                rc.w=bm_0.Width;
+                rc.h=bm_0.Height;
+                DrawRect(hdc,&rc);
+            }
+        }
+        EndPaint(hwnd,&ps);
+        break;
      }
 
 在WM_CREATE中，已经将图片绘制到MemoryDC中，因此，我们只需要将MemoryDC中的图形拷贝到hdc中即可。调用BitBlt函数将MEMDC的（0，0）处的内容输出到窗口的（x，y）中，数据的数目由图片的大小决定。使用DrawRect函数给图片画个“画框”。

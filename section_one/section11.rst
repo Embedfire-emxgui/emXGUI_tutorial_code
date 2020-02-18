@@ -35,9 +35,9 @@ emXGUI可以通过配置__MSGBOXOPTIONS结构体，来改变对话框内部的�
 
      typedef struct __MSGBOXOPTIONS
      {
-     const WCHAR **pButtonText; //按键文字
-     int ButtonCount; //按键个数
-     u32 Flag; //消息框的图标
+        const WCHAR **pButtonText; //按键文字
+        int ButtonCount; //按键个数
+        u32 Flag; //消息框的图标
      }MSGBOX_OPTIONS;
 
 1) pButtonText：存放按键显示文字，有几个按键，就需要几个字符串。
@@ -60,8 +60,8 @@ emXGUI调用MessageBox函数创建对话框控件，同时会返回一个int类�
     :name: 代码清单11_2
 
      int MessageBox(HWND hwndParent,int x,int y,int w,int h,
-     const WCHAR *pText,const WCHAR *pCaption,
-     const MSGBOX_OPTIONS *opt);
+                    const WCHAR *pText,const WCHAR *pCaption,
+                    const MSGBOX_OPTIONS *opt);
 
 1. hwndParent：对话框所属的父窗口。控件不可以脱离窗口而存在，通过该成员来指定该控件是属于哪一个父窗口。
 
@@ -102,34 +102,34 @@ emXGUI调用MessageBox函数创建对话框控件，同时会返回一个int类�
 
      void GUI_DEMO_Messagebox(void)
      {
-     HWND hwnd;
-     WNDCLASS wcex;
-     MSG msg;
-     //
-     wcex.Tag = WNDCLASS_TAG;
-     wcex.Style = CS_HREDRAW | CS_VREDRAW;
-     wcex.lpfnWndProc = WinProc; //设置主窗口消息处理的回调函数.
+        HWND hwnd;
+        WNDCLASS wcex;
+        MSG msg;
+        //
+        wcex.Tag = WNDCLASS_TAG;
+        wcex.Style = CS_HREDRAW | CS_VREDRAW;
+        wcex.lpfnWndProc = WinProc; //设置主窗口消息处理的回调函数.
 
-     wcex.cbClsExtra = 0;
-     wcex.cbWndExtra = 0;
-     wcex.hInstance = NULL;//hInst;
-     wcex.hIcon = NULL;//LoadIcon(hInstance, (LPCTSTR)IDI_WIN32_APP_TEST);
-     wcex.hCursor = NULL;//LoadCursor(NULL, IDC_ARROW);
-     //创建主窗口
-     hwnd =CreateWindowEx( NULL,
-     &wcex,
-     _T("GUI_DEMO-Messagebox"),
-     WS_CAPTION|WS_DLGFRAME|WS_BORDER|WS_CLIPCHILDREN,
-     10,20,440,240,
-     NULL,NULL,NULL,NULL);
-     //显示主窗口
-     ShowWindow(hwnd,SW_SHOW);
-     //开始窗口消息循环(窗口关闭并销毁时,GetMessage将返回FALSE,退出本消息循环)。
-     while(GetMessage(&msg,hwnd))
-     {
-     TranslateMessage(&msg);
-     DispatchMessage(&msg);
-     }
+        wcex.cbClsExtra = 0;
+        wcex.cbWndExtra = 0;
+        wcex.hInstance = NULL;//hInst;
+        wcex.hIcon = NULL;//LoadIcon(hInstance, (LPCTSTR)IDI_WIN32_APP_TEST);
+        wcex.hCursor = NULL;//LoadCursor(NULL, IDC_ARROW);
+        //创建主窗口
+        hwnd =CreateWindowEx( NULL,
+        &wcex,
+        _T("GUI_DEMO-Messagebox"),
+        WS_CAPTION|WS_DLGFRAME|WS_BORDER|WS_CLIPCHILDREN,
+        10,20,440,240,
+        NULL,NULL,NULL,NULL);
+        //显示主窗口
+        ShowWindow(hwnd,SW_SHOW);
+        //开始窗口消息循环(窗口关闭并销毁时,GetMessage将返回FALSE,退出本消息循环)。
+        while(GetMessage(&msg,hwnd))
+        {
+        TranslateMessage(&msg);
+        DispatchMessage(&msg);
+        }
      }
 
 创建父窗口，标题栏为“GUI Demo - Messagebox”，带有大小边框，设置WinProc作为窗口回调函数。
@@ -145,25 +145,25 @@ emXGUI调用MessageBox函数创建对话框控件，同时会返回一个int类�
 
      case WM_CREATE: //窗口创建时,会自动产生该消息,在这里做一些初始化的操作或创建子窗口
      {
-     GetClientRect(hwnd,&rc); //获得窗口的客户区矩形
-     CreateWindow(BUTTON,L"OK",WS_VISIBLE,
-     rc.w-80,8,68,32,hwnd,ID_OK,NULL,NULL);
-     rc.x =20;
-     rc.y =30;
-     rc.w =100;
-     rc.h =40;
+        GetClientRect(hwnd,&rc); //获得窗口的客户区矩形
+        CreateWindow(BUTTON,L"OK",WS_VISIBLE,
+        rc.w-80,8,68,32,hwnd,ID_OK,NULL,NULL);
+        rc.x =20;
+        rc.y =30;
+        rc.w =100;
+        rc.h =40;
 
-     //创建按钮
-     CreateWindow(BUTTON,L"Msgbox-1",WS_VISIBLE,
-     rc.x,rc.y,rc.w,rc.h,hwnd,ID_BTN1,NULL,NULL);
-     //往下移动矩形位置(X轴增加rc.w+10个像素)
-     OffsetRect(&rc,rc.w+10,0);
-     CreateWindow(BUTTON,L"Msgbox-2",WS_VISIBLE,
-     rc.x,rc.y,rc.w,rc.h,hwnd,ID_BTN2,NULL,NULL);
-     OffsetRect(&rc,rc.w+10,0);
-     CreateWindow(BUTTON,L"Msgbox-3",WS_VISIBLE,
-     rc.x,rc.y,rc.w,rc.h,hwnd,ID_BTN3,NULL,NULL);
-     return TRUE;
+        //创建按钮
+        CreateWindow(BUTTON,L"Msgbox-1",WS_VISIBLE,
+        rc.x,rc.y,rc.w,rc.h,hwnd,ID_BTN1,NULL,NULL);
+        //往下移动矩形位置(X轴增加rc.w+10个像素)
+        OffsetRect(&rc,rc.w+10,0);
+        CreateWindow(BUTTON,L"Msgbox-2",WS_VISIBLE,
+        rc.x,rc.y,rc.w,rc.h,hwnd,ID_BTN2,NULL,NULL);
+        OffsetRect(&rc,rc.w+10,0);
+        CreateWindow(BUTTON,L"Msgbox-3",WS_VISIBLE,
+        rc.x,rc.y,rc.w,rc.h,hwnd,ID_BTN3,NULL,NULL);
+        return TRUE;
      }
 
 代码清单11_4_ 中，创建了四个按钮。点击BTN1、BTN2和BTN3按钮，会弹出相应的对话框。OK按钮用来关闭父窗口。
@@ -175,10 +175,10 @@ emXGUI调用MessageBox函数创建对话框控件，同时会返回一个int类�
     :linenos:
     :name: 代码清单11_5
 
-     case WM_DESTROY: //窗口销毁时，会自动产生该消息，在这里做一些资源释放的操作.
-     {
-     return PostQuitMessage(hwnd); //调用PostQuitMessage，使用主窗口结束并退出消息循环.
-     }
+    case WM_DESTROY: //窗口销毁时，会自动产生该消息，在这里做一些资源释放的操作.
+    {
+        return PostQuitMessage(hwnd); //调用PostQuitMessage，使用主窗口结束并退出消息循环.
+    }
 
 调用PostQuitMessage，使用主窗口结束并退出消息循环。具体说明，可以参考《emXGUI API编程手册》的章节：标准消息类型及参数说明。
 
@@ -192,41 +192,41 @@ emXGUI调用MessageBox函数创建对话框控件，同时会返回一个int类�
      //WM_NOTIFY消息:wParam低16位为发送该消息的控件ID,高16位为通知码;lParam指向了一个NMHDR结构体.
      case WM_NOTIFY:
      {
-     u16 code,id;
-     int ret=0;
-     code =HIWORD(wParam); //获得通知码类型.
-     id =LOWORD(wParam); //获得产生该消息的控件ID.
-     if(id==ID_OK && code==BN_CLICKED)
-     {
+        u16 code,id;
+        int ret=0;
+        code =HIWORD(wParam); //获得通知码类型.
+        id =LOWORD(wParam); //获得产生该消息的控件ID.
+        if(id==ID_OK && code==BN_CLICKED)
+        {
 
-     PostCloseMessage(hwnd); //产生WM_CLOSE消息关闭窗口
-     }
-     if(id==ID_BTN1 && code==BN_CLICKED)
-     {
-     ret=MessageBox(hwnd,10,20,200,120,L"Hello!",L"MsgBox-1",NULL);
-     }
-     if(id==ID_BTN2 && code==BN_CLICKED)
-     {
-     const WCHAR *btn[] ={L"YES",L"NO",}; //对话框内按钮的文字
-     MSGBOX_OPTIONS mb;
-     mb.Flag =MB_BTN_WIDTH(80)|MB_ICONWARNING; //按钮的宽度为80px,使用警告图标
-     mb.pButtonText =btn;
-     mb.ButtonCount=2; //对话框内创建两个按钮
-     ret=MessageBox(hwnd,10,20,320,150,
-     L"MB_YESNO + MB_ICON\r\nABCDEFG",L"MsgBox-2",&mb);
-     }
-     if(id==ID_BTN3 && code==BN_CLICKED)
-     {
-     const WCHAR *btn[] ={L"Yes to all",L"取消",L"确认>>"};
-     MSGBOX_OPTIONS mb;
-     mb.Flag =MB_ICONINFORMATION; //使用信息图标
-     mb.pButtonText =btn;
-     mb.ButtonCount=3;
-     ret=MessageBox(hwnd,10,20,360,180,
-     L"Auto size + MB_ICON\r\nMulti-Line",L"MsgBox-3",&mb);
-     }
-     GUI_Printf("Messagebox Return:%d\r\n",ret);
-     break;
+        PostCloseMessage(hwnd); //产生WM_CLOSE消息关闭窗口
+        }
+        if(id==ID_BTN1 && code==BN_CLICKED)
+        {
+        ret=MessageBox(hwnd,10,20,200,120,L"Hello!",L"MsgBox-1",NULL);
+        }
+        if(id==ID_BTN2 && code==BN_CLICKED)
+        {
+        const WCHAR *btn[] ={L"YES",L"NO",}; //对话框内按钮的文字
+        MSGBOX_OPTIONS mb;
+        mb.Flag =MB_BTN_WIDTH(80)|MB_ICONWARNING; //按钮的宽度为80px,使用警告图标
+        mb.pButtonText =btn;
+        mb.ButtonCount=2; //对话框内创建两个按钮
+        ret=MessageBox(hwnd,10,20,320,150,
+        L"MB_YESNO + MB_ICON\r\nABCDEFG",L"MsgBox-2",&mb);
+        }
+        if(id==ID_BTN3 && code==BN_CLICKED)
+        {
+        const WCHAR *btn[] ={L"Yes to all",L"取消",L"确认>>"};
+        MSGBOX_OPTIONS mb;
+        mb.Flag =MB_ICONINFORMATION; //使用信息图标
+        mb.pButtonText =btn;
+        mb.ButtonCount=3;
+        ret=MessageBox(hwnd,10,20,360,180,
+        L"Auto size + MB_ICON\r\nMulti-Line",L"MsgBox-3",&mb);
+        }
+        GUI_Printf("Messagebox Return:%d\r\n",ret);
+        break;
      }
 
 利用HIWORD和LOWORD函数来获取控件的ID和通知码。对于BTN2，定义了一个MSGBOX_OPTIONS类型的变量mb，使用警告图标，对话框内创建两个按钮，宽度为80px，显示的文字为“YES”和“NO”。我们点击其中一个按钮，MessageBox函数会有返回值，存放在ret中。这个值就是按
@@ -243,16 +243,16 @@ BTN3使用信息图标，对话框内有三个按钮，显示的文字为“YES 
 
      void GUI_AppMain(void)
      {
-     while(1)
-     {
-     GUI_DEMO_Button();
-     GUI_DEMO_Checkbox();
-     GUI_DEMO_Radiobox();
-     GUI_DEMO_Textbox();
-     GUI_DEMO_Progressbar();
+        while(1)
+        {
+            GUI_DEMO_Button();
+            GUI_DEMO_Checkbox();
+            GUI_DEMO_Radiobox();
+            GUI_DEMO_Textbox();
+            GUI_DEMO_Progressbar();
 
-     GUI_DEMO_Messagebox();
-     }
+            GUI_DEMO_Messagebox();
+        }
      }
 
 .. _实验现象-6:

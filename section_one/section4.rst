@@ -34,139 +34,87 @@ GUI_Startup函数的示例代码具体见 代码清单4_0_ 。
     :linenos:
     :name: 代码清单4_0
 
-    //第1部分
-    /*
-    * @brief GUI低级别的初始化,这是GUI的第一个初始化函数
-    * @param 无
+    /***********************第1部分*************************/
+    /**
+    * @brief  GUI低级别的初始化,这是GUI的第一个初始化函数
+    * @param  无
     * @retval TRUE:成功; FALSE：失败.
     */
     static BOOL GUI_LowLevelInit(void)
     {
-
-    //GUI Core内存管理初始化
-    GUI_MEM_Init();
-
+    
+        //GUI Core内存管理初始化
+        GUI_MEM_Init();
+    
     #if(GUI_VMEM_EN)
-    //vmem内存管理初始化
-    GUI_VMEM_Init();
+        //vmem内存管理初始化
+        GUI_VMEM_Init();
     #endif
+    
+        //初始化日志接口
+        if (GUI_Log_Init() != TRUE) {
 
-    //初始化日志接口
-    if (GUI_Log_Init() != TRUE) {
+        }
 
+        /* 直接返回TRUE，为了部分设备初始化不正常不影响后续运行 */
+        return TRUE;
     }
-
-    /* 直接返回TRUE，为了部分设备初始化不正常不影响后续运行 */
-    return TRUE;
-
-    }
-     //第2部分
-
-     /*
-     *
-     * @brief 启动GUI，包含各种内存、液晶、输入设备的初始化
-     * @param 无
-     * @retval 无
-     */
-
-     void GUI_Startup(void)
-
-     {
-
-     SURFACE *pSurf=NULL;
-
-     HFONT hFont=NULL;
-
-     //第3部分
-
-     if (!GUI_LowLevelInit()) { //GUI低级初始化.
-
-     GUI_ERROR("GUI_LowLevelInit Failed.");
-
-     return;
-
-     }
-
-     //第4部分
-
-     if (!GUI_Arch_Init()) { //GUI架构适配层初始化.
-
-     GUI_ERROR("GUI_Arch_Init Failed.");
-
-     return;
-
-     }
-
-     if (!X_GUI_Init()) { //GUI内核初始化.
-
-     GUI_ERROR("X_GUI_Init Failed.");
-
-     return;
-
-     }
-
-     //第5部分
-
-     pSurf =GUI_DisplayInit(); //显示设备初始化
-
-     if (pSurf==NULL) {
-
-     GUI_ERROR("GUI_DisplayInit Failed.");
-
-     return;
-
-     }
-
-     GUI_SetScreenSurface(pSurf); //设置屏幕Surface对象
-
-     //第6部分
-
-     #if(GUI_RES_DEV_EN)
-
-     //资源设备初始化（FLASH）
-
-     if (RES_DevInit() != TRUE) {
-
-     GUI_ERROR("RES_DevInit Failed.");
-
-     }
-
-     #endif
-
-     //第7部分
-
-     #if(GUI_INPUT_DEV_EN)
-
-     //初始化输入设备
-
-     if (GUI_InputInit() != TRUE) {
-
-     GUI_ERROR("GUI_InputInit Failed.");
-
-     }
-
-     GL_CursorInit(pSurf,pSurf->Width>>1,pSurf->Height>>1); //初始化光标
-
-     #endif
-
-     //第8部分
-
-     hFont =GUI_Default_FontInit(); //初始化默认的字体
-
-     if (hFont==NULL) {
-
-     GUI_ERROR("GUI_Default_FontInit Failed.");
-
-     return;
-
-     }
-
-     GUI_SetDefFont(hFont); //设置默认的字体
-
-     //第9部分
-
-     GUI_DesktopStartup(); //启动桌面窗口(该函数不会返回).
-
+    /**********************第2部分**************************/
+    /**
+    * @brief  启动GUI，包含各种内存、液晶、输入设备的初始化
+    * @param  无
+    * @retval 无
+    */
+    void  GUI_Startup(void)
+    {
+        SURFACE *pSurf=NULL;
+        HFONT hFont=NULL;
+        /**********************第3部分**************************/
+        if (!GUI_LowLevelInit()) { //GUI低级初始化.
+            GUI_ERROR("GUI_LowLevelInit Failed.");
+            return;
+        }
+        /**********************第4部分**************************/
+        if (!GUI_Arch_Init()) { //GUI架构适配层初始化.
+            GUI_ERROR("GUI_Arch_Init Failed.");
+            return;
+        }
+        
+        if (!X_GUI_Init()) {  //GUI内核初始化.
+            GUI_ERROR("X_GUI_Init Failed.");
+            return;
+        }
+        /**********************第5部分**************************/
+        pSurf =GUI_DisplayInit(); //显示设备初始化
+        if (pSurf==NULL) {
+            GUI_ERROR("GUI_DisplayInit Failed.");
+            return;
+        }
+        GUI_SetScreenSurface(pSurf); //设置屏幕Surface对象
+        /**********************第6部分**************************/
+    #if(GUI_RES_DEV_EN)
+        //资源设备初始化（FLASH）
+        if (RES_DevInit() != TRUE) {
+            GUI_ERROR("RES_DevInit Failed.");
+        }
+    #endif
+        /**********************第7部分**************************/
+    #if(GUI_INPUT_DEV_EN)
+        //初始化输入设备
+        if (GUI_InputInit() != TRUE) {
+            GUI_ERROR("GUI_InputInit Failed.");
+        }
+        GL_CursorInit(pSurf,pSurf->Width>>1,pSurf->Height>>1); //初始化光标
+    #endif
+        /**********************第8部分**************************/
+        hFont =GUI_Default_FontInit(); //初始化默认的字体
+        if (hFont==NULL) {
+            GUI_ERROR("GUI_Default_FontInit Failed.");
+            return;
+        }
+        GUI_SetDefFont(hFont);  //设置默认的字体
+        /**********************第9部分**************************/
+        GUI_DesktopStartup(); //启动桌面窗口(该函数不会返回).
     }
 
 在这段代码中条件编译中的内容如“#if(GUI_VMEM_EN) …#endif”、“#if(GUI_RES_DEV_EN) …#endif”是可以通过gui_drv_cfg.h头文件配置的宏，可以根据自己的应用需要决定是否加入这些接口。
@@ -240,200 +188,143 @@ GUI_Startup函数的示例代码具体见 代码清单4_0_ 。
     :name: 代码清单4_1
 
     /*
-    
     函数功能: 创建一个互斥(该互斥锁必须支持嵌套使用)
-    
     返回: 互斥对象句柄(唯一标识)
-    
     说明: 互斥对象句柄按实际OS所定,可以是指针,ID号等...
-    
     */
-    
-    GUI_MUTEX *GUI_MutexCreate(void)
+    GUI_MUTEX*  GUI_MutexCreate(void)
     {
-    return (GUI_MUTEX*)rt_mutex_create(NULL,RT_IPC_FLAG_FIFO);
+        return (GUI_MUTEX*)rt_mutex_create(NULL,RT_IPC_FLAG_FIFO);
     }
-
     /*
     函数功能: 互斥锁定
     参数: hMutex(由GUI_MutexCreate返回的句柄);
-    time 最长等待毫秒数,0立既返回,0xFFFFFFFF,一直等待
+        time 最长等待毫秒数,0立既返回,0xFFFFFFFF,一直等待
     返回: TRUE:成功;FALSE:失败或超时
     说明: .
     */
-    BOOL GUI_MutexLock(GUI_MUTEX *hMutex,U32 time)
+    BOOL  GUI_MutexLock(GUI_MUTEX *hMutex,U32 time)
     {
-    if (rt_mutex_take((rt_mutex_t)hMutex,rt_tick_from_millisecond(time))==RT_EOK) {
-    return TRUE;
-    }
-    return FALSE;
-    }
 
+    if (rt_mutex_take((rt_mutex_t)hMutex,rt_tick_from_millisecond(time))==RT_EOK) {
+            return TRUE;
+        }
+        return  FALSE;
+    }
     /*
     函数功能: 互斥解锁
     参数: hMutex(由GUI_MutexCreate返回的句柄);
     返回: 无
     说明: .
     */
-    void GUI_MutexUnlock(GUI_MUTEX *hMutex)
+    void  GUI_MutexUnlock(GUI_MUTEX *hMutex)
     {
-    rt_mutex_release((rt_mutex_t)hMutex);
+        rt_mutex_release((rt_mutex_t)hMutex);
     }
-
     /*
     函数功能: 互斥删除
     参数: hMutex(由GUI_MutexCreate返回的句柄);
     返回: 无
     说明: .
     */
-    void GUI_MutexDelete(GUI_MUTEX *hMutex)
+    void  GUI_MutexDelete(GUI_MUTEX *hMutex)
     {
-    rt_mutex_delete((rt_mutex_t)hMutex);
+        rt_mutex_delete((rt_mutex_t)hMutex);
     }
-
     /*
     函数功能: 创建一个信号量
     参数: init: 信号量初始值; max: 信号量最大值
     返回: 信号量对象句柄(唯一标识)
     说明: 信号量对象句柄按实际OS所定,可以是指针,ID号等...
     */
-    GUI_SEM* GUI_SemCreate(int init,int max)
+    GUI_SEM*  GUI_SemCreate(int init,int max)
     {
-    return (GUI_SEM*)rt_sem_create(NULL,init,RT_IPC_FLAG_FIFO);
+        return (GUI_SEM*)rt_sem_create(NULL,init,RT_IPC_FLAG_FIFO);
     }
-
     /*
     函数功能: 信号量等待
     参数: hsem(由GUI_SemCreate返回的句柄);
-    time 最长等待毫秒数,0立既返回,0xFFFFFFFF,一直等待
+        time 最长等待毫秒数,0立既返回,0xFFFFFFFF,一直等待
     返回: TRUE:成功;FALSE:失败或超时
     说明: .
     */
-    BOOL GUI_SemWait(GUI_SEM *hsem,U32 time)
+    BOOL  GUI_SemWait(GUI_SEM *hsem,U32 time)
     {
-
-    if (rt_sem_take((rt_sem_t)hsem,rt_tick_from_millisecond(time))== RT_EOK) {
-    return TRUE;
+        if (rt_sem_take((rt_sem_t)hsem,rt_tick_from_millisecond(time))== RT_EOK) {
+            return TRUE;
+        }
+        return FALSE;
     }
-    return FALSE;
-    }
-
     /*
     函数功能: 信号量发送
     参数: hsem(由GUI_SemCreate返回的句柄);
     返回: 无
     说明: .
     */
-    void GUI_SemPost(GUI_SEM *hsem)
+    void  GUI_SemPost(GUI_SEM *hsem)
     {
-    rt_sem_release((rt_sem_t)hsem);
+        rt_sem_release((rt_sem_t)hsem);
+    }
+    /*
+    函数功能: 信号量删除
+    参数: hsem(由GUI_SemCreate返回的句柄);
+    返回: 无
+    说明: .
+    */
+    void  GUI_SemDelete(GUI_SEM *hsem)
+    {
+        rt_sem_delete((rt_sem_t)hsem);
     }
 
-     /*
-
-     函数功能: 信号量删除
-
-     参数: hsem(由GUI_SemCreate返回的句柄);
-
-     返回: 无
-
-     说明: .
-
-     */
-
-     void GUI_SemDelete(GUI_SEM *hsem)
-
-     {
-
-     rt_sem_delete((rt_sem_t)hsem);
-
-     }
-
     /*
-
-     函数功能: 获得当前线程句柄(唯一标识)
-
-     参数: 无
-
-     返回: 当前线程唯一标识,按实际OS所定,可以是指针,ID号等...
-
-     说明: .
-
-     */
-
-     HANDLE GUI_GetCurThreadHandle(void)
-
-     {
-
-     return (HANDLE)rt_thread_self();
-
-     }
-
-     /*
-
-     函数功能: 获得当前系统时间(单位:毫秒)
-
-     参数: 无
-
-     返回: 当前系统时间
-
-     说明: .
-
-     */
-
-     U32 GUI_GetTickCount(void)
-
-     {
-
-     U32 i;
-
-     i=rt_tick_get();
-
-     return (i*1000)/RT_TICK_PER_SECOND;
-
-     }
-
-     /*
-
-     函数功能: 最短时间内让出CPU
-
-     参数: 无
-
-     返回: 无
-
-     说明: 按具体OS情况而定,最简单的方法是:OS Delay 一个 tick 周期.
-
-     */
-
-     void GUI_Yield(void)
-
-     {
-
-     rt_thread_delay(2);
-
-     }
-
-     /*
-
-     函数功能: 延时函数
-
-     参数: ms: 延时时间(单位:毫秒)
-
-     返回: 无
-
-     说明:
-
-     */
-
-     void GUI_msleep(u32 ms)
-
-     {
-
-     ms=rt_tick_from_millisecond(ms);
-
-     rt_thread_delay(ms);
-
-     }
+    函数功能: 获得当前线程句柄(唯一标识)
+    参数: 无
+    返回: 当前线程唯一标识,按实际OS所定,可以是指针,ID号等...
+    说明: .
+    */
+    HANDLE  GUI_GetCurThreadHandle(void)
+    {
+        return  (HANDLE)rt_thread_self();
+    }
+    
+    /*
+    函数功能: 获得当前系统时间(单位:毫秒)
+    参数: 无
+    返回: 当前系统时间
+    说明: .
+    */
+    U32 GUI_GetTickCount(void)
+    {
+        U32 i;
+    
+        i=rt_tick_get();
+    
+        return (i*1000)/RT_TICK_PER_SECOND;
+    
+    }
+    
+    /*
+    函数功能: 最短时间内让出CPU
+    参数: 无
+    返回: 无
+    说明: 按具体OS情况而定,最简单的方法是:OS Delay 一个 tick 周期.
+    */
+    void  GUI_Yield(void)
+    {
+        rt_thread_delay(2);
+    }
+    
+    /*
+    函数功能: 延时函数
+    参数: ms: 延时时间(单位:毫秒)
+    返回: 无
+    说明:
+    */
+    void  GUI_msleep(u32 ms)
+    {
+        ms=rt_tick_from_millisecond(ms);
+        rt_thread_delay(ms);
+    }
 
 示例代码就是针对具体的操作系统进行封装，它封装的操作系统接口总结如表格 5‑2，主要包括互斥信号量、信号量的创建、删除、等待和释放的操作，还包含有获取任务句柄、当前系统时间戳以及延时相关的操作。
 
@@ -505,79 +396,43 @@ MEM内存接口
     :linenos:
     :name: 代码清单4_3
 
-    1 /*
-    
-    2  @brief 创建一个内存堆（用于GUI内核对象）,可参考vmem配置
-    
-    3  @retval 无
-    
-    4 */
-    
-    5 void GUI_MEM_Init(void)
-    
-    6 {
-    
-    7 /* 本示例中的GUI内核对象使用 rt_malloc ，
-    
-    8 它已由rtt系统初始化*/
-    
-    9 return ;
-    
-    10 }
-    
-    11
-    
-    12 /*
-    
-    13  @brief 动态内存申请(用于GUI内核对象)
-    
-    14  @param size 要申请的内存大小
-    
-    15  @retval 申请到的内存指针
-    
-    16 */
-    
-    17 void* GUI_MEM_Alloc(U32 size)
-    
-    18 {
-    
-    19 void *p=NULL;
-    
-    20
-    
-    21 p =rt_malloc(size);
-    
-    22 if (p==NULL) {
-    
-    23 GUI_ERROR("GUI_MEM_Alloc.");
-    
-    24 }
-    
-    25
-    
-    26 return p;
-    
-    27 }
-    
-    28
-    
-    29 /*
+    /**
+    * @brief  创建一个内存堆（用于GUI内核对象）,可参考vmem配置
+    * @retval 无
+    */
+    void  GUI_MEM_Init(void)
+    {
+        /* 本示例中的GUI内核对象使用 rt_malloc ，
+        它已由rtt系统初始化*/
+        return ;
+    }
 
-    30 * @brief 释放内存(用于GUI内核对象)
-    
-    31 * @param p:需要释放的内存首址
-    
-    32 * @retval 无
-    
-    33 */
-    
-    34 void GUI_MEM_Free(void *p)
-    
-    35 {
-    
-    36 rt_free(p);
-    
-    37 }
+    /**
+    * @brief  动态内存申请(用于GUI内核对象)
+    * @param  size 要申请的内存大小
+    * @retval 申请到的内存指针
+    */
+    void* GUI_MEM_Alloc(U32 size)
+    {
+        void *p=NULL;
+
+        p =rt_malloc(size);
+        if (p==NULL) {
+            GUI_ERROR("GUI_MEM_Alloc.");
+        }
+
+        return p;
+    }
+
+    /**
+    * @brief  释放内存(用于GUI内核对象)
+    * @param  p:需要释放的内存首址
+    * @retval 无
+    */
+    void  GUI_MEM_Free(void *p)
+    {
+        rt_free(p);
+    }
 
 由于使用RT-Thread系统接口管理，初始化已经由系统实现，这段代码的GUI_MEM_Init为空，在RT-Thread系统启动前就完成了内存堆的初始化。而配置该空间的大小则是在gui_drv_cfg.h和board.c文件中实现的，具体见 代码清单4_4_ 。
 
@@ -586,41 +441,24 @@ MEM内存接口
     :linenos:
     :name: 代码清单4_4
 
-    //
-
-    /* gui_drv_cfg.h文件 */
-
+    /***********************************************/
+    /**gui_drv_cfg.h文件**/
     /* GUI内核使用的存储区大小，推荐最小值为8KB */
-
-    #define GUI_CORE_MEM_SIZE (32*1024) (1)
-
-    //
-
-    /* board.c文件 */
-
-    #define RT_HEAP_SIZE (GUI_CORE_MEM_SIZE) (1)
-
+    #define  GUI_CORE_MEM_SIZE  (32*1024)                (1)
+    /***********************************************/
+    /**board.c文件**/
+    #define RT_HEAP_SIZE (GUI_CORE_MEM_SIZE)             (1)
     /* 从内部SRAM里面分配一部分静态内存来作为rtt的堆空间，这里配置为4KB */
-
-    static uint8_t rt_heap[RT_HEAP_SIZE]; (2)
-
-     RT_WEAK void *rt_heap_begin_get(void) (3)
-
-     {
-
-     return rt_heap;
-
-     }
-
+    static uint8_t rt_heap[RT_HEAP_SIZE];		(2)		
+    RT_WEAK void *rt_heap_begin_get(void) 	     (3)
+    {
+        return rt_heap;
+    }
     
-
-     RT_WEAK void *rt_heap_end_get(void) (4)
-
-     {
-
-     return rt_heap + RT_HEAP_SIZE;
-
-     }
+    RT_WEAK void *rt_heap_end_get(void) 			(4)
+    {
+        return rt_heap + RT_HEAP_SIZE;
+    }
 
 这段代码中的第1部分定义了MEM存储区大小的宏GUI_CORE_MEM_SIZE，第2部分利用该宏定义了一个静态大小为GUI_CORE_MEM_SIZE的数组rt_heap，第3部分是RT-Thread内存堆管理的接口，用于获取内存空间的边界，即数组rt_heap的起始和结束地址。
 
@@ -638,176 +476,94 @@ VMEM和GRAM内存接口
     :linenos:
     :name: 代码清单4_5
 
-    //第1部分
-    
-    /* gui_drv_cfg.h文件 */
-    
+    /***********************第1部分*************************/
+    /**gui_drv_cfg.h文件**/
     /* 配置vmem的基地址，大小以及分配粒度 */
-    
     /* 是否使能VMEM内存堆 */
-    
-    #define GUI_VMEM_EN 1
-    
+    #define  GUI_VMEM_EN      1
     /* 内存堆的基地址，可以为内部SRAM、外扩的SDRAM等 */
-    
-    #define VMEM_BASE 0xD0200000 // 本SDRAM前2MB给LCD控制器作为显存了
-    
+    #define VMEM_BASE         0xD0200000  // 本SDRAM前2MB给LCD控制器作为显存了 
     /* 内存堆的总大小，单位为字节 */
-    
-    #define VMEM_SIZE (6<<20) // 6MB
-    
+    #define VMEM_SIZE         (6<<20)     // 6MB 
     /* 最小分配粒度，单位为字节*/
-    
-    #define VMEM_ALLOC_UNIT (64) //64字节
-    
+    #define VMEM_ALLOC_UNIT   (64)         //64字节   
     /*..gui_mem_port.c文件..*/
-    
-    //第2部分
-    
+    /***********************第2部分*************************/
     #if(GUI_VMEM_EN)
-    
     /* VMEM内存管理 */
-    
     /* 互斥信号量 */
-    
     static GUI_MUTEX *mutex_vmem = NULL;
-    
     /* 内存堆管理句柄 */
-    
-    static heap_t heap_vmem;
-    
+    static  heap_t heap_vmem;
     /* VMEM缓冲区 */
-    
     static uint8_t buff_vmem[VMEM_SIZE] __attribute__((at(VMEM_BASE)));
-    
     #endif
-    
-    //第3部分
-    
+    /***********************第3部分*************************/
     /**
-    
-    * @brief 创建一个内存堆
-    
-    * @note 使用vmalloc前必须调用本函数初始化内存堆句柄
-    
+    * @brief  创建一个内存堆
+    * @note  使用vmalloc前必须调用本函数初始化内存堆句柄
     * @retval 无
-    
     */
-    
     void GUI_VMEM_Init(void)
-    
     {
-    
     #if(GUI_VMEM_EN)
-    
-    mutex_vmem = GUI_MutexCreate();
-    
-    x_heap_init(&heap_vmem,
-    
-    (void*)buff_vmem,
-    
-    VMEM_SIZE,
-    
-    VMEM_ALLOC_UNIT); /* 创建一个内存堆 */
-    
+        mutex_vmem = GUI_MutexCreate();
+        x_heap_init(&heap_vmem,
+                    (void*)buff_vmem,
+                    VMEM_SIZE,
+                    VMEM_ALLOC_UNIT);  /* 创建一个内存堆 */
     #endif
-    
     }
     
-    
     /**
-    * @brief 从内存堆里申请空间
-    
-    * @param size 要申请的内存大小
-    
+    * @brief  从内存堆里申请空间
+    * @param  size 要申请的内存大小
     * @retval 申请到的内存指针
-    
     */
-    
     void* GUI_VMEM_Alloc(u32 size)
-    
     {
-    
     #if(GUI_VMEM_EN)
-    
-    u8 *p;
-    
-    GUI_MutexLock(mutex_vmem,5000);
-    
-    p =x_heap_alloc(&heap_vmem,size);
-    
-    GUI_MutexUnlock(mutex_vmem);
-    
-    return p;
-    
+        u8 *p;
+        GUI_MutexLock(mutex_vmem,5000);
+        p =x_heap_alloc(&heap_vmem,size);
+        GUI_MutexUnlock(mutex_vmem);
+        return p;
     #endif
-    
     }
     
     /**
-    
-    * @brief 释放内存
-    
-    * @param p:需要释放的内存首址
-    
+    * @brief  释放内存
+    * @param  p:需要释放的内存首址
     * @retval 无
-    
     */
-    
     void GUI_VMEM_Free(void *p)
-    
     {
-    
     #if(GUI_VMEM_EN)
-    
-    GUI_MutexLock(mutex_vmem,5000);
-    
-    x_heap_free(&heap_vmem,p);
-    
-    GUI_MutexUnlock(mutex_vmem);
-    
+        GUI_MutexLock(mutex_vmem,5000);
+        x_heap_free(&heap_vmem,p);
+        GUI_MutexUnlock(mutex_vmem);
     #endif
-    
     }
-    
-    //第4部分
-    
+
+    /***********************第4部分*************************/
     /**
-    
-    * @brief 显示动态内存申请(用于GUI显示器缓存)
-    
-    * @param size 要申请的内存大小
-    
+    * @brief  显示动态内存申请(用于GUI显示器缓存)
+    * @param  size 要申请的内存大小
     * @retval 申请到的内存指针
-    
     */
-    
     void* GUI_GRAM_Alloc(U32 size)
-    
     {
-    
-    return GUI_VMEM_Alloc(size);
-    
+        return GUI_VMEM_Alloc(size);
     }
-    
-    
-    
+
     /**
-    
-    * @brief 显示动态内存申请(用于GUI显示器缓存)
-    
-    * @param p:需要释放的内存首址
-    
+    * @brief  显示动态内存申请(用于GUI显示器缓存)
+    * @param  p:需要释放的内存首址
     * @retval 无
-    
     */
-    
-    void GUI_GRAM_Free(void *p)
-    
+    void  GUI_GRAM_Free(void *p)
     {
-    
-    GUI_VMEM_Free(p);
-    
+        GUI_VMEM_Free(p);
     }
 
 这段代码说明如下：
@@ -833,95 +589,53 @@ VMEM和GRAM内存接口
     :name: 代码清单4_6
 
     /**
-    
-    * @brief 初始化GUI日志接口
-    
-    * @param 无
-    
+    * @brief  初始化GUI日志接口
+    * @param  无
     * @retval 是否初始化正常
-    
     */
-    
-    BOOL GUI_Log_Init(void)
-    
+    BOOL  GUI_Log_Init(void)
     {
-    
-    /* 本例子在board.c文件中 rtt系统启动时就已初始化，此处不再重复 */
-    
-    /* 初始化串口 */
-    
-    // Debug_USART_Config();
-    
-    return TRUE;
-    
+        /* 本例子在board.c文件中 rtt系统启动时就已初始化，此处不再重复 */
+        /* 初始化串口 */
+    //  Debug_USART_Config();
+        return TRUE;
     }
-    
-    
-    
+
     /**
-    
-    * @brief 格式化字符串输出
-    
-    * @param 可变参数
-    
-    * @note 如果不用输出GUI调试信息,这个函数可以为空
-    
+    * @brief  格式化字符串输出
+    * @param  可变参数
+    * @note   如果不用输出GUI调试信息,这个函数可以为空
     * @retval 无
-    
     */
-    
-    void GUI_Printf(const char *fmt,...)
-    
+    void  GUI_Printf(const char *fmt,...)
     {
-    
     #if 0
-    
-    x_va_list ap;
-    
-    char *buf;
-    
-    static char str_buf[256];
-    
-    static GUI_MUTEX *mutex_gui_printf=NULL;
-    
-    ////
-    
-    buf =str_buf/*(char*)GUI_MEM_Alloc(256)*/;
-    
-    if (buf) {
-    
-    
-    
-    if (GUI_MutexLock(mutex_gui_printf,0xFFFFFFFF)) {
-    
-    x_va_start(ap,fmt);
-    
-    x_vsprintf(buf,fmt,ap);
-    
-    /* 底层需要提供DebugPuts接口进行输出 */
-    DebugPuts(buf);
-    
-    //DebugOutput(buf);
-    
-    
-    
-    GUI_MutexUnlock(mutex_gui_printf);
-    
-    x_va_end(ap);
-    
-    }
-    
-    //GUI_MEM_Free(buf);
-    
-    }
-    
+        x_va_list ap;
+        char *buf;
+        static  char str_buf[256];
+        static  GUI_MUTEX *mutex_gui_printf=NULL;
+        ////
+        buf =str_buf/*(char*)GUI_MEM_Alloc(256)*/;
+        if (buf) {
+
+            if (GUI_MutexLock(mutex_gui_printf,0xFFFFFFFF)) {
+                x_va_start(ap,fmt);
+                x_vsprintf(buf,fmt,ap);
+                /* 底层需要提供DebugPuts接口进行输出 */
+                DebugPuts(buf);
+                //DebugOutput(buf);
+
+                GUI_MutexUnlock(mutex_gui_printf);
+                x_va_end(ap);
+            }
+
+            //GUI_MEM_Free(buf);
+        }
     #else
-    
-    
-    
-    rt_kprintf(fmt);
-    
+
+        rt_kprintf(fmt);
     #endif
+
     }
 
 代码中的GUI_Log_Init是GUI_Startup函数会调用的日志初始化接口，可在此处初始化串口作为日志输出，本示例中在RT-Thread系统正式运行前就已经在board.c文件的rt_hw_board_init函数初始化了，此处不再重复。
@@ -935,72 +649,43 @@ VMEM和GRAM内存接口
     :linenos:
     :name: 代码清单4_7
 
-    #define GUI_INFO(fmt,arg...) GUI_Printf("<<-GUI-INFO->> "fmt"\n",##arg)
-
+    /* INFO和ERROR在任何情况下都会输出 */
+    /* 信息输出 */
+    #define GUI_INFO(fmt,arg...)           GUI_Printf("<<-GUI-INFO->> "fmt"\n",##arg)
     /* 错误输出 */
-
-    #define GUI_ERROR(fmt,arg...) GUI_Printf("<<-GUI-ERROR->> "fmt"\n",##arg)
-
+    #define GUI_ERROR(fmt,arg...)          GUI_Printf("<<-GUI-ERROR->> "fmt"\n",##arg)
     /* 调试输出，受GUI_DEBUG_EN控制 */
-
-    #define GUI_DEBUG(fmt,arg...) do{
-
-    if(GUI_DEBUG_EN)
-    GUI_Printf("<<-GUI-DEBUG->> [%s] [%d]"fmt"\n",__FILE__,__LINE__,\
-    ##arg);
-    }while(0)
-
+    #define GUI_DEBUG(fmt,arg...)          do{\
+                                            if(GUI_DEBUG_EN)\
+        GUI_Printf("<<-GUI-DEBUG->> [%s] [%d]"fmt"\n",__FILE__,__LINE__, ##arg);\
+                                            }while(0)
     /* 数组输出，受GUI_DEBUG_ARRAY_EN控制 */
-
-    #define GUI_DEBUG_ARRAY(array, num) do{
-
-    int32_t i;
-
-    uint8_t* a = array;
-
-    if(GUI_DEBUG_ARRAY_EN)
-
-    {
-
-    GUI_Printf("<<-GUI-DEBUG-ARRAY->>\n");
-
-    for (i = 0; i < (num); i++)
-
-    {
-
-    GUI_Printf("%02x ", (a)[i]);
-
-    if ((i + 1 ) %10 == 0)
-
-    {
-
-    GUI_Printf("\n");
-
-    }
-
-    }
-
-    GUI_Printf("\n");
-
-    }
-
-    }while(0)
-
+    #define GUI_DEBUG_ARRAY(array, num)    do{\
+                                            int32_t i;\
+                                            uint8_t* a = array;\
+                                            if(GUI_DEBUG_ARRAY_EN)\
+                                            {\
+                                                GUI_Printf("<<-GUI-DEBUG-ARRAY->>\n");\
+                                                for (i = 0; i < (num); i++)\
+                                                {\
+                                                    GUI_Printf("%02x   ", (a)[i]);\
+                                                    if ((i + 1 ) %10 == 0)\
+                                                    {\
+                                                        GUI_Printf("\n");\
+                                                    }\
+                                                }\
+                                                GUI_Printf("\n");\
+                                            }\
+                                            }while(0)
+    
     /* 进入函数输出，受GUI_DEBUG_FUNC_EN控制
-    
     一般在需要调试的函数开头进行调用，
-    
     调试时可通过输出信息了解运行了什么函数或运行顺序
-    
     */
-     
-    #define GUI_DEBUG_FUNC() do{
-    
-    if(GUI_DEBUG_FUNC_EN)
-    
-     GUI_Printf("<<-GUI-FUNC->> Func:%s@Line:%d\n",__func__,__LINE__);
-    
-    }while(0)
+    #define GUI_DEBUG_FUNC()               do{\
+                                            if(GUI_DEBUG_FUNC_EN)\
+                    GUI_Printf("<<-GUI-FUNC->> Func:%s@Line:%d\n",__func__,__LINE__);\
+                                            }while(0)
 
 其中GUI_INFO和GUI_ERROR函数默认都会进行输出，主要用于输出提示信息和错误信息，而GUI_DEBUG、GUI_DEBUG_ARRAY和GUI_DEBUG_FUNC函数一般用于调试输出，可以在gui_drv_cfg.h文件设置它们是否进行输出，具体见 代码清单4_8_ 。
 
@@ -1010,12 +695,9 @@ VMEM和GRAM内存接口
     :name: 代码清单4_8
 
     /* 是否开启调试输出、数组输出、进入函数的输出功能 */
- 
-    #define GUI_DEBUG_EN 1
- 
-    #define GUI_DEBUG_ARRAY_EN 0
- 
-    #define GUI_DEBUG_FUNC_EN 0
+    #define GUI_DEBUG_EN                1
+    #define GUI_DEBUG_ARRAY_EN          0
+    #define GUI_DEBUG_FUNC_EN            0
 
 配置显示驱动接口
 ~~~~~~~~~~~~~~~~
@@ -1029,106 +711,66 @@ emXGUI的显示驱动接口主要包含绘图引擎、绘图表面以及底层�
     :linenos:
     :name: 代码清单4_9
 
-     //第1部分
-    
-     /**
-    
-     * @brief 初始化显示设备接口，并创建SURFACE表面
-    
-     * @param 无
-    
-     * @retval 显示设备Surface对象指针，创建得到的绘图表面
-    
-     */
-    
-     SURFACE* GUI_DisplayInit(void)
-
+    /***********************第1部分*************************/
+    /**
+    * @brief  初始化显示设备接口，并创建SURFACE表面
+    * @param  无
+    * @retval 显示设备Surface对象指针，创建得到的绘图表面
+    */
+    SURFACE* GUI_DisplayInit(void)
     {
-
-     /* 绘图表面 */
+        /* 绘图表面 */
+        SURFACE *pSurf;
+        /***********************第2部分*************************/
+    #if (LCD_FORMAT == COLOR_FORMAT_RGB565)
     
-     SURFACE *pSurf;
+        //创建绘图表面
+        /* 动态申请的方式  */
+    // pSurf = GUI_CreateSurface(SURF_RGB565,
+    //                              LCD_XSIZE,LCD_YSIZE,
+    //                              LCD_XSIZE*2,
+    //                              NULL);
     
-     //第2部分
+        /* 直接指定地址的方式， 显存地址，*/
+        pSurf = GUI_CreateSurface(SURF_RGB565,
+                                LCD_XSIZE,LCD_YSIZE,
+                                LCD_XSIZE*2,
+                                (void*)LCD_FRAME_BUFFER);
     
-     #if (LCD_FORMAT == COLOR_FORMAT_RGB565)
-     //创建绘图表面
+    #endif
+        
+    #if (LCD_FORMAT == COLOR_FORMAT_XRGB8888)
+        //动态申请的方式，初始化LCD Surface结构数据(XRGB8888格式)
+        //lcd_buffer =(u8*)GUI_GRAM_Alloc(LCD_XSIZE,LCD_YSIZE*4);
     
-     /* 动态申请的方式 */
-     // pSurf = GUI_CreateSurface(SURF_RGB565,
+        /* 直接指定地址的方式， 显存地址，*/
+        /* 动态申请的方式  */
+    // pSurf = GUI_CreateSurface(SURF_XRGB8888,
+    //                              LCD_XSIZE,LCD_YSIZE,
+    //                              LCD_XSIZE*4,
+    //                              NULL);
     
-     // LCD_XSIZE,LCD_YSIZE,
+        pSurf = GUI_CreateSurface(SURF_XRGB8888,
+                                LCD_XSIZE,LCD_YSIZE,
+                                LCD_XSIZE*4,
+                                (void*)LCD_FRAME_BUFFER);
     
-     // LCD_XSIZE*2,
+    #endif
+        /***********************第3部分*************************/
+        if (pSurf == NULL) {
+            GUI_Printf("#Error: GUI_CreateSurface Failed.\r\n");
+        }
     
-     // NULL);
-    
-     /* 直接指定地址的方式， 显存地址，*/
-    
-     pSurf = GUI_CreateSurface(SURF_RGB565,
-    
-     LCD_XSIZE,LCD_YSIZE,
-    
-     LCD_XSIZE*2,
-    
-     (void*)LCD_FRAME_BUFFER);
-    
-     #endif
-     #if (LCD_FORMAT == COLOR_FORMAT_XRGB8888)
-    
-     //动态申请的方式，初始化LCD Surface结构数据(XRGB8888格式)
-    
-     //lcd_buffer =(u8*)GUI_GRAM_Alloc(LCD_XSIZE,LCD_YSIZE*4);
-    
-     /* 直接指定地址的方式， 显存地址，*/
-    
-     /* 动态申请的方式 */
-    
-     // pSurf = GUI_CreateSurface(SURF_XRGB8888,
-    
-     // LCD_XSIZE,LCD_YSIZE,
-    
-     // LCD_XSIZE*4,
-    
-     // NULL);
-    
-     pSurf = GUI_CreateSurface(SURF_XRGB8888,
-    
-     LCD_XSIZE,LCD_YSIZE,
-    
-     LCD_XSIZE*4,
-    
-     (void*)LCD_FRAME_BUFFER);
-    
-     #endif
-    
-     //第3部分
-    
-     if (pSurf == NULL) {
-    
-     GUI_Printf("#Error: GUI_CreateSurface Failed.\r\n");
-    
-     }
-    
-     //LCD硬件初始化
-    
-     LCD_HardInit((u32)pSurf->Bits);
-    
-     //第4部分
-    
-     //清屏
-    
-     pSurf->GL->FillArea(pSurf,0,0,LCD_XSIZE,LCD_YSIZE,pSurf->CC->MapRGB(0,0,0));
-    
-     //打开背光
-    
-     LCD_BkLight(TRUE);
-    
-     //第5部分
-    
-     return pSurf;
-    
-     }
+        //LCD硬件初始化
+        LCD_HardInit((u32)pSurf->Bits);
+        /***********************第4部分*************************/
+        //清屏
+        pSurf->GL->FillArea(pSurf,0,0,LCD_XSIZE,LCD_YSIZE,pSurf->CC->MapRGB(0,0,0));
+        //打开背光
+        LCD_BkLight(TRUE);
+        /***********************第5部分*************************/
+        return pSurf;
+    }
 
 该代码的说明如下：
 
@@ -1142,43 +784,25 @@ emXGUI的显示驱动接口主要包含绘图引擎、绘图表面以及底层�
     :linenos:
     :name: 代码清单4_10
 
-    /* bsp_lcd.h文件 */
-
+    /** bsp_lcd.h文件 **/
     /* LCD Size (Width and Height) */
+    #define  LCD_PIXEL_WIDTH          ((uint16_t)800)
+    #define  LCD_PIXEL_HEIGHT         ((uint16_t)480)
 
-    #define LCD_PIXEL_WIDTH ((uint16_t)800)
+    #define  LCD_BUFFER         ((uint32_t)0xD0000000)
 
-    #define LCD_PIXEL_HEIGHT ((uint16_t)480)
-
-   
-
-    #define LCD_BUFFER ((uint32_t)0xD0000000)
-
-   
-
-    /* gui_drv_cfg.h文件 */
-
+    /** gui_drv_cfg.h文件 **/
     //野火5.0 / 7.0TFT,800x480
-
     /* 显存基地址 */
-
-    #define LCD_FRAME_BUFFER LCD_BUFFER
-
-   
+    #define  LCD_FRAME_BUFFER   LCD_BUFFER
 
     /* 使用的显示格式 */
-
-    #define LCD_FORMAT COLOR_FORMAT_RGB565
-
-    //#define LCD_FORMAT COLOR_FORMAT_XRGB8888
-
-   
+    #define LCD_FORMAT    COLOR_FORMAT_RGB565
+    //#define LCD_FORMAT    COLOR_FORMAT_XRGB8888
 
     /* 液晶宽高 */
-
-    #define LCD_XSIZE LCD_PIXEL_WIDTH
-
-    #define LCD_YSIZE LCD_PIXEL_HEIGHT
+    #define LCD_XSIZE     LCD_PIXEL_WIDTH
+    #define LCD_YSIZE     LCD_PIXEL_HEIGHT
 
 特别地，若调用GUI_CreateSurface时显存地址指定为NULL时，函数执行时会从GRAM中分配显存空间（代码清单4_9_ 第2部分中注释掉的调用方式即从GRAM中分配显存）。
 
@@ -1198,37 +822,22 @@ emXGUI的显示驱动接口主要包含绘图引擎、绘图表面以及底层�
     :linenos:
     :name: 代码清单4_11
 
-     typedef struct tagSURFACE SURFACE;
+    typedef struct  tagSURFACE    SURFACE;
     
-    
-    
-     /**
-    
-     * @brief 绘图表面，包含格式、宽高、显存地址等内容
-    
-     */
-    
-     struct tagSURFACE {
-    
-     U32 Format; //绘图表面的格式
-    
-     U32 Width; //绘图表面的宽
-    
-     U32 Height; //绘图表面的高
-    
-     U32 WidthBytes; //一行像素点占多少字节
-    
-     LPVOID Bits; //所在的显存地址
-    
-     const COLOR_CONVERT *CC; //颜色转换函数指针
-    
-     const GL_OP *GL; //绘图引擎指针
-    
-     const void *pdata; //附加数据
-    
-     u32 Flags; //标志
-    
-     };
+    /**
+    * @brief  绘图表面，包含格式、宽高、显存地址等内容
+    */
+    struct tagSURFACE {
+        U32      Format;            //绘图表面的格式
+        U32      Width;             //绘图表面的宽
+        U32      Height;            //绘图表面的高
+        U32      WidthBytes;        //一行像素点占多少字节
+        LPVOID   Bits;              //所在的显存地址
+        const COLOR_CONVERT *CC;    //颜色转换函数指针
+        const GL_OP *GL;            //绘图引擎指针
+        const void  *pdata;         //附加数据
+        u32 Flags;                  //标志
+    };
 
 该结构体的类型说明如下：
 
@@ -1239,23 +848,15 @@ emXGUI的显示驱动接口主要包含绘图引擎、绘图表面以及底层�
     :linenos:
     :name: 代码清单4_12
     
-     typedef enum {
-    
-     SURF_SCREEN = 0,
-    
-     SURF_RGB332 = COLOR_FORMAT_RGB332,
-    
-     SURF_RGB565 = COLOR_FORMAT_RGB565,
-    
-     SURF_ARGB4444 = COLOR_FORMAT_ARGB4444,
-    
-     SURF_XRGB8888 = COLOR_FORMAT_XRGB8888,
-    
-     SURF_ARGB8888 = COLOR_FORMAT_ARGB8888,
-    
-    
-    
-     } SURF_FORMAT;
+    typedef enum {
+        SURF_SCREEN      = 0,
+        SURF_RGB332      = COLOR_FORMAT_RGB332,
+        SURF_RGB565      = COLOR_FORMAT_RGB565,
+        SURF_ARGB4444    = COLOR_FORMAT_ARGB4444,
+        SURF_XRGB8888    = COLOR_FORMAT_XRGB8888,
+        SURF_ARGB8888    = COLOR_FORMAT_ARGB8888,
+
+    } SURF_FORMAT;
 
 -  Width和Height：分别表示绘图表面的宽和高。
 
@@ -1277,30 +878,18 @@ emXGUI的显示驱动接口主要包含绘图引擎、绘图表面以及底层�
     :name: 代码清单4_13
 
     /**
-   
-    * @brief 初始化绘图表面
-   
-    * @param pSurf[out] 根据其它参数对pSurf进行初始化
-   
-    * @param gdraw[in] 绘图引擎对象，如GL_MEM_8PP、GL_MEM_16PP、GL_MEM_32PP
-   
-    * @param w h 绘图表面的宽和高
-   
-    * @param line_bytes 一行像素占多少个字节
-   
-    * @param bits[in] 显存指针
-   
+    * @brief  初始化绘图表面
+    * @param  pSurf[out] 根据其它参数对pSurf进行初始化
+    * @param  gdraw[in] 绘图引擎对象，如GL_MEM_8PP、GL_MEM_16PP、GL_MEM_32PP
+    * @param  w h 绘图表面的宽和高
+    * @param  line_bytes 一行像素占多少个字节
+    * @param  bits[in] 显存指针
     */
-   
-    void SurfaceInit_RGB332(SURFACE *pSurf,
-   
-    const GL_OP *gdraw,
-   
-    int w,int h,
-   
-    int line_bytes,
-   
-    void *bits);
+    void  SurfaceInit_RGB332(SURFACE *pSurf,
+                                const GL_OP *gdraw,
+                                int w,int h,
+                                int line_bytes,
+                                void *bits);
 
 这些函数会根据输入参数配置绘图表面指针pSurf，为方便应用，在gui_lcd_port.c文件中把这些函数封装成了GUI_CreateSurface接口，具体见 代码清单4_14_。
 
@@ -1310,91 +899,49 @@ emXGUI的显示驱动接口主要包含绘图引擎、绘图表面以及底层�
     :name: 代码清单4_14
 
     /**
-   
-    * @brief 创建SURFACE表面
-   
-    * @param Format 绘图表面格式
-   
-    * @param Width Height 绘图表面宽高
-   
-    * @param LineBytes 绘图表面每行像素占多少字节
-   
-    * @param bits 显存地址，若为NULL，则会使用GUI_GMEM_Alloc申请动态显存
-   
+    * @brief  创建SURFACE表面
+    * @param  Format 绘图表面格式
+    * @param  Width Height 绘图表面宽高
+    * @param  LineBytes 绘图表面每行像素占多少字节
+    * @param  bits 显存地址，若为NULL，则会使用GUI_GMEM_Alloc申请动态显存
     * @retval 显示设备Surface对象指针，创建得到的绘图表面
-   
     */
-   
-    SURFACE* GUI_CreateSurface(SURF_FORMAT Format,
-   
-    int Width,int Height,
-   
-    int LineBytes,
-   
-    void *bits)
-   
+    SURFACE*  GUI_CreateSurface(SURF_FORMAT Format,
+                                int Width,int Height,
+                                int LineBytes,
+                                void *bits)
     {
-   
-    SURFACE *pSurf;
-   
-    switch (Format) {
-   
-    case SURF_RGB332:
-   
-    pSurf = (SURFACE*)GUI_MEM_Alloc(sizeof(SURFACE));
-   
-    pSurf->Flags =0;
-   
-    if (LineBytes <= 0) {
-   
-    LineBytes = Width;
-   
-    }
-   
-    if (bits==NULL) {
-   
-    bits = (void*)GUI_GRAM_Alloc(Height*LineBytes);
-   
-    pSurf->Flags |= SURF_FLAG_GRAM;
-   
-    }
-   
-    SurfaceInit_RGB332(pSurf,&GL_MEM_8PP,Width,Height,LineBytes,bits);
-   
-    break;
-   
-    ////
-   
-    case SURF_RGB565:
-   
-    pSurf = (SURFACE*)GUI_MEM_Alloc(sizeof(SURFACE));
-   
-    pSurf->Flags =0;
-   
-    if (LineBytes <= 0) {
-   
-    LineBytes = Width*2;
-   
-    }
-   
-    if (bits==NULL) {
-   
-    bits = (void*)GUI_GRAM_Alloc(Height*LineBytes);
-   
-    pSurf->Flags |= SURF_FLAG_GRAM;
-   
-    }
-   
-    SurfaceInit_RGB565(pSurf,&GL_MEM_16PP,Width,Height,LineBytes,bits);
-   
-    break;
-   
-    ////
-   
-    /*...后面省略其它像素格式的配置内容...*/
-   
-    }
-   
+        SURFACE *pSurf;
+        switch (Format) {
+        case  SURF_RGB332:
+            pSurf = (SURFACE*)GUI_MEM_Alloc(sizeof(SURFACE));
+            pSurf->Flags =0;
+            if (LineBytes <= 0) {
+                LineBytes = Width;
+            }
+            if (bits==NULL) {
+                bits = (void*)GUI_GRAM_Alloc(Height*LineBytes);
+                pSurf->Flags |= SURF_FLAG_GRAM;
+            }
+            SurfaceInit_RGB332(pSurf,&GL_MEM_8PP,Width,Height,LineBytes,bits);
+            break;
+        ////
+    
+        case  SURF_RGB565:
+            pSurf = (SURFACE*)GUI_MEM_Alloc(sizeof(SURFACE));
+            pSurf->Flags =0;
+            if (LineBytes <= 0) {
+                LineBytes = Width*2;
+            }
+            if (bits==NULL) {
+                bits = (void*)GUI_GRAM_Alloc(Height*LineBytes);
+                pSurf->Flags |= SURF_FLAG_GRAM;
+            }
+            SurfaceInit_RGB565(pSurf,&GL_MEM_16PP,Width,Height,LineBytes,bits);
+            break;
+            ////
+            /*...后面省略其它像素格式的配置内容...*/
+        }
     }
 
 代码中根据输入的像素格式调用不同的绘图表面初始化函数，利用GUI_MEM_Alloc接口从MEM分配绘图表面变量的空间，并且当显存地址输入为NULL的时候，通过GUI_GRAM_Alloc从GRAM分配显存空间。
@@ -1429,67 +976,42 @@ emXGUI能适配不同的液晶屏，按照适配的驱动接口主要把液晶�
     :name: 代码清单4_15
 
     /**
-   
-    * @brief 绘图对象，包含相应的绘图操作函数指针
-   
+    * @brief  绘图对象，包含相应的绘图操作函数指针
     */
-   
-    typedef struct tagGL_OP {
-   
-    FN_GL_SetPos *SetPos;
-   
-    FN_GL_SetPixel *SetPixel;
-   
-    FN_GL_GetPixel *GetPixel;
-   
-    FN_GL_XorPixel *XorPixel;
-   
-    FN_GL_HLine *HLine;
-   
-    FN_GL_VLine *VLine;
-   
-    FN_GL_Line *Line;
-   
-    FN_GL_FillArea *FillArea;
-   
-    FN_GL_CopyBits *CopyBits;
-   
-    FN_GL_DrawBitmap_LUT1 *DrawBitmap_LUT1;
-   
-    FN_GL_DrawBitmap_LUT2 *DrawBitmap_LUT2;
-   
-    FN_GL_DrawBitmap_LUT4 *DrawBitmap_LUT4;
-   
-    FN_GL_DrawBitmap_LUT8 *DrawBitmap_LUT8;
-   
-    FN_GL_DrawBitmap_RGB *DrawBitmap_RGB332;
-   
-    FN_GL_DrawBitmap_RGB *DrawBitmap_RGB565;
-   
-    FN_GL_DrawBitmap_RGB *DrawBitmap_XRGB1555;
-   
-    FN_GL_DrawBitmap_RGB *DrawBitmap_ARGB1555;
-   
-    FN_GL_DrawBitmap_RGB *DrawBitmap_ARGB4444;
-   
-    FN_GL_DrawBitmap_RGB *DrawBitmap_RGB888;
-   
-    FN_GL_DrawBitmap_RGB *DrawBitmap_XRGB8888;
-   
-    FN_GL_DrawBitmap_RGB *DrawBitmap_ARGB8888;
-   
-    FN_GL_DrawBitmap_AL1 *DrawBitmap_AL1;
-   
-    FN_GL_DrawBitmap_AL2 *DrawBitmap_AL2;
-   
-    FN_GL_DrawBitmap_AL4 *DrawBitmap_AL4;
-   
-    FN_GL_DrawBitmap_AL8 *DrawBitmap_AL8;
-   
-    FN_GL_ScaleBitmap *ScaleBitmap;
-   
-    FN_GL_RotateBitmap *RotateBitmap;
-   
+    typedef struct  tagGL_OP {
+    
+        FN_GL_SetPos    *SetPos;
+        FN_GL_SetPixel    *SetPixel;
+        FN_GL_GetPixel    *GetPixel;
+        FN_GL_XorPixel    *XorPixel;
+        FN_GL_HLine     *HLine;
+        FN_GL_VLine     *VLine;
+        FN_GL_Line      *Line;
+        FN_GL_FillArea    *FillArea;
+        FN_GL_CopyBits    *CopyBits;
+    
+        FN_GL_DrawBitmap_LUT1 *DrawBitmap_LUT1;
+        FN_GL_DrawBitmap_LUT2 *DrawBitmap_LUT2;
+        FN_GL_DrawBitmap_LUT4 *DrawBitmap_LUT4;
+        FN_GL_DrawBitmap_LUT8 *DrawBitmap_LUT8;
+    
+        FN_GL_DrawBitmap_RGB  *DrawBitmap_RGB332;
+        FN_GL_DrawBitmap_RGB  *DrawBitmap_RGB565;
+        FN_GL_DrawBitmap_RGB  *DrawBitmap_XRGB1555;
+        FN_GL_DrawBitmap_RGB  *DrawBitmap_ARGB1555;
+        FN_GL_DrawBitmap_RGB  *DrawBitmap_ARGB4444;
+        FN_GL_DrawBitmap_RGB  *DrawBitmap_RGB888;
+        FN_GL_DrawBitmap_RGB  *DrawBitmap_XRGB8888;
+        FN_GL_DrawBitmap_RGB  *DrawBitmap_ARGB8888;
+    
+        FN_GL_DrawBitmap_AL1  *DrawBitmap_AL1;
+        FN_GL_DrawBitmap_AL2  *DrawBitmap_AL2;
+        FN_GL_DrawBitmap_AL4  *DrawBitmap_AL4;
+        FN_GL_DrawBitmap_AL8  *DrawBitmap_AL8;
+    
+        FN_GL_ScaleBitmap  *ScaleBitmap;
+        FN_GL_RotateBitmap *RotateBitmap;
+    
     } GL_OP;
 
 这个结构体中的内容全是函数指针，包含如获取坐标、绘制像素点、获取像素点、像素点异或运算、绘制各种线段和矩形等操作。以16位内存型绘图引擎GL_MEM_16BPP.c为例，具体见 代码清单4_16_。
@@ -1499,132 +1021,82 @@ emXGUI能适配不同的液晶屏，按照适配的驱动接口主要把液晶�
     :linenos:
     :name: 代码清单4_16
 
-     /* 像素点类型 */
+    /* 像素点类型 */
+    #define COLOR16 U16
     
-     #define COLOR16 U16
-    
-     /**
-    
-     * @brief 根据坐标计算像素点的地址
-    
-     * @param pSurf 绘图表面
-    
-     * @param x y 坐标
-    
-     * @retval 坐标在绘图表面对应的地址
-    
-     */
-    
-     #define __set_addr(pSurf,x,y) (COLOR16*)((U8*)pSurf->Bits + (x*2) + ((y)*pSurf->WidthBytes))
-    
-     /**
-    
-     * @brief 绘制单个像素点
-    
-     * @param pSurf 绘图表面
-    
-     * @param x y 坐标
-    
-     * @param 要绘制的颜色
-    
-     * @retval 坐标在绘图表面对应的地址
-    
-     */
-    
-     void GL16_set_pixel(const SURFACE *pSurf,int x,int y,COLORREF c)
-    
-     {
-    
-     COLOR16 *addr;
-    
-     addr = __set_addr(pSurf,x,y);
-    
-     *addr =c;
-    
-     }
-    
-     COLORREF GL16_get_pixel(const SURFACE *pSurf,int x,int y)
-    
-     {
-    
-     COLOR16 *addr;
-    
-     addr = __set_addr(pSurf,x,y);
-    
-     return *addr;
-    
-     }
-    
-     void GL16_draw_hline(const SURFACE *pSurf,int x0,int y0,int x1,COLORREF c)
-     {
-    
-     COLOR16 *addr;
-    
-     addr = __set_addr(pSurf,x0,y0);
-    
-     GUI_memset16(addr,c,x1-x0);
-    
-     }
-    
-     /* ...省略大部分内容...
+    /**
+    * @brief  根据坐标计算像素点的地址
+    * @param  pSurf 绘图表面
+    * @param  x y 坐标
+    * @retval 坐标在绘图表面对应的地址
     */
+    #define __set_addr(pSurf,x,y)   (COLOR16*)((U8*)pSurf->Bits + (x*2) + ((y)*pSurf->WidthBytes))
     
-     /* 给绘图引擎结构体赋值为具体函数 */
+    /**
+    * @brief  绘制单个像素点
+    * @param  pSurf 绘图表面
+    * @param  x y 坐标
+    * @param  要绘制的颜色
+    * @retval 坐标在绘图表面对应的地址
+    */
+    void  GL16_set_pixel(const SURFACE *pSurf,int x,int y,COLORREF c)
+    {
+        COLOR16 *addr;
     
-     void GL_MEM_16BPP_Init(GL_OP *gd)
+        addr = __set_addr(pSurf,x,y);
+        *addr =c;
+    }
     
-     {
-     gd->SetPos =GL16_set_addr;
-     gd->SetPixel =GL16_set_pixel;
-     gd->GetPixel =GL16_get_pixel;
-    
-     gd->XorPixel =GL16_xor_pixel;
-    
-     gd->HLine =GL16_draw_hline;
-    
-     gd->VLine =GL16_draw_vline;
-    
-     gd->FillArea =GL16_fill_rect;
-    
-     gd->CopyBits =GL16_copy_bits;
-  
-     gd->DrawBitmap_LUT1 =GL16_draw_bitmap_LUT1;
-    
-     gd->DrawBitmap_LUT2 =GL16_draw_bitmap_LUT2;
-    
-     gd->DrawBitmap_LUT4 =GL16_draw_bitmap_LUT4;
-    
-     gd->DrawBitmap_LUT8 =GL16_draw_bitmap_LUT8;
-    
-     gd->DrawBitmap_RGB332 =GL16_draw_bitmap_RGB332;
-    
-     gd->DrawBitmap_RGB565 =GL16_draw_bitmap_RGB565;
-    
-     gd->DrawBitmap_XRGB1555 =GL16_draw_bitmap_XRGB1555;
-    
-     gd->DrawBitmap_ARGB1555 =GL16_draw_bitmap_ARGB1555;
-    
-     gd->DrawBitmap_ARGB4444 =GL16_draw_bitmap_ARGB4444;
-    
-     gd->DrawBitmap_RGB888 =GL16_draw_bitmap_RGB888;
-    
-     gd->DrawBitmap_XRGB8888 =GL16_draw_bitmap_XRGB8888;
-    
-     gd->DrawBitmap_ARGB8888 =GL16_draw_bitmap_ARGB8888;
-    
-     gd->DrawBitmap_AL1 =GL16_draw_bitmap_AL1;
-    
-     gd->DrawBitmap_AL2 =GL16_draw_bitmap_AL2;
-    
-     gd->DrawBitmap_AL4 =GL16_draw_bitmap_AL4;
-    
-     gd->DrawBitmap_AL8 =GL16_draw_bitmap_AL8;
-    
-     gd->ScaleBitmap =GL16_scale_bitmap;
-    
-     gd->RotateBitmap =GL16_rotate_bitmap;
-    
-     }
+    COLORREF  GL16_get_pixel(const SURFACE *pSurf,int x,int y)
+    {
+        COLOR16 *addr;
+
+        addr = __set_addr(pSurf,x,y);
+        return *addr;
+    }
+
+    void GL16_draw_hline(const SURFACE *pSurf,int x0,int y0,int x1,COLORREF c)
+    {
+        COLOR16 *addr;
+
+        addr = __set_addr(pSurf,x0,y0);
+        GUI_memset16(addr,c,x1-x0);
+    }
+
+    /* ...省略大部分内容... */
+    /* 给绘图引擎结构体赋值为具体函数 */
+    void GL_MEM_16BPP_Init(GL_OP *gd)
+    {
+        gd->SetPos       =GL16_set_addr;
+        gd->SetPixel  =GL16_set_pixel;
+        gd->GetPixel  =GL16_get_pixel;
+        gd->XorPixel  =GL16_xor_pixel;
+        gd->HLine     =GL16_draw_hline;
+        gd->VLine   =GL16_draw_vline;
+        gd->FillArea    =GL16_fill_rect;
+        gd->CopyBits    =GL16_copy_bits;
+
+        gd->DrawBitmap_LUT1 =GL16_draw_bitmap_LUT1;
+        gd->DrawBitmap_LUT2 =GL16_draw_bitmap_LUT2;
+        gd->DrawBitmap_LUT4 =GL16_draw_bitmap_LUT4;
+        gd->DrawBitmap_LUT8 =GL16_draw_bitmap_LUT8;
+        gd->DrawBitmap_RGB332 =GL16_draw_bitmap_RGB332;
+        gd->DrawBitmap_RGB565 =GL16_draw_bitmap_RGB565;
+        gd->DrawBitmap_XRGB1555 =GL16_draw_bitmap_XRGB1555;
+        gd->DrawBitmap_ARGB1555 =GL16_draw_bitmap_ARGB1555;
+        gd->DrawBitmap_ARGB4444 =GL16_draw_bitmap_ARGB4444;
+        gd->DrawBitmap_RGB888 =GL16_draw_bitmap_RGB888;
+        gd->DrawBitmap_XRGB8888 =GL16_draw_bitmap_XRGB8888;
+        gd->DrawBitmap_ARGB8888 =GL16_draw_bitmap_ARGB8888;
+
+        gd->DrawBitmap_AL1  =GL16_draw_bitmap_AL1;
+        gd->DrawBitmap_AL2  =GL16_draw_bitmap_AL2;
+        gd->DrawBitmap_AL4  =GL16_draw_bitmap_AL4;
+        gd->DrawBitmap_AL8  =GL16_draw_bitmap_AL8;
+
+        gd->ScaleBitmap     =GL16_scale_bitmap;
+        gd->RotateBitmap        =GL16_rotate_bitmap;
+    }
 
 在这段代码中，先定义了一个__set_addr宏，根据输入的绘图表面、像素点xy坐标计算显存地址，其后的绘制像素点函数GL16_set_pixel、获取像素点函数GL16_get_pixel以及绘制水平线函数GL16_draw_hline则针对具体的地址和颜色赋予像素数据值。其余的绘制操作也类似，具
 体可直接查看源码了解。本段代码的最后通过GL_MEM_16BPP_Init函数对输入的绘图引擎结构体gd赋值，赋值内容为以上具体的16位绘制操作函数。在GUI_Startup函数通过调用GUI_Arch_Init会完成这部分绘图引擎的初始化，具体见 代码清单4_17_ 。
@@ -1634,31 +1106,21 @@ emXGUI能适配不同的液晶屏，按照适配的驱动接口主要把液晶�
     :linenos:
     :name: 代码清单4_17
 
-     GL_OP GL_MEM_8PP;
-
-     GL_OP GL_MEM_16PP;
-
-     GL_OP GL_MEM_32PP;
-
-     /**
-
-     * @brief GUI架构适配层初始化.
-
+    GL_OP GL_MEM_8PP;
+    GL_OP GL_MEM_16PP;
+    GL_OP GL_MEM_32PP;
+    /**
+    * @brief  GUI架构适配层初始化.
     */
-
-    BOOL GUI_Arch_Init(void)
-
+    BOOL  GUI_Arch_Init(void)
     {
-
-    _RectLL_Init(); //初始化GUI内核矩形链表，用于窗口叠加时的Z序管理
-
-     GL_MEM_8BPP_Init(&GL_MEM_8PP); //初始化8位内存型绘图对象.
-
-     GL_MEM_16BPP_Init(&GL_MEM_16PP); //初始化16位内存型绘图对象.
-
-     GL_MEM_32BPP_Init(&GL_MEM_32PP); //初始化32位内存型绘图对象.
-
-    return TRUE;
+        _RectLL_Init();   //初始化GUI内核矩形链表，用于窗口叠加时的Z序管理
+    
+        GL_MEM_8BPP_Init(&GL_MEM_8PP);   //初始化8位内存型绘图对象.
+        GL_MEM_16BPP_Init(&GL_MEM_16PP); //初始化16位内存型绘图对象.
+        GL_MEM_32BPP_Init(&GL_MEM_32PP); //初始化32位内存型绘图对象.
+    
+        return TRUE;
     }
 
 若不是有特殊的应用需求，在移植时通常不需要修改绘图引擎相关的内容，直接根据液晶屏的类型把相应的绘图引擎文件添加到工程即可。
@@ -1676,47 +1138,29 @@ emXGUI能适配不同的液晶屏，按照适配的驱动接口主要把液晶�
     :name: 代码清单4_18
 
     /**
-   
-    * @brief 液晶屏初始化接口
-   
-    * @param fb_addr 要使用的显存地址
-   
+    * @brief  液晶屏初始化接口
+    * @param  fb_addr 要使用的显存地址
     */
-   
     void LCD_HardInit(u32 fb_addr)
-   
     {
-   
-    /* 初始化液晶屏 */
-   
+        /* 初始化液晶屏 */
     #if (LCD_FORMAT == COLOR_FORMAT_RGB565)
-   
-    LCD_Init(fb_addr, 33, LTDC_Pixelformat_RGB565);
-   
+        LCD_Init(fb_addr, 33, LTDC_Pixelformat_RGB565);
     #endif
-   
+    
     #if (LCD_FORMAT == COLOR_FORMAT_XRGB8888)
-   
-    LCD_Init(fb_addr, 21, LTDC_Pixelformat_ARGB8888);
-   
+        LCD_Init(fb_addr, 21, LTDC_Pixelformat_ARGB8888);
     #endif
-   
+    
     }
-   
+    
     /**
-   
-    * @brief 液晶背光控制接口
-   
-    * @param on 1为亮，其余值为灭
-   
+    * @brief  液晶背光控制接口
+    * @param  on 1为亮，其余值为灭
     */
-   
     void LCD_BkLight(int on)
-   
     {
-   
-    LCD_BackLed_Control(on);
-   
+        LCD_BackLed_Control(on);
     }
 
 代码中的液晶初始化接口LCD_HardInit接收参数fb_addr作为显存地址，函数的内部根据gui_drv_cfg.h文件中的宏LCD_FORMAT使用不同的参数初始化STM32的LTDC外设，分为RGB565和XRGB8888格式，不同格式的主要区别是LTDC层的像素格式和像素时钟频率的差异，
@@ -1728,32 +1172,19 @@ emXGUI能适配不同的液晶屏，按照适配的驱动接口主要把液晶�
     :name: 代码清单4_19
 
     /**
-    
     * @brief LCD初始化
-    
     * @param fb_addr 显存首地址
-    
-    * @param lcd_clk_mhz 像素时钟频率，
-    
-    RGB565格式推荐为30~33，
-    
-    XRGB8888格式推荐为20~22
-    
-    极限范围为15~52，其余值会超出LTDC时钟分频配置范围
-    
+    * @param  lcd_clk_mhz 像素时钟频率，
+                RGB565格式推荐为30~33，
+                XRGB8888格式推荐为20~22
+                极限范围为15~52，其余值会超出LTDC时钟分频配置范围
     * @param pixel_format 像素格式，如LTDC_Pixelformat_ARGB8888 、
-    
-    LTDC_Pixelformat_RGB565等
-    
-     * @retval None
-    
+                            LTDC_Pixelformat_RGB565等
+    * @retval  None
     */
-    
     void LCD_Init(uint32_t fb_addr,
-    
-     int lcd_clk_mhz,
-    
-     uint32_t pixel_format );
+                int lcd_clk_mhz,
+                uint32_t pixel_format );
 
 LCD_Init函数主要是根据具体的液晶屏时序配置不同的LTDC参数，关于LTDC的驱动原理请参考野火的《零死角玩转STM32》教程，STM32F429的LTDC支持使用两个液晶层进行混合效果显示，不过使用多层时数据量太大，驱动液晶屏时像素时钟无法调高，导致存在闪屏现象（特别是ARGB8888双层显
 示时），而且emXGUI并不需要使用到双层混合效果的功能，所以本示例都只使用了LTDC的单层显示。
@@ -1780,16 +1211,11 @@ emXGUI推荐使用XFT作为默认字体显示字符，可通过gui_font_port.c�
     :name: 代码清单4_20
 
     const char ASCII_20_4BPP[]= {
-
-    88,70,84,0,88,71,85,73,32,70,111,110,116,0,0,0,
-
-    0,0,0,0,16,83,0,0,16,115,0,0,64,0,0,0,
-
-    212,0,0,0,10,0,100,0,20,0,20,0,4,0,0,0,
-
-     /*..省略大部分内容..*/
-
-     }
+        88,70,84,0,88,71,85,73,32,70,111,110,116,0,0,0,
+        0,0,0,0,16,83,0,0,16,115,0,0,64,0,0,0,
+        212,0,0,0,10,0,100,0,20,0,20,0,4,0,0,0,
+        /*..省略大部分内容..*/
+    }
 
 可以看到，字体资源就是一个超大数组，使用时把需要的字体资源的添加到工程，然后调用库函数XFT_CreateFont创建字体句柄，即可使用该字体进行显示，下面以创建默认字体的GUI_Default_FontInit函数为例进行说明，具体见 代码清单4_21_。
 
@@ -1798,31 +1224,30 @@ emXGUI推荐使用XFT作为默认字体显示字符，可通过gui_font_port.c�
     :linenos:
     :name: 代码清单4_21
 
-     extern const char ASCII_20_4BPP[];
-     /**
-     * @brief GUI默认字体初始化
-     * @param 无
-     * @retval 返回默认字体的句柄
-     */
-     HFONT GUI_Default_FontInit(void)
-     {
+    extern const char ASCII_20_4BPP[];
+    /**
+    * @brief  GUI默认字体初始化
+    * @param  无
+    * @retval 返回默认字体的句柄
+    */
+    HFONT GUI_Default_FontInit(void)
+    {
+        HFONT hFont=NULL;
+        /*..此处省略从外部SPI-FLASH加载字体数据的方式..*/
+        /* 使用内部FLASH中的数据（工程中的C语言数组）
+        *  添加字体数据时，把数组文件添加到工程，在本文件头添加相应字体数组的声明，
+        *  然后调用XFT_CreateFont函数创建字体即可
+        */
+        if (hFont==NULL) {
+            /* 从本地加载(本地数组数据) */
+    hFont =XFT_CreateFont(ASCII_20_4BPP);  /*ASCii字库,20x20,4BPP抗锯齿*/
 
-     HFONT hFont=NULL;
-     /*..此处省略从外部SPI-FLASH加载字体数据的方式..*/
-     /* 使用内部FLASH中的数据（工程中的C语言数组）
-     * 添加字体数据时，把数组文件添加到工程，在本文件头添加相应字体数组的声明，
-     * 然后调用XFT_CreateFont函数创建字体即可
-     */
-     if (hFont==NULL) {
-     /* 从本地加载(本地数组数据) */
-     hFont =XFT_CreateFont(ASCII_20_4BPP); /* ASCii字库,20x20,4BPP抗锯齿*/
-
-     /* 中文字库存储占用空间非常大，不推荐放在内部FLASH */
-     //hFont =XFT_CreateFont(GB2312_16_2BPP); /* GB2312字库,16x16,2BPP抗锯齿*/
-     //hFont =XFT_CreateFont(GB2312_20_4BPP); /* GB2312字库,20x20,4BPP抗锯齿*/
-     }
-     return hFont;
-     }
+            /* 中文字库存储占用空间非常大，不推荐放在内部FLASH */
+    //hFont =XFT_CreateFont(GB2312_16_2BPP); /*GB2312字库,16x16,2BPP抗锯齿*/
+    //hFont =XFT_CreateFont(GB2312_20_4BPP); /*GB2312字库,20x20,4BPP抗锯齿*/
+        }
+        return hFont;
+    }
 
 在这段代码的开头，声明了在ASCII_20_4BPP.c定义的外部变量ASCII_20_4BPP，然后把它作为输入参数调用库函数XFT_CreateFont，函数执行后返回字体句柄hFont，在GUI_Startup函数内再通过库函数GUI_SetDefFont以hFont作为输入参数设置为默认字体
 。
@@ -1844,17 +1269,16 @@ emXGUI支持使用鼠标、键盘及触摸屏作为输入设备，本示例以�
     :linenos:
     :name: 代码清单4_22
 
-     /* 是否使用输入设备 */
-     #define GUI_INPUT_DEV_EN 1
-
-     /* 是否使能键盘、鼠标、触摸屏 */
-     #define GUI_TOUCHSCREEN_EN 1
-     #define GUI_KEYBOARD_EN 0
-     #define GUI_MOUSE_EN 0
-
-     /* 是否需要触摸校准-电阻屏才需要 */
-
-     #define GUI_TOUCHSCREEN_CALIBRATE 0
+    /* 是否使用输入设备 */
+    #define  GUI_INPUT_DEV_EN               1
+    
+    /* 是否使能键盘、鼠标、触摸屏 */
+    #define GUI_TOUCHSCREEN_EN              1
+    #define GUI_KEYBOARD_EN                 0
+    #define GUI_MOUSE_EN                    0
+    
+    /* 是否需要触摸校准-电阻屏才需要 */
+    #define GUI_TOUCHSCREEN_CALIBRATE       0
 
 以上的宏会影响gui_input_port.c文件中的条件编译，使用电容触摸屏时，需要使能宏GUI_INPUT_DEV_EN和GUI_TOUCHSCREEN_EN，gui_input_port.c文件的内容具体见 代码清单4_23_。
 
@@ -1863,81 +1287,80 @@ emXGUI支持使用鼠标、键盘及触摸屏作为输入设备，本示例以�
     :linenos:
     :name: 代码清单4_23
 
-     /**
-     * @brief GUI输入设备的初始化
-     * @param 无
-     * @retval 是否初始化正常
-     */
-     BOOL GUI_InputInit(void)
-     {
-     BOOL state = FALSE;
-     #if(GUI_KEYBOARD_EN)
+    /**
+    * @brief  GUI输入设备的初始化
+    * @param  无
+    * @retval 是否初始化正常
+    */
+    BOOL GUI_InputInit(void)
+    {
+        BOOL state = FALSE;
+    #if(GUI_KEYBOARD_EN)
+        {
+            state = KeyBoardDev_Init();
+        }
+    #endif
 
-     {
-     state = KeyBoardDev_Init();
-     }
-     #endif
+    #if(GUI_TOUCHSCREEN_EN)
+        {
+            state = TouchDev_Init();
+            if (state) { /*触摸屏设备初始化*/
+    #if(GUI_TOUCHSCREEN_CALIBRATE)
+                TS_CFG_DATA ts_cfg;
+                if (TouchDev_LoadCfg(&ts_cfg)) { /*加载校正数据(电阻屏需要)*/
+            TouchPanel_TranslateInit(&ts_cfg); /*初始化坐标转换函数(电阻屏需要)*/
+                }
+    #endif
+            }
 
-     #if(GUI_TOUCHSCREEN_EN)
-     {
-     state = TouchDev_Init();
-     if (state) { /* 触摸屏设备初始化 */
-     #if(GUI_TOUCHSCREEN_CALIBRATE)
-     TS_CFG_DATA ts_cfg;
-     if (TouchDev_LoadCfg(&ts_cfg)) { /*加载校正数据(电阻屏需要)*/
-     TouchPanel_TranslateInit(&ts_cfg); /*初始化坐标转换函数(电阻屏需要)*/
-     }
-     #endif
-     }
+        }
+    #endif
 
-     }
-     #endif
+    #if(GUI_MOUSE_EN)
+        {
+            state = MouseDev_Init();
+        }
+    #endif
+        return state;
+    }
 
-     #if(GUI_MOUSE_EN)
-     {
-     state = MouseDev_Init();
-     }
-     #endif
-     return state;
-     }
+    /*=========================================================
 
-     /*===================================================================*/
+    /**
+    * @brief  GUI输入设备的定时处理函数
+    * @note   该函数需要被定时执行，
+    *         如使用独立的线程调用 或 在桌面的定时器消息中调用
+    *
+    * @param  无
+    * @retval 无
+    */
+    void GUI_InputHandler(void)
+    {
 
-     /**
-     * @brief GUI输入设备的定时处理函数
-     * @note 该函数需要被定时执行，
-     * 如使用独立的线程调用 或 在桌面的定时器消息中调用
-     *
-     * @param 无
-     * @retval 无
-     */
-     void GUI_InputHandler(void)
-     {
+    #if(GUI_KEYBOARD_EN)
+        {
+            if (KeyBoardDev_IsActive())
+            {
+                KeyBoardDev_Handler();
+            }
+        }
+    #endif
 
-     #if(GUI_KEYBOARD_EN)
-     {
-     if (KeyBoardDev_IsActive())
-     {
-     KeyBoardDev_Handler();
-     }
-     }
-     #endif
+    #if(GUI_TOUCHSCREEN_EN)
+        {
+            GUI_TouchHandler(); //调用触摸屏处理函数
+        }
+    #endif
 
-     #if(GUI_TOUCHSCREEN_EN)
-     {
-     GUI_TouchHandler(); //调用触摸屏处理函数
-     }
-     #endif
-
-     #if(GUI_MOUSE_EN)
-     {
-     if (MouseDev_IsActive())
-     {
-     MouseDev_Handler();
-     }
-     }
-     #endif
-     }
+    #if(GUI_MOUSE_EN)
+        {
+            if (MouseDev_IsActive())
+            {
+                MouseDev_Handler();
+            }
+        }
+    #endif
+    }
 
 本文件是输入设备的统一接口，只是简单地调用了鼠标、键盘及触摸屏相应的初始化和处理函数，需要针对具体的设备定制驱动接口。
 
@@ -1951,45 +1374,43 @@ GUI_InputHandler接口用于处理输入设备传回的信息，需要定时调�
     :linenos:
     :name: 代码清单4_24
 
-     /**
-     * @brief 桌面回调函数
-     * @param hwnd 当前处理该消息的窗口对象句柄
-     * @param msg 消息类型值，用以标识和区分当前产生的消息
-     * @param wParam 消息参数值，根据msg消息代码值不同
-     * @param lParam 消息参数值，根据msg消息代码值不同
-     * @retval 返回给SendMessage的值
-     */
-     static LRESULT desktop_proc(HWND hwnd,
+    /**
+    * @brief  桌面回调函数
+    * @param  hwnd 当前处理该消息的窗口对象句柄
+    * @param  msg 消息类型值，用以标识和区分当前产生的消息
+    * @param  wParam 消息参数值，根据msg消息代码值不同
+    * @param  lParam 消息参数值，根据msg消息代码值不同
+    * @retval 返回给SendMessage的值
+    */
+    static   LRESULT    desktop_proc(HWND hwnd,
+                                    UINT msg,
+                                    WPARAM wParam,
+                                    LPARAM lParam)
+    {
+        switch (msg) {
+        /* 桌面创建时,会产生该消息,可以在这里做一些初始化工作. */
+        case  WM_CREATE:
+            ////创建1个20ms定时器，处理循环事件.
+            SetTimer(hwnd,1,20,TMR_START,NULL);
+            /*..省略部分内容..*/
+            break;
 
-     UINT msg,
-     WPARAM wParam,
-     LPARAM lParam)
-     {
-     switch (msg) {
-     /* 桌面创建时,会产生该消息,可以在这里做一些初始化工作.
+        /* 定时处理输入设备的信息 */
+        case  WM_TIMER: {
+            u16 id;
+            id =LOWORD(wParam);
+            if (id==1)
+                GUI_InputHandler(); //处理输入设备
+        }
+        break;
+        /*..省略部分内容..*/
 
-     case WM_CREATE:
-     ////创建1个20ms定时器，处理循环事件.
-     SetTimer(hwnd,1,20,TMR_START,NULL);
-     /*..省略部分内容..*/
-     break;
-
-     /* 定时处理输入设备的信息 */
-     case WM_TIMER: {
-     u16 id;
-     id =LOWORD(wParam);
-     if (id==1)
-     GUI_InputHandler(); //处理输入设备
-     }
-     break;
-     /*..省略部分内容..*/
-
-     /* 用户不关心的信息，由系统处理 */
-     default:
-     return DefDesktopProc(hwnd,msg,wParam,lParam);
-     }
-     return WM_NULL;
-     }
+        /* 用户不关心的信息，由系统处理 */
+        default:
+            return  DefDesktopProc(hwnd,msg,wParam,lParam);
+        }
+        return WM_NULL;
+    }
 
 这个回调函数与输入设备相关的主要是WM_CREATE和WM_TIMER处理分支，WM_CREATE是桌面窗口创建时会执行的分支，此处创建了一个20ms的定时器，每20ms时间到后会进入WM_TIMER分支，在该分支下我们直接调用GUI_InputHandler处理输入设备的信息。实际应用中可根据需要
 调整定时间隔。
@@ -2004,71 +1425,70 @@ GUI_InputHandler接口用于处理输入设备传回的信息，需要定时调�
     :linenos:
     :name: 代码清单4_25
 
-     /**
-     * @brief 触摸初始化接口,会被gui_input_port.c文件的GUI_InputInit函数调用
-     * @note 需要在本函数初始化触摸屏相关硬件
-     * @retval 是否初始化正常
-     */
-     BOOL TouchDev_Init(void)
-     {
-     /* 初始化配套的5/7寸屏 */
-     if (GTP_Init_Panel() == 0)
-
-     return TRUE;
-     else
-     return FALSE;
-     }
-
-     /**
-     * @brief 获取触摸状态及坐标，不需要用户修改
-     * @note 本函数依赖GTP_Execu接口，该接口需要返回触摸坐标和是否被按下的状态，
-     * 本例子在bsp_touch_gt9xx.c文件实现
-     * @param pt[out] 存储获取到的x y坐标
-     * @retval 触摸状态
-     * @arg TS_ACT_DOWN 触摸按下
-     * @arg TS_ACT_UP 触摸释放
-     * @arg TS_ACT_NONE 无触摸动作
-     */
-     BOOL TouchDev_GetPoint(POINT *pt)
-     {
-     static int ts_state=TS_ACT_NONE;
-
-     /* 通过GTP_Execu获取触摸坐标和状态 */
-     if (GTP_Execu(&pt->x,&pt->y) > 0)
-     ts_state =TS_ACT_DOWN;
-     else {
-     if (ts_state==TS_ACT_DOWN)
-     ts_state =TS_ACT_UP;
-     else
-     ts_state =TS_ACT_NONE;
-     }
-     return ts_state;
-     }
-
-     /**
-     * @brief 需要被定时调用的触摸处理函数
-     * @note 本例子中通过gui_input_port.c文件的GUI_InputHandler被定时调用
-     * @param 无
-     * @retval 无
-     */
-     void GUI_TouchHandler(void)
-     {
-     int act;
-     POINT pt;
-
-     /* 判断触摸状态及坐标 */
-     act =TouchDev_GetPoint(&pt);
-     if (act==TS_ACT_DOWN) {
-     /* 触摸按下，使用触摸坐标作为输入 */
-     MouseInput(pt.x,pt.y,MK_LBUTTON);
-     }
-
-     if (act==TS_ACT_UP) {
-     /* 触摸释放，使用当前光标作为输入*/
-     GetCursorPos(&pt);
-     MouseInput(pt.x,pt.y,0);
-     }
-     }
+    /**
+    * @brief  触摸初始化接口,会被gui_input_port.c文件的GUI_InputInit函数调用
+    * @note  需要在本函数初始化触摸屏相关硬件
+    * @retval 是否初始化正常
+    */
+    BOOL TouchDev_Init(void)
+    {
+        /* 初始化配套的5/7寸屏 */
+        if (GTP_Init_Panel() == 0)
+            return TRUE;
+        else
+            return FALSE;
+    }
+    
+    /**
+    * @brief  获取触摸状态及坐标，不需要用户修改
+    * @note  本函数依赖GTP_Execu接口，该接口需要返回触摸坐标和是否被按下的状态，
+    *        本例子在bsp_touch_gt9xx.c文件实现
+    * @param  pt[out] 存储获取到的x y坐标
+    * @retval 触摸状态
+    *    @arg  TS_ACT_DOWN  触摸按下
+    *    @arg  TS_ACT_UP    触摸释放
+    *    @arg  TS_ACT_NONE  无触摸动作
+    */
+    BOOL TouchDev_GetPoint(POINT *pt)
+    {
+        static int ts_state=TS_ACT_NONE;
+    
+        /* 通过GTP_Execu获取触摸坐标和状态 */
+        if (GTP_Execu(&pt->x,&pt->y) > 0)
+            ts_state =TS_ACT_DOWN;
+        else {
+            if (ts_state==TS_ACT_DOWN)
+                ts_state =TS_ACT_UP;
+            else
+                ts_state =TS_ACT_NONE;
+        }
+        return ts_state;
+    }
+    
+    /**
+    * @brief  需要被定时调用的触摸处理函数
+    * @note   本例子中通过gui_input_port.c文件的GUI_InputHandler被定时调用
+    * @param  无
+    * @retval 无
+    */
+    void  GUI_TouchHandler(void)
+    {
+        int act;
+        POINT pt;
+    
+        /* 判断触摸状态及坐标 */
+        act =TouchDev_GetPoint(&pt);
+        if (act==TS_ACT_DOWN) {
+            /* 触摸按下，使用触摸坐标作为输入 */
+            MouseInput(pt.x,pt.y,MK_LBUTTON);
+        }
+    
+        if (act==TS_ACT_UP) {
+            /* 触摸释放，使用当前光标作为输入*/
+            GetCursorPos(&pt);
+            MouseInput(pt.x,pt.y,0);
+        }
+    }
 
 这部分代码说明如下：
 
@@ -2099,69 +1519,68 @@ GUI_InputHandler接口用于处理输入设备传回的信息，需要定时调�
     :linenos:
     :name: 代码清单4_26
 
-     /* 访问资源设备的互斥信号量 */
-     static GUI_MUTEX *mutex_lock=NULL;
+    /*访问资源设备的互斥信号量*/
+    static GUI_MUTEX *mutex_lock=NULL;
 
-     /**
-     * @brief 初始化资源设备（外部FLASH）
-     * @param 无
-     * @retval 是否初始化正常
-     */
-     BOOL RES_DevInit(void)
+    /**
+    * @brief  初始化资源设备（外部FLASH）
+    * @param  无
+    * @retval 是否初始化正常
+    */
+    BOOL RES_DevInit(void)
+    {
+        mutex_lock=GUI_MutexCreate();
 
-     {
-     mutex_lock=GUI_MutexCreate();
+        if (SPI_FLASH_Init() == 0)
+            return TRUE;
+        else
+            return FALSE;
+    }
 
-     if (SPI_FLASH_Init() == 0)
-     return TRUE;
-     else
-     return FALSE;
-     }
-
-     /**
-     * @brief 向设备写入内容
-     * @param buf 要写入的内容
-     * @param addr 写入的目标地址
-     * @param size 写入的数据量（size不应超过BLOCK大小）
-     * @retval 是否写入正常
-     */
-     BOOL RES_DevWrite(u8 *buf,u32 addr,u32 size)
-     {
-     GUI_MutexLock(mutex_lock,5000);
-     SPI_FLASH_SectorErase(addr&0xFFFFF000);
-     SPI_FLASH_BufferWrite(buf,addr,size);
-     GUI_MutexUnlock(mutex_lock);
-     return TRUE;
-     }
-
-     /**
-     * @brief 从设备中读取内容
-     * @param buf 存储读取到的内容
-     * @param addr 读取的目标地址
-     * @param size 读取的数据量
-     * @retval 是否读取正常
-     */
-     BOOL RES_DevRead(u8 *buf,u32 addr,u32 size)
-     {
-     GUI_MutexLock(mutex_lock,5000);
-
-     SPI_FLASH_BufferRead(buf,addr,size);
-     GUI_MutexUnlock(mutex_lock);
-     return TRUE;
-     }
-
-     /**
-     * @brief 擦除扇区
-     * @param addr 要擦除的扇区地址
-     * @retval 扇区的字节数
-     */
-     int RES_DevEraseSector(u32 addr)
-     {
-     GUI_MutexLock(mutex_lock,5000);
-     SPI_FLASH_SectorErase(addr&0xFFFFF000);
-     GUI_MutexUnlock(mutex_lock);
-     return SPI_FLASH_SectorSize;
-     }
+    /**
+    * @brief  向设备写入内容
+    * @param  buf 要写入的内容
+    * @param  addr 写入的目标地址
+    * @param  size 写入的数据量（size不应超过BLOCK大小）
+    * @retval 是否写入正常
+    */
+    BOOL RES_DevWrite(u8 *buf,u32 addr,u32 size)
+    {
+        GUI_MutexLock(mutex_lock,5000);
+        SPI_FLASH_SectorErase(addr&0xFFFFF000);
+        SPI_FLASH_BufferWrite(buf,addr,size);
+        GUI_MutexUnlock(mutex_lock);
+        return TRUE;
+    }
+    
+    /**
+    * @brief  从设备中读取内容
+    * @param  buf 存储读取到的内容
+    * @param  addr 读取的目标地址
+    * @param  size 读取的数据量
+    * @retval 是否读取正常
+    */
+    BOOL RES_DevRead(u8 *buf,u32 addr,u32 size)
+    {
+        GUI_MutexLock(mutex_lock,5000);
+    
+        SPI_FLASH_BufferRead(buf,addr,size);
+        GUI_MutexUnlock(mutex_lock);
+        return TRUE;
+    }
+    
+    /**
+    * @brief  擦除扇区
+    * @param  addr 要擦除的扇区地址
+    * @retval 扇区的字节数
+    */
+    int RES_DevEraseSector(u32 addr)
+    {
+        GUI_MutexLock(mutex_lock,5000);
+        SPI_FLASH_SectorErase(addr&0xFFFFF000);
+        GUI_MutexUnlock(mutex_lock);
+        return SPI_FLASH_SectorSize;
+    }
 
 代码中包含了函数RES_DevInit、RES_DevWrite、RES_DevRead、RES_DevEraseSector，分别用于初始化资源设备、写入数据、读取数据以及擦除扇区，它们都是简单地调用了底层驱动文件bsp_spi_flash.c中相关的函数，实现对外部SPI-FLASH的访问。
 
@@ -2197,12 +1616,12 @@ GUI_InputHandler接口用于处理输入设备传回的信息，需要定时调�
     :linenos:
     :name: 代码清单4_27
 
-     /* 目录信息类型 */
-     typedef struct {
-     char name[24]; /* 资源的名字 */
-     u32 size; /* 资源的大小 */
-     u32 offset; /* 资源相对于基地址的偏移 */
-     } CatalogTypeDef;
+    /* 目录信息类型 */
+    typedef struct {
+        char  name[24];  /* 资源的名字 */
+        u32   size;      /* 资源的大小 */
+        u32   offset;    /* 资源相对于基地址的偏移 */
+    } CatalogTypeDef;
 
 以上信息是往SPI-FLASH中写入资源文件时记录到目录中的，目录中每一项大小为24+4+4=32字节，在查找资源文件时，我们每次从FLASH的目录中读取一项，把目标资源文件名与目录信息中的“name”进行比对，若一致的话，再查看相应的“offset”计算出资源所在的地址，具体的实现见 代码清单4_28_。
 
@@ -2211,42 +1630,43 @@ GUI_InputHandler接口用于处理输入设备传回的信息，需要定时调�
     :linenos:
     :name: 代码清单4_28
 
-     /* 第1部分*/
-     /*..gui_drv_cfg.h文件..*/
-     /* 是否使用资源设备 */
-     #define GUI_RES_DEV_EN 1
-     /* 资源所在的基地址 */
-     #define GUI_RES_BASE 4096
-     /* 存储在FLASH中的资源目录大小 */
-     #define GUI_CATALOG_SIZE 4096
-     /* 第2部分*/
-     /*..gui_resource_portc文件..*/
-     /**
-     * @brief 从FLASH中的目录查找相应资源的信息
-     * @param res_base 目录在FLASH中的基地址
-     * @param res_name[in] 要查找的资源名字
-     * @param dir[out] 要查找的资源名字
-     * @note 此处dir.offset会被赋值为资源的绝对地址！！
-     * @retval -1表示找不到，其余值表示资源在FLASH中的基地址
-     */
-     s32 RES_GetInfo_AbsAddr(const char *res_name, CatalogTypeDef *dir)
-     {
-     int i,len;
-
-     len =x_strlen(res_name);
-     /* 第3部*分*/
-     /* 根据名字遍历目录 */
-     for (i=0; i<GUI_CATALOG_SIZE; i+=32) {
-     RES_DevRead((u8*)dir,GUI_RES_BASE+i,32);
-     if (x_strncasecmp(dir->name,res_name,len)==0) {
-     /* 第4部分*/
-     /* dir.offset是相对基地址的偏移，此处返回绝对地址 */
-     dir->offset += GUI_RES_BASE;
-     return dir->offset ;
-     }
-     }
-     return -1;
-     }
+    /***********************第1部分*************************/
+    /*..gui_drv_cfg.h文件..*/
+    /* 是否使用资源设备 */
+    #define GUI_RES_DEV_EN            1
+    /* 资源所在的基地址 */
+    #define GUI_RES_BASE             4096
+    /* 存储在FLASH中的资源目录大小 */
+    #define GUI_CATALOG_SIZE         4096
+    
+    /***********************第2部分*************************/
+    /*..gui_resource_portc文件..*/
+    /**
+    * @brief  从FLASH中的目录查找相应资源的信息
+    * @param  res_base 目录在FLASH中的基地址
+    * @param  res_name[in] 要查找的资源名字
+    * @param  dir[out] 要查找的资源名字
+    * @note   此处dir.offset会被赋值为资源的绝对地址！！
+    * @retval -1表示找不到，其余值表示资源在FLASH中的基地址
+    */
+    s32 RES_GetInfo_AbsAddr(const char *res_name, CatalogTypeDef *dir)
+    {
+        int i,len;
+    
+        len =x_strlen(res_name);
+        /***********************第3部分*************************/
+        /* 根据名字遍历目录 */
+        for (i=0; i<GUI_CATALOG_SIZE; i+=32) {
+            RES_DevRead((u8*)dir,GUI_RES_BASE+i,32);
+            if (x_strncasecmp(dir->name,res_name,len)==0) {
+                /***********************第4部分*************************/
+                /* dir.offset是相对基地址的偏移，此处返回绝对地址 */
+                dir->offset += GUI_RES_BASE;
+                return dir->offset ;
+            }
+        }
+        return -1;
+    }
 
 这段代码说明如下：
 
@@ -2274,12 +1694,12 @@ GUI_InputHandler接口用于处理输入设备传回的信息，需要定时调�
     :linenos:
     :name: 代码清单4_29
 
-     /* 资源在SD卡中的路径 */
-     #define RESOURCE_DIR "0:/srcdata"
-     /* 资源烧录到的FLASH基地址（目录地址） */
-     #define RESOURCE_BASE_ADDR 4096
-     /* 存储在FLASH中的资源目录大小 */
-     #define CATALOG_SIZE 4096
+    /* 资源在SD卡中的路径 */
+    #define RESOURCE_DIR         "0:/srcdata"
+    /* 资源烧录到的FLASH基地址（目录地址） */
+    #define RESOURCE_BASE_ADDR    4096
+    /* 存储在FLASH中的资源目录大小 */
+    #define CATALOG_SIZE           4096
 
 使用该工程时，需要准备一张SD卡，使用电脑在SD卡的根目录下建立一个文件夹“srcdata”，把需要拷贝的资源文件放置到该目录，这个“srcdata”就是资源文件的数据来源，即res_mgr.h文件中宏RESOURCE_DIR表示的路径。
 
@@ -2331,35 +1751,35 @@ GUI_InputHandler接口用于处理输入设备传回的信息，需要定时调�
     :name: 代码清单4_30
 
     /**
-    * @brief GUI默认字体初始化
-    * @param 无
+    * @brief  GUI默认字体初始化
+    * @param  无
     * @retval 返回默认字体的句柄
     */
     HFONT GUI_Default_FontInit(void)
     {
-    /* 整个字体文件加载至RAM */
+        /* 整个字体文件加载至RAM */
 
-     int font_base;
+        int font_base;
 
-     /* 指向缓冲区的指针 */
-     static u8 *pFontData_XFT=NULL;
-     CatalogTypeDef dir;
+        /* 指向缓冲区的指针 */
+        static u8 *pFontData_XFT=NULL;
+        CatalogTypeDef dir;
 
-     /* RES_GetInfo读取到的dir.offset是资源的绝对地址 */
-     font_base =RES_GetInfo_AbsAddr("GB2312_24_4BPP.xft", &dir);
+        /* RES_GetInfo读取到的dir.offset是资源的绝对地址 */
+        font_base =RES_GetInfo_AbsAddr("GB2312_24_4BPP.xft", &dir);
 
-     if (font_base > 0) {
-     pFontData_XFT =(u8*)GUI_VMEM_Alloc(dir.size);
-     if (pFontData_XFT!=NULL) {
-     RES_DevRead(pFontData_XFT, font_base, dir.size);
+        if (font_base > 0) {
+            pFontData_XFT =(u8*)GUI_VMEM_Alloc(dir.size);
+            if (pFontData_XFT!=NULL) {
+                RES_DevRead(pFontData_XFT, font_base, dir.size);
 
-     hFont = XFT_CreateFont(pFontData_XFT);
-     }
-     }
+                hFont = XFT_CreateFont(pFontData_XFT);
+            }
+        }
 
-     /*..省略部分内容..*/
-     return hFont;
-     }
+        /*..省略部分内容..*/
+        return hFont;
+    }
 
 这是初始化默认字体GUI_Default_FontInit函数中的流设备加载部分，它的执行过程如下：
 
@@ -2383,25 +1803,23 @@ GUI_InputHandler接口用于处理输入设备传回的信息，需要定时调�
     :linenos:
     :name: 代码清单4_31
 
-    /*
-    *
-    * @brief XFT_CreateFontEx使用的回调函数指针定义
-    * @param buf[out] 存储读取到的数据缓冲区
-    * @param offset 要读取的位置
-    * @param size 要读取的数据大小
-    * @param lParam 调用函数时的自定义参数（用户参数）
+    /**
+    * @brief   XFT_CreateFontEx使用的回调函数指针定义
+    * @param  buf[out] 存储读取到的数据缓冲区
+    * @param  offset 要读取的位置
+    * @param  size 要读取的数据大小
+    * @param  lParam 调用函数时的自定义参数（用户参数）
     * @retval 读取到的数据大小
     */
     typedef int (FN_XFT_GetData)(void *buf,int offset,int size,LONG lParam);
 
-
-     /**
-     * @brief XFT_CreateFontEx使用外部字体
-     * @param FN_XFT_GetData 加载数据的函数指针
-     * @param lParam 调用函数FN_XFT_GetData时传入自定义参数（用户参数）
-     * @retval 创建得到的字体句柄
-     */
-     HFONT XFT_CreateFontEx(FN_XFT_GetData *pfnGetData,LONG lParam);
+    /**
+    * @brief  XFT_CreateFontEx使用外部字体
+    * @param  FN_XFT_GetData 加载数据的函数指针
+    * @param  lParam 调用函数FN_XFT_GetData时传入自定义参数（用户参数）
+    * @retval 创建得到的字体句柄
+    */
+    HFONT XFT_CreateFontEx(FN_XFT_GetData *pfnGetData,LONG lParam);
 
 通过XFT_CreateFontEx创建字体后，在显示字符时它会调用创建字体句柄时XFT_CreateFontEx输入的FN_XFT_GetData型函数指针，并向该函数传入buf、offset、size以及lParam参数，FN_XFT_GetData型函数指针根据输入参数从外部FLASH中读取数
 据存储至buf，然后字符显示函数根据读取得的buf数据处理显示。
@@ -2413,51 +1831,49 @@ GUI_InputHandler接口用于处理输入设备传回的信息，需要定时调�
     :linenos:
     :name: 代码清单4_32
 
-     /* 第1部分*/
-     /**
-     * @brief 从流媒体加载内容的回调函数
-     * @param buf[out] 存储读取到的数据缓冲区
-     * @param offset 要读取的位置
-     * @param size 要读取的数据大小
-     * @param lParam 调用函数时的自定义参数（用户参数）
-     * @retval 读取到的数据大小
-     */
-
-     static int font_read_data_exFlash(void *buf,int offset,int size,LONG lParam)
-     {
-     /* 本例子中offset是具体字符数据在字体文件中的偏移
-     * lParam 是字体文件在FLASH中的基地址
-     */
-     offset += lParam;
-
-     /* 读取具体的字模数据内容 */
-     RES_DevRead(buf,offset,size);
-     return size;
-     }
-
-     /* 第2部分 */
-     /**
-     * @brief GUI默认字体初始化
-     * @param 无
-     * @retval 返回默认字体的句柄
-     */
-     HFONT GUI_Default_FontInit(void)
-     {
-     HFONT hFont=NULL;
-     /*..省略部分内容..*/
-     /* 使用流设备加载字体，按需要读取 */
-     if (hFont==NULL) {
-     int font_base;
-     CatalogTypeDef dir;
-     /* 从外部资源查找字体相关的目录信息 */
-     font_base=RES_GetInfo_AbsAddr("GB2312_24_4BPP.xft", &dir);
-     if (font_base> 0) {
-     hFont =XFT_CreateFontEx(font_read_data_exFlash, font_base);
-     }
-     }
-     /*..省略部分内容..*/
-     return hFont;
-     }
+    /***********************第1部分*************************/
+    /**
+    * @brief  从流媒体加载内容的回调函数
+    * @param  buf[out] 存储读取到的数据缓冲区
+    * @param  offset 要读取的位置
+    * @param  size 要读取的数据大小
+    * @param  lParam 调用函数时的自定义参数（用户参数）
+    * @retval 读取到的数据大小
+    */
+    static int font_read_data_exFlash(void *buf,int offset,int size,LONG lParam)
+    {
+        /* 本例子中offset是具体字符数据在字体文件中的偏移
+        * lParam 是字体文件在FLASH中的基地址
+        */
+        offset += lParam;
+    
+        /* 读取具体的字模数据内容 */
+        RES_DevRead(buf,offset,size);
+        return size;
+    }
+    /***********************第2部分*************************/
+    /**
+    * @brief  GUI默认字体初始化
+    * @param  无
+    * @retval 返回默认字体的句柄
+    */
+    HFONT GUI_Default_FontInit(void)
+    {
+        HFONT hFont=NULL;
+        /*..省略部分内容..*/
+        /* 使用流设备加载字体，按需要读取 */
+        if (hFont==NULL) {
+            int font_base;
+            CatalogTypeDef dir;
+            /* 从外部资源查找字体相关的目录信息 */
+            font_base=RES_GetInfo_AbsAddr("GB2312_24_4BPP.xft", &dir);
+            if (font_base> 0) {
+                hFont =XFT_CreateFontEx(font_read_data_exFlash, font_base);
+            }
+        }
+        /*..省略部分内容..*/
+        return hFont;
+    }
 
 -  第1部分。定义了font_read_data_exFlash 函数，它是FN_XFT_GetData型函数指针的实例，用于流式加载字体数据。其中参数offset是具体字符数据在字体文件中的偏移，而lPara
    m参数则是字体文件在FLASH设备中的基地址，所以在读取具体数据前，我们对offset加上l
@@ -2489,55 +1905,61 @@ GUI_InputHandler接口用于处理输入设备传回的信息，需要定时调�
     :linenos:
     :name: 代码清单4_33
 
-    /*
-    *
-    * @brief GUI默认字体初始化
-    * @param 无
+    /**
+    * @brief  GUI默认字体初始化
+    * @param  无
     * @retval 返回默认字体的句柄
     */
     HFONT GUI_Default_FontInit(void)
     {
-    HFONT hFont=NULL;
-    #if (GUI_FONT_LOAD_TO_RAM )
-    {
-    /* 整个字体文件加载至RAM */
-    /* 指向缓冲区的指针 */
-    static u8 *pFontData_XFT=NULL;
-    CatalogTypeDef dir;
-    /* RES_GetInfo读取到的dir.offset是资源的绝对地址 */
-    if (RES_GetInfo_AbsAddr(GUI_DEFAULT_EXTERN_FONT, &dir) > 0) {
-    pFontData_XFT =(u8*)GUI_VMEM_Alloc(dir.size);
-    if (pFontData_XFT!=NULL) {
-    RES_DevRead(pFontData_XFT, dir.offset, dir.size);
-    hFont = XFT_CreateFont(pFontData_XFT);
-    }
-    }
-    }
+        HFONT hFont=NULL;
+    
+    #if (GUI_FONT_LOAD_TO_RAM  )
+        {
+            /* 整个字体文件加载至RAM */
+    
+            /* 指向缓冲区的指针 */
+            static u8 *pFontData_XFT=NULL;
+            CatalogTypeDef dir;
+    
+            /* RES_GetInfo读取到的dir.offset是资源的绝对地址 */
+            if (RES_GetInfo_AbsAddr(GUI_DEFAULT_EXTERN_FONT, &dir) > 0) {
+                pFontData_XFT =(u8*)GUI_VMEM_Alloc(dir.size);
+                if (pFontData_XFT!=NULL) {
+                    RES_DevRead(pFontData_XFT, dir.offset, dir.size);
+    
+                    hFont = XFT_CreateFont(pFontData_XFT);
+                }
+            }
+        }
     #elif (GUI_USE_EXTERN_FONT)
-    {
-    /* 使用流设备加载字体，按需要读取 */
-    if (hFont==NULL) {
-    int offset;
-    CatalogTypeDef dir;
-    offset =RES_GetInfo_AbsAddr(GUI_DEFAULT_EXTERN_FONT, &dir);
-    if (offset > 0) {
-    hFont =XFT_CreateFontEx(font_read_data_exFlash,offset);
-    }
-    }
-    }
+        {
+            /* 使用流设备加载字体，按需要读取 */
+            if (hFont==NULL) {
+                int offset;
+                CatalogTypeDef dir;
+    
+                offset =RES_GetInfo_AbsAddr(GUI_DEFAULT_EXTERN_FONT, &dir);
+                if (offset > 0) {
+                    hFont =XFT_CreateFontEx(font_read_data_exFlash,offset);
+                }
+            }
+        }
     #endif
-    /* 若前面的字体加载失败，使用内部FLASH中的数据（工程中的C语言数组）
-    * 添加字体数据时，把数组文件添加到工程，在本文件头添加相应字体数组的声明，
-    * 然后调用XFT_CreateFont函数创建字体即可
-    */
-    if (hFont==NULL) {
-    /* 从本地加载(本地数组数据) */
-    hFont =XFT_CreateFont(GUI_DEFAULT_FONT); /* ASCii字库,20x20,4BPP抗锯齿 */
+    
+        /* 若前面的字体加载失败，使用内部FLASH中的数据（工程中的C语言数组）
+        *  添加字体数据时，把数组文件添加到工程，在本文件头添加相应字体数组的声明，
+        *  然后调用XFT_CreateFont函数创建字体即可
+        */
+        if (hFont==NULL) {
+            /* 从本地加载(本地数组数据) */
+    hFont =XFT_CreateFont(GUI_DEFAULT_FONT);  /*ASCii字库,20x20,4BPP抗锯齿*/
+    
     /* 中文字库存储占用空间非常大，不推荐放在内部FLASH */
-    //hFont =XFT_CreateFont(GB2312_16_2BPP); /* GB2312字库,16x16,2BPP抗锯齿 */
-    //hFont =XFT_CreateFont(GB2312_20_4BPP); /* GB2312字库,20x20,4BPP抗锯齿 */
-    }
-    return hFont;
+    //hFont =XFT_CreateFont(GB2312_16_2BPP); /*GB2312字库,16x16,2BPP抗锯齿*/
+    //hFont =XFT_CreateFont(GB2312_20_4BPP); /*GB2312字库,20x20,4BPP抗锯齿*/
+        }
+        return hFont;
     }
 
 相对前面的代码，完整版的主要是增加了条件编译以及使用宏来设置默认字体，这些宏可在gui_drv_cfg.h文件进行配置，具体见 代码清单4_34_。
@@ -2546,25 +1968,24 @@ GUI_InputHandler接口用于处理输入设备传回的信息，需要定时调�
     :caption: 代码清单4_34 默认字体配置（gui_drv_cfg.h文件）
     :linenos:
     :name: 代码清单4_34
-
-     /* 是否使用外部FLASH中的字体
-     * 流设备和整体加载方式都要把这个宏设置为1
-     */
-     #define GUI_USE_EXTERN_FONT 1
-
-     /*
-     * 是否把整个外部字体数据加载至VMEM区域，初始化加载时需要较长时间，
-     * 加载后可大幅提高字符显示的速度
-     * 若设置为真，则使用整体加载方式，否则使用流设备方式
-
-     */
-     #define GUI_FONT_LOAD_TO_RAM (0 && GUI_USE_EXTERN_FONT)
     
-     /* 要使用的外部默认字体文件，USE_EXTERN_FONT为1时生效 */
-     #define GUI_DEFAULT_EXTERN_FONT "GB2312_24_4BPP.xft"
+    /* 是否使用外部FLASH中的字体
+    *  流设备和整体加载方式都要把这个宏设置为1
+    */
+    #define GUI_USE_EXTERN_FONT       1
     
-     /* 默认内部字体数组名，USE_EXTERN_FONT为0或 外部字体加载失败时会采用的字体 */
-     #define GUI_DEFAULT_FONT ASCII_20_4BPP
+    /*
+    * 是否把整个外部字体数据加载至VMEM区域，初始化加载时需要较长时间，
+    * 加载后可大幅提高字符显示的速度
+    * 若设置为真，则使用整体加载方式，否则使用流设备方式
+    */
+    #define GUI_FONT_LOAD_TO_RAM     (0 && GUI_USE_EXTERN_FONT)
+    
+    /* 要使用的外部默认字体文件，USE_EXTERN_FONT为1时生效 */
+    #define GUI_DEFAULT_EXTERN_FONT   "GB2312_24_4BPP.xft"
+    
+    /* 默认内部字体数组名，USE_EXTERN_FONT为0或 外部字体加载失败时会采用的字体 */
+    #define GUI_DEFAULT_FONT          ASCII_20_4BPP
 
 使用外部SPI-FLASH的字体数据文件时，需要把宏GUI_USE_EXTERN_FONT设置为真值，当宏GUI_FONT_LOAD_TO_RAM设置为真值时，则使用整体加载的方式，否则使用流设备加载方式。而外部字体数据文件的文件名可通过宏GUI_DEFAULT_EXTERN_FONT设置。
 
