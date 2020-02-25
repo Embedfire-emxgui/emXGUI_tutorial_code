@@ -318,45 +318,6 @@ PNGlib文件组         PNG.lib                 PNG图片解码库
      void BSP_Init(void)
      {
 
-<<<<<<< HEAD
-     static FATFS fsys;
-
-     /* LED 端口初始化 */
-     LED_GPIO_Config();
-
-     /* 初始化触屏 */
-     Touch_Init();
-
-     /* 初始化定时器 */
-     SysTick_Init();
-
-     /* 配置 FSMC Bank1 NOR/SRAM3 */
-     FSMC_SRAM_Init();
-
-     /* 初始化sd卡 */
-     disk_initialize(0);
-
-     f_mount(0,&fsys); //注册文件系统工作区 // TBD 增加sd卡检测
-
-     /*CRC和emXGUI没有关系，只是他们为了库的保护而做的，
-     这样STemXGUI的库只能用在ST的芯片上面，别的芯片是无法使用的。 */
-     RCC_AHBPeriphClockCmd(RCC_AHBPeriph_CRC, ENABLE);
-
-     /* 初始化GUI */
-     GUI_Init();
-
-     /* 初始化串口*/
-     USART1_Config();
-
-     /* 配置RTC秒中断优先级 */
-     RTC_NVIC_Config();
-
-     RTC_CheckAndConfig(&systmtime);
-
-     EXTI_Key_Config();
-
-     DEBUG("\r\n wildfire ISO board emXGUI test \r\n");
-=======
         static FATFS fsys;
 
         /* LED 端口初始化 */
@@ -394,7 +355,6 @@ PNGlib文件组         PNG.lib                 PNG图片解码库
         EXTI_Key_Config();
 
         DEBUG("\r\n wildfire ISO board emXGUI test \r\n");
->>>>>>> dev
 
      }
 
@@ -407,25 +367,6 @@ PNGlib文件组         PNG.lib                 PNG图片解码库
      int main(void)
      {
 
-<<<<<<< HEAD
-     BSP_Init();
-
-     GUI_Delay (20);
-
-     #if 0
-     /* 触摸校准demo */
-     Touch_MainTask();
-
-     #else
-
-     WFGUI_MainTask();
-
-     while (1) {
-
-     GUI_Delay(50); //窗口在gui delay期间自动重绘，必须要有gui_delay
-     }
-     #endif
-=======
         BSP_Init();
 
         GUI_Delay (20);
@@ -443,7 +384,6 @@ PNGlib文件组         PNG.lib                 PNG图片解码库
             GUI_Delay(50); //窗口在gui delay期间自动重绘，必须要有gui_delay
             }
         #endif
->>>>>>> dev
 
      }
 
@@ -473,40 +413,6 @@ WFGUI_MainTask函数的定义位于WFGUI_DeskTop.c文件，它在调用emXGUI库
      */
      static void CreatDeskTop(void)
      {
-<<<<<<< HEAD
-
-
-     /* 准备建立3个窗口，以下是使用到的用户定义参数，
-     方便在回调函数中使用 */
-     WinPara.xSizeLCD = LCD_GetXSize(); //LCD屏幕尺寸
-     WinPara.ySizeLCD = LCD_GetYSize(); //LCD屏幕尺寸
-     WinPara.xSizeWin = WinPara.xSizeLCD; //窗口尺寸
-     WinPara.ySizeWin = WinPara.ySizeLCD -20*2; //窗口尺寸
-     //屏幕大小减去状态栏和控制栏
-     WinPara.xPosWin = 0; //窗口的起始位置
-     WinPara.yPosWin = 20; //窗口的起始位置
-     WinPara.xSizeWinVirtual = WinPara.xSizeWin * VIRTUAL_WIN_NUM;
-     //虚拟窗口尺寸，用于桌面
-
-     /* 设置默认皮肤 */
-     SetDefaultSkin();
-
-
-     WM_EnableMemdev(WM_HBKWIN);
-
-     /* 设置背景桌面的回调函数 */
-     WM_SetCallback(WM_HBKWIN, _cbBKWin);
-
-     /* 创建三个窗口 状态栏、控制栏、主窗口*/
-     CreatStatusWin();
-     CreatCtrlWin();
-     CreatMainWin();
-
-     /* 初始化app链表 */
-     hAPPLinkedList_Init();
-
-
-=======
         /* 准备建立3个窗口，以下是使用到的用户定义参数，
         方便在回调函数中使用 */
         WinPara.xSizeLCD = LCD_GetXSize(); //LCD屏幕尺寸
@@ -535,7 +441,6 @@ WFGUI_MainTask函数的定义位于WFGUI_DeskTop.c文件，它在调用emXGUI库
 
         /* 初始化app链表 */
         hAPPLinkedList_Init();
->>>>>>> dev
      }
 
 
@@ -554,19 +459,6 @@ WFGUI_MainTask函数的定义位于WFGUI_DeskTop.c文件，它在调用emXGUI库
      */
      void WFGUI_MainTask(void)
      {
-<<<<<<< HEAD
-
-     WM_MOTION_Enable(1);
-     WM_MOTION_SetDefaultPeriod(1000);
-
-     CreatDeskTop(); //创建gui桌面
-
-     while (1) {
-
-     GUI_Delay(50);
-
-     }
-=======
         WM_MOTION_Enable(1);
         WM_MOTION_SetDefaultPeriod(1000);
 
@@ -577,7 +469,6 @@ WFGUI_MainTask函数的定义位于WFGUI_DeskTop.c文件，它在调用emXGUI库
             GUI_Delay(50);
 
         }
->>>>>>> dev
      }
 
 
@@ -592,23 +483,6 @@ WFGUI_MainTask函数的定义位于WFGUI_DeskTop.c文件，它在调用emXGUI库
     :name: 代码清单17_3
 
      typedef struct WIN_PARA {
-<<<<<<< HEAD
-     //窗口使用到的用户定义参数，方便在回调函数中使用
-     int xSizeLCD, ySizeLCD; //LCD屏幕尺寸
-     int xPosWin, yPosWin; //窗口的起始位置
-     int xSizeWin, ySizeWin; //窗口尺寸
-     int xSizeWinVirtual; //虚拟窗口尺寸
-
-     unsigned char ctr_index; //记录icorn窗口的索引
-     unsigned char isDesktop; //记录桌面窗口是否在最前 0：桌面窗口不在最前  1：桌面窗口在最前
-    
-     WM_HWIN hWinCtrl; //控制窗口的句柄（底部）
-     WM_HWIN hWinMain; //主显示窗的句柄（中部）
-     WM_HWIN hWinStatus; //状态窗口的句柄（顶部）
-     WM_HWIN hWinTime;
-    
-     WM_HWIN hApp[20]; //记录正在运行的App句柄
-=======
         //窗口使用到的用户定义参数，方便在回调函数中使用
         int xSizeLCD, ySizeLCD; //LCD屏幕尺寸
         int xPosWin, yPosWin; //窗口的起始位置
@@ -624,7 +498,6 @@ WFGUI_MainTask函数的定义位于WFGUI_DeskTop.c文件，它在调用emXGUI库
         WM_HWIN hWinTime;
         
         WM_HWIN hApp[20]; //记录正在运行的App句柄
->>>>>>> dev
     
      } WIN_PARA;
 
@@ -677,34 +550,6 @@ CreatDeskTop设置完各个窗口的大小后，调用了SetDefaultSkin函数设
      static void SetDefaultSkin(void)
      {
 
-<<<<<<< HEAD
-     /* 设置各种控件的皮肤为类win7的皮肤 */
-     BUTTON_SetDefaultSkin (BUTTON_SKIN_FLEX);
-     CHECKBOX_SetDefaultSkin (CHECKBOX_SKIN_FLEX);
-     DROPDOWN_SetDefaultSkin (DROPDOWN_SKIN_FLEX);
-     FRAMEWIN_SetDefaultSkin (FRAMEWIN_SKIN_FLEX);
-     HEADER_SetDefaultSkin (HEADER_SKIN_FLEX);
-     PROGBAR_SetDefaultSkin (PROGBAR_SKIN_FLEX);
-     RADIO_SetDefaultSkin (RADIO_SKIN_FLEX);
-     SCROLLBAR_SetDefaultSkin(SCROLLBAR_SKIN_FLEX);
-     SLIDER_SetDefaultSkin (SLIDER_SKIN_FLEX);
-
-     /* 设置滑动条 */
-     SCROLLBAR_SetDefaultWidth(15); //宽度
-     SCROLLBAR_SetThumbSizeMin(10); //滑块最小size
-
-     /* 创建sd卡外部字体 */
-     CreateFont(&SDFont);
-
-     /* 设置默认字体 */
-     TEXT_SetDefaultFont(&SDFont.XFont);
-
-     /* 设置framwin */
-     FRAMEWIN_SetDefaultTitleHeight(20); //标题栏高度
-     FRAMEWIN_SetDefaultFont(GUI_FONT_8X16); //默认字体
-     FRAMEWIN_SetDefaultTextColor(1,GUI_BLACK); //设置激活状态时的标题文字颜色
-     WM_SetDesktopColor(GUI_BLACK);
-=======
         /* 设置各种控件的皮肤为类win7的皮肤 */
         BUTTON_SetDefaultSkin (BUTTON_SKIN_FLEX);
         CHECKBOX_SetDefaultSkin (CHECKBOX_SKIN_FLEX);
@@ -731,7 +576,6 @@ CreatDeskTop设置完各个窗口的大小后，调用了SetDefaultSkin函数设
         FRAMEWIN_SetDefaultFont(GUI_FONT_8X16); //默认字体
         FRAMEWIN_SetDefaultTextColor(1,GUI_BLACK); //设置激活状态时的标题文字颜色
         WM_SetDesktopColor(GUI_BLACK);
->>>>>>> dev
      }
 
 在SetDefaultSkin函数中，调用了各种emXGUI控件的皮肤设置函数，它们的作用是把野火GUI里使用到的控件皮肤都设置为Win7风格，这样的控件比较好看。另外，还调用了CreateFont函数初始化外部SD卡字体，emXGUI自带的字体只包含英文字库，当需要显示中文的时候，就需要用到SD卡
@@ -754,40 +598,6 @@ CreatDeskTop设置完各个窗口的大小后，调用了SetDefaultSkin函数设
      */
      static void CreatStatusWin(void)
      {
-<<<<<<< HEAD
-     WM_HWIN hText;
-     WM_HWIN hButton;
-
-
-     WinPara.hWinStatus = WM_CreateWindowAsChild(
-     0, //窗口位置、大小
-     0,
-     WinPara.xSizeLCD,
-     WinPara.yPosWin,
-     WM_HBKWIN, WM_CF_SHOW | WM_CF_MEMDEV, _cbStatusWin, sizeof(WIN_PARA *)
-     );
-
-     /* 顶部的 "wildfire OS "文本 */
-     hText = TEXT_CreateEx(0, 0, WinPara.xSizeWin , 20,
-    nPara.hWinStatus, WM_CF_SHOW,
-     GUI_TA_HCENTER|TEXT_CF_VCENTER, GUI_ID_TEXT1, "Wildfire OS");
-     TEXT_SetFont(hText, GUI_FONT_16B_ASCII);
-     TEXT_SetTextColor(hText, 0xFF4040);
-
-     /* 状态栏的时间显示文本 */
-     hText = TEXT_CreateEx(WinPara.xSizeLCD-55,5,55,20,
-    nPara.hWinStatus,WM_CF_SHOW,TEXT_CF_LEFT,
-     GUI_ID_TEXT0,"");
-     TEXT_SetBkColor(hText,GUI_INVALID_COLOR);
-     TEXT_SetTextColor(hText,GUI_WHITE);
-     TEXT_SetFont(hText,GUI_FONT_13B_ASCII);
-
-     /* 野火Logo 按钮 */
-     hButton = BUTTON_CreateEx(2,0,40,20,
-    nPara.hWinStatus,WM_CF_SHOW,0,GUI_ID_BUTTON0);
-     BUTTON_SetBitmap(hButton,BUTTON_BI_UNPRESSED,&bmWF_Logo);
-     BUTTON_SetBitmap(hButton,BUTTON_BI_PRESSED,&bmWF_LogoPr);
-=======
         WM_HWIN hText;
         WM_HWIN hButton;
 
@@ -820,7 +630,6 @@ CreatDeskTop设置完各个窗口的大小后，调用了SetDefaultSkin函数设
         nPara.hWinStatus,WM_CF_SHOW,0,GUI_ID_BUTTON0);
         BUTTON_SetBitmap(hButton,BUTTON_BI_UNPRESSED,&bmWF_Logo);
         BUTTON_SetBitmap(hButton,BUTTON_BI_PRESSED,&bmWF_LogoPr);
->>>>>>> dev
 
      }
 
@@ -837,73 +646,6 @@ CreatDeskTop设置完各个窗口的大小后，调用了SetDefaultSkin函数设
     :linenos:
     :name: 代码清单17_6
 
-<<<<<<< HEAD
-     /**
-     * @brief _cbStatusWin,状态栏回调函数
-     * @param none
-     * @retval none
-     */
-     static void _cbStatusWin(WM_MESSAGE * pMsg)
-     {
-     char text_buffer[20];
-     WM_HWIN hText;
-
-     int NCode;
-     int Id;
-
-     switch (pMsg->MsgId) {
-
-     case WM_NOTIFY_PARENT: //通知父窗口
-
-     Id = WM_GetId(pMsg->hWinSrc); // 控件的ID
-     NCode = pMsg->Data.v; // 通知代码
-
-     if (NCode == WM_NOTIFICATION_RELEASED) { //触摸释放消息
-     if (Id == GUI_ID_BUTTON0) { //野火Logo按键
-     /* 显示消息提示框 */
-     MESSAGEBOX_Create("\n\n Wildfire OS 1.0 \n\n",
-     "About",0);
-
-     } else if (Id == GUI_ID_TEXT0) { //时间文本框
-     /* 执行WFGUI_Time应用 */
-     WFGUI_Time();
-     }
-
-     }
-
-     break;
-
-     case WM_PAINT: //重绘背景
-     GUI_SetColor(GUI_BLACK);
-     GUI_FillRect(0,0,WinPara.xSizeLCD ,WinPara.yPosWin);
-
-     break;
-
-     case MY_MESSAGE_RTC:
-     //处理时间显示的信息，每秒钟修改一次时间
-
-     /* 获取text句柄 */
-     hText = WM_GetDialogItem(pMsg->hWin, GUI_ID_TEXT0);
-
-     /* 转换rtc值至北京时间 */
-     RTC_TimeCovr(&systmtime);
-
-     /* 转换成字符串 */
-     sprintf(text_buffer,"%02d:%02d:%02d",systmtime.tm_hour,systmtime.tm_min,systmtime.tm_sec);
-
-     /* 输出时间 */
-     TEXT_SetText(hText,text_buffer);
-     break;
-
-
-     default:
-     WM_DefaultProc(pMsg);
-
-     }
-
-     }
-
-=======
     /**
     * @brief  _cbStatusWin,状态栏回调函数
     * @param  none
@@ -960,7 +702,6 @@ CreatDeskTop设置完各个窗口的大小后，调用了SetDefaultSkin函数设
     
         }
     }
->>>>>>> dev
 
 在这个回调函数中，主要处理了三种消息，分别为WM_PAINT重绘消息，WM_NOTIFY_PARENT 通知父窗口消息以及我们为了RTC时钟自定义的MY_MESSAGE_RTC消息。
 
@@ -988,37 +729,6 @@ MY_MESSAGE_RTC消息并不是emXGUI默认的系统消息，而是我们为了让
     :linenos:
     :name: 代码清单17_7
 
-<<<<<<< HEAD
-     /**
-     * @brief This function handles RTC interrupt request.
-     * @param None
-     * @retval None
-     */
-     void RTC_IRQHandler(void)
-     {
-
-     if (RTC_GetITStatus(RTC_IT_SEC) != RESET) {
-
-     /* Clear the RTC Second interrupt */
-     RTC_ClearITPendingBit(RTC_IT_SEC);
-
-     /* Enable time update */
-     TimeDisplay = 1;
-
-     /* 判断窗口是否有效 */
-     if (WM_IsWindow(WinPara.hWinStatus)) {
-     /* 发送 */
-     WM_SendMessageNoPara(WinPara.hWinStatus,MY_MESSAGE_RTC);
-     }
-     if (WM_IsWindow(WinPara.hWinTime)) {
-     WM_SendMessageNoPara(WinPara.hWinTime,MY_MESSAGE_RTC);
-     }
-
-     /* Wait until last write operation on RTC registers has finished */
-     RTC_WaitForLastTask();
-     }
-     }
-=======
     /**
     * @brief  This function handles RTC interrupt request.
     * @param  None
@@ -1047,7 +757,6 @@ MY_MESSAGE_RTC消息并不是emXGUI默认的系统消息，而是我们为了让
             RTC_WaitForLastTask();
         }
     }
->>>>>>> dev
 
 创建控制窗口
 ''''''''''''''''''
@@ -1105,94 +814,6 @@ MY_MESSAGE_RTC消息并不是emXGUI默认的系统消息，而是我们为了让
     :caption: 代码清单 17_9 控制窗口回调函数_cbCtrlWin
     :linenos:
     :name: 代码清单17_9
-<<<<<<< HEAD
-
-     /**
-     * @brief _cbCtrlWin,控制栏回调函数
-     * @param none
-     * @retval none
-     */
-     static void _cbCtrlWin(WM_MESSAGE * pMsg)
-     {
-     WM_HWIN hItem;
-
-     WM_HWIN hItemNext;
-
-     switch (pMsg->MsgId)
-     {
-
-     case WM_PAINT: //重绘背景
-
-     GUI_SetColor(GUI_BLACK);
-     GUI_FillRect(0,0,WM_GetWindowSizeX(pMsg->hWin),WM_GetWindowSizeY(pMsg->hWin));
-     break;
-
-     case MY_MESSAGE_CTRLCHANGE:
-     if (hAPPLinkedList_GetAppTop()==NULL)
-     //如果没有app窗口，则控制栏显示桌面索引
-     {
-     hItem = WM_GetFirstChild(WinPara.hWinCtrl);
-     hItemNext = WM_GetNextSibling(hItem);
-
-     /* 根据回调函数来区分窗口 */
-     if (WM_GetCallback(hItem) == _cbIndexWin && WM_GetCallback(hItemNext) == _cbButtonWin)
-
-     {
-     /* 显示index窗口，隐藏button窗口 */
-     WM_ShowWindow(hItem);
-     WM_HideWindow(hItemNext);
-     WM_Paint(hItem); //要重绘索引窗口，更新索引
-
-     }
-     else if (WM_GetCallback(hItemNext) == _cbIndexWin && WM_GetCallback(hItem) ==_cbButtonWin)
-
-     {
-     /* 显示index窗口，隐藏button窗口 */
-     WM_ShowWindow(hItemNext);
-     WM_HideWindow(hItem);
-
-     WM_Paint(hItemNext); //要重绘索引窗口，更新索引
-
-     }
-
-     }
-     else //如果存在app窗口，显示控制按钮索引
-     {
-     hItem = WM_GetFirstChild(WinPara.hWinCtrl);
-     hItemNext = WM_GetNextSibling(hItem);
-
-     /* 根据回调函数来区分窗口 */
-     if (WM_GetCallback(hItem) == _cbIndexWin && WM_GetCallback(hItemNext) == _cbButtonWin)
-
-     {
-     /* 显示button窗口，隐藏index窗口 */
-     WM_ShowWindow(hItemNext);
-     WM_HideWindow(hItem);
-     }
-     else if (WM_GetCallback(hItemNext) == _cbIndexWin && WM_GetCallback(hItem) == _cbButtonWin)
-
-     {
-     /* 显示button窗口，隐藏index窗口 */
-     WM_ShowWindow(hItem);
-     WM_HideWindow(hItemNext);
-
-     }
-
-
-     }
-
-     break;
-
-
-     default:
-     WM_DefaultProc(pMsg);
-     break;
-
-     }
-
-
-     }
-=======
  
     /**
     * @brief  _cbCtrlWin,控制栏回调函数
@@ -1274,7 +895,6 @@ MY_MESSAGE_RTC消息并不是emXGUI默认的系统消息，而是我们为了让
                 break;
             }
         }
->>>>>>> dev
 
 控制窗口的回调函数主要处理了一个我们自宝义的消息MY_MESSAGE_CTRLCHANGE ，每当打开或关闭了应用程序，我们都会给控制窗口发送这个消息。
 
@@ -1284,129 +904,6 @@ MY_MESSAGE_RTC消息并不是emXGUI默认的系统消息，而是我们为了让
     :caption: 代码清单 17‑10索引窗口及返回键窗口的回调函数
     :linenos:
     :name: 代码清单17_10
-<<<<<<< HEAD
-
-    /**
-    * @brief _cbIndexWin,索引窗口回调函数
-    * @param none
-    * @retval none
-    */
-    static void _cbIndexWin(WM_MESSAGE * pMsg)
-    {
-
-     switch (pMsg->MsgId)
-     {
-     case WM_PAINT: //重绘背景
-
-     GUI_SetColor(GUI_BLACK);
-     GUI_FillRect(0,0,WM_GetWindowSizeX(pMsg->hWin) ,
-    _GetWindowSizeY(pMsg->hWin));
-
-
-     /* 绘制索引窗口 */
-     GUI_SetColor(GUI_LIGHTGRAY);
-
-     {
-     char i,r;
-
-     for (i=0; i<VIRTUAL_WIN_NUM; i++)
-     {
-     if (i == WinPara.ctr_index)
-     r=5; //当前窗口的圆点半径大
-     else
-     r=2; //非当前窗口的圆点半径小
-
-     if (i< VIRTUAL_WIN_NUM/2) //绘制圆点
-     {
-     /* 绘制索引窗口 */
-     GUI_FillCircle(WM_GetWindowSizeX(pMsg->hWin)/2-10*i,WM_GetWindowSizeY(pMsg-> hWin)/2,r);
-
-     }
-     else
-     {
-     /* 绘制索引窗口 */
-     GUI_FillCircle(WM_GetWindowSizeX(pMsg->hWin)/2+10*i,WM_GetWindowSizeY(pMsg-> hWin)/2,r);
-
-     }
-     }
-     }
-     break;
-
-
-
-     default:
-     break;
-
-     }
-
-     }
-
-     /**
-     * @brief _cbButtonWin,控制按钮窗口回调函数
-     * @param none
-     * @retval none
-     */
-     static void _cbButtonWin(WM_MESSAGE * pMsg)
-     {
-     int Id,NCode;
-     WM_HWIN hItem;
-
-     switch (pMsg->MsgId)
-     {
-
-     case WM_PAINT: //重绘窗口
-     GUI_SetColor(GUI_BLACK);
-     GUI_FillRect(0,0,WM_GetWindowSizeX(pMsg->hWin) ,WM_GetWindowSizeY(pMsg->hWin));
-
-     break;
-
-     case WM_CREATE: //创建窗口
-
-     /* 返回键 */
-     hItem = BUTTON_CreateEx(0,0,40, 20,
-     pMsg->hWin, WM_CF_SHOW|WM_CF_MEMDEV , 0, GUI_ID_BUTTON0);
-     BUTTON_SetText(hItem, "<");
-
-     break;
-
-     case WM_NOTIFY_PARENT: //处理子窗口消息
-     Id = WM_GetId(pMsg->hWinSrc);
-     NCode = pMsg->Data.v;
-
-     if (NCode == WM_NOTIFICATION_RELEASED)
-     {
-     if (Id == GUI_ID_BUTTON0)
-     {
-
-     HANDLE_LIST *hAPPOnTop;
-
-     /* 获取最上层的窗口句柄 */
-     hAPPOnTop = hAPPLinkedList_GetAppTop();
-     if (hAPPOnTop != NULL)
-
-     {
-     WM_DeleteWindow(hAPPOnTop->hAPP); // 关闭窗口
-
-     }
-
-     }
-     else if (Id == GUI_ID_BUTTON1)
-     //button1可以制作home键，现在没有实现
-     {
-
-     }
-
-     }
-
-     break;
-
-     default:
-     break;
-
-     }
-
-     }
-=======
  
     /**
     * @brief  _cbIndexWin,索引窗口回调函数
@@ -1526,7 +1023,6 @@ MY_MESSAGE_RTC消息并不是emXGUI默认的系统消息，而是我们为了让
             }
     
         } 
->>>>>>> dev
 
 索引窗口在它的重绘消息处理中绘制了大小不同的圆点，它根据全局变量WinPara.ctr_index来绘制半径不同的圆点。而返回窗口的回调函数则在返回键被按下时处理关闭最上层应用程序的操作。
 
@@ -1574,43 +1070,6 @@ MY_MESSAGE_RTC消息并不是emXGUI默认的系统消息，而是我们为了让
     :linenos:
     :name: 代码清单17_12
 
-<<<<<<< HEAD
-
-     /**
-     * @brief _cbMainWin,主窗口回调函数
-     * @param none
-     * @retval none
-     */
-     static void _cbMainWin(WM_MESSAGE * pMsg)
-     {
-
-     switch (pMsg->MsgId)
-     {
-
-     case WM_NOTIFY_PARENT:
-
-     break;
-
-     case MY_MESSAGE_SNAPSHOT: //处理截图消息
-
-     /* 调用截图应用 */
-     WFGUI_Snapshot() ;
-
-     break;
-
-     case WM_PAINT: //重绘背景
-     GUI_SetColor(GUI_BLACK);
-     GUI_FillRect(0,0,WinPara.xSizeWin ,WinPara.ySizeWin);
-
-     break;
-
-     default:
-     WM_DefaultProc(pMsg);
-
-     }
-
-     }
-=======
     /**
     * @brief  _cbMainWin,主窗口回调函数
     * @param  none
@@ -1641,7 +1100,6 @@ MY_MESSAGE_RTC消息并不是emXGUI默认的系统消息，而是我们为了让
                 WM_DefaultProc(pMsg);
             }
         }
->>>>>>> dev
 
 在回调函数中，主要处理的为WM_PAINT重绘消息以及自定义的截图消息MY_MESSAGE_SNAPSHOT，它通过调用函数WFGUI_Snapshot函数保存截图到SD卡。截图消息是由按键中断服务函数发出的，当我们按下开发板的KEY1键时，就会触发截图中断，按键截图中断服务函数见 代码清单17_13_。
 
@@ -1653,19 +1111,6 @@ MY_MESSAGE_RTC消息并不是emXGUI默认的系统消息，而是我们为了让
      void EXTI0_IRQHandler(void)
      {
 
-<<<<<<< HEAD
-     if (EXTI_GetITStatus(EXTI_Line0) != RESET) //确保是否产生了EXTI Line中断
-     {
-
-     if (WM_IsWindow(WinPara.hWinMain))
-     {
-     WM_SendMessageNoPara(WinPara.hWinMain ,MY_MESSAGE_SNAPSHOT);
-
-     }
-
-     EXTI_ClearITPendingBit(EXTI_Line0); //清除中断标志位
-     }
-=======
         if (EXTI_GetITStatus(EXTI_Line0) != RESET) //确保是否产生了EXTI Line中断
         {
 
@@ -1677,7 +1122,6 @@ MY_MESSAGE_RTC消息并不是emXGUI默认的系统消息，而是我们为了让
 
         EXTI_ClearITPendingBit(EXTI_Line0); //清除中断标志位
         }
->>>>>>> dev
      }
 
 
@@ -1690,249 +1134,6 @@ MY_MESSAGE_RTC消息并不是emXGUI默认的系统消息，而是我们为了让
     :linenos:
     :name: 代码清单17_14
 
-<<<<<<< HEAD
-     /**
-     * @brief Icon窗口回调函数
-     * @param none
-     * @retval none
-     */
-     static void _cbIconWin(WM_MESSAGE * pMsg)
-     {
-     WM_HWIN hWin;
-
-     WM_HWIN hItem;
-     WM_HWIN hParent;
-
-     WM_MOTION_INFO * pInfo;
-
-     int NCode;
-     int Id;
-     int Sel;
-
-     unsigned char i,j;
-     hParent = pMsg->hWin;
-
-     switch (pMsg->MsgId) {
-
-     case WM_CREATE:
-
-     for (i=0; i<VIRTUAL_WIN_NUM; i++) {
-     /*
-     * 创建图标控件
-     */
-
-     hWin = ICONVIEW_CreateEx(i*240, 5, WinPara.xSizeWin, WinPara.ySizeWin, hParent, WM_CF_SHOW | WM_CF_HASTRANS,
-     0, GUI_ID_ICONVIEW0+i, 55, 70);
-
-
-     /* 设置选定图标的颜色 */
-     ICONVIEW_SetBkColor(hWin, ICONVIEW_CI_SEL, GUI_BLUE | 0xC0000000);
-     /* 设置图标的字体 */
-     ICONVIEW_SetFont(hWin, &GUI_Font13B_ASCII);
-
-     /* 设置初始选择的图标为 -1 (表示尚未选择)*/
-     ICONVIEW_SetSel(hWin,-1);
-     }
-     /* 设置当前索引 */
-     WinPara.ctr_index = 0;
-     /* 显示第一个图标页 */
-     hWin = WM_GetDialogItem(pMsg->hWin,GUI_ID_ICONVIEW0);
-     /*
-     * 添加图标到图标控件
-     */
-     for (j = 0 ; j < ICON_PAGE_NUM && j < GUI_COUNTOF(_aBitmapItem); j++) {
-     ICONVIEW_AddBitmapItem(hWin, _aBitmapItem[j].pBitmap, _aBitmapItem[j].pText);
-     }
-
-     /* 显示第二个图标页 */
-     hWin = WM_GetDialogItem(pMsg->hWin,GUI_ID_ICONVIEW1);
-
-     /*
-     * 添加图标到图标控件
-     */
-     for (j = 0 ; j < ICON_PAGE_NUM && j < GUI_COUNTOF(_aBitmapItem2); j++) {
-     ICONVIEW_AddBitmapItem(hWin, _aBitmapItem2[j].pBitmap, _aBitmapItem2[j].pText);
-     }
-
-     break;
-
-     case WM_NOTIFY_PARENT:
-
-     Id = WM_GetId(pMsg->hWinSrc); // 控件的ID
-     NCode = pMsg->Data.v; // 通知代码
-
-     switch (Id) {
-
-     case GUI_ID_ICONVIEW0: // 图标控件0
-
-     switch (NCode) {
-     case WM_NOTIFICATION_RELEASED:
-     //case WM_NOTIFICATION_SEL_CHANGED:
-     /*
-     * 获取当前选中的图标
-     */
-     Sel = ICONVIEW_GetSel(pMsg->hWinSrc);
-
-     switch (Sel) {
-     case 0:
-     GUI_Delay(500); //短暂延时以显示触摸效果
-     ShowTips(pMsg->hWin); //提示让用户等待
-     WFGUI_SDView();
-     break;
-
-     case 1:
-     GUI_Delay(500); //短暂延时以显示触摸效果
-     ShowTips(pMsg->hWin); //提示让用户等待
-     WFGUI_Time();
-     break;
-
-     case 2:
-     GUI_Delay(500);
-     ShowTips(pMsg->hWin); //提示让用户等待
-     WFGUI_Temperature();
-
-     break;
-
-     case 3:
-     GUI_Delay(500);
-     ShowTips(pMsg->hWin); //提示让用户等待
-     WFGUI_ImageReader();
-
-     break;
-
-     case 4:
-     GUI_Delay(500);
-     ShowTips(pMsg->hWin); //提示让用户等待
-     WFGUI_TextReader();
-     break;
-
-     case 5:
-     GUI_Delay(500); //短暂延时以显示触摸效果
-     ShowTips(pMsg->hWin); //提示让用户等待
-     WFGUI_Message();
-     break;
-
-     case 6:
-     GUI_Delay(500); //短暂延时以显示触摸效果
-     ShowTips(pMsg->hWin); //提示让用户等待
-     WFGUI_Phone();
-     break;
-
-     case 7:
-     GUI_Delay(500);
-     ShowTips(pMsg->hWin); //提示让用户等待
-     WFGUI_Camera();
-     break;
-     default:
-     break;
-     }
-
-     /* 获取ICON的句柄 */
-     hItem = WM_GetDialogItem(hParent, GUI_ID_ICONVIEW0);
-     /* 设置初始选择的图标为 -1 (表示尚未选择)*/
-     ICONVIEW_SetSel(hItem,-1);
-     break;//WM_NOTIFICATION_RELEASED
-     } //NCODE
-
-     break; //ICONVIEW0
-
-     case GUI_ID_ICONVIEW1: // 图标控件1
-
-     if (NCode == WM_NOTIFICATION_RELEASED) {
-
-     /*
-     * 获取当前选中的图标
-     */
-     Sel = ICONVIEW_GetSel(pMsg->hWinSrc);
-
-     switch (Sel) {
-     case 0:
-     case 1:
-     case 2:
-     GUI_Delay(500);
-     ShowTips(pMsg->hWin); //提示让用户等待
-     WFGUI_UserAPP();
-     break;
-     default:
-     break;
-     }
-
-     /* 获取ICON的句柄 */
-     hItem = WM_GetDialogItem(hParent, GUI_ID_ICONVIEW1);
-     /* 设置初始选择的图标为 -1 (表示尚未选择)*/
-     ICONVIEW_SetSel(hItem,-1);
-     }
-     break;
-
-     default:
-     break;
-     } //ID
-
-     break; //NOTIFYPARENT
-
-     case WM_MOTION:
-     pInfo = (WM_MOTION_INFO *)pMsg->Data.p;
-     if (pInfo) {
-     switch (pInfo->Cmd) {
-     case WM_MOTION_INIT:
-     pInfo->SnapX = 240; //像素对齐
-     pInfo->SnapY = 0;
-     pInfo->Period = 500;
-
-     break;
-
-     case WM_MOTION_MOVE:
-     /* 禁止图标控件 ，防止误触发*/
-     for (i=0; i<VIRTUAL_WIN_NUM; i++) {
-     hWin = WM_GetDialogItem(pMsg->hWin,GUI_ID_ICONVIEW0+i);
-     WM_DisableWindow(hWin);
-     }
-     break;
-
-     default:
-     break;
-     }
-     /* 移动结束 */
-     if (pInfo->FinalMove) {
-     /* 移动结束，使能图标控件 */
-     for (i=0; i<VIRTUAL_WIN_NUM; i++) {
-     hWin = WM_GetDialogItem(pMsg->hWin,GUI_ID_ICONVIEW0+i);
-     WM_EnableWindow(hWin);
-     }
-     //xpos指向窗口移动的距离，向左移动为负。
-     //一般第一窗口移动结束时xpos=-1
-     if (pInfo->xPos >= -120 && pInfo->xPos ) {
-     WinPara.ctr_index = 0; //第一个窗口
-     WM_SendMessageNoPara(WinPara.hWinCtrl,MY_MESSAGE_CTRLCHANGE);
-     //WM_Paint(WinPara.hWinCtrl); //重绘ctrl窗口，刷新index
-
-     } else if (pInfo->xPos < -120) {//一般第二窗口移动结束时xpos=-239
-     WinPara.ctr_index = 1; //第二个窗口
-     WM_SendMessageNoPara(WinPara.hWinCtrl,MY_MESSAGE_CTRLCHANGE);
-     // WM_Paint(WinPara.hWinCtrl); //重绘ctrl窗口，刷新index
-     }
-
-
-     }
-     }
-
-     break;
-
-     case WM_PAINT: //重绘背景
-     GUI_SetColor(GUI_BLACK);
-     GUI_FillRect(0,0,WinPara.xSizeWin *VIRTUAL_WIN_NUM ,WinPara.ySizeWin);
-     break; //WM_PAINT
-
-     default:
-     WM_DefaultProc(pMsg);
-
-     }
-
-
-     }
-
-
-=======
     /**
     * @brief  Icon窗口回调函数
     * @param  none
@@ -2176,7 +1377,6 @@ MY_MESSAGE_RTC消息并不是emXGUI默认的系统消息，而是我们为了让
     
     
     }
->>>>>>> dev
 
 回调函数中主要处理了以下消息：
 
@@ -2289,46 +1489,6 @@ erature.c文件中的温度传感器应用为例，见 代码清单17_17_。
     :name: 代码清单17_17
 
     /**
-<<<<<<< HEAD
-    * @brief WFGUI_Temperature 温度计主函数
-    *
-    * @param none
-    * @retval none
-    */
-    void WFGUI_Temperature(void)
-
-     {
-     WM_HWIN hGraph = 0;
-
-     HANDLE_LIST *hDlg = hAPPLinkedList_NewNode();
-
-     WM_SetCreateFlags(WM_CF_MEMDEV);
-
-     /* 根据资源表，创建温度计窗口 */
-     hDlg->hAPP = GUI_CreateDialogBox(_aDialogCreate, GUI_COUNTOF(_aDialogCreate), &_cbTEMPWin,
-     WinPara.hWinMain , 0, 0);
-
-     /* 添加结点到链表 */
-     hAPPLinkedList_AddTail(hDlg);
-     /* 向ctrl窗口发送消息 */
-     WM_SendMessageNoPara(WinPara.hWinCtrl,MY_MESSAGE_CTRLCHANGE);
-
-     InitTEMPSensor();
-
-     /* 如果本窗口有效，则一直更新数据 */
-     while (WM_IsWindow( hDlg->hAPP)) {
-     if (!_Stop) {
-     GUI_Delay(10);
-     if (!hGraph) {
-     hGraph = WM_GetDialogItem( hDlg->hAPP, GUI_ID_GRAPH0);
-     }
-     //_AddValues(hGraph);
-     GetTEMPData();
-     }
-     GUI_Delay(50);
-     }
-     }
-=======
     * @brief  WFGUI_Temperature 温度计主函数
     *
     * @param  none
@@ -2367,7 +1527,6 @@ erature.c文件中的温度传感器应用为例，见 代码清单17_17_。
             GUI_Delay(50);
         }
     }
->>>>>>> dev
 
 我们看代码中的13~22行，先是调用了hAPPLinkedList_NewNode函数新建了一个结点，结点指针为hDlg，接着调用emXGUI的库函数GUI_CreateDialogBox创建一个温度计使用的窗口，并把函数的返回值(即温度计窗口句柄)赋值给了结点的数据域hDlg->hAPP变量，最后
 调用hAPPLinkedList_AddTail函数把该结点添加到了链表尾，方便后面管理应用程序。
@@ -2389,22 +1548,6 @@ erature.c文件中的温度传感器应用为例，见 代码清单17_17_。
      */
      HANDLE_LIST* hAPPLinkedList_GetAppTop(void)
      {
-<<<<<<< HEAD
-     HANDLE_LIST *node;
-
-
-     if (!list_empty(&hAppHead.listNode)) { //若链表非空
-
-     /* hAppHead.listNode.prev 头结点的前一个结点，即尾部结点*/
-     node = list_entry(hAppHead.listNode.prev,HANDLE_LIST,listNode);
-
-     DEBUG("\r\n node.app =%ld \\r\n ",node->hAPP);
-
-     return node;
-
-     } else
-     return NULL;
-=======
         HANDLE_LIST *node;
 
 
@@ -2419,7 +1562,6 @@ erature.c文件中的温度传感器应用为例，见 代码清单17_17_。
 
         } else
             return NULL;
->>>>>>> dev
 
      }
 
@@ -2432,53 +1574,6 @@ erature.c文件中的温度传感器应用为例，见 代码清单17_17_。
     :linenos:
     :name: 代码清单17_19
 
-<<<<<<< HEAD
-     /**
-     * @brief _cbButtonWin,控制按钮窗口回调函数
-     * @param none
-     * @retval none
-     */
-     static void _cbButtonWin(WM_MESSAGE * pMsg)
-     {
-     int Id,NCode;
-     WM_HWIN hItem;
-
-     switch (pMsg->MsgId) {
-
-     case WM_PAINT: //重绘窗口
-     GUI_SetColor(GUI_BLACK);
-     GUI_FillRect(0,0,WM_GetWindowSizeX(pMsg->hWin) ,_GetWindowSizeY(pMsg->hWin));
-     break;
-
-     case WM_CREATE: //创建窗口
-     /* 返回键 */
-     hItem = BUTTON_CreateEx(0,0,40, 20,pMsg->hWin, WM_CF_SHOW|WM_CF_MEMDEV , 0, GUI_ID_BUTTON0);
-     BUTTON_SetText(hItem, "<");
-     break;
-
-     case WM_NOTIFY_PARENT: //处理子窗口消息
-     Id = WM_GetId(pMsg->hWinSrc);
-     NCode = pMsg->Data.v;
-
-     if (NCode == WM_NOTIFICATION_RELEASED) {
-     if (Id == GUI_ID_BUTTON0) {
-     HANDLE_LIST *hAPPOnTop;
-     /* 获取最上层的窗口句柄 */
-     hAPPOnTop = hAPPLinkedList_GetAppTop();
-     if (hAPPOnTop != NULL) {
-     WM_DeleteWindow(hAPPOnTop->hAPP); // 关闭窗口
-     }
-     } else if (Id == GUI_ID_BUTTON1) {
-     //button1可以制作home键，现在没有实现
-     }
-     }
-     break;
-
-     default:
-     break;
-     }
-     }
-=======
     /**
     * @brief  _cbButtonWin,控制按钮窗口回调函数
     * @param  none
@@ -2527,7 +1622,6 @@ erature.c文件中的温度传感器应用为例，见 代码清单17_17_。
             break;
         }
     }
->>>>>>> dev
 
 当用户按下返回键时，触发进入它的回调函数，它会运行至代码第25~37行，在处理这个返回键消息时，我们使用hAPPLinkedList_GetAppTop函数从链表中获取了正在显示的应用程序句柄结点，接着通过结点的数据域找到相应的句柄，调用emXGUI的库函数WM_DeleteWindow关闭应用程序
 窗口。
@@ -2542,55 +1636,6 @@ erature.c文件中的温度传感器应用为例，见 代码清单17_17_。
     :linenos:
     :name: 代码清单17_20
 
-<<<<<<< HEAD
-     /**
-     * @brief hAPPLinkedList_Del删除链表中的结点，并释放malloc空间
-     * @param none
-     * @retval none
-     */
-     void hAPPLinkedList_Del(HANDLE_LIST *node)
-     {
-     /* TBD node在释放时没有被设置为NULL */
-
-     if (node == NULL || (node->listNode.next == NULL && node->listNode.prev == NULL)) {
-     DEBUG("\r\n hAPP linkedList free error\r\n ");
-     return ;
-     }
-
-     /* 删除在链表里的记录 */
-     list_del(&node->listNode);
-     /* 释放结点的malloc空间 */
-     free(node);
-     }
-
-     /**
-     * @brief hAPPLinkedList_GetAppNode根据APP句柄获取链表结点
-     * @param none
-     * @retval app结点句柄，没有的话返回NULL
-     */
-     HANDLE_LIST* hAPPLinkedList_GetAppNode(WM_HWIN hAPP)
-     {
-     struct list_head *pos;
-     HANDLE_LIST *node;
-
-     list_for_each(pos,&hAppHead.listNode) {
-     /* TBD 这里有个warning，不知道影响大不大*/
-     node = list_entry(pos,HANDLE_LIST,listNode);
-     DEBUG("\r\n node.app =%ld \\r\n ",node->hAPP);
-
-     /* 返回与输入app句柄相同的结点 */
-     if (node->hAPP == hAPP) {
-     return node;
-     }
-     }
-
-     /* 找不到与输入app句柄相同的结点 */
-     if (pos == &hAppHead.listNode)
-     return NULL;
-
-     return NULL;
-     }
-=======
     /**
     * @brief  hAPPLinkedList_Del删除链表中的结点，并释放malloc空间
     * @param  none
@@ -2638,7 +1683,6 @@ erature.c文件中的温度传感器应用为例，见 代码清单17_17_。
     
         return NULL;
     }
->>>>>>> dev
 
 在hAPPLinkedList_Del函数删除链表操作时，检查将要删除的结点是否为空，若不为空，仅需要调用Linux链表宏list_del，并把要删除的链表结点作为参数输入宏中即可，删除了链表结点后，我们还需要调用free函数释放结点的空间。
 
@@ -2672,33 +1716,6 @@ erature.c文件中的温度传感器应用为例，见 代码清单17_17_。
      static void _cbTEMPWin(WM_MESSAGE * pMsg)
      {
 
-<<<<<<< HEAD
-     int i, NCode, Id, Value;
-     WM_HWIN hDlg, hItem;
-     HANDLE_LIST *appNode;
-
-     hDlg = pMsg->hWin;
-
-     switch (pMsg->MsgId) {
-
-     /* ...源代码这里还有很多消息，
-     由于篇幅问题在此省略了，具体可查看工程源代码...*/
-
-     case WM_DELETE:
-     /* 获取app句柄对应的链表结点 */
-     appNode = hAPPLinkedList_GetAppNode(pMsg->hWin);
-     if (appNode != NULL) {
-     /* 删除app句柄链表里的记录 */
-     hAPPLinkedList_Del(appNode);
-     /* 发送消息通知ctrl窗口*/
-     WM_SendMessageNoPara(WinPara.hWinCtrl,MY_MESSAGE_CTRLCHANGE);
-     }
-     break;
-
-     default:
-     WM_DefaultProc(pMsg);
-     }
-=======
         int i, NCode, Id, Value;
         WM_HWIN hDlg, hItem;
         HANDLE_LIST *appNode;
@@ -2724,7 +1741,6 @@ erature.c文件中的温度传感器应用为例，见 代码清单17_17_。
         default:
             WM_DefaultProc(pMsg);
         }
->>>>>>> dev
      }
 
 

@@ -85,39 +85,6 @@ TextOut函数
 
      void GUI_DEMO_TextOut(void)
      {
-<<<<<<< HEAD
-     HWND hwnd;
-     WNDCLASS wcex;
-     MSG msg;
-
-     wcex.Tag = WNDCLASS_TAG;
-     wcex.Style = CS_HREDRAW | CS_VREDRAW;
-     wcex.lpfnWndProc = WinProc; //设置主窗口消息处理的回调函数.
-
-     wcex.cbClsExtra = 0;
-     wcex.cbWndExtra = 0;
-     wcex.hInstance = NULL;
-     wcex.hIcon = NULL;
-     wcex.hCursor = NULL;
-
-     //创建主窗口
-     hwnd =CreateWindowEx( NULL,
-     &wcex,
-     _T("GUI_DEMO - TextOut"), //窗口名称
-     WS_CAPTION|WS_DLGFRAME|WS_BORDER|WS_CLIPCHILDREN,
-     0,0,GUI_XSIZE,GUI_YSIZE, //窗口位置和大小
-     NULL,NULL,NULL,NULL);
-
-     //显示主窗口
-     ShowWindow(hwnd,SW_SHOW);
-
-     //开始窗口消息循环(窗口关闭并销毁时,GetMessage将返回FALSE,退出本消息循环)。
-     while(GetMessage(&msg,hwnd))
-     {
-     TranslateMessage(&msg);
-     DispatchMessage(&msg);
-     }
-=======
         HWND hwnd;
         WNDCLASS wcex;
         MSG msg;
@@ -149,7 +116,6 @@ TextOut函数
             TranslateMessage(&msg);
             DispatchMessage(&msg);
         }
->>>>>>> dev
      }
 
 创建父窗口，标题栏为“GUI_DEMO_TextOut”，带有大小边框，设置winProc作为窗口回调函数。
@@ -165,17 +131,10 @@ TextOut函数
 
     case WM_CREATE: //窗口创建时,会自动产生该消息,在这里做一些初始化的操作或创建子窗口.
      {
-<<<<<<< HEAD
-     GetClientRect(hwnd,&rc); //获得窗口的客户区矩形.
-
-     CreateWindow(BUTTON,L"OK",WS_VISIBLE,
-     rc.w-80,8,68,32,hwnd,ID_OK,NULL,NULL); //创建一个按钮(示例).
-=======
         GetClientRect(hwnd,&rc); //获得窗口的客户区矩形.
 
         CreateWindow(BUTTON,L"OK",WS_VISIBLE,
         rc.w-80,8,68,32,hwnd,ID_OK,NULL,NULL); //创建一个按钮(示例).
->>>>>>> dev
      }
 
 WM_CREATE消息中，在坐标（rc.w-80,8）处创建了一个OK按键。用来退出该界面。
@@ -190,19 +149,6 @@ WM_CREATE消息中，在坐标（rc.w-80,8）处创建了一个OK按键。用来
      case WM_NOTIFY: //WM_NOTIFY消息:wParam低16位为发送该消息的控件ID,高16位为通知码;
      lParam指向了一个NMHDR结构体.
      {
-<<<<<<< HEAD
-     u16 code,id;
-
-     code =HIWORD(wParam); //获得通知码类型.
-     id =LOWORD(wParam); //获得产生该消息的控件ID.
-
-     if(id==ID_OK && code==BN_CLICKED) // 按钮“单击”了.
-
-     {
-     PostCloseMessage(hwnd); //使产生WM_CLOSE消息关闭窗口.
-     }
-     break;
-=======
         u16 code,id;
 
         code =HIWORD(wParam); //获得通知码类型.
@@ -214,7 +160,6 @@ WM_CREATE消息中，在坐标（rc.w-80,8）处创建了一个OK按键。用来
             PostCloseMessage(hwnd); //使产生WM_CLOSE消息关闭窗口.
         }
         break;
->>>>>>> dev
      }
 
 WM_NOTIFY消息用来检测OK键是否被按下。使用HIWORD和LOWORD函数读取控件的ID和通知码。如果OK键被按下，则发送WM_CLOSE消息关闭窗口。
@@ -229,39 +174,6 @@ WM_NOTIFY消息用来检测OK键是否被按下。使用HIWORD和LOWORD函数读
 
      case WM_PAINT: //窗口需要绘制时，会自动产生该消息.
      {
-<<<<<<< HEAD
-     PAINTSTRUCT ps;
-     HDC hdc;
-     RECT rc;
-     int i,t,y;
-     WCHAR wbuf[128];
-     POINT Point;
-     GetClientRect(hwnd,&rc);
-
-     hdc =BeginPaint(hwnd,&ps); //开始绘图
-
-     ////用户的绘制内容...
-     SetTextColor(hdc,MapRGB(hdc,10,10,100));
-     t=GUI_GetTickCount();
-     y=24;
-     i=0;
-     Point.x = 0;
-     while(y<rc.h)
-     {
-     Point.y = y;
-     ClientToScreen(hwnd, &Point, 1);
-     if(Point.y > 480) break;
-     TextOut(hdc,10,y,L"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",-1);
-     y+=20;
-     i++;
-     }
-     t =GUI_GetTickCount()-t;
-     SetTextColor(hdc,MapRGB(hdc,250,10,10));
-     x_wsprintf(wbuf,L"TextOut Time used:%dms; %.1fms/line",t,(float)t/(float)i);
-     TextOut(hdc,10,4,wbuf,-1);
-     EndPaint(hwnd,&ps); //结束绘图
-     break;
-=======
         PAINTSTRUCT ps;
         HDC hdc;
         RECT rc;
@@ -293,7 +205,6 @@ WM_NOTIFY消息用来检测OK键是否被按下。使用HIWORD和LOWORD函数读
         TextOut(hdc,10,4,wbuf,-1);
         EndPaint(hwnd,&ps); //结束绘图
         break;
->>>>>>> dev
      }
 
 在WM_PAINT消息中，绘制显示的文字。绘制过程中，需要调用BeginPaint来获取绘图上下文和EndPaint函数结束绘图。使用GUI_GetTickCount函数来得到当前系统的时间，存放到变量t中。TextOut函数用来输出文本，这里显示的内容为：0123456789ABCDEFGHIJK
@@ -311,21 +222,6 @@ LMNOPQRSTUVWXYZ。我们使用的字体为GB2312_20_4BPP，字体高是20，所�
 
      void GUI_AppMain(void)
      {
-<<<<<<< HEAD
-     while(1)
-     {
-     GUI_DEMO_Button();
-     GUI_DEMO_Checkbox();
-     GUI_DEMO_Radiobox();
-     GUI_DEMO_Textbox();
-     GUI_DEMO_Progressbar();
-
-     GUI_DEMO_Scrollbar();
-     GUI_DEMO_Listbox();
-     GUI_DEMO_Messagebox();
-     GUI_DEMO_TextOut();
-     }
-=======
         while(1)
         {
             GUI_DEMO_Button();
@@ -339,7 +235,6 @@ LMNOPQRSTUVWXYZ。我们使用的字体为GB2312_20_4BPP，字体高是20，所�
             GUI_DEMO_Messagebox();
             GUI_DEMO_TextOut();
         }
->>>>>>> dev
      }
 
 将GUI_DEMO_TextOut函数创建的窗口，加入到GUI_AppMain中，如 代码清单19_7_。
