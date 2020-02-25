@@ -15,6 +15,7 @@ Surface是对绘图设备的描述，其记录了绘图设备的颜色格式，�
     :linenos:
     :name: 代码清单5_1
 
+<<<<<<< HEAD
      //函数原型
      SURFACE* CreateSurface(SURF_FORMAT Format,U32 nWidth,U32 nHeight,
      int LineBytes,void *Bits);
@@ -25,6 +26,18 @@ Surface是对绘图设备的描述，其记录了绘图设备的颜色格式，�
      LCD_XSIZE,LCD_YSIZE,
      LCD_XSIZE*2,
      (void*)LCD_FRAME_BUFFER);
+=======
+    //函数原型
+    SURFACE* CreateSurface(SURF_FORMAT Format,U32 nWidth,U32 nHeight,
+                int LineBytes,void *Bits);
+    //举例说明            
+    //创建绘图表面
+    /* 直接指定地址的方式， 显存地址，*/
+    pSurf = GUI_CreateSurface(SURF_RGB565, 
+                            LCD_XSIZE,LCD_YSIZE,
+                            LCD_XSIZE*2,
+                            (void*)LCD_FRAME_BUFFER);
+>>>>>>> dev
 
 CreateSurface函数参数说明如下：
 
@@ -38,7 +51,11 @@ nWidth 、nHeight ：Surface的宽度和高度，一般是LCD的宽度和高度�
 
 LineBytes ：Surface每行的内存字节数，这个值取决于Surface的颜色格式。
 如果使用的SURF_ARGB8888，即每个像素占4个字节，则每行的内存字节数等于行的像素数*每个像素的字节数（LCD_XSIZE
+<<<<<<< HEAD
 *4）。例子中，我们使用的是RGB565，因此，每行内存字节数为LCD_XSIZE *2。
+=======
+\*4）。例子中，我们使用的是RGB565，因此，每行内存字节数为LCD_XSIZE \*2。
+>>>>>>> dev
 
 Bits：显存的首地址。例程中采用SDRAM作为显存，其首地址为0xD0000000。
 
@@ -54,9 +71,13 @@ Drawing Context
     :name: 代码清单5_2
 
     SetBrushColor(hdc,MapRGB(hdc,30,150,30));
+<<<<<<< HEAD
 
     SetPenColor(hdc,MapRGB(hdc,0,250,0));
 
+=======
+    SetPenColor(hdc,MapRGB(hdc,0,250,0));
+>>>>>>> dev
     SetTextColor(hdc,MapRGB(hdc,0,50,100));
 
 窗口及消息机制(Window & Message)
@@ -144,6 +165,7 @@ MSG结构体成员（文件emXGUI.。随后调用DispatchMessage函数将该获�
     :linenos:
     :name: 代码清单5_4
 
+<<<<<<< HEAD
      typedef struct tagMSG {
      HWND hwnd; //目标窗口
      UINT message; //消息
@@ -152,6 +174,16 @@ MSG结构体成员（文件emXGUI.。随后调用DispatchMessage函数将该获�
      LONG ExtData; //扩展数据
      UINT time; //消息产生时间
      } MSG;
+=======
+    typedef struct tagMSG {
+        HWND    hwnd;    //目标窗口
+        UINT  message; //消息
+        WPARAM  wParam;  //参数0
+        LPARAM  lParam;  //参数1
+        LONG  ExtData; //扩展数据
+        UINT  time;  //消息产生时间
+    } MSG;
+>>>>>>> dev
 
 该结构体的成员变量说明如下：
 
@@ -174,12 +206,20 @@ HWND是struct tagWINDOW*的别名。见 代码清单5_5_ HWND类型说明（文�
     :linenos:
     :name: 代码清单5_6
 
+<<<<<<< HEAD
     #define WM_USER 0x8000 //0x8000-0xFFFF for user custom
 
      //用户自定义消息（emXGUI.h文件没有以下宏，只是举个例子来说明）
      #define MY_MSG_0 WM_USER+1
      #define MY_MSG_1 WM_USER+2
      #define MY_MSG_2 WM_USER+3
+=======
+    #define WM_USER   0x8000 //0x8000-0xFFFF for user custom
+    //用户自定义消息（emXGUI.h文件没有以下宏，只是举个例子来说明）
+    #define MY_MSG_0 WM_USER+1
+    #define MY_MSG_1 WM_USER+2
+    #define MY_MSG_2 WM_USER+3
+>>>>>>> dev
 
 3) wParam和lParam：发送消息附带的参数。每个消息类型的参数都不同，可以是空值，即没有参数。
 
@@ -196,12 +236,21 @@ HWND是struct tagWINDOW*的别名。见 代码清单5_5_ HWND类型说明（文�
     :linenos:
     :name: 代码清单5_7
 
+<<<<<<< HEAD
      //开始窗口消息循环(窗口关闭并销毁时,GetMessage将返回FALSE,退出本消息循环)。
      while (GetMessage(&msg,hwnd)) /*获取消息。*/
      {
      TranslateMessage(&msg);/*消息转换,由按键消息(WM_KEYDOWN)转换产生字符消息(WM_CHAR)。*/
      DispatchMessage(&msg);/*派发消息。*/
      }
+=======
+    //开始窗口消息循环(窗口关闭并销毁时,GetMessage将返回FALSE,退出本消息循环)。
+    while (GetMessage(&msg,hwnd)) /*获取消息。*/
+    {
+        TranslateMessage(&msg);/*消息转换,由按键消息(WM_KEYDOWN)转换产生字符消息(WM_CHAR)。*/
+        DispatchMessage(&msg);/*派发消息。*/
+    }
+>>>>>>> dev
 
 当目标窗口收到消息后，会执行消息处理回调函数。用户创建主窗口时，需要提供一个为“消息处理回调函数”的函数地址。
 该函数即为窗口过程函数，是用户响应处理窗口消息的地方。
@@ -213,6 +262,7 @@ HWND是struct tagWINDOW*的别名。见 代码清单5_5_ HWND类型说明（文�
     :linenos:
     :name: 代码清单5_8
 
+<<<<<<< HEAD
      static LRESULT WinProc(HWND hwnd,UINT msg,WPARAM wParam,LPARAM lParam)
      {
      RECT rc;
@@ -236,6 +286,30 @@ HWND是struct tagWINDOW*的别名。见 代码清单5_5_ HWND类型说明（文�
 
      return WM_NULL;
      }
+=======
+    static LRESULT  WinProc(HWND hwnd,UINT msg,WPARAM wParam,LPARAM lParam)
+    {
+        RECT rc;
+        switch (msg) {
+        case WM_CREATE: { //窗口创建时,会自动产生该消息,在这里做一些初始化的操作或创建子窗口.
+            GetClientRect(hwnd,&rc); //获得窗口的客户区矩形.
+    //创建一个按钮(示例).
+            CreateWindow(BUTTON,L"OK",WS_VISIBLE,rc.w-80,8,68,32,hwnd,ID_OK,NULL,NULL); 
+        }
+        return TRUE;
+        ////
+        //省略部分代码//
+        ////
+    
+        default: { //用户不关心的消息,由系统处理.
+            return DefWindowProc(hwnd,msg,wParam,lParam);
+        }
+    
+        }
+    
+        return WM_NULL;
+    }
+>>>>>>> dev
 
 标准消息类型及参数说明
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -250,6 +324,7 @@ WM_CREATE消息。当窗口被创建时，会收到WM_CREATE消息，用户可�
     :linenos:
     :name: 代码清单5_9
 
+<<<<<<< HEAD
      void GUI_DEMO(void)
      {
      创建主窗口；
@@ -260,12 +335,24 @@ WM_CREATE消息。当窗口被创建时，会收到WM_CREATE消息，用户可�
 
      消息循环；
      }
+=======
+    void GUI_DEMO(void)
+    {
+        //创建主窗口；
+        //创建子控件1；
+        //创建子控件2；
+        //省略一些内容
+        //创建子控件10；
+        //消息循环；
+    }
+>>>>>>> dev
 
 .. code-block:: c
     :caption: 代码清单 5_10 示例程序2
     :linenos:
     :name: 代码清单5_10
 
+<<<<<<< HEAD
      LRESULT win_proc(HWND hwnd,UINT msg,
      WPARAM wParam,LPARAM lParam)
      {
@@ -280,6 +367,21 @@ WM_CREATE消息。当窗口被创建时，会收到WM_CREATE消息，用户可�
      return TRUE;
      }
      }
+=======
+    LRESULT win_proc(HWND hwnd,UINT msg,
+            WPARAM wParam,LPARAM lParam)
+    {
+    switch(msg)
+        {
+            case WM_CREATE:
+                //创建子控件1；
+                //创建子控件2；
+                //省略一些内容
+                //创建子控件10；
+            return TRUE;
+        }
+    }
+>>>>>>> dev
 
 对比一下 代码清单5_9_ 和 代码清单5_10_ ，两种代码都可以实现同一个功能：创建控件。但是 代码清单5_10_
 是在GUI_DEMO这个函数中定义控件。如果我们需要十几个控件的话，就会显得GUI_DEMO_Button函数的内容特别多，影响美观。因此将创建子窗口放在WM_CREATE消息中，使得代码条理清晰，内容明确。
@@ -318,6 +420,7 @@ WM_TIMER
     :linenos:
     :name: 代码清单5_12
 
+<<<<<<< HEAD
      case WM_CREATE: //窗口创建时,会自动产生该消息,在这里做一些初始化的操作或创建子窗口
      {
      GetClientRect(hwnd,&rc); //获取窗口坐标
@@ -351,6 +454,41 @@ WM_TIMER
      DestroyWindow(hwnd); //调用DestroyWindow函数来销毁窗口（该函数会产生WM_DESTROY消息）。
      return TRUE; //关闭窗口返回TRUE。
      }
+=======
+    case WM_CREATE: //窗口创建时,会自动产生该消息,在这里做一些初始化的操作或创建子窗口
+    {
+        GetClientRect(hwnd,&rc); //获取窗口坐标       
+        CreateWindow(BUTTON,L"OK",WS_VISIBLE,
+                rc.w-70,rc.h-40,68,32,hwnd,ID_OK,NULL,NULL);
+        SetTimer(hwnd,0,1000,TMR_START,NULL);
+        return TRUE;
+    }
+
+    case WM_TIMER:
+    {
+        time++;        
+        InvalidateRect(hwnd ,NULL,TRUE); //发送WM_PAINT消息
+        break;
+    }  
+
+    case WM_PAINT: //窗口需要绘制时，会自动产生该消息.
+    {
+        PAINTSTRUCT ps;
+        HDC hdc;      
+        hdc =BeginPaint(hwnd,&ps);  
+        x_wsprintf(wbuf, L"Time(s):%d", time); 
+        TextOut(hdc,300,200,wbuf,-1); //显示时间
+        EndPaint(hwnd,&ps);
+        break;
+    }
+
+    case WM_CLOSE:
+    {
+        time = 0;
+        DestroyWindow(hwnd); //调用DestroyWindow函数来销毁窗口（该函数会产生WM_DESTROY消息）。
+        return TRUE; //关闭窗口返回TRUE。
+    }
+>>>>>>> dev
 
 代码清单5_12_，WM_CREATE消息中创建一个1s定时器，设置为循环定时触发定时器，开启定时器。
 
@@ -375,6 +513,7 @@ WM_TIMER
     :linenos:
     :name: 代码清单5_13
 
+<<<<<<< HEAD
      /*
      函数功能: 延时函数
      参数: ms: 延时时间(单位:毫秒)
@@ -387,6 +526,19 @@ WM_TIMER
 
      rt_thread_delay(ms);
      }
+=======
+    /*
+    函数功能: 延时函数
+    参数: ms: 延时时间(单位:毫秒) 
+    返回: 无
+    说明: 
+    */
+    void  GUI_msleep(u32 ms)
+    {
+        ms=rt_tick_from_millisecond(ms);
+        rt_thread_delay(ms);
+    }
+>>>>>>> dev
 
 WM_ERASEBKGND
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -403,6 +555,7 @@ WM_ERASEBKGND
     :linenos:
     :name: 代码清单5_14
 
+<<<<<<< HEAD
      case WM_ERASEBKGND:
      {
      画矩形（0，0，LCD宽，LCD高）；//清除桌面
@@ -410,6 +563,14 @@ WM_ERASEBKGND
 
      }
      return TRUE;
+=======
+    case  WM_ERASEBKGND:
+    {
+        //画矩形（0，0，LCD宽，LCD高）；//清除桌面
+        //显示文字（“桌面”）；
+    }
+    return TRUE;
+>>>>>>> dev
 
 代码清单5_14_，这里只是负责清除桌面背景，暂时没有涉及窗口重绘。所谓的桌面清除，其实就是画一个起点为（0，0），大小和桌面大小一样的矩形，再显示桌面的内容，这里显示的是桌面两个汉字。请读者注意，窗口的重绘不是在桌面背景清除消息中执行的。最终结果如 图5_6_。
 
@@ -435,6 +596,7 @@ WNDClass结构体定义在emXGUI.h文件中，具体定义如下：
     :linenos:
     :name: 代码清单5_15
 
+<<<<<<< HEAD
      typedef struct tagWNDCLASS{
      U32 Tag; //必须设置为 WNDCLASS_TAG值。
      U32 Style; //窗口类风格。
@@ -445,6 +607,19 @@ WNDClass结构体定义在emXGUI.h文件中，具体定义如下：
      HICON hIcon; //图标
      HCURSOR hCursor; //光标
      } WNDCLASS;
+=======
+    typedef struct tagWNDCLASS{
+        U32       Tag;          //必须设置为 WNDCLASS_TAG值。
+        U32       Style;        //窗口类风格。
+        WNDPROC   lpfnWndProc;  //窗口过程函数。
+        U32       cbClsExtra;   //窗口类扩展数据大小。
+        U32       cbWndExtra;   //窗口扩展数据大小。
+        HINSTANCE hInstance;
+        HICON     hIcon;        //图标
+        HCURSOR   hCursor;      //光标
+    
+    } WNDCLASS;
+>>>>>>> dev
 
 1) Tag：窗口类型标签。创建桌面，窗口时，该成员变量的值必须设置为 WNDCLASS_TAG，该成员变量主要是用来区分窗口和子控件。
 
@@ -470,9 +645,15 @@ WNDClass结构体定义在emXGUI.h文件中，具体定义如下：
     :linenos:
     :name: 代码清单5_16
 
+<<<<<<< HEAD
      HWND GUI_CreateDesktop(U32 dwExStyle, const WNDClass *wcex, LPCWSTR lpWindowName,
      U32 dwStyle, int x, int y, int nWidth, int nHeight,
      HWND hwndParent, UINT WinId,HINSTANCE hInstance,LPVOID lpParam);
+=======
+    HWND GUI_CreateDesktop(U32 dwExStyle, const WNDClass *wcex, LPCWSTR lpWindowName,
+            U32 dwStyle, int x, int y, int nWidth, int nHeight,
+            HWND hwndParent, UINT WinId,HINSTANCE hInstance,LPVOID lpParam);
+>>>>>>> dev
 
 1) dwExStyle：指定窗口的扩展样式。可以是WS_EX_LOCKPOS（窗口不能拖动）、WS_EX_LOCKZORDER（窗口不能通过点击来改变Z序）。这里的Z序指的是窗口在屏幕上显示时的前后顺序。
 
@@ -539,6 +720,7 @@ GUI_Startup函数初始化了GUI依赖的各种设备后，在末尾调用了示
     :linenos:
     :name: 代码清单5_17
 
+<<<<<<< HEAD
      /**
      * @brief 桌面回调函数
      * @param hwnd 当前处理该消息的窗口对象句柄
@@ -593,6 +775,60 @@ GUI_Startup函数初始化了GUI依赖的各种设备后，在末尾调用了示
      }
      return WM_NULL;
      }
+=======
+    /**
+    * @brief  桌面回调函数
+    * @param  hwnd 当前处理该消息的窗口对象句柄
+    * @param  msg 消息类型值，用以标识和区分当前产生的消息
+    * @param  wParam 消息参数值，根据msg消息代码值不同
+    * @param  lParam 消息参数值，根据msg消息代码值不同
+    * @retval 返回给SendMessage的值
+    */
+    static   LRESULT    desktop_proc(HWND hwnd,UINT msg,WPARAM wParam,LPARAM lParam)
+    {
+    switch(msg)
+    {
+        /* 桌面创建时,会产生该消息,可以在这里做一些初始化工作. */
+        case  WM_CREATE:  
+            ////创建1个20ms定时器，处理循环事件.
+            SetTimer(hwnd,1,20,TMR_START,NULL);
+            //创建App线程           
+            if(1)
+            {
+                rt_thread_t h;
+                h=rt_thread_create("GUI_APP",gui_app_thread,NULL,2048,5,5);
+                rt_thread_startup(h);       
+            }
+
+            break;
+        /* 定时处理输入设备的信息 */
+        case  WM_TIMER:
+        #if(GUI_INPUT_DEV_EN)
+            {
+            u16 id;
+
+            id =LOWORD(wParam);
+            if(id==1)
+            {
+                GUI_InputHandler(); //处理输入设备
+            }
+            }
+        #endif
+        break;
+        /* 客户区背景需要被擦除 */
+        case  WM_ERASEBKGND:
+        {
+        HDC hdc =(HDC)wParam;
+        _EraseBackgnd(hdc,NULL,hwnd);
+        }
+        return TRUE;
+        /* 用户不关心的信息，由系统处理 */
+        default:
+            return  DefDesktopProc(hwnd,msg,wParam,lParam);
+    }
+    return WM_NULL;
+    }
+>>>>>>> dev
 
 1) WM_CREATE消息
 
@@ -603,6 +839,7 @@ GUI_Startup函数初始化了GUI依赖的各种设备后，在末尾调用了示
     :linenos:
     :name: 代码清单5_18
 
+<<<<<<< HEAD
      static void gui_app_thread(void *p)
      {
      #if(GUI_TOUCHSCREEN_EN & GUI_TOUCHSCREEN_CALIBRATE)
@@ -628,6 +865,32 @@ GUI_Startup函数初始化了GUI依赖的各种设备后，在末尾调用了示
      // ShellWindowStartup();
      // return 0;
      }
+=======
+    static  void  gui_app_thread(void *p)
+    {
+    #if(GUI_TOUCHSCREEN_EN & GUI_TOUCHSCREEN_CALIBRATE)
+        {
+            int i=0;
+            while (TouchPanel_IsPenDown())
+            {
+                GUI_msleep(100);
+                if (i++>10) {
+                    ShowCursor(FALSE);
+                    TouchScreenCalibrate(NULL);
+                    ShowCursor(TRUE);
+                    break;
+                }
+            }
+        }
+    #endif
+
+        /* 调用APP函数 */
+        GUI_AppMain();
+    //   GUI_UserAppStart();
+    //    ShellWindowStartup();
+        //  return 0;
+    }
+>>>>>>> dev
 
 #if(GUI_TOUCHSCREEN_EN & GUI_TOUCHSCREEN_CALIBRATE)是条件编译，由于我们使用的是电容屏，不需要校准，因此GUI_TOUCHSCREEN_CALIBRATE为0。GUI_TOUCHSCREEN_EN为是否使能触摸屏，这里为1。所以#if的内容不执行。紧
 接着调用GUI_AppMain函数，我们自己定义的界面是放在此处执行的。
@@ -641,6 +904,7 @@ GUI_Startup函数初始化了GUI依赖的各种设备后，在末尾调用了示
     :linenos:
     :name: 代码清单5_19
 
+<<<<<<< HEAD
      /* 定时处理输入设备的信息 */
      case WM_TIMER:
      #if(GUI_INPUT_DEV_EN)
@@ -654,6 +918,20 @@ GUI_Startup函数初始化了GUI依赖的各种设备后，在末尾调用了示
      }
      #endif
      break;
+=======
+    /* 定时处理输入设备的信息 */
+    case  WM_TIMER:
+    #if(GUI_INPUT_DEV_EN)
+    {
+        u16 id;
+        id =LOWORD(wParam);
+        if (id==1) {
+            GUI_InputHandler(); //处理输入设备
+        }
+    }
+    #endif
+    break;
+>>>>>>> dev
 
 #if(GUI_INPUT_DEV_EN)是条件编译，GUI_INPUT_DEV_EN为是否使用输入设备，这里设置为1。函数LOWORD是取数据的低16位。WM_TIMER消息中，带有wParam参数。这里将wParam参数，也就是定时器的
 ID值赋给id变量。WM_CREATE消息中我们创建的定时器的ID是1，如果读取的ID是1，则执行GUI_InputHandler处理输入设备（这里我们只用到了触摸屏）。
@@ -663,6 +941,7 @@ ID值赋给id变量。WM_CREATE消息中我们创建的定时器的ID是1，如�
     :linenos:
     :name: 代码清单5_20
 
+<<<<<<< HEAD
      /**
      * @brief 需要被定时调用的触摸处理函数
      * @note 本例子中通过gui_input_port.c文件的GUI_InputHandler被定时调用
@@ -688,6 +967,32 @@ ID值赋给id变量。WM_CREATE消息中我们创建的定时器的ID是1，如�
      MouseInput(pt.x,pt.y,0);
      }
      }
+=======
+    /**
+    * @brief  需要被定时调用的触摸处理函数
+    * @note   本例子中通过gui_input_port.c文件的GUI_InputHandler被定时调用
+    * @param  无
+    * @retval 无
+    */
+    void  GUI_TouchHandler(void)
+    {
+        int act;
+        POINT pt;
+
+        /* 判断触摸状态及坐标 */
+        act =TouchDev_GetPoint(&pt);
+        if (act==TS_ACT_DOWN) {
+            /* 触摸按下，使用触摸坐标作为输入 */
+            MouseInput(pt.x,pt.y,MK_LBUTTON);
+        }
+
+        if (act==TS_ACT_UP) {
+            /* 触摸释放，使用当前光标作为输入*/
+            GetCursorPos(&pt);
+            MouseInput(pt.x,pt.y,0);
+        }
+    }
+>>>>>>> dev
 
 代码清单5_20_ 触摸处理函数（文件gui_touch_port.中，调用GUI_TouchHandler来获取触摸状态以及触摸坐标，保存在pt结构体中。
 
@@ -698,6 +1003,7 @@ ID值赋给id变量。WM_CREATE消息中我们创建的定时器的ID是1，如�
     :linenos:
     :name: 代码清单5_21
 
+<<<<<<< HEAD
      /* 客户区背景需要被擦除 */
      case WM_ERASEBKGND:
      {
@@ -705,6 +1011,15 @@ ID值赋给id变量。WM_CREATE消息中我们创建的定时器的ID是1，如�
         _EraseBackgnd(hdc,NULL,hwnd);
      }
      return TRUE;
+=======
+    /* 客户区背景需要被擦除 */
+    case  WM_ERASEBKGND:
+    {
+        HDC hdc =(HDC)wParam;
+        _EraseBackgnd(hdc,NULL,hwnd);
+    }
+    return TRUE;
+>>>>>>> dev
 
 当桌面创建完成后，会发送该消息，来绘制桌面。接收该消息时，会收到wParam参数，见 代码清单5_21_。调用_EraseBackgnd来绘制桌面。见 代码清单5_22_ 桌面背景绘制函数（文件gui_desktop.。
 
@@ -713,6 +1028,7 @@ ID值赋给id变量。WM_CREATE消息中我们创建的定时器的ID是1，如�
     :linenos:
     :name: 代码清单5_22
 
+<<<<<<< HEAD
      /**
      * @brief 桌面背景绘制函数，触发背景绘制时会调用本函数，
      通过修改本函数的内容可更改桌面的背景
@@ -739,6 +1055,33 @@ ID值赋给id变量。WM_CREATE消息中我们创建的定时器的ID是1，如�
 
      TextOut(hdc,20,20,L"emXGUI@Embedfire STM32F429 ",-1);
      }
+=======
+    /**
+    * @brief  桌面背景绘制函数，触发背景绘制时会调用本函数，
+                通过修改本函数的内容可更改桌面的背景
+    * @param  hdc 绘图上下文
+    * @param  lprc 要绘制的矩形区域，为NULL时会自动绘制hwnd的客户区
+    * @param  hwnd 窗口对象句柄
+    * @retval 无
+    */
+    static  void  _EraseBackgnd(HDC hdc,const RECT *lprc,HWND hwnd)
+    {
+        RECT rc;
+    
+        if (lprc==NULL) {
+            GetClientRect(hwnd,&rc);
+        } else {
+            CopyRect(&rc,lprc);
+        }
+        SetBrushColor(hdc,MapRGB(hdc,32,72,144));
+        FillRect(hdc,&rc);
+        SetTextColor(hdc,MapRGB(hdc,250,250,250));
+    //  /* 居中显示结果 */
+    //  DrawText(hdc,L"Hello emXGUI@Embedfire!",-1,&rc,DT_SINGLELINE|DT_VCENTER|DT_CENTER);
+        
+        TextOut(hdc,20,20,L"emXGUI@Embedfire STM32F429 ",-1);
+    }
+>>>>>>> dev
 
 调用GetClientRect函数来获取客户区的坐标，由于程序传进来的形参为NULL，所以绘制的区域为整个客户区。调用FillRect函数，设置桌面背景颜色为RGB(32,72,144)，调用TextOut在（20，20）处显示字符串：emXGUI\@Embedfire
 STM32F429，字体颜色为RGB(250,250,250)。字体显示函数有两个：DrawText和TextOut。DrawText可以设置字体显示的格式，是左对齐，右对齐或者居中。而TextOut不行。相关的函数说明，请参考《emXGUI API编程手册》的绘图API章节。
@@ -753,7 +1096,11 @@ STM32F429，字体颜色为RGB(250,250,250)。字体显示函数有两个：Draw
     :name: 代码清单5_23
 
     default:
+<<<<<<< HEAD
      return DefWindowProc(hwnd,msg,wParam,lParam);
+=======
+        return DefWindowProc(hwnd,msg,wParam,lParam);
+>>>>>>> dev
 
 到这里为止，桌面回调函数已经讲完了。
 

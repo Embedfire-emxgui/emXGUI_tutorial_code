@@ -100,6 +100,7 @@ PNG_Close用来释放绘图句柄，函数原型见 代码清单23_3_。
 
      case WM_CREATE: //窗口创建时,会自动产生该消息,在这里做一些初始化的操作或创建子窗口
      {
+<<<<<<< HEAD
      u8 *jpeg_buf;
      u32 jpeg_size;
      JPG_DEC *dec;
@@ -131,6 +132,39 @@ PNG_Close用来释放绘图句柄，函数原型见 代码清单23_3_。
      /* 释放图片内容空间 */
      RES_Release_Content((char **)&jpeg_buf);
      return TRUE;
+=======
+        u8 *jpeg_buf;
+        u32 jpeg_size;
+        JPG_DEC *dec;
+
+        GetClientRect(hwnd,&rc); //获得窗口的客户区矩形
+        /* 根据图片数据创建PNG_DEC句柄 */
+        png_dec = PNG_Open((u8 *)redfish, redfish_size());
+
+        /* 把图片转换成bitmap */
+        PNG_GetBitmap(png_dec, &png_bm);
+
+        res = FS_Load_Content(DEMO_JPEG_FILE_NAME, (char **)&jpeg_buf, &jpeg_size);
+        if(res)
+        {
+            /* 根据图片数据创建JPG_DEC句柄 */
+            dec = JPG_Open(jpeg_buf, jpeg_size);
+            /* 读取图片文件信息 */
+            JPG_GetImageSize(&pic_width, &pic_height,dec);
+
+            /* 创建内存对象 */
+            hdc_mem =CreateMemoryDC(SURF_SCREEN,pic_width,pic_height);
+
+            /* 绘制至内存对象 */
+            JPG_Draw(hdc_mem, 0, 0, dec);
+
+            /* 关闭JPG_DEC句柄 */
+            JPG_Close(dec);
+        }
+        /* 释放图片内容空间 */
+        RES_Release_Content((char **)&jpeg_buf);
+        return TRUE;
+>>>>>>> dev
      }
 
 在WM_CREATE消息中，调用PNG_Open创建PNG_DEC句柄，以后的一切操作都可以使用PNG_DEC句柄来实现，同时通过PNG_GetBitmap将图片转换成bitmap，存放在png_bm结构体变量中。
@@ -146,10 +180,17 @@ PNG_Close用来释放绘图句柄，函数原型见 代码清单23_3_。
 
      case WM_ERASEBKGND:
      {
+<<<<<<< HEAD
      HDC hdc=(HDC)wParam;
      BitBlt(hdc,0,0,pic_width,pic_height,hdc_mem,0,0,SRCCOPY); //将MEMDC输出到窗口中。
      return TRUE;
      }
+=======
+        HDC hdc=(HDC)wParam;
+        BitBlt(hdc,0,0,pic_width,pic_height,hdc_mem,0,0,SRCCOPY); //将MEMDC输出到窗口中。
+        return TRUE;
+    }
+>>>>>>> dev
 
 WM_ERASEBKGND消息中，使用BitBlt块传输函数将背景图片，绘制到屏幕HDC上。
 
@@ -162,6 +203,7 @@ WM_ERASEBKGND消息中，使用BitBlt块传输函数将背景图片，绘制到�
 
      case WM_PAINT: //窗口需要绘制时，会自动产生该消息.
      {
+<<<<<<< HEAD
      PAINTSTRUCT ps;
      HDC hdc;
      RECT rc0;
@@ -180,6 +222,26 @@ WM_ERASEBKGND消息中，使用BitBlt块传输函数将背景图片，绘制到�
      }
      EndPaint(hwnd,&ps);
      break;
+=======
+        PAINTSTRUCT ps;
+        HDC hdc;
+        RECT rc0;
+        int x=0,y=0;
+        hdc =BeginPaint(hwnd,&ps);
+        ////用户的绘制内容...
+        GetClientRect(hwnd,&rc0);
+
+        for(y=0; y<rc0.h; y+=png_bm.Height)
+        {
+            for(x=0; x<rc0.w; x+=png_bm.Width)
+            {
+                /* 显示图片 */
+                DrawBitmap(hdc, x, y, &png_bm, NULL);
+            }
+        }
+        EndPaint(hwnd,&ps);
+        break;
+>>>>>>> dev
      }
 
 WM_CREATE消息里面，我们使用PNG_GetBitmap函数将图片转换成位图，存放在png_bm结构体变量中，因此，在WM_PAINT中，调用DrawBitmap就可以完成显示PNG格式的图片。
@@ -193,10 +255,17 @@ WM_CREATE消息里面，我们使用PNG_GetBitmap函数将图片转换成位图�
 
      case WM_DESTROY: //窗口销毁时，会自动产生该消息，在这里做一些资源释放的操作.
      {
+<<<<<<< HEAD
      /* 关闭PNG_DEC句柄 */
      PNG_Close(png_dec);
      DeleteDC(hdc_mem);
      return PostQuitMessage(hwnd); //调用PostQuitMessage，使用主窗口结束并退出消息循环.
+=======
+        /* 关闭PNG_DEC句柄 */
+        PNG_Close(png_dec);
+        DeleteDC(hdc_mem);
+        return PostQuitMessage(hwnd); //调用PostQuitMessage，使用主窗口结束并退出消息循环.
+>>>>>>> dev
      }
 
 当窗口关闭时，意味着我们不再使用PNG_DEC句柄和png_bm结构体变量，此时就可以调用PNG_Close函数，将PNG_DEC句柄释放，同时释放MEMDC的内存空间，如代码清单 23‑7。
@@ -239,6 +308,7 @@ WM_CREATE消息里面，我们使用PNG_GetBitmap函数将图片转换成位图�
 
      case WM_CREATE: //窗口创建时,会自动产生该消息,在这里做一些初始化的操作或创建子窗口
      {
+<<<<<<< HEAD
      u8 *png_buf;
      u32 png_size;
      u8 *jpg_buf;
@@ -276,6 +346,45 @@ WM_CREATE消息里面，我们使用PNG_GetBitmap函数将图片转换成位图�
 
      return TRUE;
      }
+=======
+        u8 *png_buf;
+        u32 png_size;
+        u8 *jpg_buf;
+        u32 jpg_size;
+        GetClientRect(hwnd,&rc); //获得窗口的客户区矩形
+        #if(RES_PIC_DEMO)
+        /* 资源设备中加载 */
+
+        res = RES_Load_Content(DEMO_PNG_FILE_NAME, (char **)&png_buf, &png_size);
+        #else
+        /* SD文件系统加载 */
+        res = FS_Load_Content(DEMO_PNG_FILE_NAME, (char **)&png_buf, &png_size);
+        #endif
+        if(res)
+        {
+            /* 根据图片数据创建PNG_DEC句柄 */
+            png_dec = PNG_Open(png_buf, png_size);
+            /* 把图片转换成bitmap */
+            PNG_GetBitmap(png_dec, &png_bm);
+        }
+        /* 释放图片内容空间 */
+        RES_Release_Content((char **)&png_buf);
+
+        res = FS_Load_Content(DEMO_JPEG_FILE_NAME, (char **)&jpg_buf, &jpg_size);
+        if(res)
+        {
+            jdec = JPG_Open(jpg_buf, jpg_size);
+            JPG_GetImageSize(&pic_width, &pic_height, jdec);
+            hdc_mem = CreateMemoryDC(SURF_SCREEN,pic_width,pic_height);
+            JPG_Draw(hdc_mem,0,0,jdec);
+            JPG_Close(jdec);
+        }
+        /* 释放图片内容空间 */
+        RES_Release_Content((char **)&jpg_buf);
+
+        return TRUE;
+    }
+>>>>>>> dev
 
 RES_PIC_DEMO宏定义决定程序从什么位置读取PNG图片，代码中的RES_PIC_DEMO为0，即从SD卡读取图片数据。根据读取成功的图片数据，调用PNG_Open函数创建图片句柄，通过PNG_GetBitmap转换为位图格式，存放在png_bm结构体中，完成之后释放PNG图片句柄。
 
@@ -290,6 +399,7 @@ RES_PIC_DEMO宏定义决定程序从什么位置读取PNG图片，代码中的RE
 
      case WM_PAINT: //窗口需要绘制时，会自动产生该消息.
      {
+<<<<<<< HEAD
      PAINTSTRUCT ps;
      HDC hdc;
      RECT rc0;
@@ -312,6 +422,30 @@ RES_PIC_DEMO宏定义决定程序从什么位置读取PNG图片，代码中的RE
      }
      EndPaint(hwnd,&ps);
      break;
+=======
+        PAINTSTRUCT ps;
+        HDC hdc;
+        RECT rc0;
+        int x=0,y=0;
+        hdc =BeginPaint(hwnd,&ps);
+        ////用户的绘制内容...
+        GetClientRect(hwnd,&rc0);
+
+        /* 若正常加载了图片 */
+        if(res)
+        {
+            for(y=0; y<rc0.h; y+=png_bm.Height)
+            {
+                for(x=0; x<rc0.w; x+=png_bm.Width)
+                {
+                    /* 显示图片 */
+                    DrawBitmap(hdc, x, y, &png_bm, NULL);
+                }
+            }
+        }
+        EndPaint(hwnd,&ps);
+        break;
+>>>>>>> dev
      }
 
 WM_PAINT消息中， PNG图片已经转换成位图，存放在png_bm结构体中，调用DrawBitmap来显示图片。WM_PAINT消息绘制前，需要调用BeginPaint函数，结束时需要使用EndPaint函数。
@@ -325,9 +459,15 @@ WM_PAINT消息中， PNG图片已经转换成位图，存放在png_bm结构体�
 
      case WM_DESTROY: //窗口销毁时，会自动产生该消息，在这里做一些资源释放的操作.
      {
+<<<<<<< HEAD
      /* 关闭PNG_DEC句柄 */
      PNG_Close(png_dec);
      return PostQuitMessage(hwnd); //调用PostQuitMessage，使用主窗口结束并退出消息循环.
+=======
+        /* 关闭PNG_DEC句柄 */
+        PNG_Close(png_dec);
+        return PostQuitMessage(hwnd); //调用PostQuitMessage，使用主窗口结束并退出消息循环.
+>>>>>>> dev
      }
 
 退出窗口时，需要调用PNG_Close来释放PNG_DEC句柄。

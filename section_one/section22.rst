@@ -124,6 +124,7 @@ JPG_Close函数用于释放绘图句柄，函数声明，见 代码清单22_4_�
 
      case WM_CREATE: //窗口创建时,会自动产生该消息,在这里做一些初始化的操作或创建子窗口
      {
+<<<<<<< HEAD
      JPG_DEC *dec;
      GetClientRect(hwnd,&rc); //获得窗口的客户区矩形
      /* 根据图片数据创建JPG_DEC句柄 */
@@ -140,6 +141,24 @@ JPG_Close函数用于释放绘图句柄，函数声明，见 代码清单22_4_�
      CreateWindow(BUTTON,L"OK",WS_VISIBLE,
      rc.w-70,rc.h-40,68,32,hwnd,ID_OK,NULL,NULL);
      return TRUE;
+=======
+        JPG_DEC *dec;
+        GetClientRect(hwnd,&rc); //获得窗口的客户区矩形
+        /* 根据图片数据创建JPG_DEC句柄 */
+        dec = JPG_Open(tiger_jpg, tiger_jpg_size());
+        /* 读取图片文件信息 */
+        JPG_GetImageSize(&pic_width, &pic_height,dec);
+        /* 创建内存对象 */
+
+        hdc_mem =CreateMemoryDC(SURF_SCREEN,pic_width,pic_height);
+        /* 绘制至内存对象 */
+        JPG_Draw(hdc_mem, 0, 0, dec);
+        /* 关闭JPG_DEC句柄 */
+        JPG_Close(dec);
+        CreateWindow(BUTTON,L"OK",WS_VISIBLE,
+        rc.w-70,rc.h-40,68,32,hwnd,ID_OK,NULL,NULL);
+        return TRUE;
+>>>>>>> dev
      }
 
 定义一个JPG_EDC变量，存放图片句柄。例程的图片数据的数组名为tiger_jpg，且定义函数tiger_jpg_size来获取数组的大小，见 代码清单22_7_。
@@ -151,7 +170,11 @@ JPG_Close函数用于释放绘图句柄，函数声明，见 代码清单22_4_�
 
      unsigned int tiger_jpg_size(void)
      {
+<<<<<<< HEAD
      return sizeof(tiger_jpg);
+=======
+        return sizeof(tiger_jpg);
+>>>>>>> dev
      }
 
 tiger_jpg_size函数使用sizeof函数，直接返回tiger_jpg数组的大小。
@@ -167,6 +190,7 @@ tiger_jpg_size函数使用sizeof函数，直接返回tiger_jpg数组的大小。
 
      case WM_PAINT: //窗口需要绘制时，会自动产生该消息.
      {
+<<<<<<< HEAD
      PAINTSTRUCT ps;
      HDC hdc;
      RECT rc0;
@@ -190,6 +214,31 @@ tiger_jpg_size函数使用sizeof函数，直接返回tiger_jpg数组的大小。
      }
      EndPaint(hwnd,&ps);
      break;
+=======
+        PAINTSTRUCT ps;
+        HDC hdc;
+        RECT rc0;
+        int x=0,y=0;
+        hdc =BeginPaint(hwnd,&ps);
+        ////用户的绘制内容...
+        GetClientRect(hwnd,&rc0);
+
+        for(y=0; y<rc0.h; y+=pic_height)
+        {
+            for(x=0; x<rc0.w; x+=pic_width)
+            {
+                /* 把内存对象绘制至屏幕 */
+                BitBlt(hdc,x,y,pic_width,pic_height,hdc_mem,0,0,SRCCOPY);//将MEMDC输出到窗口中。
+                rc.x=x;
+                rc.y=y;
+                rc.w=pic_width;
+                rc.h=pic_height;
+                DrawRect(hdc,&rc);
+            }
+        }
+        EndPaint(hwnd,&ps);
+        break;
+>>>>>>> dev
      }
 
 在WM_Create消息中，将图片绘制到MemoryDC中，因此，需要显示图片时，只需要将MemoryDC的内容绘制到屏幕hdc即可。WM_PAINT消息，调用BeginPaint函数开始绘图，绘图结束需调用EndPaint函数。使用BitBlt块传输函数，将内存对象绘制至屏幕。调用DrawRect
@@ -259,6 +308,7 @@ RES_Load_Content函数是从SPI_FLASH中读取图片数据，函数声明，见 
 
      BOOL RES_Load_Content(char * file_name, char** buf, u32* size)
      {
+<<<<<<< HEAD
      int content_offset;
      CatalogTypeDef dir;
      BOOL result = TRUE;
@@ -282,6 +332,31 @@ RES_Load_Content函数是从SPI_FLASH中读取图片数据，函数声明，见 
      result = FALSE;
 
      return result;
+=======
+        int content_offset;
+        CatalogTypeDef dir;
+        BOOL result = TRUE;
+
+        content_offset = RES_GetInfo_AbsAddr(file_name, &dir);
+        if(content_offset > 0)
+        {
+            /* 文件内容空间 */
+            *buf = (char *)GUI_VMEM_Alloc(dir.size);
+            if(*buf != NULL)
+            {
+            /* 加载数据*/
+            RES_DevRead((u8 *)*buf,content_offset,dir.size);
+
+            *size = dir.size;
+            }
+        else
+        result = FALSE;
+        }
+        else
+        result = FALSE;
+
+        return result;
+>>>>>>> dev
      }
 
 RES_Load_Content函数有三个形参：file_name是图片的文件名；buf是读取的图片数据存放缓冲区，是根据内容的大小，调用GUI_VMEM_Alloc函数，
@@ -304,11 +379,19 @@ RES_Load_Content函数有三个形参：file_name是图片的文件名；buf是�
      BOOL RES_DevRead(u8 *buf,u32 addr,u32 size)
      {
 
+<<<<<<< HEAD
      GUI_MutexLock(mutex_lock,5000);
 
      SPI_FLASH_BufferRead(buf,addr,size);
      GUI_MutexUnlock(mutex_lock);
      return TRUE;
+=======
+        GUI_MutexLock(mutex_lock,5000);
+
+        SPI_FLASH_BufferRead(buf,addr,size);
+        GUI_MutexUnlock(mutex_lock);
+        return TRUE;
+>>>>>>> dev
      }
 
 FS_Load_Content
@@ -333,6 +416,7 @@ FS_Load_Content是用于从SD卡中加载内容，函数声明，见 代码清�
 
      BOOL FS_Load_Content(char * file_name, char** buf, u32* size)
      {
+<<<<<<< HEAD
      /* file objects */
      FIL *file;
      FRESULT fresult;
@@ -368,6 +452,43 @@ FS_Load_Content是用于从SD卡中加载内容，函数声明，见 代码清�
      GUI_VMEM_Free(file);
 
      return result;
+=======
+        /* file objects */
+        FIL *file;
+        FRESULT fresult;
+        BOOL result = TRUE;
+        UINT br;
+
+        /* 文件句柄空间 */
+        file =(FIL*)GUI_VMEM_Alloc(sizeof(FIL));
+
+        /* 打开文件 */
+        fresult = f_open(file, file_name, FA_OPEN_EXISTING | FA_READ );
+        if (fresult != FR_OK)
+        {
+            GUI_ERROR("Open file failed!");
+            GUI_VMEM_Free(file);
+            return FALSE;
+        }
+
+        *size = f_size(file);
+        /* 文件内容空间 */
+        *buf = (char *)GUI_VMEM_Alloc(*size);
+        if(*buf != NULL)
+        {
+            /* 加载整个图片文件 */
+            fresult = f_read(file, *buf, *size, &br);
+            /* 关闭文件 */
+            f_close(file);
+        }
+        else
+        result = FALSE;
+
+        /* 释放空间 */
+        GUI_VMEM_Free(file);
+
+        return result;
+>>>>>>> dev
      }
 
 FS_Load_Content函数也有三个形参，作用与SPI_FLASH一样。使用GUI_VMEM_Alloc申请内存，并强制转换为FIL指针类型，用来存放文件句柄。
@@ -391,6 +512,7 @@ FS_Load_Content函数也有三个形参，作用与SPI_FLASH一样。使用GUI_V
 
      case WM_CREATE: //窗口创建时,会自动产生该消息,在这里做一些初始化的操作或创建子窗口
      {
+<<<<<<< HEAD
      u8 *jpeg_buf;
      u32 jpeg_size;
      JPG_DEC *dec;
@@ -424,6 +546,41 @@ FS_Load_Content函数也有三个形参，作用与SPI_FLASH一样。使用GUI_V
      CreateWindow(BUTTON,L"OK",WS_VISIBLE,
      rc.w-70,rc.h-40,68,32,hwnd,ID_OK,NULL,NULL);
      return TRUE;
+=======
+        u8 *jpeg_buf;
+        u32 jpeg_size;
+        JPG_DEC *dec;
+        GetClientRect(hwnd,&rc); //获得窗口的客户区矩形
+        #if(RES_PIC_DEMO)
+        /* 资源设备中加载 */
+        res = RES_Load_Content(DEMO_JPEG_FILE_NAME, (char **)&jpeg_buf, &jpeg_size);
+
+        #else
+        /* SD文件系统加载 */
+        res = FS_Load_Content(DEMO_JPEG_FILE_NAME, (char **)&jpeg_buf, &jpeg_size);
+        #endif
+        if(res)
+        {
+            /* 根据图片数据创建JPG_DEC句柄 */
+            dec = JPG_Open(jpeg_buf, jpeg_size);
+            /* 读取图片文件信息 */
+            JPG_GetImageSize(&pic_width, &pic_height,dec);
+
+            /* 创建内存对象 */
+            hdc_mem =CreateMemoryDC(SURF_SCREEN,pic_width,pic_height);
+
+            /* 绘制至内存对象 */
+            JPG_Draw(hdc_mem, 0, 0, dec);
+
+            /* 关闭JPG_DEC句柄 */
+            JPG_Close(dec);
+        }
+        /* 释放图片内容空间 */
+        RES_Release_Content((char **)&jpeg_buf);
+        CreateWindow(BUTTON,L"OK",WS_VISIBLE,
+        rc.w-70,rc.h-40,68,32,hwnd,ID_OK,NULL,NULL);
+        return TRUE;
+>>>>>>> dev
      }
 
 WM_CREATE中，调用RES_Load_Content函数从外部设备读取图片数据，保存到数组jpeg_buf中。 JPG_Open函数用于创建JPG_DEC句柄。创建MemoryDC，大小为图片的大小
@@ -438,6 +595,7 @@ WM_CREATE中，调用RES_Load_Content函数从外部设备读取图片数据，�
 
      case WM_PAINT: //窗口需要绘制时，会自动产生该消息.
      {
+<<<<<<< HEAD
      PAINTSTRUCT ps;
      HDC hdc;
      RECT rc0;
@@ -465,6 +623,35 @@ WM_CREATE中，调用RES_Load_Content函数从外部设备读取图片数据，�
      }
      EndPaint(hwnd,&ps);
      break;
+=======
+        PAINTSTRUCT ps;
+        HDC hdc;
+        RECT rc0;
+        int x=0,y=0;
+        hdc =BeginPaint(hwnd,&ps);
+        ////用户的绘制内容...
+        GetClientRect(hwnd,&rc0);
+
+        /* 若正常加载了图片 */
+        if(res)
+            {
+            for(y=0; y<rc0.h; y+=pic_height)
+            {
+                for(x=0; x<rc0.w; x+=pic_width)
+                {
+                    /* 把内存对象绘制至屏幕 */
+                    BitBlt(hdc,x,y,pic_width,pic_height,hdc_mem,0,0,SRCCOPY);//将MEMDC输出到窗口中。
+                    rc.x=x;
+                    rc.y=y;
+                    rc.w=pic_width;
+                    rc.h=pic_height;
+                    DrawRect(hdc,&rc);
+                }
+            }
+        }
+        EndPaint(hwnd,&ps);
+        break;
+>>>>>>> dev
      }
 
 WM_PAINT消息用来绘制图片，利用BitBlt函数将MEMDC输出到窗口中。在绘制的时候，要先调用BeginPaint函数，结束时调用EndPaint函数。
@@ -474,12 +661,21 @@ WM_PAINT消息用来绘制图片，利用BitBlt函数将MEMDC输出到窗口中�
 .. code-block:: c
     :caption: 代码清单 22‑14 WM_DESTROY消息（文件GUI_DEMO_DrawJPEG_Extern.c）
     :linenos:
+<<<<<<< HEAD
     :name: 代码清单22_3
 
      case WM_DESTROY: //窗口销毁时，会自动产生该消息，在这里做一些资源释放的操作.
      {
      DeleteDC(hdc_mem);
      return PostQuitMessage(hwnd); //调用PostQuitMessage，使用主窗口结束并退出消息循环.
+=======
+    :name: 代码清单22_14
+
+     case WM_DESTROY: //窗口销毁时，会自动产生该消息，在这里做一些资源释放的操作.
+     {
+        DeleteDC(hdc_mem);
+        return PostQuitMessage(hwnd); //调用PostQuitMessage，使用主窗口结束并退出消息循环.
+>>>>>>> dev
      }
 
 窗口销毁时，会自动产生消息WM_DESTROY，窗口退出时，注意，要将MemoryDC释放掉。

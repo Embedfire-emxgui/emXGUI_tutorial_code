@@ -359,9 +359,14 @@ FWord                leftSideBearing[]              用于等宽字体，数组�
     :name: 代码清单28_3
 
      struct {
+<<<<<<< HEAD
      uint16 advanceWidth;
      int16 leftSideBearing;
 
+=======
+          uint16 advanceWidth;
+          int16 leftSideBearing;
+>>>>>>> dev
      }
 
 更改前进宽度，会改变每个字的间距，而改变左侧方位，则会改变单个字体的位置，相对于字体边界矩形而言，见 图28_9_。
@@ -665,6 +670,7 @@ freetype_CreateFont函数用来创建字体句柄，该函数会返回HFONT类�
 
      void GUI_DEMO_TTF(void)
      {
+<<<<<<< HEAD
      HWND hwnd;
      WNDCLASS wcex;
      MSG msg;
@@ -733,6 +739,76 @@ freetype_CreateFont函数用来创建字体句柄，该函数会返回HFONT类�
      DispatchMessage(&msg);
      }
      GUI_VMEM_Free(font_data_buf);
+=======
+          HWND hwnd;
+          WNDCLASS wcex;
+          MSG msg;
+          int fsize;
+          FIL *file;
+          FRESULT fresult;
+          UINT br;
+
+
+          /* 文件句柄空间 */
+          file =(FIL*)GUI_VMEM_Alloc(sizeof(FIL));
+
+          /* 打开文件 */
+          fresult = f_open(file, filename, FA_OPEN_EXISTING | FA_READ );
+          GUI_DEBUG("%d",fresult);
+          fsize =f_size(file);
+          font_data_buf =(u8*)GUI_VMEM_Alloc(fsize);
+
+          if(font_data_buf!=NULL)
+          {
+               fresult = f_read(file,font_data_buf,fsize,&br); //将整个ttf文件读到内存
+          }
+          f_close(file);
+
+          if(font_data_buf==NULL)
+          { //内存不够
+               MSGBOX_OPTIONS ops;
+               const WCHAR *btn[]={L"确定"};
+               int x,y,w,h;
+
+               ops.Flag =MB_BTN_WIDTH(60)|MB_ICONERROR;
+               ops.pButtonText =btn;
+               ops.ButtonCount =1;
+               w =300;
+               h =250;
+               x =(GUI_XSIZE-w)>>1;
+               y =(GUI_YSIZE-h)>>1;
+               MessageBox(hwnd,x,y,w,h,L"绯系统内存不足,\r\n请选择更小的字体文件...",L"消息",&ops);
+               return;
+          }
+
+          wcex.Tag = WNDCLASS_TAG;
+          wcex.Style = CS_HREDRAW | CS_VREDRAW;
+          wcex.lpfnWndProc = WinProc; //设置主窗口消息处理的回调函数.
+          wcex.cbClsExtra = 0;
+          wcex.cbWndExtra = 0;
+          wcex.hInstance = NULL;
+          wcex.hIcon = NULL;
+          wcex.hCursor = NULL;
+
+          //创建主窗口
+          hwnd =CreateWindowEx( WS_EX_LOCKPOS, //窗口不可拖动
+          &wcex,
+          L"emxGUI矢量显示示例" , //窗口名称
+          WS_CAPTION|WS_DLGFRAME|WS_BORDER|WS_CLIPCHILDREN,
+          0,0,GUI_XSIZE,GUI_YSIZE, //窗口位置和大小
+          NULL,NULL,NULL,NULL);
+
+          //显示主窗口
+          ShowWindow(hwnd,SW_SHOW);
+
+          //开始窗口消息循环(窗口关闭并销毁时,GetMessage将返回FALSE,退出本消息循环)。
+          while(GetMessage(&msg,hwnd))
+          {
+               TranslateMessage(&msg);
+               DispatchMessage(&msg);
+          }
+          GUI_VMEM_Free(font_data_buf);
+>>>>>>> dev
      }
 
 在创建窗口前，调用f_open函数打开文件FZLTCXHJW.TTF，获取文件句柄，通过f_size函数得到文件的大小，同时调用GUI_VMEM_Alloc函数为字库文件数据分配空间，大小为FZLTCXHJW.TTF的大小fsize。使用f_read函数，将整个ttf文件读到内存中。
@@ -744,6 +820,7 @@ freetype_CreateFont函数用来创建字体句柄，该函数会返回HFONT类�
 
 -  WM_CREATE
 
+<<<<<<< HEAD
 .. image:: /media/docx153.jpg
    :align: center
    :alt: 代码清单 28‑9 WM_CREATE消息（文件GUI_DEMO_TTF.c）
@@ -756,12 +833,25 @@ freetype_CreateFont函数用来创建字体句柄，该函数会返回HFONT类�
      CreateWindow(BUTTON,L"OK",WS_VISIBLE,
      rc.w-80,8,68,32,hwnd,ID_OK,NULL,NULL); //创建一个按钮(示例).
      return TRUE;
+=======
+.. code-block:: c
+   :caption: 代码清单 28‑9 WM_CREATE消息（文件GUI_DEMO_TTF.c）
+
+     case WM_CREATE: //窗口创建时,会自动产生该消息,在这里做一些初始化的操作或创建子窗口.
+     {
+          GetClientRect(hwnd,&rc); ////获得窗口的客户区矩形.
+          ft_obj =freetype_font_obj_new(16,16,72,72,font_data_buf); //创建一个freetype对象
+          CreateWindow(BUTTON,L"OK",WS_VISIBLE,
+          rc.w-80,8,68,32,hwnd,ID_OK,NULL,NULL); //创建一个按钮(示例).
+          return TRUE;
+>>>>>>> dev
      }
 
 调用freetype_font_obj_new函数，来创建矢量字体对象。font_data_buf数组存放着字库文件的数据，这样之后，有个矢量字体的操作，都可以是该对象ft_obj。
 
 -  WM_PAINT
 
+<<<<<<< HEAD
 .. image:: /media/docx153.jpg
    :align: center
    :alt: 代码清单 28‑10 WM_PAINT（文件GUI_DEMO_TTF.c）
@@ -813,6 +903,55 @@ freetype_CreateFont函数用来创建字体句柄，该函数会返回HFONT类�
      DeleteFont(hFont); //释放字体
      EndPaint(hwnd,&ps); //结束绘图
      break;
+=======
+.. code-block:: c
+   :caption: 代码清单 28‑10 WM_PAINT（文件GUI_DEMO_TTF.c）
+
+     case WM_PAINT: //窗口需要绘制时，会自动产生该消息.
+     {
+          PAINTSTRUCT ps;
+          HDC hdc;
+          HFONT hFont;
+          RECT rc0;
+
+          GetClientRect(hwnd,&rc0);
+
+
+          hdc =BeginPaint(hwnd,&ps); //开始绘图
+
+          ////用户的绘制内容...
+
+          hFont =freetype_CreateFont(ft_obj); //创建freetype字体
+
+          SetFont(hdc,hFont); //设置新的字体.
+
+          SetTextColor(hdc,MapRGB(hdc,10,10,10));
+
+          freetype_font_set_size(ft_obj,16,16,72,72); //设置freetype字体的大小参数
+          TextOut(hdc,10,10,L"矢量字体示例1234567890",-1);
+          SetTextColor(hdc,MapRGB(hdc,250,0,10));
+          freetype_font_set_size(ft_obj,32,32,72,72);
+          TextOut(hdc,10,30,L"矢量字体示例1234567890",-1);
+          SetTextColor(hdc,MapRGB(hdc,0,0,205));
+          freetype_font_set_size(ft_obj,64,64,72,72);
+          TextOut(hdc,10,80,L"矢量字体示例1234567890",-1);
+          SetTextColor(hdc,MapRGB(hdc, 255,255,255));
+          freetype_font_set_size(ft_obj,128,128,72,72);
+          TextOut(hdc,10,200,L"矢量字体示例1234567890",-1);
+
+          SetTextColor(hdc,MapRGB(hdc,200,50,50));
+          freetype_font_set_size(ft_obj,40,40,72,72);
+
+          rc.w =rc0.w;
+          rc.h =48;
+          rc.x =0;
+          rc.y =rc0.h-48;
+          DrawText(hdc,L"emXGUI,十年深度优化图像引擎",-1,&rc,DT_VCENTER|DT_RIGHT|DT_BORDER);
+
+          DeleteFont(hFont); //释放字体
+          EndPaint(hwnd,&ps); //结束绘图
+          break;
+>>>>>>> dev
      }
 
 调用BeginPaint函数开始绘制，我们先调用freetype_CreateFont函数来创建字体句柄h
@@ -831,9 +970,14 @@ Font。在WM_CREATE消息中，创建矢量字体对象ft_obj指的是字体的�
 
      case WM_CLOSE: //窗口关闭时，会自动产生该消息.
      {
+<<<<<<< HEAD
      freetype_font_obj_delete(ft_obj); //释放freetype对象
      return DestroyWindow(hwnd); //调用DestroyWindow函数销毁窗口，该函数会使主窗口结束并退出消息循环;
 
+=======
+          freetype_font_obj_delete(ft_obj); //释放freetype对象
+          return DestroyWindow(hwnd); //调用DestroyWindow函数销毁窗口，该函数会使主窗口结束并退出消息循环;
+>>>>>>> dev
      }
 
 .. _实验结果-14:

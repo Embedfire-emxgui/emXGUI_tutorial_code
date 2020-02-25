@@ -198,6 +198,7 @@ FontCreator提供两种设计方式：有图片加载方式以及手动绘制，
      */
      HFONT GUI_Default_FontInit(void)
      {
+<<<<<<< HEAD
      //省略一些代码
      #if(GUI_ICON_LOGO_EN)
 
@@ -219,6 +220,29 @@ FontCreator提供两种设计方式：有图片加载方式以及手动绘制，
      #endif
 
      return defaultFont;
+=======
+        //省略一些代码
+    #if(GUI_ICON_LOGO_EN)
+
+        /* 创建logo字体 */
+        logoFont = XFT_CreateFont(GUI_LOGO_FONT);
+        /* 创建图标字体 */
+        iconFont = XFT_CreateFont(GUI_ICON_FONT);
+        /* 创建控制图标字体 */
+        controlFont = XFT_CreateFont(GUI_CONTROL_FONT);
+
+        if(logoFont==NULL)
+            GUI_ERROR("logoFont create failed");
+
+        if(iconFont ==NULL)
+            GUI_ERROR("iconFont create failed");
+
+        if(controlFont ==NULL)
+            GUI_ERROR("controlFont create failed");
+    #endif
+
+        return defaultFont;
+>>>>>>> dev
      }
 
 GUI_Default_FontInit函数中，调用XFT_CreateFont函数来创建字体，GUI_LOGO_FONT、GUI_ICON_FONT以及GUI_CONTROL_FONT是我们使用bin2c软件生成的图标字体数组，以logo图标字体为例，
@@ -253,6 +277,7 @@ GUI_Default_FontInit函数中，调用XFT_CreateFont函数来创建字体，GUI_
 
      case WM_PAINT: //窗口需要绘制时，会自动产生该消息.
      {
+<<<<<<< HEAD
      PAINTSTRUCT ps;
      HDC hdc;
 
@@ -287,6 +312,42 @@ GUI_Default_FontInit函数中，调用XFT_CreateFont函数来创建字体，GUI_
 
      EndPaint(hwnd,&ps);
      break;
+=======
+        PAINTSTRUCT ps;
+        HDC hdc;
+
+        RECT rc0;
+
+        hdc =BeginPaint(hwnd,&ps);
+
+        ////用户的绘制内容...
+        GetClientRect(hwnd,&rc0);
+        SetPenColor(hdc,MapRGB(hdc,200,200,220));
+        SetTextColor(hdc,MapRGB(hdc,250,250,250));
+        /* 使用图标字体*/
+        SetFont(hdc, logoFont);
+        DrawText(hdc,L" A B C ",-1,&rc0,DT_LEFT);
+        /* 使用控制图标字体*/
+        SetFont(hdc, controlFont);
+        SetTextColor(hdc,MapRGB(hdc,0,0,0));
+        rc0.y += 80;
+        DrawText(hdc,L" A B C D E F G H \\r\n I J K L M N O P",-1,&rc0,DT_LEFT);
+        /* 使用图标字体*/
+        SetFont(hdc, iconFont);
+        SetTextColor(hdc,MapRGB(hdc,238,142,0));
+        rc0.y += 120;
+        DrawText(hdc,L" A B C D E ",-1,&rc0,DT_LEFT);
+
+        SetTextColor(hdc,MapRGB(hdc,100,149,237));
+        rc0.y += 120;
+        DrawText(hdc,L" F G H I J",-1,&rc0,DT_LEFT);
+        /* 恢复默认字体 */
+        SetFont(hdc, defaultFont);
+        SetTextColor(hdc,MapRGB(hdc,250,250,250));
+
+        EndPaint(hwnd,&ps);
+        break;
+>>>>>>> dev
      }
 
 由于图标实际上就是字符，所以颜色受TextColor的影响，调用SetTextColor函数来选择图标的颜色，logoFont字体中的内容如 图27_17_ 所示。
@@ -326,12 +387,21 @@ iconFont字体中的内容如 图27_19_，使用RGB(238,142,0)的颜色来显示
 
      case WM_ERASEBKGND:
      {
+<<<<<<< HEAD
      HDC hdc=(HDC)wParam;
 
      GetClientRect(hwnd,&rc);
      SetBrushColor(hdc,MapRGB(hdc,215,61,50));
      FillRect(hdc,&rc);
      return TRUE;
+=======
+        HDC hdc=(HDC)wParam;
+
+        GetClientRect(hwnd,&rc);
+        SetBrushColor(hdc,MapRGB(hdc,215,61,50));
+        FillRect(hdc,&rc);
+        return TRUE;
+>>>>>>> dev
      }
 
 使用FillRect来绘制客户区的背景，颜色调用SetBrushColor函数来设置，此处为RGB(215,61,50)，最后要返回TRUE，这样在WM_PAINT消息，才不会重绘客户区背景。

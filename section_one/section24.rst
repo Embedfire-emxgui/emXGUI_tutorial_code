@@ -83,10 +83,17 @@ GIF_GetInfo函数来获取GIF图片信息，函数原型见代码清单 24‑2�
 
      typedef struct tagIMAGE_INFO
      {
+<<<<<<< HEAD
      U8 Tag[7]; //图像类型的标识
      U8 Bpp;//图像颜色位宽
      U16 Width; //图片宽度
      U16 Height;//图片高度
+=======
+        U8 Tag[7]; //图像类型的标识
+        U8 Bpp;//图像颜色位宽
+        U16 Width; //图片宽度
+        U16 Height;//图片高度
+>>>>>>> dev
      }IMAGE_INFO;
 
 这个结构体主要存放了GIF图片的一些信息， Tag参数里记录的图像的类型; 比如打开的数据是JPG图像, Tag参数里就是'J','P','G'字符标识; 如果是GIF图像,Tag参数里就是'G','I','F'。具体实现过程是由GIF_GetInfo函数来完成的，这里简单了解一下即可。
@@ -192,6 +199,7 @@ emXGUI通过在WM_PAINT中显示GIF图片的每一帧，延时一定时间，如
 
      case WM_CREATE: //窗口创建时,会自动产生该消息,在这里做一些初始化的操作或创建子窗口
      {
+<<<<<<< HEAD
      GetClientRect(hwnd,&rc);
      /* 获取HGIF句柄 */
      hgif = GIF_Open(king);
@@ -203,6 +211,19 @@ emXGUI通过在WM_PAINT中显示GIF图片的每一帧，延时一定时间，如
      CreateWindow(BUTTON,L"OK",WS_VISIBLE,rc.w-70,rc.h-40,68,32,hwnd,ID_OK,NULL,NULL);
      SetTimer(hwnd,0,0,TMR_SINGLE,NULL);
      return TRUE;
+=======
+        GetClientRect(hwnd,&rc);
+        /* 获取HGIF句柄 */
+        hgif = GIF_Open(king);
+        /* 获取GIF的图片信息 */
+        GIF_GetInfo(hgif,&img_info);
+        /* 获取GIF的帧数 */
+        frame_num = GIF_GetFrameCount(hgif);
+
+        CreateWindow(BUTTON,L"OK",WS_VISIBLE,rc.w-70,rc.h-40,68,32,hwnd,ID_OK,NULL,NULL);
+        SetTimer(hwnd,0,0,TMR_SINGLE,NULL);
+        return TRUE;
+>>>>>>> dev
      }
 
 代码清单24_8_，调用GIF_Open函数来获取HGIF句柄，参数king是使用软件生成的图像数组。使用GIF_GetInfo函数来得到图片的消息，存放在img_info结构体中。
@@ -217,6 +238,7 @@ GIF_GetFrameCount函数用来得到GIF图片的总帧数，作为循环显示的
 
      case WM_PAINT: //窗口需要绘制时，会自动产生该消息.
      {
+<<<<<<< HEAD
      PAINTSTRUCT ps;
      HDC hdc;
      hdc =BeginPaint(hwnd,&ps);
@@ -245,6 +267,36 @@ GIF_GetFrameCount函数用来得到GIF图片的总帧数，作为循环显示的
      ResetTimer(hwnd,0,delay,TMR_SINGLE|TMR_START,NULL);
      EndPaint(hwnd,&ps);
      break;
+=======
+        PAINTSTRUCT ps;
+        HDC hdc;
+        hdc =BeginPaint(hwnd,&ps);
+        GetClientRect(hwnd,&rc);
+        if(hgif)
+        {
+            /* 创建MemoryDC */
+
+            hdc_mem = CreateMemoryDC(SURF_SCREEN,img_info.Width,img_info.Height);
+            /* 清除屏幕显示 */
+            ClrDisplay(hdc_mem,NULL,MapRGB(hdc_mem,255,255,255));
+            if(i>=frame_num)
+            {
+                i=0;
+            }
+            /* 绘制图片至MemoryDC */
+            GIF_DrawFrame(hdc_mem,0,0,MapRGB(hdc_mem,255,255,255),hgif,i);
+            BitBlt(hdc,rc.x,rc.y,img_info.Width,img_info.Height,hdc_mem,0,0,SRCCOPY); //将MEMDC输出到窗口中。
+            /* 获取当前帧的延时值 */
+            delay=GIF_GetFrameDelay(hgif,i);
+            i++;
+        }
+        /* 释放MemoryDC */
+        DeleteDC(hdc_mem);
+
+        ResetTimer(hwnd,0,delay,TMR_SINGLE|TMR_START,NULL);
+        EndPaint(hwnd,&ps);
+        break;
+>>>>>>> dev
      }
 
 代码清单24_9_ 负责绘制GIF图片的每一帧，CreateMemoryDC函数创建MemoryDC，调用GIF_DrawFrame将每一帧图片绘制到MemoryDC，
@@ -329,6 +381,7 @@ WM_TIMER消息中，当超过延时时间时，调用InvalidateRect函数重绘�
 
      case WM_CREATE: //窗口创建时,会自动产生该消息,在这里做一些初始化的操作或创建子窗口
      {
+<<<<<<< HEAD
      GetClientRect(hwnd,&rc);
      #if(RES_PIC_DEMO)
      /* 资源设备中加载 */
@@ -347,6 +400,26 @@ WM_TIMER消息中，当超过延时时间时，调用InvalidateRect函数重绘�
      CreateWindow(BUTTON,L"OK",WS_VISIBLE,rc.w-70,rc.h-40,68,32,hwnd,ID_OK,NULL,NULL);
      SetTimer(hwnd,0,0,TMR_SINGLE,NULL);
      return TRUE;
+=======
+        GetClientRect(hwnd,&rc);
+        #if(RES_PIC_DEMO)
+        /* 资源设备中加载 */
+        res = RES_Load_Content(DEMO_GIF_FILE_NAME, (char **)&gif_buf, &gif_size);
+        #else
+        /* SD文件系统加载 */
+        res = FS_Load_Content(DEMO_GIF_FILE_NAME, (char **)&gif_buf, &gif_size);
+
+        #endif
+        /* 获取GIF句柄 */
+        hgif = GIF_Open(gif_buf);
+        /* 获取GIF图片信息 */
+        GIF_GetInfo(hgif,&img_info);
+        /* 获取GIF图片的帧数 */
+        frame_num = GIF_GetFrameCount(hgif);
+        CreateWindow(BUTTON,L"OK",WS_VISIBLE,rc.w-70,rc.h-40,68,32,hwnd,ID_OK,NULL,NULL);
+        SetTimer(hwnd,0,0,TMR_SINGLE,NULL);
+        return TRUE;
+>>>>>>> dev
      }
 
 代码清单24_12_ WM_CREATE消息（文件GUI_DEMO_DrawGIF_Extern.使用FS_Load_Content函数从SD卡中读取图片数据，存放在数组gif_buf中。
@@ -362,6 +435,7 @@ WM_TIMER消息中，当超过延时时间时，调用InvalidateRect函数重绘�
 
      case WM_PAINT: //窗口需要绘制时，会自动产生该消息.
      {
+<<<<<<< HEAD
      PAINTSTRUCT ps;
      HDC hdc;
      hdc =BeginPaint(hwnd,&ps);
@@ -390,6 +464,36 @@ WM_TIMER消息中，当超过延时时间时，调用InvalidateRect函数重绘�
      ResetTimer(hwnd,0,delay,TMR_SINGLE|TMR_START,NULL);
      EndPaint(hwnd,&ps);
      break;
+=======
+        PAINTSTRUCT ps;
+        HDC hdc;
+        hdc =BeginPaint(hwnd,&ps);
+        GetClientRect(hwnd,&rc);
+        if(hgif)
+        {
+        /* 创建MemoryDC */
+
+        hdc_mem = CreateMemoryDC(SURF_SCREEN,img_info.Width,img_info.Height);
+        /* 清除窗口显示内容 */
+        ClrDisplay(hdc_mem,NULL,MapRGB(hdc_mem,255,255,255));
+        if(i>=frame_num)
+        {
+            i=0;
+            }
+            /* 绘制GIF图片 */
+            GIF_DrawFrame(hdc_mem,0,0,MapRGB(hdc_mem,255,255,255),hgif,i);
+            BitBlt(hdc,rc.x,rc.y,img_info.Width,img_info.Height,hdc_mem,0,0,SRCCOPY); //将MEMDC输出到窗口中。
+            /* 获取GIF图片的延时值 */
+            delay=GIF_GetFrameDelay(hgif,i);
+            i++;
+        }
+        /* 释放MemoryDC */
+        DeleteDC(hdc_mem);
+        /*设置延时值，开启定时器 */
+        ResetTimer(hwnd,0,delay,TMR_SINGLE|TMR_START,NULL);
+        EndPaint(hwnd,&ps);
+        break;
+>>>>>>> dev
      }
 
 CreateMemoryDC函数用于创建MemoryDC，将GIF图片的每一帧绘制到MemoryDC，使用BitBlt函数将MEMDC输出到窗口HDC中，最后需要释放MemoryDC。
@@ -405,8 +509,13 @@ CreateMemoryDC函数用于创建MemoryDC，将GIF图片的每一帧绘制到Memo
 
      case WM_DESTROY: //窗口销毁时，会自动产生该消息，在这里做一些资源释放的操作.
      {
+<<<<<<< HEAD
      GIF_Close(hgif);
      return PostQuitMessage(hwnd); //调用PostQuitMessage，使用主窗口结束并退出消息循环.
+=======
+        GIF_Close(hgif);
+        return PostQuitMessage(hwnd); //调用PostQuitMessage，使用主窗口结束并退出消息循环.
+>>>>>>> dev
      }
 
 当窗口退出时，调用GIF_Close函数来释放GIF图片句柄。
