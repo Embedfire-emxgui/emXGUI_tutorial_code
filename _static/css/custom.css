@@ -1,0 +1,23 @@
+@import "theme.css";
+
+
+.wy-side-nav-search img {
+    display: block;
+    margin: 0px auto 0px auto;
+    padding: 0px;
+    height: 30px;
+    width: 30px;
+    border-radius: unset
+}
+
+.wy-side-nav-search>a img.logo{
+    display:block;
+    margin:0 auto;
+    height:30%;
+    width:30%;
+    border-radius:0;
+    max-width:30%;
+    background:transparent
+}
+
+

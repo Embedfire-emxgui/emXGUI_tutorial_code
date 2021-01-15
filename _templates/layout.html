@@ -1,0 +1,66 @@
+{% extends "!layout.html" %}
+
+
+
+{% block htmltitle %}
+<title>{{ title|striptags|e }}{{ titlesuffix }}</title>
+<link rel="shortcut icon" type="image/x-icon" href="{{ pathto("_static/images/logo.ico", 1) }}"/>
+{% endblock %}
+
+
+
+{% block sidebartitle %}
+<!-------------------------------------------------------------------------------------------------------------------------------->
+<a href="https://embedfire.com/"><img alt="embedfire" title="官网" src="{{ pathto("_static/images/embedfire.png", 1) }}"/></a>
+&nbsp;<a href="https://www.firebbs.cn/"><img alt="firebbs" title="论坛" src="{{ pathto("_static/images/firebbs.png", 1) }}"/></a>
+&nbsp;<a href="https://gitee.com/Embedfire-gui-emxgui"><img alt="gitee" title="gitee" src="{{ pathto("_static/images/gitee.png", 1) }}"/></a>
+&nbsp;<a href="https://github.com/Embedfire-gui-emxgui"><img alt="github" title="github" src="{{ pathto("_static/images/github.png", 1) }}"/></a>
+&nbsp;<a href="https://doc.embedfire.com/gui/emxgui/pdf"><img alt="pdf" title="pdf" src="{{ pathto("_static/images/pdf.png", 1) }}"/></a>
+<!-------------------------------------------------------------------------------------------------------------------------------->
+
+<a href="{{ pathto(master_doc) }}">
+  <img src="{{ pathto('_static/' + logo, 1) }}" style="margin-top: -20px;" class="logo" alt="Logo"/>
+  {{ project }}
+</a>
+
+
+{% if theme_display_version %}
+  {%- set nav_version = version %}
+  {% if READTHEDOCS and current_version %}
+    {%- set nav_version = current_version %}
+  {% endif %}
+  {% if nav_version %}
+    <!--<div class="version">
+      {{ nav_version }}
+    </div>-->
+  {% endif %}
+{% endif %}
+{% include "searchbox.html" %}
+{% endblock %}
+
+
+
+{%- block content %}
+{% include "head.html" %}
+{% if theme_style_external_links|tobool %}
+<div class="rst-content style-external-links">
+{% else %}
+<div class="rst-content">
+{% endif %}
+  {% include "breadcrumbs.html" %}
+  <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+  {%- block document %}
+   <div itemprop="articleBody">
+    {% block body %}{% endblock %}
+   </div>
+   {% if self.comments()|trim %}
+   <div class="articleComments">
+    {% block comments %}{% endblock %}
+   </div>
+   {% endif%}
+  </div>
+  {%- endblock %}
+  {% include "footer.html" %}
+</div>
+{%- endblock %}
+

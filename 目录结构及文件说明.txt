@@ -1,0 +1,68 @@
+本文件用于对本目录下的相关文件和自动构建过程进行说明，
+建议在进行文档编写之前先进行阅读，注意格式等相关问题
+
+文件说明：
+
+
+.
+│  .gitignore
+│  .gitlab-ci.yml   gitlab自动构建配置文件，根据不同的工程需要按需修改
+│  .tgitconfig
+│  about_us.rst      
+│  conf.py          sphinx配置文件，对html和pdf的编译选项做配置
+│  index.rst        文件索引，调整章节顺序
+│  latexbuild.py    用于生成的latex文件的内容的自动修改，如果发现生成的pdf索引和章节标题序号有误，或者设置部分章节不生成序号可以在此文件修改
+│  latexbuild2.py   用于自动修改生成pdf的名称，如果自动生成的pdf名称有误，在这里修改
+│  LICENSE.rst      
+│  make.bat         
+│  Makefile         
+│  README.rst       git页面说明文件，需要修改文档的git地址和在线文档名称及地址
+│  requirements.txt python依赖包设置
+│      
+├─latexfile         构建PDF所需的latex风格配置文件
+│      logo.eps
+│      sphinx.sty
+│      sphinxmanual.cls
+│      
+├─Module_Manual     正文
+│  │  users_manual.rst
+│  │  
+│  └─media          正文媒体文件
+│          AD7192.jpg
+│          
+├─_build            构建生成的文件
+│                  
+├─_static           生成HTML所需的静态文件
+│  ├─css
+│  │      custom.css    
+│  │      
+│  └─images         html中用到的图片资源
+│          ad7192.png       产品图片
+│          embedfire.png    
+│          firebbs.png
+│          gitee.png
+│          github.png
+│          logo-1.png   
+│          logo.ico         浏览器顶部图片，16x16像素ico图片
+│          
+└─_templates        html各区块的自定义文件，如果要修改生成html以下3栏的内容，在对应文件中修改
+        footer.html 底部栏：© Copyright commit用release替代了，在conf.py中读取，如果目录层级变化，可能会读不到commit id，需要在conf.py中排名个修改路径
+        head.html   顶部栏：矩形产品介绍，产品相关情况在这里设定
+        layout.html 侧边栏：四个图片链接
+        
+
+
+
+对于文档书写格式的说明：
+1.确保使用格式化符号的正确性
+2.确保文档编译为网页过程零错误，尽量少的警告
+
+对于生成pdf文件的说明：
+0.自动构建过程要求较严格，只要有一个错误都无法成功
+1.文档编写过程中不使用动图或视频
+2.在正式上传服务器进行自动自动编译之前，先在本地编译无错误后再进行
+3.在进行文档编写过程中，将.gitlab-ci.yml文件中的'tags'字段标记为rst,
+在文档编写完成，要进行pdf自动编译的前一次推送再将'tags'字段标记为pdf
+4.编译过程中可能存在错误，在gitlab对应仓库的流水线选项中寻找自动构建
+失败的位置，并分析log信息解决错误。
+

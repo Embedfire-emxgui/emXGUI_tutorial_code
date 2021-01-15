@@ -1,0 +1,127 @@
+variables:
+  #要上传的PDF仓库地址，注意格式，使用ssh地址，（不传的话注释掉后面的上传指令"gitlab PDF文档仓库"）
+  GIT_ADDRESS: ssh://git@EmbedfireNAS:30001/emxgui/emxgui_tutorial_pdf.git
+  #gitlab 邮箱
+  GIT_USEREMAIL: hjw0415@outlook.com
+  #gitlab 用户名
+  GIT_USERNAME: hejiawen
+  #OSS 主地址 index.html所在的地址，末尾必须带 "/" 
+  OSS_URL: oss://ebf-doc/gui/emxgui/
+  #OSS HTML地址 html文件夹相对index的地址,一般不更改
+  OSS_HTML_URL: zh/latest/
+  #OSS PDF地址 pdf文件夹相对于index的地址，一般不更改
+  OSS_PDF_URL: pdf/
+  #NAS地址 数量不匹配需要删改PDF-files任务中的内容，(不传的话注释掉后面的上传指令"网盘同步")
+  NAS_URL1: /home/flyleaf/ebf_nas/公司共享/百度云对外发布资料/野火开源图书专栏/[野火]《emXGUI实战指南》系列/
+
+# 分段，若不想运行某些分段，在后面分段名的定义前加两点，如 ..make-html，
+# 但不要注释此处的声明
+stages: 
+  - html
+  - htmloutput
+  - latex
+  - pdf
+  - pdfoutput
+  
+cache: # 缓存路径，根据.git文件夹作为根目录确定，下同
+  paths:
+    - _build
+
+# 若不想运行整个分段，在前面加两点， 如 ..make-html
+make-html:
+  tags:
+    - ENABLE
+  stage: html
+  script:
+    #如果conf.py不在根目录，使用cd命令跳转到conf.py所在的目录
+    #删除以前的缓存文件
+    - make clean
+    #rst转html
+    - make html
+
+html-output:
+  tags:
+    - ENABLE
+  stage: htmloutput
+  script:
+    #如果conf.py不在根目录，使用cd命令跳转到conf.py所在的目录
+    #添加index.html
+    - ossutil64 cp _templates/index.html $OSS_URL --update   
+    #删除oss html文件夹
+    - ossutil64 rm $OSS_URL$OSS_HTML_URL -rf
+    #同步到doc.embedfire.com
+    - ossutil64 cp -r _build/html/ $OSS_URL$OSS_HTML_URL
+
+make-latex:
+  tags:
+    - ENABLE
+  stage: latex
+  script:
+    #如果conf.py不在根目录，使用cd命令跳转到conf.py所在的目录
+    #删除以前的缓存文件
+    - make clean
+    #rst转latex文件
+    - make latex
+
+make-pdf:
+  tags:
+    - ENABLE
+  stage: pdf
+  script:
+    #如果conf.py不在根目录，使用cd命令跳转到conf.py所在的目录
+    #复制相关资源文件
+    - cp -r latexfile/*  _build/latex/  
+    #使用python脚本处理latex文件
+    - python3 latexbuild.py
+    #latex文件生成pdf
+    - cd _build/latex/ && latexmk -r latexmkrc -pdf -f -dvi- -ps-  -interaction=nonstopmode
+    #允许错误运行
+    #allow_failure: true
+
+pdf-output:
+  tags:
+    - ENABLE
+  stage: pdfoutput
+  before_script:
+    - git config --global user.email "$GIT_USEREMAIL"
+    - git config --global user.name "$GIT_USERNAME"
+  script:
+    #如果conf.py不在根目录，使用cd命令跳转到conf.py所在的目录
+    #修改文件名称
+    - python3 latexbuild2.py 
+    #移动文件到指定位置 
+    - cp _build/latex/*.pdf ./
+
+    #删除oss文件夹
+    - ossutil64 rm $OSS_URL$OSS_PDF_URL -rf
+    #同步到doc.embedfire.com
+    - ossutil64 cp -r _build/*.pdf $OSS_URL$OSS_PDF_URL
+    - ossutil64 cp -r _build/index.html $OSS_URL$OSS_PDF_URL
+
+    #网盘同步，在不同的仓库中都需要修改，不传的话注释掉
+    #F407骄阳
+    - find "$NAS_URL1" -name "*.pdf" -print0 | xargs -0 rm -f
+    - cp _build/latex/*.pdf "$NAS_URL1"
+
+
+    #上传到gitlab PDF文档仓库，不传的话注释掉
+    #克隆仓库
+    - git clone $GIT_ADDRESS /docs/workdir
+    #修改复制pdf文件到拉取的git仓库
+    - cd _build/latex/ && rename 's/\.pdf/.pdf_bak/' *.pdf 
+    - cp ./*.pdf_bak /docs/workdir/
+    - cd /docs/workdir/
+    #从git删除原来的pdf文件，并将新文件添加
+    - git rm --ignore-unmatch *.pdf
+    - rename   's/\.pdf_bak/.pdf/'  *.pdf_bak 
+    - git add *.pdf 
+    #提交推送
+    - git commit -m "gitlab-ci自动提交"
+    - git push
+
+  artifacts:
+    name: 'PDFfile' #下载压缩包文件名
+    paths: #文件路径
+      - ./*.pdf
+    expire_in: 1 day #保存时间
+    when: on_success #仅在job成功后上传

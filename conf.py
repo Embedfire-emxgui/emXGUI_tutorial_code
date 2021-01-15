@@ -1,3 +1,8 @@
+#关于新建文档时配置文件的修改说明
+#必须要修改的部分使用#&&&&&&&&&&&&&&&&#标记
+#酌情修改的部分使用#*****************#标记
+#详细的修改说明见对应位置
+
 # Configuration file for the Sphinx documentation builder.
 #
 # This file only contains a selection of the most common options. For a full
@@ -17,8 +22,12 @@
 
 # -- Project information -----------------------------------------------------
 
-project = '[野火]emXGUI应用开发实战指南'
-copyright = '2019, embedfire-野火 www.embedfire.com'
+#&&&&&&&&&&&&&&&&&&&& START &&&&&&&&&&&&&&&&&&&&&&&#
+#html页面显示的文档标题，注意文档的命名格式
+project = '[野火]emXGUI应用开发实战—基于STM32'
+#&&&&&&&&&&&&&&&&&&&&& END &&&&&&&&&&&&&&&&&&&&&&&&#
+
+copyright = '2020, embedfire-野火 www.embedfire.com'
 author = 'embedfire-野火 www.embedfire.com'
 
 
@@ -50,17 +59,121 @@ language = 'zh_CN'
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+exclude_patterns = []
 
 
 # -- Options for HTML output -------------------------------------------------
+import subprocess
 
-# The theme to use for HTML and HTML Help pages.  See the documentation for
-# a list of builtin themes.
-#
 html_theme = 'sphinx_rtd_theme'
 
-# Add any paths that contain custom static files (such as style sheets) here,
-# relative to this directory. They are copied after the builtin static files,
-# so a file named "default.css" will overwrite the builtin "default.css".
+highlight_language = "sh"
+
 html_static_path = ['_static']
+#是否添加 View page source
+html_show_sourcelink = False
+#是否显示使用Sphinx创建
+html_show_sphinx = False
+#search 上方的图片
+html_logo = u'./_static/images/logo-1.png'
+
+html_last_updated_fmt = '%Y-%m-%d, %H:%M:%S — %Z '
+
+html_search_language = 'zh'
+
+def placeholderReplace(app, docname, source):
+    result = source[0]
+    for key in app.config.placeholder_replacements:
+        result = result.replace(key, app.config.placeholder_replacements[key])
+    source[0] = result
+
+def setup(app):
+    app.add_css_file('css/custom.css')
+    app.add_config_value('placeholder_replacements', {}, True)
+    app.connect('source-read', placeholderReplace)
+
+version = subprocess.getoutput("git rev-parse --short HEAD")
+print('commit:', version)
+
+
+###########################################################################
+#                        embedfire pdf - configuration                    #
+###########################################################################
+
+project_language = 'zh_CN'
+latex_use_xindy = True
+latex_engine = 'xelatex'
+
+#&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& START &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&#
+# (源文件, '输出文档名称', u'封面标题', u'作者', '主题')
+# 此处仅修改封面标题即可，与上方 “project = ‘’ ”保持一致,其他参数请勿修改
+latex_documents = [
+    (master_doc, 'output.tex_bak', u'[野火]emXGUI应用开发实战—基于STM32',
+     u'EmbedFire\\\野火电子', 'manual'),
+]
+#&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&  END  &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&#
+
+#****************************** START **********************************#
+#详细修改说明文中有标注，其中%为注释符号，
+#可修改的部分为页面边距、目录深度、章节编号深度
+#页眉的设定为必改项
+latex_elements = {
+    'preamble': r'''
+\def\pageautorefname{page}
+\usepackage{geometry}%用于设置页面上下左右页边距
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% start %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \geometry{left=2cm,right=2cm,top=3cm,bottom=4cm}%页边距具体数值
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% end %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
+
+\PassOptionsToPackage{silence}{xeCJK}
+\PassOptionsToPackage{silence}{fontspec}
+\usepackage{xeCJK}%设置中文字体
+    \setCJKfamilyfont{hei}{SimHei} %黑体hei
+    \setCJKfamilyfont{sun}{SimSun} %宋体hei
+    \newcommand{\hei}{\CJKfamily{hei}} %黑体(Windows自带simhei.ttf,linux上需要安装字体)
+    \newcommand{\sun}{\CJKfamily{sun}} %宋(Windows自带simsun.ttf,linux上需要安装字体)
+\xeCJKsetup{SlantFont}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% start %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{tocdepth}{2} %目录深度
+\setcounter{secnumdepth}{4} %章节编号深度
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% end %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
+
+%生成的PDF标签带序号
+%\hypersetup{bookmarksnumbered=true}
+
+\usepackage{titlesec}
+\usepackage{CJKnumb}
+\usepackage{titletoc}
+%修改文档中的章节名使用中文
+\titleformat{\chapter}{\centering\Huge\bfseries}{}{1em} {}
+%修改文档中的章节名前面空出的距离
+\titlespacing{\chapter}{0cm}{0cm}{1em}  
+%修改目录的章节名使用中文
+\titlecontents{chapter}[0pt]{\addvspace{1.5pt}\filright\bf}%
+               {\contentspush{\color{TitleColor} }}%
+               {}{\titlerule*[8pt]{.}\contentspage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% start %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%修改页眉设置，页眉分为两种格式
+%一种是教程类：页眉右侧文字部分为标题和副标题
+%另一类是手册类：页眉右侧文字部分只有主标题
+%下面两种配置二选一，不使用的配置用‘%’屏蔽
+%可根据生成的PDF来调整页眉字体，使观感协调
+%字体大小：\tiny \scriptsize \footnotesize \small \normalsize \large \Large \LARGE \huge \Huge
+%字体加粗：\textbf{} 括号内为加粗文本，可直接使用 \upname 的定义
+%*******************************************%
+%\newcommand\upname{[野火]emXGUI应用开发实战}
+%\newcommand\downname{基于STM32}
+%\newcommand\fancyheadstyle{\fancyhead[R]{\LARGE \textbf{\upname} \\ \normalsize \downname}}
+%*******************************************%
+\newcommand\upname{[野火]emXGUI应用开发实战}
+\newcommand\fancyheadstyle{\fancyhead[R]{\Large \textbf{\upname}}}
+%*******************************************%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% end %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%    
+
+\usepackage[UTF8]{ctex}  
+''',
+
+}
+
+#*******************************  END  **********************************#
