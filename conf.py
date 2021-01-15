@@ -108,7 +108,7 @@ latex_engine = 'xelatex'
 # (源文件, '输出文档名称', u'封面标题', u'作者', '主题')
 # 此处仅修改封面标题即可，与上方 “project = ‘’ ”保持一致,其他参数请勿修改
 latex_documents = [
-    (master_doc, 'output.tex_bak', u'[野火]emXGUI应用开发实战—基于STM32',
+    (master_doc, 'output.tex_bak', u'[野火]emXGUI应用开发实战\\\\—基于STM32',
      u'EmbedFire\\\野火电子', 'manual'),
 ]
 #&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&  END  &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&#

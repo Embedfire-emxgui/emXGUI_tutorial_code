@@ -6,7 +6,7 @@ variables:
   #gitlab 用户名
   GIT_USERNAME: hejiawen
   #OSS 主地址 index.html所在的地址，末尾必须带 "/" 
-  OSS_URL: oss://ebf-doc/gui/emxgui/
+  OSS_URL: oss://ebf-doc/gui/emXGUI/
   #OSS HTML地址 html文件夹相对index的地址,一般不更改
   OSS_HTML_URL: zh/latest/
   #OSS PDF地址 pdf文件夹相对于index的地址，一般不更改
