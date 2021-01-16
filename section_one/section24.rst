@@ -167,12 +167,14 @@ GIF_Close
 
 图24_3_ 是GIF图片的第一帧，使用上述的API函数，在emXGUI实现动态图的显示。
 
-.. image:: /media/docx112.gif
+.. image:: /media/docx112.jpg
    :align: center
    :alt: 图 24‑3 实验要求
    :name: 图24_3
 
 图 24‑3 实验要求
+
+.. attention:: 上图图片为gif格式
 
 .. _代码分析-19:
 
